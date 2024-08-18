@@ -41,7 +41,7 @@ function Contact(): React.ReactNode {
 
   return (
     <section id="contact" className="contact-section">
-      <h2 className="contact-title">Contact Us</h2>
+      <h2 className="contact-title">Leave a comment</h2>
       <form onSubmit={handleSubmit} className="contact-form">
         <div className="form-group">
           <label>First Name:</label>
