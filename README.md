@@ -37,3 +37,7 @@
 4. Your portfolio should now be accessible at `http://your-username.github.io/my-portfolio`.
 
 Replace `your-username` with your actual GitHub username.
+
+## Email js documentation
+- [docs](https://www.emailjs.com/docs/examples/reactjs/)
+- [Admin Dashboard](https://dashboard.emailjs.com/admin)
