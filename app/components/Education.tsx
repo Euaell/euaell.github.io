@@ -1,9 +1,3 @@
-// app/components/Education.tsx
-'use client';
-
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-
 interface EducationItem {
   date: string;
   degree: string;
@@ -39,34 +33,21 @@ const education: EducationItem[] = [
 ];
 
 const Education: React.FC = () => {
-  const eduRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (eduRef.current) {
-      gsap.from(eduRef.current.querySelectorAll('.edu-item'), {
-        opacity: 0,
-        x: 50,
-        duration: 1,
-        stagger: 0.2,
-      });
-    }
-  }, []);
-
   return (
-    <section id="education" ref={eduRef} className="py-16 bg-white">
+    <section id="education" className="py-16">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold mb-8">Education</h2>
         <div className="space-y-8">
           {education.map((edu, index) => (
             <div key={index} className="edu-item">
               <h3 className="text-2xl font-semibold">{edu.degree}</h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm">
                 {edu.institution}, {edu.location}
               </p>
-              <p className="text-sm text-gray-600">{edu.date}</p>
+              <p className="text-sm">{edu.date}</p>
               {edu.gpa && <p className="mt-2">{edu.gpa}</p>}
               {edu.coursework && (
-                <div className="mt-2">
+                <div className="mt-2 hidden">
                   <p className="font-semibold">Relevant Coursework:</p>
                   <ul className="list-disc list-inside">
                     {edu.coursework.map((course, idx) => (

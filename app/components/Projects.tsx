@@ -1,9 +1,3 @@
-// app/components/Projects.tsx
-'use client';
-
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-
 interface ProjectItem {
   title: string;
   description: string;
@@ -30,21 +24,9 @@ const projects: ProjectItem[] = [
 ];
 
 const Projects: React.FC = () => {
-  const projRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (projRef.current) {
-      gsap.from(projRef.current.querySelectorAll('.proj-item'), {
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        stagger: 0.2,
-      });
-    }
-  }, []);
 
   return (
-    <section id="projects" ref={projRef} className="py-16 bg-gray-100">
+    <section id="projects" className="py-16 bg-slate-200">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold mb-8">Projects</h2>
         <div className="space-y-8">

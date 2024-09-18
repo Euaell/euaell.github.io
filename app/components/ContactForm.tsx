@@ -1,40 +1,27 @@
-// app/components/ContactForm.tsx
 'use client';
 
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
 import emailjs from '@emailjs/browser';
 
 const ContactForm: React.FC = () => {
-  const formRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (formRef.current) {
-      gsap.from(formRef.current, {
-        opacity: 0,
-        y: 50,
-        duration: 1,
-      });
-    }
-  }, []);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     emailjs.sendForm('service_pj3bisc', 'template_pzqq2wx', e.currentTarget, 'T6gcZ8d7pzuDD5KId')
-        .then((result: any) => { // TODO: Fix the type of result
+        .then((result) => { // TODO: Fix the type of result
         console.log(result.text);
         // Optionally display a success message
-        }, (error: any) => {
+        }, (error) => {
         console.log(error.text);
         // Optionally display an error message
         });
 
     e.currentTarget.reset();
-  };
+  }
 
   return (
-    <section id="contact" ref={formRef} className="py-16 bg-white">
+    <section id="contact"className="py-16 bg-white">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold mb-8">Contact Me</h2>
         <form onSubmit={handleSubmit} className="max-w-xl mx-auto">

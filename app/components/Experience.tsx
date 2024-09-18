@@ -1,9 +1,3 @@
-// app/components/Experience.tsx
-'use client';
-
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-
 interface ExperienceItem {
   date: string;
   position: string;
@@ -41,40 +35,29 @@ const experiences: ExperienceItem[] = [
   // Add more experiences as needed
 ];
 
-const Experience: React.FC = () => {
-  const expRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (expRef.current) {
-      gsap.from(expRef.current.querySelectorAll('.exp-item'), {
-        opacity: 0,
-        x: -50,
-        duration: 1,
-        stagger: 0.2,
-      });
-    }
-  }, []);
+function Experience(): React.ReactElement {
 
   return (
-    <section id="experience" ref={expRef} className="py-16 bg-gray-100">
+    <section id="experience" className="py-16 bg-slate-200">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold mb-8">Professional Experience</h2>
-        <div className="space-y-8">
+        <div className="relative border-l-2 border-gray-300 pl-6">
           {experiences.map((exp, index) => (
-            <div key={index} className="exp-item">
-              <h3 className="text-2xl font-semibold">
-                {exp.position} - {exp.company}
-              </h3>
-              <p className="text-sm text-gray-600">
-                {exp.date} | {exp.location}
-              </p>
-              <ul className="list-disc list-inside mt-2">
-                {exp.responsibilities.map((item, idx) => (
-                  <li key={idx} className="text-lg">
-                    {item}
-                  </li>
-                ))}
-              </ul>
+            <div key={index} className="timeline-item mb-8 relative">
+              <div>
+                <p className="text-sm">{exp.date}</p>
+                <h3 className="text-xl font-semibold">
+                  {exp.position} - {exp.company}
+                </h3>
+                <p className="text-sm">{exp.location}</p>
+                <ul className="list-disc list-inside mt-2 hidden">
+                  {exp.responsibilities.map((item, idx) => (
+                    <li key={idx} className="text-lg">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           ))}
         </div>
