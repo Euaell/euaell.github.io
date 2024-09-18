@@ -1,21 +1,45 @@
 'use client';
 
 import emailjs from '@emailjs/browser';
+import { ChangeEvent, useState } from 'react';
 
 function ContactForm(): React.ReactElement {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    comment: ''
+  });
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const serviceID = 'service_pj3bisc';
+    const templateID = 'template_pzqq2wx';
+    const userID = 'T6gcZ8d7pzuDD5KId';
 
-    emailjs.sendForm('service_pj3bisc', 'template_pzqq2wx', e.currentTarget, 'T6gcZ8d7pzuDD5KId')
-        .then((result) => { // TODO: Fix the type of result
-          console.log(result.text);
-          // Optionally display a success message
-        }, (error) => {
-          console.log(error.text);
-          // Optionally display an error message
-        })
+    
+    const form_data = {
+      from_name: formData.firstName + " " + formData.lastName,
+      message: formData.comment,
+      from_email: formData.email
+    }
+    emailjs.send(serviceID, templateID, form_data, {
+      publicKey: userID
+    })
+    .then((response) => {
+      console.debug("SUCCESS!", response.text)
+      setFormData({firstName: '', lastName: '', email: '', comment: ''})
+    })
+    .catch((error) => {
+      console.error("Failed ...", error.text)
+      alert('There was an error sending the email.')
+    })
 
     e.currentTarget.reset();
   }
@@ -34,6 +58,8 @@ function ContactForm(): React.ReactElement {
                 type="text"
                 id="first_name"
                 name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
                 required
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -46,6 +72,8 @@ function ContactForm(): React.ReactElement {
                 type="text"
                 id="last_name"
                 name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
                 required
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -59,6 +87,8 @@ function ContactForm(): React.ReactElement {
               type="email"
               id="email"
               name="email"
+              value={formData.email}
+              onChange={handleChange}
               required
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -70,6 +100,8 @@ function ContactForm(): React.ReactElement {
             <textarea
               id="comment"
               name="comment"
+              value={formData.comment}
+              onChange={handleChange}
               required
               className="w-full px-4 py-2 border rounded-md h-32 focus:outline-none focus:ring-2 focus:ring-blue-500"
             ></textarea>
