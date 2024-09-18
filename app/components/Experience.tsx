@@ -39,31 +39,38 @@ function Experience(): React.ReactElement {
 
   return (
     <section id="experience" className="py-16 bg-slate-200">
-      <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-8">Professional Experience</h2>
-        <div className="relative border-l-2 border-gray-300 pl-6">
-          {experiences.map((exp, index) => (
-            <div key={index} className="timeline-item mb-8 relative">
-              <div>
-                <p className="text-sm">{exp.date}</p>
-                <h3 className="text-xl font-semibold">
-                  {exp.position} - {exp.company}
-                </h3>
-                <p className="text-sm">{exp.location}</p>
-                <ul className="list-disc list-inside mt-2 hidden">
-                  {exp.responsibilities.map((item, idx) => (
-                    <li key={idx} className="text-lg">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+      <div className="container mx-auto px-6 lg:px-20">
+        <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Professional Experience</h2>
+        <div className="relative">
+          {/* Timeline line */}
+          <div className="hidden md:block absolute w-1 bg-blue-500 h-full left-1/2 transform -translate-x-1/2"></div>
+          {/* Timeline items */}
+          <div className="space-y-12">
+            {experiences.map((exp, index) => (
+              <div
+                key={index}
+              >
+                {/* Popping animation */}
+                <div className={`relative md:w-1/2 px-6 ${index % 2 === 0 ? 'md:pr-8 md:ml-auto' : 'md:pl-8 md:mr-auto'} `}>
+                  <div
+                    className={`bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300 cursor-pointer animate-pop`}
+                  >
+                    <p className="text-sm text-gray-500">{exp.date}</p>
+                    <h3 className="text-xl font-semibold text-gray-800">
+                      {exp.position} - {exp.company}
+                    </h3>
+                    <p className="text-gray-600">{exp.location}</p>
+                  </div>
+                </div>
+                {/* Timeline dot */}
+                <div className="hidden md:block absolute w-4 h-4 bg-blue-500 rounded-full left-1/2 transform -translate-x-1/2"></div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
-};
+}
 
 export default Experience;

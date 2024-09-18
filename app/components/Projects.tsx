@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface ProjectItem {
   title: string;
   description: string;
@@ -23,26 +25,32 @@ const projects: ProjectItem[] = [
   // Add more projects if needed
 ];
 
-const Projects: React.FC = () => {
-
+function Projects(): React.ReactElement {
   return (
     <section id="projects" className="py-16 bg-slate-200">
-      <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-8">Projects</h2>
-        <div className="space-y-8">
-          {projects.map((project, index) => (
-            <div key={index} className="proj-item">
-              <h3 className="text-2xl font-semibold">{project.title}</h3>
-              {project.description && <p className="mt-2">{project.description}</p>}
-              {project.responsibilities.length > 0 && (
-                <ul className="list-disc list-inside mt-2">
-                  {project.responsibilities.map((item, idx) => (
-                    <li key={idx}>{item}</li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          ))}
+      <div className="container mx-auto px-6 lg:px-20">
+        <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Projects</h2>
+        <div className="overflow-x-auto">
+          <div className="flex space-x-6">
+            {projects.map((project, index) => (
+              <div
+                key={index}
+                className="flex-shrink-0 w-80 bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300"
+              >
+                <h3 className="text-2xl font-semibold text-gray-800 mb-2">{project.title}</h3>
+                {project.description && (
+                  <p className="text-gray-600 leading-relaxed mb-4">{project.description}</p>
+                )}
+                {project.responsibilities.length > 0 && (
+                  <ul className="list-disc list-inside text-gray-700 space-y-2">
+                    {project.responsibilities.map((item, idx) => (
+                      <li key={idx}>{item}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

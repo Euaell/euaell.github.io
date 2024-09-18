@@ -1,3 +1,7 @@
+'use client';
+
+import React, { useState } from 'react';
+
 interface EducationItem {
   date: string;
   degree: string;
@@ -33,27 +37,69 @@ const education: EducationItem[] = [
 ];
 
 const Education: React.FC = () => {
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
+  const toggleExpand = (index: number) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
+
   return (
-    <section id="education" className="py-16">
-      <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-8">Education</h2>
+    <section id="education" className="py-16 bg-white">
+      <div className="container mx-auto px-6 lg:px-20">
+        <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Education</h2>
         <div className="space-y-8">
           {education.map((edu, index) => (
-            <div key={index} className="edu-item">
-              <h3 className="text-2xl font-semibold">{edu.degree}</h3>
-              <p className="text-sm">
-                {edu.institution}, {edu.location}
-              </p>
-              <p className="text-sm">{edu.date}</p>
-              {/* {edu.gpa && <p className="mt-2">{edu.gpa}</p>} */}
-              {edu.coursework && (
-                <div className="mt-2 hidden">
-                  <p className="font-semibold">Relevant Coursework:</p>
-                  <ul className="list-disc list-inside">
-                    {edu.coursework.map((course, idx) => (
-                      <li key={idx}>{course}</li>
-                    ))}
-                  </ul>
+            <div
+              key={index}
+              className="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+              onClick={() => toggleExpand(index)}
+            >
+              <div className="flex justify-between items-center">
+                <div>
+                  <h3 className="text-2xl font-semibold text-gray-800">{edu.degree}</h3>
+                  <p className="text-gray-600">
+                    {edu.institution}, {edu.location}
+                  </p>
+                  <p className="text-gray-500">{edu.date}</p>
+                </div>
+                <div>
+                  {expandedIndex === index ? (
+                    <svg
+                      className="w-6 h-6 text-gray-600 transform rotate-180"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  ) : (
+                    <svg
+                      className="w-6 h-6 text-gray-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  )}
+                </div>
+              </div>
+
+              {expandedIndex === index && (
+                <div className="mt-4 text-gray-700 animate-fadeIn">
+                  {edu.gpa && <p className="mb-2 font-medium">{edu.gpa}</p>}
+                  {edu.coursework && (
+                    <div>
+                      <p className="font-semibold mb-1">Relevant Coursework:</p>
+                      <ul className="list-disc list-inside space-y-1">
+                        {edu.coursework.map((course, idx) => (
+                          <li key={idx}>{course}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
