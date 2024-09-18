@@ -14,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Euael",
-  description: "Euael's personal portfolio",
+  title: 'Euael M. Eshete - Portfolio',
+  description: 'Portfolio website of Euael M. Eshete',
 };
 
 export default function RootLayout({
