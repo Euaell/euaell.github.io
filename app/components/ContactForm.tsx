@@ -3,6 +3,9 @@
 import emailjs from '@emailjs/browser';
 import { ChangeEvent, useState } from 'react';
 
+import PaperPlaneIcon from '@/app/components/icons/PaperPlaneIcon';
+import CheckCircleIcon from '@/app/components/icons/CheckCircleIcon';
+
 function ContactForm(): React.ReactElement {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -86,7 +89,6 @@ function ContactForm(): React.ReactElement {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
-                  required
                   className="peer w-full px-0 py-2 border-0 border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:ring-0 focus:border-blue-500"
                   placeholder="Last Name"
                 />
@@ -142,17 +144,14 @@ function ContactForm(): React.ReactElement {
             className="flex items-center px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300"
           >
             Send Message
-            <svg
-              className="w-5 h-5 ml-2 animate-bounce"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M2 21l21-9L2 3v7l15 2-15 2v7z" />
-            </svg>
+            {/* Paper Plane Icon */}
+            <PaperPlaneIcon className={"w-6 h-6 ml-2 " + (successMessage ? "" : "animate-bounce")} />
           </button>
+          {/* Success Message */}
           {successMessage && (
             <div className="mt-6 flex items-center text-green-600 animate-fadeIn">
-              {/* <CheckCircleIcon className="w-6 h-6 mr-2" /> */}
+              {/* Check Circle Icon */}
+              <CheckCircleIcon className="w-6 h-6 text-green-600" />
               <p>{successMessage}</p>
             </div>
           )}
