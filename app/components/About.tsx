@@ -10,7 +10,7 @@ function About(): React.ReactElement {
           <Image
             src="/images/profile.jpg"
             alt="Euael M. Eshete"
-            className="rounded-full mb-6 md:mb-0 md:mr-8"
+            className="w-auto h-auto rounded-full mb-6 md:mb-0 md:mr-8"
             width={192}
             height={192}
             priority

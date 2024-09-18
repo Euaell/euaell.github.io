@@ -2,7 +2,7 @@
 
 import emailjs from '@emailjs/browser';
 
-const ContactForm: React.FC = () => {
+function ContactForm(): React.ReactElement {
 
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -10,12 +10,12 @@ const ContactForm: React.FC = () => {
 
     emailjs.sendForm('service_pj3bisc', 'template_pzqq2wx', e.currentTarget, 'T6gcZ8d7pzuDD5KId')
         .then((result) => { // TODO: Fix the type of result
-        console.log(result.text);
-        // Optionally display a success message
+          console.log(result.text);
+          // Optionally display a success message
         }, (error) => {
-        console.log(error.text);
-        // Optionally display an error message
-        });
+          console.log(error.text);
+          // Optionally display an error message
+        })
 
     e.currentTarget.reset();
   }
@@ -25,17 +25,31 @@ const ContactForm: React.FC = () => {
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold mb-8">Contact Me</h2>
         <form onSubmit={handleSubmit} className="max-w-xl mx-auto">
-          <div className="mb-4">
-            <label htmlFor="name" className="block text-lg font-medium mb-2">
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="user_name"
-              required
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+          <div className="mb-4 w-full gap-4 justify-between flex flex-col sm:flex-row">
+            <div className="w-full">
+              <label htmlFor="first_name" className="block text-lg font-medium mb-2">
+                Frist Name
+              </label>
+              <input
+                type="text"
+                id="first_name"
+                name="firstName"
+                required
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div className='w-full'>
+              <label htmlFor="last_name" className="block text-lg font-medium mb-2">
+                Last Name
+              </label>
+              <input
+                type="text"
+                id="last_name"
+                name="lastName"
+                required
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
           </div>
           <div className="mb-4">
             <label htmlFor="email" className="block text-lg font-medium mb-2">
@@ -44,18 +58,18 @@ const ContactForm: React.FC = () => {
             <input
               type="email"
               id="email"
-              name="user_email"
+              name="email"
               required
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="message" className="block text-lg font-medium mb-2">
+            <label htmlFor="comment" className="block text-lg font-medium mb-2">
               Message
             </label>
             <textarea
-              id="message"
-              name="user_message"
+              id="comment"
+              name="comment"
               required
               className="w-full px-4 py-2 border rounded-md h-32 focus:outline-none focus:ring-2 focus:ring-blue-500"
             ></textarea>
