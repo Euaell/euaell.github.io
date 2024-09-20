@@ -32,8 +32,8 @@ function About(): React.ReactElement {
           </div>
           <div className="md:w-2/3 md:pl-12">
             <p className="text-lg text-gray-700 leading-relaxed">
-              I&apos;m a <strong>Computer Engineer</strong> and <strong>Python Developer</strong> 
-              with a Bachelor's degree from <strong>Addis Ababa University</strong>, currently 
+              I&apos;m a <strong>Computer Engineer</strong> and <strong>Python Developer </strong> 
+              with a Bachelor&apos;s degree from <strong>Addis Ababa University</strong>, currently 
               pursuing a Master&apos;s degree. With hands-on experience in developing AI-driven 
               conversational agents and responsive websites, I thrive on turning complex challenges 
               into innovative solutions. I&apos;ve collaborated on projects that range from integrating 
