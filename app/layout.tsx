@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { Afacad } from 'next/font/google'
+
+const afacad = Afacad({subsets: ['latin']})
 
 export const metadata: Metadata = {
   title: 'Euael M. Eshete - Portfolio',
@@ -8,7 +11,8 @@ export const metadata: Metadata = {
   icons: {
     icon: '/icons/favicon_io/favicon.ico',
     apple: '/icons/favicon_io/apple-touch-icon.png',
-  }
+  },
+  keywords: 'Euael Mekonen Eshete, Euael, Euael Eshete, Euael Mekonen, Computer Engineer, Python Developer, Software Developer, Web Developer, Addis Ababa University, AI, Machine Learning',
 };
 
 export default function RootLayout({
@@ -19,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${afacad.className} antialiased`}
       >
         {children}
       </body>

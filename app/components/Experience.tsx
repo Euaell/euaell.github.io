@@ -1,9 +1,13 @@
+'use client';
+import anime from "animejs";
+import { useEffect, useRef } from "react";
+
 interface ExperienceItem {
   date: string;
   position: string;
   company: string;
   location: string;
-  responsibilities: string[];
+  responsibilities: string[]
 }
 
 const experiences: ExperienceItem[] = [
@@ -32,13 +36,74 @@ const experiences: ExperienceItem[] = [
       'Created clear and comprehensive documentation for WordPress websites, DHIS2 customizations, and web applications.',
     ],
   },
+  {
+    date: 'Jan 2023 – Jun 2023',
+    position: 'Software Developer Intern',
+    company: 'HISP Ethiopia',
+    location: 'Addis Ababa, Ethiopia',
+    responsibilities: [
+      'Developed and maintained web applications using Django and Flask.',
+      'Designed and implemented RESTful APIs for web applications.',
+      'Created and maintained database schemas using PostgreSQL and SQLite.',
+      'Developed and maintained DHIS2 customizations, including data entry forms, dashboards, and reports.',
+    ],
+  }
   // Add more experiences as needed
-];
+]
 
 function Experience(): React.ReactElement {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    let observer: IntersectionObserver;
+    const currentSection = sectionRef.current;
+
+    if (currentSection) {
+      observer = new IntersectionObserver(
+        (entries, observerInstance) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Start the anime.js animation
+              anime({
+                targets: '.popping-animation',
+                rotateY: '1turn',
+                easing: 'easeOutQuad',
+                opacity: [0, 1],
+                scale: [0, 1],
+                // rotate: ['-90deg', '0deg'],
+                duration: 750,
+                delay: anime.stagger(400, { start: 300 }),
+                loop: false,
+              });
+
+              // Stop observing after the animation has started
+              observerInstance.unobserve(currentSection);
+            }
+          });
+        },
+        {
+          root: null, // Observe within viewport
+          threshold: 0.3, // Trigger when 30% of the section is visible
+        }
+      );
+
+      observer.observe(currentSection);
+    }
+
+    // Cleanup the observer on component unmount
+    return () => {
+      if (observer && currentSection) {
+        observer.unobserve(currentSection);
+      }
+    };
+  }, []);
 
   return (
-    <section id="experience" className="py-16 bg-slate-200">
+    <section
+      id="experience"
+      className="py-16 bg-slate-200"
+      ref={sectionRef}
+    >
       <div className="container mx-auto px-6 lg:px-20">
         <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Professional Experience</h2>
         <div className="relative">
@@ -47,11 +112,9 @@ function Experience(): React.ReactElement {
           {/* Timeline items */}
           <div className="space-y-12">
             {experiences.map((exp, index) => (
-              <div
-                key={index}
-              >
+              <div key={index}>
                 {/* Popping animation */}
-                <div className={`relative md:w-1/2 px-6 ${index % 2 === 0 ? 'md:pr-8 md:ml-auto' : 'md:pl-8 md:mr-auto'} `}>
+                <div className={`popping-animation opacity-0 scale-0 relative md:w-1/2 px-6 ${index % 2 === 0 ? 'md:pr-8 md:ml-auto' : 'md:pl-8 md:mr-auto'} `}>
                   <div
                     className={`bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300 cursor-pointer animate-pop`}
                   >

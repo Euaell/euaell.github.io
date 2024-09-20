@@ -2,7 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    /* Smooth scroll */
+main {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
     scroll-behavior: smooth;
 }
+
+section {
+    scroll-snap-align: start;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Start: Particle styles */
+.particle {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+}
+
+/* Customize particle colors per section */
+.about-particle {
+    background-color: rgba(0, 122, 255, 0.3);
+}
+
+.experience-particle {
+    background-color: rgba(255, 159, 10, 0.3);
+}
+
+.education-particle {
+    background-color: rgba(88, 86, 214, 0.3);
+}
+
+.projects-particle {
+    background-color: rgba(255, 45, 85, 0.3);
+}
+
+.contact-particle {
+    background-color: rgba(52, 199, 89, 0.3);
+}
+
+.bubble {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    background-color: rgba(0, 122, 255, 0.5);
+    border-radius: 50%;
+}
+  
+.diagonal-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 300px;
+    background-color: rgba(255, 159, 10, 0.4);
+    transform: rotate(45deg);
+}
+/* End: Particle styles */

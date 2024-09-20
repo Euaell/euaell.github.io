@@ -1,6 +1,8 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import React, { useState } from 'react';
+import BackgroundParticles from './BackgroundParticles';
 
 interface EducationItem {
   date: string;
@@ -36,6 +38,16 @@ const education: EducationItem[] = [
   // Add more education items if needed
 ];
 
+const educationVariants = {
+  hidden: { opacity: 0, x: -50 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6 },
+  },
+  exit: { opacity: 0, x: 50, transition: { duration: 0.6 } },
+}
+
 const Education: React.FC = () => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
@@ -44,7 +56,15 @@ const Education: React.FC = () => {
   };
 
   return (
-    <section id="education" className="py-16 bg-white">
+    <motion.section
+      id="education"
+      className="py-16 bg-transparent"
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={educationVariants}
+    >
+      <BackgroundParticles type="education" />
       <div className="container mx-auto px-6 lg:px-20">
         <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Education</h2>
         <div className="space-y-8">
@@ -106,7 +126,7 @@ const Education: React.FC = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

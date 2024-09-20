@@ -1,4 +1,8 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import React from 'react';
+import BackgroundParticles from './BackgroundParticles';
 
 interface ProjectItem {
   title: string;
@@ -23,11 +27,28 @@ const projects: ProjectItem[] = [
     ],
   },
   // Add more projects if needed
-];
+]
+
+const projectsVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.3 },
+  },
+  exit: { opacity: 0, transition: { duration: 0.6 } },
+}
 
 function Projects(): React.ReactElement {
   return (
-    <section id="projects" className="py-16 bg-slate-200">
+    <motion.section
+      id="projects"
+      className="py-16 bg-slate-200"
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={projectsVariants}
+    >
+      <BackgroundParticles type="projects" />
       <div className="container mx-auto px-6 lg:px-20">
         <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Projects</h2>
         <div className="overflow-x-auto">
@@ -53,7 +74,7 @@ function Projects(): React.ReactElement {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

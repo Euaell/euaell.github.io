@@ -8,15 +8,13 @@ export default function Home() {
  
 
   return (
-    <>
-      <main className="overflow-hidden">
-        {/* Hero Section (Optional) */}
-        <About />
-        <Experience />
-        <Education />
-        <Projects />
-        <ContactForm />
-      </main>
-    </>
-  );
+    <main>
+      {/* Hero Section (Optional) */}
+      <About />
+      <Experience />
+      <Education />
+      <Projects />
+      <ContactForm />
+    </main>
+  )
 }
