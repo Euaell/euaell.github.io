@@ -11,6 +11,7 @@ import BackgroundParticles from './BackgroundParticles';
 import { FaLinkedin, FaGithub, FaTwitter, FaEnvelope } from 'react-icons/fa';
 import { FaSquareUpwork } from 'react-icons/fa6';
 import LoadingIcon from './icons/CircularLoadingIcon';
+import { SiLinktree } from 'react-icons/si';
 
 const contactVariants = {
   hidden: { opacity: 0, scale: 0.95 },
@@ -190,7 +191,7 @@ function ContactForm(): React.ReactElement {
           <div className="mt-8">
             <div className="flex justify-center items-center">
               {/* Desktop (Circular Arrangement) */}
-              <div className="flex flex-row justify-between w-3/4 md:w-1/2">
+              <div className="flex flex-row justify-between w-4/5 md:w-1/2">
                 <a href="https://github.com/euaell" target="_blank" rel="noopener noreferrer">
                   <FaGithub className="text-3xl text-gray-800 hover:text-blue-500 transition" />
                 </a>
@@ -202,6 +203,9 @@ function ContactForm(): React.ReactElement {
                 </a>
                 <a href="https://twitter.com/euaelesh" target="_blank" rel="noopener noreferrer">
                   <FaTwitter className="text-3xl text-gray-800 hover:text-blue-500 transition" />
+                </a>
+                <a href="https://linktr.ee/euael" target="_blank">
+                  <SiLinktree className="text-3xl text-gray-800 hover:text-blue-500 transition" />
                 </a>
                 <a href="mailto:euaelmeko@gmail.com" target='_blank'>
                   <FaEnvelope className="text-3xl text-gray-800 hover:text-blue-500 transition" />

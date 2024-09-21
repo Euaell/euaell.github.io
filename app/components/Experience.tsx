@@ -119,13 +119,13 @@ function Experience(): React.ReactElement {
           {/* Timeline line */}
           <div className="hidden md:block absolute w-1 bg-blue-500 h-full left-1/2 transform -translate-x-1/2"></div>
           {/* Timeline items */}
-          <div className="space-y-12">
+          <div className="space-y-4 md:space-y-12">
             {experiences.map((exp, index) => (
               <div key={index}>
                 {/* Popping animation */}
                 <div className={`popping-animation opacity-0 scale-0 relative md:w-1/2 px-6 ${index % 2 === 0 ? 'md:pr-8 md:ml-auto' : 'md:pl-8 md:mr-auto'} `}>
                   <div
-                    className={`bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300 cursor-pointer animate-pop`}
+                    className={`bg-white p-3 md:p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300 cursor-pointer animate-pop`}
                   >
                     <p className="text-sm text-gray-500">{exp.date}</p>
                     <h3 className="text-xl font-semibold text-gray-800">

@@ -16,7 +16,7 @@ function About(): React.ReactElement {
           About Me
         </h1>
         <div className="flex flex-col md:flex-row items-center">
-          <div className="md:w-1/3 mb-8 md:mb-0 relative">
+          <div className="md:w-1/3 mb-4 md:mb-0 relative">
             <div className="relative w-64 h-64 mx-auto">
               {/* Profile Picture */}
               <Image
