@@ -6,6 +6,7 @@ import { Afacad } from 'next/font/google'
 const afacad = Afacad({subsets: ['latin']})
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://euaell.github.io/'),
   title: 'Euael M. Eshete - Portfolio',
   description: 'Euael Mekonen Eshete—Computer Engineer, Python Developer, and AI enthusiast from Addis Ababa University. Explore my portfolio showcasing software and web development projects in Addis Ababa, Ethiopia.',
   icons: {
