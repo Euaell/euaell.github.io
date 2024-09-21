@@ -36,7 +36,7 @@ const education: EducationItem[] = [
     ],
   },
   // Add more education items if needed
-];
+]
 
 const educationVariants = {
   hidden: { opacity: 0, x: -50 },

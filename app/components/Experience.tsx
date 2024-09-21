@@ -37,15 +37,24 @@ const experiences: ExperienceItem[] = [
     ],
   },
   {
-    date: 'Jan 2023 – Jun 2023',
-    position: 'Software Developer Intern',
-    company: 'HISP Ethiopia',
+    date: 'Mar 2022 - Jul 2022',
+    position: 'Computer Engineer intern',
+    company: 'New Era Research and Development Center',
     location: 'Addis Ababa, Ethiopia',
     responsibilities: [
-      'Developed and maintained web applications using Django and Flask.',
-      'Designed and implemented RESTful APIs for web applications.',
-      'Created and maintained database schemas using PostgreSQL and SQLite.',
-      'Developed and maintained DHIS2 customizations, including data entry forms, dashboards, and reports.',
+      'Worked on making customer 3D printers and CNC machines. Was part of a team that worked on simultaneous control of the 3-axis motors.',
+      'I also worked as a full-stack engineer in a team working on the company ordering website.'
+    ]
+  },
+  {
+    date: '2019 - present',
+    position: 'Freelance Web Developer',
+    company: 'Self-employed (Upwork)',
+    location: 'Remote',
+    responsibilities: [
+      'Developed responsive websites for clients using HTML, CSS, JavaScript, and WordPress.',
+      'Customized WordPress themes and plugins to meet client requirements.',
+      'Ensured websites are optimized for performance, security, and SEO.',
     ],
   }
   // Add more experiences as needed

@@ -9,6 +9,8 @@ import { motion } from 'framer-motion';
 import BackgroundParticles from './BackgroundParticles';
 
 import { FaLinkedin, FaGithub, FaTwitter, FaEnvelope } from 'react-icons/fa';
+import { FaSquareUpwork } from 'react-icons/fa6';
+import LoadingIcon from './icons/CircularLoadingIcon';
 
 const contactVariants = {
   hidden: { opacity: 0, scale: 0.95 },
@@ -21,6 +23,7 @@ const contactVariants = {
 }
 
 function ContactForm(): React.ReactElement {
+  const [formLoading, setFormLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -38,6 +41,7 @@ function ContactForm(): React.ReactElement {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setFormLoading(true);
     const serviceID = 'service_pj3bisc';
     const templateID = 'template_pzqq2wx';
     const userID = 'T6gcZ8d7pzuDD5KId';
@@ -63,6 +67,9 @@ function ContactForm(): React.ReactElement {
       .catch((error) => {
         console.error('Failed ...', error.text);
         alert('There was an error sending the email.');
+      })
+      .finally(() => {
+        setFormLoading(false);
       });
 
     e.currentTarget.reset();
@@ -164,11 +171,19 @@ function ContactForm(): React.ReactElement {
             </div>
             <button
               type="submit"
-              className="flex items-center px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300"
+              className={`flex items-center px-6 py-3 bg-blue-500 
+                text-white rounded-md hover:bg-blue-600 transition 
+                duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300`
+                + (formLoading ? " cursor-not-allowed bg-gray-500" : "")
+              }
+              disabled={formLoading}
             >
               Send Message
               {/* Paper Plane Icon */}
-              <PaperPlaneIcon className={"w-6 h-6 ml-2 " + (successMessage ? "" : "animate-bounce")} />
+              {/* TODO: change it to a loading svg */}
+              {formLoading ? <LoadingIcon className="w-6 h-6 ml-2 animate-spin" /> :
+                <PaperPlaneIcon className={"w-6 h-6 ml-2 " + (successMessage ? "" : "animate-bounce")} />
+              }
             </button>
           </form>
           {/* Social Media Icons */}
@@ -182,10 +197,13 @@ function ContactForm(): React.ReactElement {
                 <a href="https://linkedin.com/in/euael-eshete" target="_blank" rel="noopener noreferrer">
                   <FaLinkedin className="text-3xl text-gray-800 hover:text-blue-500 transition" />
                 </a>
+                <a href="https://www.upwork.com/freelancers/euaell" target='_blank'>
+                  <FaSquareUpwork className="text-3xl text-gray-800 hover:text-blue-500 transition"/>
+                </a>
                 <a href="https://twitter.com/euaelesh" target="_blank" rel="noopener noreferrer">
                   <FaTwitter className="text-3xl text-gray-800 hover:text-blue-500 transition" />
                 </a>
-                <a href="mailto:euaelmeko@gmail.com">
+                <a href="mailto:euaelmeko@gmail.com" target='_blank'>
                   <FaEnvelope className="text-3xl text-gray-800 hover:text-blue-500 transition" />
                 </a>
               </div>

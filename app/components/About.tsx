@@ -17,7 +17,7 @@ function About(): React.ReactElement {
         </h1>
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/3 mb-8 md:mb-0 relative">
-            <div className="relative w-56 h-56 mx-auto">
+            <div className="relative w-64 h-64 mx-auto">
               {/* Profile Picture */}
               <Image
                 src="/images/profile.jpg"
@@ -30,7 +30,7 @@ function About(): React.ReactElement {
               <ProfilePictureAnimation />
             </div>
           </div>
-          <div className="md:w-2/3 md:pl-12">
+          <article className="md:w-2/3 md:pl-12">
             <p className="text-lg text-gray-700 leading-relaxed">
               I&apos;m a <strong>Computer Engineer</strong> and <strong>Python Developer </strong> 
               with a Bachelor&apos;s degree from <strong>Addis Ababa University</strong>, currently 
@@ -40,7 +40,7 @@ function About(): React.ReactElement {
               advanced machine learning models to optimizing user experiences on web platforms. 
               I&apos;m a team player who values precision and organizational excellence.
             </p>
-          </div>
+          </article>
         </div>
       </div>
     </section>

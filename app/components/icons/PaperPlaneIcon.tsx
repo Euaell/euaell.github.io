@@ -1,5 +1,3 @@
-// components/icons/PaperPlaneIcon.tsx
-
 import React from 'react';
 
 const PaperPlaneIcon: React.FC<{ className?: string }> = ({ className }) => (

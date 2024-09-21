@@ -2,19 +2,44 @@ import type { Metadata } from "next";
 import "@/app/globals.css";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Afacad } from 'next/font/google'
-import Head from "next/head";
 
 const afacad = Afacad({subsets: ['latin']})
 
 export const metadata: Metadata = {
   title: 'Euael M. Eshete - Portfolio',
-  description: 'Portfolio website of Euael M. Eshete',
+  description: 'Euael Mekonen Eshete—Computer Engineer, Python Developer, and AI enthusiast from Addis Ababa University. Explore my portfolio showcasing software and web development projects in Addis Ababa, Ethiopia.',
   icons: {
     icon: '/icons/favicon_io/favicon.ico',
     apple: '/icons/favicon_io/apple-touch-icon.png',
   },
-  keywords: 'Euael Mekonen Eshete, Euael, Euael Eshete, Euael Mekonen, Computer Engineer, Python Developer, Software Developer, Web Developer, Addis Ababa University, AI, Machine Learning',
-};
+  applicationName: 'Euael M. Eshete - Portfolio',
+  creator: 'Euael M. Eshete',
+  publisher: 'GitHub',
+  robots: 'index, follow',
+  openGraph: {
+    type: 'website',
+    title: 'Euael M. Eshete - Portfolio',
+    description: 'Euael Mekonen Eshete—Computer Engineer, Python Developer, and AI enthusiast from Addis Ababa University. Explore my portfolio showcasing software and web development projects in Addis Ababa, Ethiopia.',
+    siteName: 'Euael M. Eshete - Portfolio',
+    url: 'https://euaell.github.io/',
+    images: [
+      {
+        url: '/icons/favicon_io/apple-touch-icon.png',
+        width: 512,
+        height: 512,
+        alt: 'Euael M. Eshete - Portfolio',
+      },
+    ],
+    countryName: 'Ethiopia',
+  },
+  alternates: {
+      canonical: 'https://euaell.github.io/',
+  },
+  manifest: '/manifest.json',
+  verification: {
+    google: 'wrlJdVvMi6HIsFSGq8Gy99eYLql-rKl2ONU4Gp_KzPM'
+  }
+}
 
 export default function RootLayout({
   children,
@@ -23,16 +48,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        {/* Open Graph and Twitter Cards */}
-        <meta property="og:title" content="Euael M. Eshete - Computer Engineer & Developer" />
-        <meta property="og:description" content="Computer Engineer, Python Developer..." />
-        <meta property="og:image" content="/icons/favicon_io/apple-touch-icon.png" />
-        <meta name="twitter:card" content="/icons/favicon_io/apple-touch-icon.png" />
-        <meta name="twitter:site" content="@euaelesh" />
-
-        <link rel="canonical" href="https://euaell.github.io/" />
-      </Head>
       <body
         className={`${afacad.className} antialiased`}
       >

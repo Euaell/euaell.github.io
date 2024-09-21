@@ -23,11 +23,11 @@ const ProfilePictureAnimation: React.FC = () => {
         targets: '.orbiting-particle',
         translateX: function (el: unknown, i: number) {
           const angle = (i / 12) * 360;
-          return 120 * Math.cos((angle * Math.PI) / 180);
+          return 135 * Math.cos((angle * Math.PI) / 180);
         },
         translateY: function (el: unknown, i: number) {
           const angle = (i / 12) * 360;
-          return 120 * Math.sin((angle * Math.PI) / 180);
+          return 135 * Math.sin((angle * Math.PI) / 180);
         },
         rotate: '1turn',
         easing: 'linear',
