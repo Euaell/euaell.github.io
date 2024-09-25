@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import BackgroundParticles from './BackgroundParticles';
-import ProfilePictureAnimation from './ProfileImageAnimation';
+// import ProfilePictureAnimation from './ProfileImageAnimation';
 import React from 'react';
 
 
@@ -27,7 +27,7 @@ function About(): React.ReactElement {
                 priority
               />
               {/* Animation Overlay */}
-              <ProfilePictureAnimation />
+              {/* <ProfilePictureAnimation /> */}
             </div>
           </div>
           <article className="md:w-2/3 md:pl-12">
