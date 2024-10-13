@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
 import LinkIcon from './icons/LinkSVG';
+import projectStyle from "./project.module.css";
 
 interface ProjectItem {
   title: string;
@@ -69,9 +70,9 @@ export default function Projects(): React.ReactElement {
 			exit="exit"
 			variants={projectsVariants}
 		>
-			<div className="container mx-auto px-6 lg:px-20">
+			<div className="container mx-auto px-6 lg:px-20 projects">
 				<h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Projects</h2>
-				<div className="overflow-x-auto">
+				<div className={projectStyle.projects_scroll_bar}>
 					<div className="flex space-x-6">
 						{projects.map((project, index) => (
 							<div

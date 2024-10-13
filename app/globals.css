@@ -106,3 +106,8 @@ section {
     border-radius: 50%;
 }
 /* End: Profile Animation */
+
+/* Start: scroll bar */
+::-webkit-scrollbar {
+    display: none;
+}

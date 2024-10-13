@@ -1,0 +1,22 @@
+.projects_scroll_bar {
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.projects_scroll_bar::-webkit-scrollbar {
+    height: 10px;
+    display: inline-block;
+}
+
+.projects_scroll_bar::-webkit-scrollbar-track {
+    background: none;
+}
+
+.projects_scroll_bar::-webkit-scrollbar-thumb {
+    background: #7899a4;
+    border-radius: 1rem;
+}
+
+.projects_scroll_bar::-webkit-scrollbar-thumb:hover {
+    background: #78a9b4;
+}
