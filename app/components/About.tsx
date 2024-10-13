@@ -2,6 +2,7 @@ import Image from 'next/image';
 import BackgroundParticles from './BackgroundParticles';
 // import ProfilePictureAnimation from './ProfileImageAnimation';
 import React from 'react';
+import profileImage from '@/public/images/profile.jpg';
 
 
 function About(): React.ReactElement {
@@ -13,17 +14,17 @@ function About(): React.ReactElement {
       <BackgroundParticles type="about" />
       <div className="container mx-auto px-6 lg:px-20 relative z-10">
         <h1 className="text-4xl font-bold text-center mb-12 text-gray-800">
-          About Me
+          Euael M. Eshete
         </h1>
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/3 mb-4 md:mb-0 relative">
             <div className="relative w-64 h-64 mx-auto">
               {/* Profile Picture */}
               <Image
-                src="/images/profile.jpg"
+                src={profileImage}
                 alt="Euael M. Eshete"
                 className="rounded-full object-cover"
-                layout="fill"
+                fill
                 priority
               />
               {/* Animation Overlay */}
