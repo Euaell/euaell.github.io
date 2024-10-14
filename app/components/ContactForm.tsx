@@ -8,10 +8,12 @@ import CheckCircleIcon from '@/app/components/icons/CheckCircleIcon';
 import { motion } from 'framer-motion';
 import BackgroundParticles from './BackgroundParticles';
 
-import { FaLinkedin, FaGithub, FaTwitter, FaEnvelope } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaEnvelope  } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import { FaSquareUpwork } from 'react-icons/fa6';
 import LoadingIcon from './icons/CircularLoadingIcon';
 import { SiLinktree } from 'react-icons/si';
+import Link from 'next/link';
 
 const contactVariants = {
   hidden: { opacity: 0, scale: 0.95 },
@@ -90,7 +92,7 @@ function ContactForm(): React.ReactElement {
         <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">
           Get in Touch
         </h2>
-        <div className="max-w-xl mx-auto bg-gray-50 p-8 rounded-lg shadow-lg">
+        <div className="max-w-xl mx-auto bg-slate-100 p-8 rounded-lg shadow-lg">
           <form onSubmit={handleSubmit}>
             <div className="mb-8 space-y-6">
               <div className="flex flex-col sm:flex-row gap-6">
@@ -102,13 +104,13 @@ function ContactForm(): React.ReactElement {
                     value={formData.firstName}
                     onChange={handleChange}
                     required
-                    className="peer w-full px-0 py-2 border-0 border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:ring-0 focus:border-blue-500"
+                    className="peer rounded-md w-full shadow-sm px-1 py-2 border-0 border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:ring-0 focus:border-blue-500"
                     placeholder="First Name"
                   />
                   <label
                     htmlFor="first_name"
-                    className="absolute left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base
-                    peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-5 peer-focus:text-gray-600 peer-focus:text-sm"
+                    className="absolute left-0 px-1 -top-5 text-gray-700 text-sm transition-all peer-placeholder-shown:text-base
+                    peer-placeholder-shown:text-gray-600 peer-placeholder-shown:top-2 peer-focus:-top-5 peer-focus:text-gray-600 peer-focus:text-sm"
                   >
                     First Name
                   </label>
@@ -120,13 +122,13 @@ function ContactForm(): React.ReactElement {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleChange}
-                    className="peer w-full px-0 py-2 border-0 border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:ring-0 focus:border-blue-500"
+                    className="peer rounded-md w-full shadow-sm px-1 py-2 border-0 border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:ring-0 focus:border-blue-500 focus:shadow-lg"
                     placeholder="Last Name"
                   />
                   <label
                     htmlFor="last_name"
-                    className="absolute left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base
-                    peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-5 peer-focus:text-gray-600 peer-focus:text-sm"
+                    className="absolute left-0 -top-5 px-1 text-gray-700 text-sm transition-all peer-placeholder-shown:text-base
+                    peer-placeholder-shown:text-gray-600 peer-placeholder-shown:top-2 peer-focus:-top-5 peer-focus:text-gray-600 peer-focus:text-sm"
                   >
                     Last Name
                   </label>
@@ -140,13 +142,13 @@ function ContactForm(): React.ReactElement {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="peer w-full px-0 py-2 border-0 border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:ring-0 focus:border-blue-500"
+                  className="peer rounded-md w-full px-1 py-2 border-0 border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:ring-0 focus:border-blue-500"
                   placeholder="Email"
                 />
                 <label
                   htmlFor="email"
-                  className="absolute left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base
-                  peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-5 peer-focus:text-gray-600 peer-focus:text-sm"
+                  className="absolute left-0 px-1 shadow-sm focus:shadow-lg -top-5 text-gray-700 text-sm transition-all peer-placeholder-shown:text-base
+                  peer-placeholder-shown:text-gray-600 peer-placeholder-shown:top-2 peer-focus:-top-5 peer-focus:text-gray-600 peer-focus:text-sm"
                 >
                   Email
                 </label>
@@ -158,13 +160,13 @@ function ContactForm(): React.ReactElement {
                   value={formData.comment}
                   onChange={handleChange}
                   required
-                  className="peer w-full px-0 py-2 border-0 border-b-2 border-gray-300 text-gray-900 placeholder-transparent h-32 focus:outline-none focus:ring-0 focus:border-blue-500 resize-none"
+                  className="peer rounded-lg w-full px-1 py-2 border-0 border-b-2 border-gray-300 text-gray-900 placeholder-transparent h-32 focus:outline-none focus:ring-0 focus:border-blue-500 resize-none"
                   placeholder="Message"
                 ></textarea>
                 <label
                   htmlFor="comment"
-                  className="absolute left-0 -top-5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base
-                  peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-5 peer-focus:text-gray-600 peer-focus:text-sm"
+                  className="absolute left-0 px-1 shadow-sm focus:shadow-lg -top-5 text-gray-700 text-sm transition-all peer-placeholder-shown:text-base
+                  peer-placeholder-shown:text-gray-600 peer-placeholder-shown:top-2 peer-focus:-top-5 peer-focus:text-gray-600 peer-focus:text-sm"
                 >
                   Message
                 </label>
@@ -172,8 +174,8 @@ function ContactForm(): React.ReactElement {
             </div>
             <button
               type="submit"
-              className={`flex items-center px-6 py-3 bg-blue-500 
-                text-white rounded-md hover:bg-blue-600 transition 
+              className={`flex items-center px-4 py-2 bg-sky-700 font-semibold text-lg
+                text-white rounded-lg hover:bg-sky-800 hover:shadow-xl transition tracking-wide
                 duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300`
                 + (formLoading ? " cursor-not-allowed bg-gray-500" : "")
               }
@@ -190,26 +192,25 @@ function ContactForm(): React.ReactElement {
           {/* Social Media Icons */}
           <div className="mt-8">
             <div className="flex justify-center items-center">
-              {/* Desktop (Circular Arrangement) */}
               <div className="flex flex-row justify-between w-4/5 md:w-1/2">
-                <a href="https://github.com/euaell" target="_blank" rel="noopener noreferrer">
+                <Link href="https://github.com/euaell" target="_blank" rel="noopener noreferrer" aria-label='GitHub'>
                   <FaGithub className="text-3xl text-gray-800 hover:text-blue-500 transition" />
-                </a>
-                <a href="https://linkedin.com/in/euael-eshete" target="_blank" rel="noopener noreferrer">
+                </Link>
+                <Link href="https://linkedin.com/in/euael-eshete" target="_blank" rel="noopener noreferrer" aria-label='LinkedIn'>
                   <FaLinkedin className="text-3xl text-gray-800 hover:text-blue-500 transition" />
-                </a>
-                <a href="https://www.upwork.com/freelancers/euaell" target='_blank'>
+                </Link>
+                <Link href="https://www.upwork.com/freelancers/euaell" target='_blank' rel="noopener noreferrer" aria-label='Upwork'>
                   <FaSquareUpwork className="text-3xl text-gray-800 hover:text-blue-500 transition"/>
-                </a>
-                <a href="https://twitter.com/euaelesh" target="_blank" rel="noopener noreferrer">
-                  <FaTwitter className="text-3xl text-gray-800 hover:text-blue-500 transition" />
-                </a>
-                <a href="https://linktr.ee/euael" target="_blank">
+                </Link>
+                <Link href="https://twitter.com/euaelesh" target="_blank" rel="noopener noreferrer" aria-label='Twitter'>
+                  <FaXTwitter className="text-3xl text-gray-800 hover:text-blue-500 transition" />
+                </Link>
+                <Link href="https://linktr.ee/euael" target="_blank" rel="noopener noreferrer" aria-label='Linktree'>
                   <SiLinktree className="text-3xl text-gray-800 hover:text-blue-500 transition" />
-                </a>
-                <a href="mailto:euaelmeko@gmail.com" target='_blank'>
+                </Link>
+                <Link href="mailto:euaelmeko@gmail.com" target='_blank' rel="noopener noreferrer" aria-label='Email'>
                   <FaEnvelope className="text-3xl text-gray-800 hover:text-blue-500 transition" />
-                </a>
+                </Link>
               </div>
             </div>
           </div>
