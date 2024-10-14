@@ -36,7 +36,6 @@ const projects: ProjectItem[] = [
 			"Developed the front-end using React and the back-end using NestJS.",
 			"Implemented the game logic using Socket.io for real-time communication.",
 			"Use Redis for caching and storing game state.",
-			"Deployed the application on Google Cloud Platform.",
 		],
 		link: "https://euaell.github.io/tick_tack_toe",
 		githubLink: 'https://github.com/Euaell/tick_tack_toe',
@@ -87,19 +86,8 @@ export default function Projects(): React.ReactElement {
 						{projects.map((project, index) => (
 							<div
 								key={index}
-								className="relative group flex-shrink-0 w-80 bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300 overflow-hidden"
+								className="relative group flex flex-col flex-shrink-0 w-80 bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300 overflow-hidden"
 							>
-								<h3 className="text-2xl font-semibold text-gray-800 mb-2">{project.title}</h3>
-								<p className="text-gray-600 leading-relaxed mb-4">{project.description}</p>
-
-								{project.responsibilities.length > 0 && (
-									<ul className="list-disc list-inside text-gray-700 space-y-2">
-										{project.responsibilities.map((item, idx) => (
-											<li key={idx}>{item}</li>
-										))}
-									</ul>
-								)}
-
 								{/* Overlay */}
 								{(project.link || project.image || project.githubLink) && (
 									<div
@@ -136,6 +124,36 @@ export default function Projects(): React.ReactElement {
 										}
 									</div>
 								)}
+
+								<div className="flex-grow">
+									<h3 className="text-2xl font-semibold text-gray-800 mb-2">{project.title}</h3>
+									<p className="text-gray-600 leading-relaxed mb-4">{project.description}</p>
+
+									{project.responsibilities.length > 0 && (
+										<ul className="list-disc list-inside text-gray-700 space-y-2">
+											{project.responsibilities.map((item, idx) => (
+												<li key={idx}>{item}</li>
+											))}
+										</ul>
+									)}
+								</div>
+								
+								<div className='mt-auto'>
+									{/* Tags */}
+									{project.tags && project.tags.length > 0 && (
+										<div className="mt-4 flex flex-wrap">
+											{project.tags.map((tag, idx) => (
+												<span
+													key={idx}
+													className="inline-block bg-gray-200 rounded-full px-3 py-1 m-1 text-sm font-semibold text-gray-700 mr-2"
+												>
+													#{tag}
+												</span>
+											))}
+										</div>
+									)}
+								</div>
+							
 							</div>
 						))}
 					</div>
