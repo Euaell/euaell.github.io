@@ -1,6 +1,7 @@
 .projects_scroll_bar {
     overflow-x: auto;
     padding-bottom: 5px;
+    overflow-y: hidden;
 }
 
 .projects_scroll_bar::-webkit-scrollbar {

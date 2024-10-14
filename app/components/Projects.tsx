@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
 import LinkIcon from './icons/LinkSVG';
@@ -60,34 +60,48 @@ const projects: ProjectItem[] = [
 	// Add more projects if needed
 ]
 
-const projectsVariants = {
+const projectVariant = {
+	hidden: { opacity: 0, y: 50 },
+	visible: { 
+		opacity: 1, 
+		y: 0,
+		transition: { duration: 0.5 }
+	}
+}
+const containerVariant = {
 	hidden: { opacity: 0 },
 	visible: {
 		opacity: 1,
-		transition: { staggerChildren: 0.3 },
-	},
-	exit: { opacity: 0, transition: { duration: 0.6 } },
+		transition: {
+			staggerChildren: 0.3, // value to control the stagger delay
+			delayChildren: 0.5,   // Delay before the first child animates
+		}
+	}
 }
 
 export default function Projects(): React.ReactElement {
+	const ref = React.useRef(null);
+  	const isInView = useInView(ref, { once: true, amount: 0.2 });
+
 	return (
 		<motion.section
+			ref={ref}
 			id="projects"
 			className="py-16 bg-slate-200"
 			initial="hidden"
-			animate="visible"
-			exit="exit"
-			variants={projectsVariants}
+			animate={isInView ? "visible" : "hidden"}
+			variants={containerVariant}
 		>
 			<div className="container mx-auto px-6 lg:px-20 projects">
 				<h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Projects</h2>
 				<div className={projectStyle.projects_scroll_bar}>
 					<div className="flex space-x-6">
 						{projects.map((project, index) => (
-							<div
+							<motion.div
 								key={index}
+								variants={projectVariant}
 								className="relative group flex flex-col flex-shrink-0 w-80 bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300 overflow-hidden"
-							>
+						  	>
 								{/* Overlay */}
 								{(project.link || project.image || project.githubLink) && (
 									<div
@@ -154,7 +168,7 @@ export default function Projects(): React.ReactElement {
 									)}
 								</div>
 							
-							</div>
+							</motion.div>
 						))}
 					</div>
 				</div>
