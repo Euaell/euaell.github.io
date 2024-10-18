@@ -1,38 +1,49 @@
 {
-    "name": "Euael M. Eshete - Portfolio",
-    "short_name": "Euael Portfolio",
-    "description": "Euael Mekonen Eshete—Computer Engineer, Python Developer, and AI enthusiast from Addis Ababa University. Explore my portfolio showcasing software and web development projects in Addis Ababa, Ethiopia.",
-    "icons": [
-        {
-            "src": "/icons/favicon_io/android-chrome-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "/icons/favicon_io/android-chrome-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        },
-        {
-            "src": "/icons/favicon_io/apple-touch-icon.png",
-            "sizes": "180x180",
-            "type": "image/png"
-        },
-        {
-            "src": "/icons/favicon_io/favicon-16x16.png",
-            "sizes": "16x16",
-            "type": "image/png"
-        },
-        {
-            "src": "/icons/favicon_io/favicon-32x32.png",
-            "sizes": "32x32",
-            "type": "image/png"
-        }
-    ],
-    "start_url": "/",
-    "background_color": "#ffffff",
-    "theme_color": "#ffffff",
-    "display": "standalone",
-    "orientation": "portrait-primary",
-    "lang": "en"
+	"name": "Euael M. Eshete - Portfolio",
+	"short_name": "Euael Portfolio",
+	"author": "Euael Mekonen Eshete",
+	"description": "Euael Mekonen Eshete—Computer Engineer, Python Developer, and AI enthusiast from Addis Ababa University. Explore my portfolio showcasing software and web development projects in Addis Ababa, Ethiopia.",
+	"icons": [
+		{
+			"src": "/icons/personal_icons/android-icon-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "/icons/personal_icons/apple-icon.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "/icons/personal_icons/favicon-16x16.png",
+			"sizes": "16x16",
+			"type": "image/png"
+		},
+		{
+			"src": "/icons/personal_icons/favicon-32x32.png",
+			"sizes": "32x32",
+			"type": "image/png"
+		}
+	],
+	"shortcuts": [
+		{
+			"name": "View Projects",
+			"short_name": "Projects",
+			"description": "View my portfolio projects",
+			"url": "/#projects",
+			"icons": [
+				{
+					"src": "/icons/personal_icons/apple-icon.png",
+					"sizes": "192x192"
+				}
+			]
+		}
+	],
+	"categories": ["portfolio", "development", "technology"],
+	"start_url": "/",
+	"background_color": "#ffffff",
+	"theme_color": "#ffffff",
+	"display": "standalone",
+	"orientation": "portrait-primary",
+	"lang": "en"
 }
