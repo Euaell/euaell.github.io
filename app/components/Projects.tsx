@@ -29,6 +29,17 @@ const projects: ProjectItem[] = [
 		tags: ['ExpressJS', 'React', 'MongoDB'],
 		githubLink: 'https://github.com/NathanZK/Mekdim'
 	},
+    {
+        title: 'React Component Library',
+        description: 'A collection of reusable React components for building web applications.',
+        responsibilities: [
+            'Implemented the components using TypeScript and Storybook for documentation.',
+            'Used visx for charting and tailwind for styling the components.',
+        ],
+        githubLink: 'https://github.com/Euaell/geek-component-library',
+        link: 'https://www.npmjs.com/package/@euael/eu-react',
+        tags: ['React', 'TypeScript', 'Storybook', 'visx', 'Tailwind CSS'],
+    },
 	{
 		title: "Tic Tac Toe Game",
 		description: "A simple Tic Tac Toe game built with React and NestJS.",
