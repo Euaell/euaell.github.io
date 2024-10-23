@@ -24,7 +24,6 @@ const projects: ProjectItem[] = [
 		responsibilities: [
 			'Actively engaged in the requirements, design, coding, and testing phase of the software.',
 			'Managed a team of 26 during the requirement phase of the development, to design a reliable system.',
-			'Developed and tested more than 2000 lines of back-end code in the development and testing phase.',
 		],
 		tags: ['ExpressJS', 'React', 'MongoDB'],
 		githubLink: 'https://github.com/NathanZK/Mekdim'
