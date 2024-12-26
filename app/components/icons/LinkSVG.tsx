@@ -2,7 +2,7 @@
 export default function LinkIcon({ width, height, fillColor }: { width: number, height: number, fillColor: string}): React.ReactElement {
 	return (
 		<svg fill={fillColor} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" 
-			width={`${width}px`} height={`${height}px`} viewBox="0 0 72 72" enable-background="new 0 0 72 72">
+			width={`${width}px`} height={`${height}px`} viewBox="0 0 72 72" enableBackground="new 0 0 72 72">
 			<g>
 				<g>
 					<path d="M18.321,69.07c-2.874,0-5.775-0.845-8.31-2.604l-0.534-0.371c-6.614-4.593-8.259-13.712-3.666-20.326l13.931-18.588
