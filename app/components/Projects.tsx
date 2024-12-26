@@ -18,6 +18,19 @@ interface ProjectItem {
 }
 
 const projects: ProjectItem[] = [
+    {
+        title: 'MacroChef',
+        description: 'A recipe app that allows users to track their daily calorie intake and plan their meals.',
+        responsibilities: [
+            'Developed using Next.js, TypeScript, and Tailwind CSS.',
+            'Implemented user authentication and authorization using NextAuth.js.',
+            'Integrated the Spoonacular API to fetch recipes and nutritional information.',
+            'Implemented a custom meal planner and calorie tracker.',
+        ],
+        tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'NextAuth.js', 'Spoonacular API'],
+        githubLink: 'https://github.com/Euaell/macro_chef',
+        link: 'https://macro.euaell.me/',
+    },
 	{
 		title: 'Mekdim - School Portal',
 		description: '',
