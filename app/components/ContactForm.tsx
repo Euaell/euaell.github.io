@@ -14,6 +14,7 @@ import { FaSquareUpwork } from 'react-icons/fa6';
 import LoadingIcon from './icons/CircularLoadingIcon';
 import { SiLinktree } from 'react-icons/si';
 import Link from 'next/link';
+import SchedulingButton from './GoogleSchedulingButton';
 
 const contactVariants = {
   hidden: { opacity: 0, scale: 0.95 },
@@ -189,7 +190,8 @@ function ContactForm(): React.ReactElement {
 						<PaperPlaneIcon className={"w-6 h-6 ml-2 " + (successMessage ? "" : "animate-bounce")} />
 					}
 				</button>
-				{/* Embed Here */}
+
+				<SchedulingButton />
 			</div>
 		  </form>
 		  {/* Social Media Icons */}
