@@ -53,6 +53,17 @@ const projects: ProjectItem[] = [
         tags: ['React', 'TypeScript', 'Storybook', 'visx', 'Tailwind CSS'],
     },
 	{
+		title: "Cryptograph Visualizer",
+		description: "A web application that visualizes the cryptographic algorithms.",
+		responsibilities: [
+			"Developed using Next.js 15 with TypeScript and Tailwind CSS.",
+			"Implemented the cryptographic algorithms using the Web Crypto API.",
+		],	
+		tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+		githubLink: "https://github.com/Euaell/Crypto_Grapher",
+		link: "https://crypto-grapher.euaell.me",		
+	},
+	{
 		title: "Tic Tac Toe Game",
 		description: "A simple Tic Tac Toe game built with React and NestJS.",
 		responsibilities: [
