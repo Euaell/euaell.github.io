@@ -70,7 +70,7 @@ const Hero = () => {
   };
   
   return (
-    <section ref={containerRef} className="hero-section">
+    <section ref={containerRef} className="hero-section" id="hero">
       <div className="container mx-auto px-4 md:px-8 py-20 flex flex-col lg:flex-row items-center justify-between relative z-10">
         
         {/* Text content */}

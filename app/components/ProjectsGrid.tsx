@@ -57,7 +57,7 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ projects, title }) => {
   }, []);
   
   return (
-    <section ref={sectionRef} className="py-20 bg-[#090909] relative">
+    <section ref={sectionRef} className="py-20 bg-[#090909] relative" id="projects">
       <div className="container mx-auto px-6">
         <AnimatedText
           text={title}

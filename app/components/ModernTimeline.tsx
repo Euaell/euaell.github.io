@@ -88,7 +88,10 @@ const ModernTimeline: React.FC<ModernTimelineProps> = ({ items, title }) => {
   }, []);
   
   return (
-    <section className="py-20 bg-[#080808] relative">
+    <section 
+      className="py-20 bg-[#080808] relative"
+      id={title.toLowerCase().includes('experience') ? 'experience' : 'education'}
+    >
       <div className="container mx-auto px-6">
         <AnimatedText
           text={title}

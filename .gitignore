@@ -38,3 +38,6 @@ next-env.d.ts
 # development
 content.txt
 project_content.txt
+
+# environment variables
+.env
