@@ -121,7 +121,7 @@ const BackgroundParticles: React.FC<BackgroundParticlesProps> = ({ type }) => {
         const handleInteraction = () => {
           if (ref.current && isActive) {
             const particles = ref.current.querySelectorAll(`.${type}-particle`);
-            particles.forEach((particle, i) => {
+            particles.forEach((particle) => {
               const rect = particle.getBoundingClientRect();
               const centerX = rect.left + rect.width / 2;
               const centerY = rect.top + rect.height / 2;

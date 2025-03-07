@@ -12,7 +12,7 @@ const NoiseBackground = () => {
 
     // Create gradient blobs
     const colors = ['#6337ff', '#00ffd5', '#fb30ff'];
-    const blobs = [];
+    const blobs: HTMLElement[] = [];
 
     for (let i = 0; i < 3; i++) {
       const blob = document.createElement('div');

@@ -48,7 +48,7 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
     // Reset any previous animations
     gsap.set(element, { opacity: 1 });
     
-    let targets;
+    let targets: HTMLElement[] | HTMLDivElement | null = [];
     
     if (animation === 'chars') {
       targets = splitText.chars;
@@ -118,10 +118,10 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
   const TagName = tag as keyof JSX.IntrinsicElements;
 
   return (
+    // @ts-expect-error - ignore the type error for the ref
     <TagName ref={el => {
-      // @ts-ignore - both refs need to be set
+      // @ts-expect-error - both refs need to be set
       textRef.current = el;
-      // @ts-ignore
       ref(el);
     }} className={`reveal-text ${className}`}>
       {text}

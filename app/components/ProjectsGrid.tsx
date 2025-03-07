@@ -5,14 +5,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Card3D from './Card3D';
 import AnimatedText from './AnimatedText';
+import { Project } from '../data/projects';
 
-interface Project {
-  title: string;
-  description: string;
-  image: string;
-  link: string;
-  tags: string[];
-}
 
 interface ProjectsGridProps {
   projects: Project[];
