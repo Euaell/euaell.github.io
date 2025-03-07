@@ -21,28 +21,18 @@ export const projectsData: Project[] = [
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'NextAuth.js', 'Spoonacular API'],
     repositoryLink: 'https://github.com/Euaell/macro_chef',
     link: 'https://macro.euaell.me/',
-    image: '/images/project1.jpg',
+    image: '/images/placeholder.png',
   },
   {
     title: 'Mekdim - School Portal',
-<<<<<<< Updated upstream
-		description: '',
-		responsibilities: [
-			'Actively engaged in the requirements, design, coding, and testing phase of the software.',
-			'Managed a team of 26 during the requirement phase of the development, to design a reliable system.',
-		],
-		tags: ['ExpressJS', 'React', 'MongoDB'],
-		repositoryLink: 'https://github.com/NathanZK/Mekdim',
-=======
-	description: '',
-	responsibilities: [
-		'Actively engaged in the requirements, design, coding, and testing phase of the software.',
-		'Managed a team of 26 during the requirement phase of the development, to design a reliable system.',
-	],
-	tags: ['ExpressJS', 'React', 'MongoDB'],
-	repositoryLink: 'https://github.com/NathanZK/Mekdim',
->>>>>>> Stashed changes
-    image: '/images/project2.jpg',
+    description: '',
+    responsibilities: [
+      'Actively engaged in the requirements, design, coding, and testing phase of the software.',
+      'Managed a team of 26 during the requirement phase of the development, to design a reliable system.',
+    ],
+    tags: ['ExpressJS', 'React', 'MongoDB'],
+    repositoryLink: 'https://github.com/NathanZK/Mekdim',
+    image: '/images/placeholder.png',
   },
   {
     title: 'React Component Library',
@@ -54,7 +44,7 @@ export const projectsData: Project[] = [
     repositoryLink: 'https://github.com/Euaell/geek-component-library',
     link: 'https://www.npmjs.com/package/@euael/eu-react',
     tags: ['React', 'TypeScript', 'Storybook', 'visx', 'Tailwind CSS'],
-    image: '/images/project3.jpg',
+    image: '/images/placeholder.png',
   },
   {
 		title: "Cryptograph Visualizer",
@@ -66,7 +56,7 @@ export const projectsData: Project[] = [
 		tags: ["Next.js", "TypeScript", "Tailwind CSS"],
 		repositoryLink: "https://github.com/Euaell/Crypto_Grapher",
 		link: "https://crypto-grapher.euaell.me",
-    image: '/images/project4.jpg',
+    image: '/images/placeholder.png',
 	},
 	{
 		title: "Wordle Clone",
@@ -78,7 +68,7 @@ export const projectsData: Project[] = [
 		tags: ["React", "CSS"],
 		repositoryLink: "https://github.com/Euaell/myWordle",
 		link: "https://wordle.euaell.me",
-		image: '/images/project4.jpg',
+		image: '/images/placeholder.png',
 	},
 	{
 		title: "Tic Tac Toe Game",
@@ -91,7 +81,7 @@ export const projectsData: Project[] = [
 		link: "https://euaell.github.io/tick_tack_toe",
 		repositoryLink: 'https://github.com/Euaell/tick_tack_toe',
 		tags: ["React", "NestJS", "Socket.io", "Redis", "Docker"],
-		image: '/images/project4.jpg',
+		image: '/images/placeholder.png',
 	},
 	{
 		title: 'Car Dealership Website',
@@ -100,7 +90,7 @@ export const projectsData: Project[] = [
 		responsibilities: [],
 		tags: ['React', 'Node.js', 'MySQL'],
 		repositoryLink: 'https://github.com/Euaell/Car-Dealership',
-		image: '/images/project5.jpg',
+		image: '/images/placeholder.png',
 	},
 	{
 		title: 'Wordcloud Generator',
@@ -109,6 +99,6 @@ export const projectsData: Project[] = [
 		link: 'https://euaell.github.io/word_counter',
 		repositoryLink: 'https://github.com/Euaell/word_counter',
 		tags: ['React', 'react-d3-cloud', 'Next.js'],
-		image: '/images/project6.jpg',
+		image: '/images/placeholder.png',
 	},
 ]; 

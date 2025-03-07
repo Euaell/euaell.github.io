@@ -41,3 +41,6 @@ project_content.txt
 
 # environment variables
 .env
+
+# ide
+.idea/
