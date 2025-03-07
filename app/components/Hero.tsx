@@ -79,14 +79,14 @@ const Hero = () => {
             text="Hello, I'm"
             animation="words"
             tag="h2"
-            className="text-xl font-light text-gray-400 mb-3"
+            className="text-xl font-light text-gray-400 mb-3 mr-4"
           />
           
           <AnimatedText
             text="Euael M. Eshete"
             animation="chars" 
             tag="h1"
-            staggerValue={0.03}
+            staggerValue={0.04}
             delay={0.2}
             className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 font-syne"
           />

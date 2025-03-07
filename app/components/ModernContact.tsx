@@ -129,7 +129,7 @@ const ModernContact = () => {
           text="Let&apos;s build something amazing together"
           tag="p"
           animation="words"
-          className="text-xl text-gray-400 text-center mb-16 max-w-2xl mx-auto"
+          className="text-xl text-gray-400 text-center mb-16 md:ml-8 max-w-2xl mx-auto"
         />
         
         <div className="max-w-3xl mx-auto">
