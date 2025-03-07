@@ -25,6 +25,7 @@ export const projectsData: Project[] = [
   },
   {
     title: 'Mekdim - School Portal',
+<<<<<<< Updated upstream
 		description: '',
 		responsibilities: [
 			'Actively engaged in the requirements, design, coding, and testing phase of the software.',
@@ -32,6 +33,15 @@ export const projectsData: Project[] = [
 		],
 		tags: ['ExpressJS', 'React', 'MongoDB'],
 		repositoryLink: 'https://github.com/NathanZK/Mekdim',
+=======
+	description: '',
+	responsibilities: [
+		'Actively engaged in the requirements, design, coding, and testing phase of the software.',
+		'Managed a team of 26 during the requirement phase of the development, to design a reliable system.',
+	],
+	tags: ['ExpressJS', 'React', 'MongoDB'],
+	repositoryLink: 'https://github.com/NathanZK/Mekdim',
+>>>>>>> Stashed changes
     image: '/images/project2.jpg',
   },
   {

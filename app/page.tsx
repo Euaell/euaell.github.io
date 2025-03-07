@@ -45,8 +45,11 @@ export default function Home() {
         />
         
         <ModernContact />
+<<<<<<< Updated upstream
         
         {/* Other sections will be added in upcoming steps */}
+=======
+>>>>>>> Stashed changes
       </main>
     </SmoothScroll>
   );
