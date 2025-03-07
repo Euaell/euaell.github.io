@@ -68,10 +68,10 @@ const ModernContact = () => {
       setStatus('sending');
       
       await emailjs.sendForm(
-        'service_id_here', // Replace with your EmailJS service ID
-        'template_id_here', // Replace with your EmailJS template ID
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         formRef.current,
-        'public_key_here' // Replace with your EmailJS public key
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY! 
       );
       
       setStatus('success');
@@ -140,7 +140,7 @@ const ModernContact = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              Thank you for your message! I'll get back to you soon.
+              Thank you for your message! I&apos;ll get back to you soon.
             </motion.div>
           )}
           
