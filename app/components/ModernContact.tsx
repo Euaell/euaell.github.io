@@ -16,41 +16,31 @@ const ModernContact = () => {
   
   const [status, setStatus] = useState<null | 'sending' | 'success' | 'error'>(null);
   const formRef = useRef<HTMLFormElement>(null);
-  const inputRefs = useRef<HTMLInputElement[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // Form hover animations
   useEffect(() => {
     if (!containerRef.current) return;
     
-    const formElements = containerRef.current.querySelectorAll('input, textarea');
+    // Set up GSAP animations
+    gsap.registerPlugin();
     
-    formElements.forEach(element => {
-      // Add focus effect
-      element.addEventListener('focus', () => {
-        gsap.to(element, {
-          borderColor: 'rgba(99, 55, 255, 1)',
-          boxShadow: '0 0 15px rgba(99, 55, 255, 0.3)',
-          duration: 0.3,
-        });
-      });
+    // Initial setup for label animations
+    const inputs = containerRef.current.querySelectorAll('input, textarea');
+    inputs.forEach((input, index) => {
+      // Set initial state for labels based on if input has value
+      const hasValue = (input as HTMLInputElement).value.length > 0;
       
-      // Remove focus effect
-      element.addEventListener('blur', () => {
-        gsap.to(element, {
-          borderColor: 'rgba(255, 255, 255, 0.1)',
-          boxShadow: 'none',
-          duration: 0.3,
-        });
+      gsap.set(`.input-label-${index}`, {
+        y: hasValue ? -25 : 0,
+        scale: hasValue ? 0.8 : 1,
+        color: hasValue ? 'var(--accent)' : 'var(--muted)',
+        transformOrigin: 'left top',
       });
     });
     
-    // Clean up
+    // Clean up animations
     return () => {
-      formElements.forEach(element => {
-        element.removeEventListener('focus', () => {});
-        element.removeEventListener('blur', () => {});
-      });
+      // gsap cleanup if needed
     };
   }, []);
   
@@ -92,22 +82,32 @@ const ModernContact = () => {
     }
   };
   
-  // Floating label animations
+  // Handle input focus
   const handleFocus = (index: number) => {
-    gsap.to(`label[for="input-${index}"]`, {
+    gsap.to(`.input-label-${index}`, {
       y: -25,
       scale: 0.8,
       color: 'var(--accent)',
       duration: 0.3,
+      ease: 'power2.out',
     });
   };
   
+  // Handle input blur
   const handleBlur = (index: number) => {
-    const input = inputRefs.current[index];
+    const input = document.getElementById(`input-${index}`) as HTMLInputElement | HTMLTextAreaElement;
+    
     if (input && !input.value) {
-      gsap.to(`label[for="input-${index}"]`, {
+      gsap.to(`.input-label-${index}`, {
         y: 0,
         scale: 1,
+        color: 'var(--muted)',
+        duration: 0.3,
+        ease: 'power2.out',
+      });
+    } else {
+      // Keep the label up but change color to indicate it's not focused
+      gsap.to(`.input-label-${index}`, {
         color: 'var(--muted)',
         duration: 0.3,
       });
@@ -157,12 +157,9 @@ const ModernContact = () => {
           
           <form ref={formRef} onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div className="relative">
+              <div className="relative group">
                 <input
                   id="input-0"
-                  ref={(el) => {
-                    if (el) inputRefs.current[0] = el;
-                  }}
                   type="text"
                   name="name"
                   value={formState.name}
@@ -170,22 +167,20 @@ const ModernContact = () => {
                   onFocus={() => handleFocus(0)}
                   onBlur={() => handleBlur(0)}
                   required
-                  className="w-full bg-[#111111] border border-[rgba(255,255,255,0.1)] rounded-lg p-4 text-white focus:outline-none transition-all"
+                  className="input-field w-full bg-[#111111] border border-[rgba(255,255,255,0.1)] rounded-lg p-4 text-white focus:outline-none transition-all focus:border-[var(--accent)] focus:shadow-input peer"
+                  autoComplete="name"
                 />
                 <label
                   htmlFor="input-0"
-                  className="absolute left-4 top-4 text-gray-400 pointer-events-none transition-all"
+                  className="input-label-0 absolute left-4 top-4 text-gray-400 transition-all duration-300 ease-out pointer-events-none"
                 >
                   Your Name
                 </label>
               </div>
               
-              <div className="relative">
+              <div className="relative group">
                 <input
                   id="input-1"
-                  ref={(el) => {
-                    if (el) inputRefs.current[1] = el;
-                  }}
                   type="email"
                   name="email"
                   value={formState.email}
@@ -193,11 +188,12 @@ const ModernContact = () => {
                   onFocus={() => handleFocus(1)}
                   onBlur={() => handleBlur(1)}
                   required
-                  className="w-full bg-[#111111] border border-[rgba(255,255,255,0.1)] rounded-lg p-4 text-white focus:outline-none transition-all"
+                  className="input-field w-full bg-[#111111] border border-[rgba(255,255,255,0.1)] rounded-lg p-4 text-white focus:outline-none transition-all focus:border-[var(--accent)] focus:shadow-input peer"
+                  autoComplete="email"
                 />
                 <label
                   htmlFor="input-1"
-                  className="absolute left-4 top-4 text-gray-400 pointer-events-none transition-all"
+                  className="input-label-1 absolute left-4 top-4 text-gray-400 transition-all duration-300 ease-out pointer-events-none"
                 >
                   Your Email
                 </label>
@@ -205,12 +201,9 @@ const ModernContact = () => {
             </div>
             
             {/* Message input */}
-            <div className="relative mb-8">
+            <div className="relative mb-8 group">
               <textarea
                 id="input-2"
-                ref={(el) => {
-                  if (el) inputRefs.current[2] = el as unknown as HTMLInputElement;
-                }}
                 name="message"
                 value={formState.message}
                 onChange={handleChange}
@@ -218,11 +211,11 @@ const ModernContact = () => {
                 onBlur={() => handleBlur(2)}
                 required
                 rows={6}
-                className="w-full bg-[#111111] border border-[rgba(255,255,255,0.1)] rounded-lg p-4 text-white focus:outline-none transition-all"
+                className="input-field w-full bg-[#111111] border border-[rgba(255,255,255,0.1)] rounded-lg p-4 text-white focus:outline-none transition-all focus:border-[var(--accent)] focus:shadow-input peer resize-none"
               />
               <label
                 htmlFor="input-2"
-                className="absolute left-4 top-4 text-gray-400 pointer-events-none transition-all"
+                className="input-label-2 absolute left-4 top-4 text-gray-400 transition-all duration-300 ease-out pointer-events-none"
               >
                 Your Message
               </label>
@@ -268,6 +261,24 @@ const ModernContact = () => {
           </form>
         </div>
       </div>
+      
+      {/* Add custom CSS for the enhanced input animations */}
+      <style jsx global>{`
+        .input-field:focus {
+          box-shadow: 0 0 0 2px rgba(99, 55, 255, 0.2);
+        }
+        
+        /* When input has content, move label up (using peer class) */
+        .input-field:not(:placeholder-shown) + label,
+        .input-field:focus + label {
+          transform: translateY(-25px) scale(0.8);
+          color: var(--accent);
+        }
+        
+        .focus:shadow-input {
+          box-shadow: 0 0 15px rgba(99, 55, 255, 0.3);
+        }
+      `}</style>
     </section>
   );
 };
