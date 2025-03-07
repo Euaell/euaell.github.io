@@ -1,9 +1,21 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
 import { GoogleAnalytics } from '@next/third-parties/google'
-import { Afacad } from 'next/font/google'
+import { Inter, Syne } from 'next/font/google'
+import AnimatedCursor from "@/app/components/AnimatedCursor";
+import NoiseBackground from "@/app/components/NoiseBackground";
 
-const afacad = Afacad({subsets: ['latin']})
+const inter = Inter({
+	subsets: ['latin'],
+	display: 'swap',
+	variable: '--font-inter',
+});
+
+const syne = Syne({
+	subsets: ['latin'],
+	display: 'swap',
+	variable: '--font-syne',
+});
 
 export const metadata: Metadata = {
 	metadataBase: new URL('https://euaell.github.io/'),
@@ -88,18 +100,18 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-	<html lang="en">
-	  <body
-		className={`${afacad.className} antialiased`}
-	  >
-		{children}
-	  </body>
-	  <GoogleAnalytics gaId="G-QZW3GEJSTM" />
-	</html>
-  );
+	return (
+		<html lang="en" className={`${inter.variable} ${syne.variable}`}>
+			<body className="antialiased overflow-x-hidden">
+				<NoiseBackground />
+				<AnimatedCursor />
+				{children}
+				<GoogleAnalytics gaId="G-QZW3GEJSTM" />
+			</body>
+		</html>
+	);
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 declare global {
 	interface Window {
@@ -31,7 +32,7 @@ export default function SchedulingButton() {
 			if (window.calendar) {
 				window.calendar.schedulingButton.load({
 					url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ26L_QvdVzsVp92i63Zq_DQhfCxMjs6uisbqemA_l9-m204uQWgcsVASaSvJ37QhlLIFVH_pi7K?gv=true',
-					color: '#039BE5',
+					color: '#6337ff',
 					label: 'Book an appointment',
 					target: document.getElementById('scheduling-button'),
 				});
@@ -39,11 +40,23 @@ export default function SchedulingButton() {
 		};
 
 		return () => {
-			document.head.removeChild(link);
-			document.body.removeChild(script);
+			if (document.head.contains(link)) {
+				document.head.removeChild(link);
+			}
+			if (document.body.contains(script)) {
+				document.body.removeChild(script);
+			}
 		};
 	}, []);
 
-	return <div id="scheduling-button" className="ml-4"></div>;
+	return (
+		<motion.div 
+			id="scheduling-button" 
+			className="mt-8 flex justify-center md:justify-start"
+			initial={{ opacity: 0, y: 20 }}
+			animate={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.5, delay: 0.3 }}
+		/>
+	);
 }
 
