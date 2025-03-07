@@ -64,6 +64,17 @@ const projects: ProjectItem[] = [
 		link: "https://crypto-grapher.euaell.me",		
 	},
 	{
+		title: "Wordle Clone",
+		description: "A Wordle clone built with React.",
+		responsibilities: [
+			"Developed the game logic using React hooks.",
+			"Implemented the game state management using zustand.",
+		],
+		tags: ["React", "CSS"],
+		githubLink: "https://github.com/Euaell/myWordle",
+		link: "https://wordle.euaell.me"
+	},
+	{
 		title: "Tic Tac Toe Game",
 		description: "A simple Tic Tac Toe game built with React and NestJS.",
 		responsibilities: [
