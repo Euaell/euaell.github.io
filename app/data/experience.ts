@@ -42,4 +42,4 @@ export const experienceData: ExperienceItem[] = [
       'I also worked as a full-stack engineer in a team working on the company ordering website.'
     ]
   },
-]; 
+];
