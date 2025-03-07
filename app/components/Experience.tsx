@@ -1,6 +1,7 @@
 'use client';
-import anime from "animejs";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView, useAnimation, Variants } from "framer-motion";
+import BackgroundParticles from './BackgroundParticles';
 
 interface ExperienceItem {
   date: string;
@@ -46,99 +47,201 @@ const experiences: ExperienceItem[] = [
       'I also worked as a full-stack engineer in a team working on the company ordering website.'
     ]
   },
-  {
-    date: '2019 - present',
-    position: 'Freelance Web Developer',
-    company: 'Self-employed (Upwork)',
-    location: 'Remote',
-    responsibilities: [
-      'Developed responsive websites for clients using HTML, CSS, JavaScript, and WordPress.',
-      'Customized WordPress themes and plugins to meet client requirements.',
-      'Ensured websites are optimized for performance, security, and SEO.',
-    ],
-  }
   // Add more experiences as needed
 ]
 
 function Experience(): React.ReactElement {
   const sectionRef = useRef<HTMLElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
+  const controls = useAnimation();
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    let observer: IntersectionObserver;
-    const currentSection = sectionRef.current;
-
-    if (currentSection) {
-      observer = new IntersectionObserver(
-        (entries, observerInstance) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              // Start the anime.js animation
-              anime({
-                targets: '.popping-animation',
-                rotateY: '1turn',
-                easing: 'easeOutQuad',
-                opacity: [0, 1],
-                scale: [0, 1],
-                // rotate: ['-90deg', '0deg'],
-                duration: 750,
-                delay: anime.stagger(400, { start: 300 }),
-                loop: false,
-              });
-
-              // Stop observing after the animation has started
-              observerInstance.unobserve(currentSection);
-            }
-          });
-        },
-        {
-          root: null, // Observe within viewport
-          threshold: 0.3, // Trigger when 30% of the section is visible
-        }
-      );
-
-      observer.observe(currentSection);
-    }
-
-    // Cleanup the observer on component unmount
-    return () => {
-      if (observer && currentSection) {
-        observer.unobserve(currentSection);
+    if (isInView) {
+      controls.start("visible");
+      // Animate timeline line growth
+      if (timelineRef.current) {
+        const timeline = timelineRef.current;
+        timeline.style.height = "0%";
+        const animation = timeline.animate(
+          [
+            { height: "0%" },
+            { height: "100%" }
+          ],
+          {
+            duration: 1500,
+            easing: "ease-out",
+            fill: "forwards"
+          }
+        );
+        
+        animation.onfinish = () => {
+          timeline.style.height = "100%";
+        };
       }
-    };
-  }, []);
+    } else {
+      controls.start("hidden");
+      if (timelineRef.current) {
+        timelineRef.current.style.height = "0%";
+      }
+      setActiveIndex(null);
+    }
+  }, [controls, isInView]);
+
+  // Variants for staggered animations
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+  
+  // Handle hover effects
+  const handleMouseEnter = (index: number) => {
+    setActiveIndex(index);
+  };
+  
+  const handleMouseLeave = () => {
+    setActiveIndex(null);
+  };
 
   return (
     <section
       id="experience"
-      className="py-16 bg-slate-200"
+      className="py-16 bg-slate-200 relative"
       ref={sectionRef}
     >
-      <div className="container mx-auto px-6 lg:px-20">
-        <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Professional Experience</h2>
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="hidden md:block absolute w-1 bg-blue-500 h-full left-1/2 transform -translate-x-1/2"></div>
-          {/* Timeline items */}
-          <div className="space-y-4 md:space-y-12">
+      <BackgroundParticles type="experience" />
+      <div className="container mx-auto px-6 lg:px-20 relative z-10">
+        <motion.h2 
+          initial={{ opacity: 0, y: -20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+          transition={{ duration: 0.5 }}
+          className="text-4xl font-bold text-center mb-12 text-gray-800"
+        >
+          Professional Experience
+        </motion.h2>
+        
+        <div className="relative mt-16">
+          {/* Animated timeline line */}
+          <div 
+            ref={timelineRef}
+            className="timeline-line"
+          ></div>
+          
+          {/* Timeline items container */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={controls}
+            className="relative z-10"
+          >
             {experiences.map((exp, index) => (
-              <div key={index}>
-                {/* Popping animation */}
-                <div className={`popping-animation opacity-0 scale-0 relative md:w-1/2 px-6 ${index % 2 === 0 ? 'md:pr-8 md:ml-auto' : 'md:pl-8 md:mr-auto'} `}>
-                  <div
-                    className={`bg-white p-3 md:p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300 cursor-pointer animate-pop`}
-                  >
-                    <p className="text-sm text-gray-500">{exp.date}</p>
-                    <h3 className="text-xl font-semibold text-gray-800">
-                      {exp.position} - {exp.company}
-                    </h3>
-                    <p className="text-gray-600">{exp.location}</p>
+              <motion.div 
+                key={index}
+                variants={itemVariants}
+                custom={index}
+                className="relative mb-16"
+                onMouseEnter={() => handleMouseEnter(index)}
+                onMouseLeave={handleMouseLeave}
+              >
+                {/* Timeline dot */}
+                <motion.div 
+                  className="timeline-dot"
+                  style={{ top: '24px' }}
+                  initial={{ scale: 0 }}
+                  animate={isInView ? { scale: 1 } : { scale: 0 }}
+                  transition={{ delay: 0.8 + (index * 0.2), duration: 0.4 }}
+                ></motion.div>
+                
+                <div className={`flex flex-col md:flex-row items-start ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                  {/* Date column */}
+                  <div className="w-full md:w-1/2 pb-8 md:pb-0 flex justify-center md:px-12">
+                    <motion.div 
+                      className="timeline-item"
+                      initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+                      transition={{ delay: 1 + (index * 0.2), duration: 0.6 }}
+                    >
+                      <div className="bg-blue-500 text-white py-2 px-6 rounded-full font-medium text-center">
+                        {exp.date}
+                      </div>
+                    </motion.div>
+                  </div>
+                  
+                  {/* Content column */}
+                  <div className="w-full md:w-1/2 md:px-12">
+                    <motion.div 
+                      className="timeline-item-content"
+                      initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                      animate={isInView ? 
+                        { 
+                          opacity: 1, 
+                          y: 0, 
+                          scale: 1,
+                          boxShadow: activeIndex === index ? "0 15px 30px rgba(0,0,0,0.2)" : "0 4px 20px rgba(0,0,0,0.1)"
+                        } : 
+                        { opacity: 0, y: 30, scale: 0.9 }
+                      }
+                      transition={{ delay: 1.2 + (index * 0.2), duration: 0.6 }}
+                      whileHover={{ 
+                        y: -8,
+                        boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <p className="timeline-item-date">{exp.location}</p>
+                      <h3 className="timeline-item-title">{exp.position}</h3>
+                      <p className="timeline-item-subtitle">{exp.company}</p>
+                      
+                      <motion.ul 
+                        className="mt-4 space-y-2 text-gray-600"
+                        initial="hidden"
+                        animate={activeIndex === index ? "visible" : "hidden"}
+                        variants={{
+                          hidden: { opacity: 0 },
+                          visible: { 
+                            opacity: 1,
+                            transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+                          }
+                        }}
+                      >
+                        {exp.responsibilities.map((resp, i) => (
+                          <motion.li 
+                            key={i}
+                            variants={{
+                              hidden: { opacity: 0, x: -10 },
+                              visible: { opacity: 1, x: 0 }
+                            }}
+                            className="flex items-start"
+                          >
+                            <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-2"></span>
+                            <span>{resp}</span>
+                          </motion.li>
+                        ))}
+                      </motion.ul>
+                    </motion.div>
                   </div>
                 </div>
-                {/* Timeline dot */}
-                <div className="hidden md:block absolute w-4 h-4 bg-blue-500 rounded-full left-1/2 transform -translate-x-1/2"></div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
