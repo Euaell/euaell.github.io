@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "@/app/globals.css";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Inter, Syne } from 'next/font/google'
@@ -19,6 +19,14 @@ const syne = Syne({
 	preload: true,
 });
 
+export const viewport: Viewport = {
+	width: 'device-width',
+	initialScale: 1,
+	maximumScale: 5,
+	colorScheme: 'dark',
+	themeColor: '#6337ff',
+}
+
 export const metadata: Metadata = {
 	metadataBase: new URL('https://euaell.github.io/'),
 	title: 'Euael M. Eshete - Portfolio',
@@ -35,13 +43,6 @@ export const metadata: Metadata = {
 	generator: 'Next.js',
 	referrer: 'origin-when-cross-origin',
 	keywords: ['Euael M. Eshete', 'Portfolio', 'Computer Engineer', 'Python Developer', 'AI', 'Addis Ababa', 'Ethiopia', 'Web Development', 'Software Engineer'],
-	colorScheme: 'dark',
-	themeColor: '#6337ff',
-	viewport: {
-		width: 'device-width',
-		initialScale: 1,
-		maximumScale: 5,
-	},
 	robots: {
 		index: true,
 		follow: true,

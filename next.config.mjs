@@ -13,19 +13,7 @@ const nextConfig = {
     swcMinify: true,
     compress: true,
     optimizeFonts: true,
-    productionBrowserSourceMaps: false,
+    productionBrowserSourceMaps: false
 };
 
 export default nextConfig;
-
-// next.config.js
-
-// module.exports = {
-//   output: 'export',
-//   images: {
-//     unoptimized: true,
-//   },
-//   // If your site will be served from a subpath, specify `basePath` and `assetPrefix`
-//   basePath: isProd ? '/your-repo-name' : '',
-//   assetPrefix: isProd ? '/your-repo-name/' : '',
-// };
