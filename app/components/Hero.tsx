@@ -5,7 +5,8 @@ import Image from 'next/image';
 import { gsap } from 'gsap';
 import AnimatedText from './AnimatedText';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaXTwitter } from "react-icons/fa6";
 
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -101,7 +102,7 @@ const Hero = () => {
           />
           
           <AnimatedText
-            text="I'm a passionate software developer with expertise in AI-driven applications and responsive web design, currently pursuing a Master's degree at Addis Ababa University."
+            text="I'm a passionate software developer with expertise in AI-driven applications and responsive web design."
             animation="lines"
             tag="p"
             delay={1}
@@ -125,7 +126,7 @@ const Hero = () => {
             </motion.a>
             
             <motion.a
-              href="https://linkedin.com/in/euael-mekonen"
+              href="https://linkedin.com/in/euael-eshete"
               target="_blank"
               rel="noreferrer"
               className="magnetic-element text-white text-2xl p-2 hover:text-[var(--accent)] transition-colors relative"
@@ -139,7 +140,7 @@ const Hero = () => {
             </motion.a>
             
             <motion.a
-              href="https://twitter.com/euael_mekonen"
+              href="https://x.com/euaelesh"
               target="_blank"
               rel="noreferrer"
               className="magnetic-element text-white text-2xl p-2 hover:text-[var(--accent)] transition-colors relative"
@@ -149,7 +150,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.5, duration: 0.5 }}
             >
-              <FaTwitter />
+              <FaXTwitter />
             </motion.a>
           </div>
         </div>
