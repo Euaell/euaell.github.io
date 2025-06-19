@@ -13,7 +13,8 @@ const nextConfig = {
     swcMinify: true,
     compress: true,
     optimizeFonts: true,
-    productionBrowserSourceMaps: false
+    productionBrowserSourceMaps: false,
+    transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
 };
 
 export default nextConfig;
