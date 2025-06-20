@@ -66,10 +66,7 @@ export default function RootLayout({
 				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 			</head>
 			<body className={`${inter.className} antialiased`}>
-				<ThemeProvider
-					defaultTheme="dark"
-					storageKey="portfolio-theme"
-				>
+				<ThemeProvider>
 					<SmoothScrollProvider>
 						<div className="relative min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
 							{/* Background Effects */}
@@ -82,7 +79,7 @@ export default function RootLayout({
 								className="fixed inset-0 opacity-[0.015] pointer-events-none" 
 								style={{
 									backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
-								}} 
+								}}
 							/>
 							
 							{children}

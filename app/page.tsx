@@ -5,15 +5,15 @@ import WorkSection from '@/app/components/WorkSection'
 import ContactSection from '@/app/components/ContactSection'
 
 export default function Home() {
-  return (
-    <>
-      <Navigation />
-      <main className="relative">
-        <HeroSection />
-        <AboutSection />
-        <WorkSection />
-        <ContactSection />
-      </main>
-    </>
-  )
+	return (
+		<>
+			<Navigation />
+			<main className="relative">
+				<HeroSection />
+				<AboutSection />
+				<WorkSection />
+				<ContactSection />
+			</main>
+		</>
+	)
 }

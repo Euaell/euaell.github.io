@@ -2,25 +2,28 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
-import { Code, Database, Globe, Smartphone, Server, Zap } from 'lucide-react'
+import { Code, Database, Globe, Smartphone, Server, Zap, Calendar, MapPin, Building } from 'lucide-react'
+import { experienceData } from '../data/experience'
+import { educationData } from '../data/education'
+import Link from 'next/link'
 
 const skills = [
   {
     category: 'Frontend',
     icon: Globe,
-    technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+    technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vue.js'],
     color: 'from-blue-500 to-cyan-500'
   },
   {
     category: 'Backend',
     icon: Server,
-    technologies: ['Node.js', 'Python', 'Express', 'FastAPI', 'GraphQL'],
+    technologies: ['Node.js', 'Python', 'FastAPI', 'LiteStar', 'Express', 'NestJS'],
     color: 'from-green-500 to-emerald-500'
   },
   {
     category: 'Database',
     icon: Database,
-    technologies: ['PostgreSQL', 'MongoDB', 'Redis', 'Prisma', 'Supabase'],
+    technologies: ['PostgreSQL', 'MongoDB', 'Redis', 'MySQL', 'Supabase'],
     color: 'from-purple-500 to-violet-500'
   },
   {
@@ -30,24 +33,24 @@ const skills = [
     color: 'from-pink-500 to-rose-500'
   },
   {
-    category: 'DevOps',
+    category: 'AI/ML',
     icon: Zap,
-    technologies: ['AWS', 'Docker', 'Kubernetes', 'CI/CD', 'Terraform'],
+    technologies: ['GPT', 'Mistral', 'Gemini', 'DALL-E', 'Stable Diffusion', 'LLMs'],
     color: 'from-orange-500 to-red-500'
   },
   {
     category: 'Tools',
     icon: Code,
-    technologies: ['Git', 'VS Code', 'Figma', 'Postman', 'Jest'],
+    technologies: ['Git', 'Docker', 'WordPress', 'DHIS2', 'Socket.io', 'Jest'],
     color: 'from-indigo-500 to-blue-500'
   }
 ]
 
 const stats = [
-  { label: 'Years Experience', value: 5, suffix: '+' },
-  { label: 'Projects Completed', value: 50, suffix: '+' },
-  { label: 'Technologies Mastered', value: 20, suffix: '+' },
-  { label: 'Happy Clients', value: 30, suffix: '+' }
+  { label: 'Years Experience', value: 2, suffix: '+' },
+  { label: 'Projects Completed', value: 15, suffix: '+' },
+  { label: 'Technologies Mastered', value: 25, suffix: '+' },
+  { label: 'Happy Clients', value: 10, suffix: '+' }
 ]
 
 export default function AboutSection() {
@@ -96,7 +99,7 @@ export default function AboutSection() {
             <span className="gradient-text">About Me</span>
           </h2>
           <p className="text-xl text-white/70 max-w-3xl mx-auto">
-            Passionate developer with a love for creating innovative solutions and beautiful user experiences
+            Passionate full-stack developer specializing in AI-driven solutions and modern web technologies
           </p>
         </motion.div>
 
@@ -137,19 +140,19 @@ export default function AboutSection() {
             </h3>
             <div className="space-y-4 text-white/80 leading-relaxed">
               <p>
-                I started my journey in software development over 5 years ago, driven by curiosity 
-                and a passion for solving complex problems. What began as a hobby quickly evolved 
-                into a career focused on creating impactful digital solutions.
+                I&apos;m a Computer Engineering graduate from Addis Ababa University with a passion for 
+                creating innovative digital solutions. My journey in software development has taken me 
+                from building 3D printers and CNC machines to developing AI-driven conversational agents.
               </p>
               <p>
-                I specialize in full-stack development, with expertise spanning modern frontend 
-                frameworks, robust backend systems, and cloud infrastructure. I believe in writing 
-                clean, maintainable code and creating user experiences that delight and inspire.
+                Currently working as a Software Engineer at AfroChat, I specialize in integrating advanced 
+                AI models (GPT, Mistral, Gemini) and building scalable backend systems that have supported 
+                user growth from 60 to nearly 2,000 users with over 58,000 messages processed.
               </p>
               <p>
-                When I'm not coding, you'll find me exploring new technologies, contributing to 
-                open-source projects, or sharing knowledge with the developer community. I'm 
-                always eager to take on new challenges and collaborate on innovative projects.
+                I believe in continuous learning and love exploring new technologies. Whether it&apos;s building 
+                responsive web applications, developing mobile apps, or working with the latest AI technologies, 
+                I&apos;m always excited to take on new challenges.
               </p>
             </div>
           </motion.div>
@@ -168,7 +171,7 @@ export default function AboutSection() {
                 <div className="w-48 h-48 mx-auto mb-6 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full flex items-center justify-center">
                   <div className="text-6xl">👨‍💻</div>
                 </div>
-                <h4 className="text-xl font-semibold text-white mb-2">Euael</h4>
+                <h4 className="text-xl font-semibold text-white mb-2">Euael M. Eshete</h4>
                 <p className="text-white/60">Full Stack Developer</p>
                 <div className="mt-4 flex justify-center space-x-2">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
@@ -179,11 +182,109 @@ export default function AboutSection() {
           </motion.div>
         </div>
 
-        {/* Skills Grid */}
+        {/* Experience Timeline */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
+          className="mb-20"
+        >
+          <h3 className="text-2xl md:text-3xl font-bold text-center text-white mb-12">
+            Professional Experience
+          </h3>
+          <div className="space-y-8">
+            {experienceData.map((experience, index) => (
+              <motion.div
+                key={experience.title}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, delay: 1 + index * 0.2 }}
+                className="card-hover interactive-card"
+              >
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="md:w-1/3">
+                    <div className="flex items-center gap-2 text-blue-400 mb-2">
+                      <Calendar size={16} />
+                      <span className="text-sm font-medium">{experience.date}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-white/60 mb-2">
+                      <MapPin size={16} />
+                      <span className="text-sm">{experience.location}</span>
+                    </div>
+                  </div>
+                  <div className="md:w-2/3">
+                    <h4 className="text-lg font-semibold text-white mb-1">{experience.title}</h4>
+                    <div className="flex items-center gap-2 text-purple-400 mb-3">
+                      <Building size={16} />
+                      <span className="text-sm font-medium">{experience.subtitle}</span>
+                    </div>
+                    <ul className="space-y-2">
+                      {experience.description.map((desc, idx) => (
+                        <li key={idx} className="text-white/70 text-sm flex items-start">
+                          <span className="text-blue-400 mr-2 mt-1">•</span>
+                          {desc}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Education */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 1.4 }}
+          className="mb-20"
+        >
+          <h3 className="text-2xl md:text-3xl font-bold text-center text-white mb-12">
+            Education
+          </h3>
+          <div className="max-w-2xl mx-auto">
+            {educationData.map((education, index) => (
+              <motion.div
+                key={education.title}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 1.6 + index * 0.1 }}
+                className="card-hover interactive-card"
+              >
+                <div className="text-center">
+                  <div className="flex justify-center items-center gap-2 text-blue-400 mb-2">
+                    <Calendar size={16} />
+                    <span className="text-sm font-medium">{education.date}</span>
+                  </div>
+                  <h4 className="text-xl font-semibold text-white mb-2">{education.title}</h4>
+                  <div className="flex justify-center items-center gap-2 text-purple-400 mb-4">
+                    <Building size={16} />
+                    <span className="font-medium">{education.subtitle}</span>
+                  </div>
+                  <div className="flex justify-center items-center gap-2 text-white/60 mb-4">
+                    <MapPin size={16} />
+                    <span className="text-sm">{education.location}</span>
+                  </div>
+                  <ul className="space-y-2 text-left max-w-md mx-auto">
+                    {education.description.map((desc, idx) => (
+                      <li key={idx} className="text-white/70 text-sm flex items-start">
+                        <span className="text-blue-400 mr-2 mt-1">•</span>
+                        {desc}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Skills Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 1.8 }}
           className="mb-16"
         >
           <h3 className="text-2xl md:text-3xl font-bold text-center text-white mb-12">
@@ -195,35 +296,24 @@ export default function AboutSection() {
                 key={skill.category}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
+                transition={{ duration: 0.5, delay: 2 + index * 0.1 }}
                 className="card-hover interactive-card group"
               >
-                <div className="flex items-center mb-4">
-                  <div className={`p-3 rounded-lg bg-gradient-to-r ${skill.color} mr-4`}>
+                <div className="text-center p-6">
+                  <div className={`inline-flex p-4 rounded-full bg-gradient-to-r ${skill.color} mb-4 group-hover:scale-110 transition-transform`}>
                     <skill.icon size={24} className="text-white" />
                   </div>
-                  <h4 className="text-xl font-semibold text-white">{skill.category}</h4>
-                </div>
-                <div className="space-y-2">
-                  {skill.technologies.map((tech, techIndex) => (
-                    <motion.div
-                      key={tech}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={isInView ? { opacity: 1, x: 0 } : {}}
-                      transition={{ duration: 0.3, delay: 1.2 + index * 0.1 + techIndex * 0.05 }}
-                      className="flex items-center justify-between py-2 px-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
-                    >
-                      <span className="text-white/80">{tech}</span>
-                      <div className="skill-bar w-16">
-                        <motion.div
-                          className="skill-progress"
-                          initial={{ width: 0 }}
-                          animate={isInView ? { width: `${85 + Math.random() * 15}%` } : {}}
-                          transition={{ duration: 1, delay: 1.5 + index * 0.1 + techIndex * 0.05 }}
-                        />
-                      </div>
-                    </motion.div>
-                  ))}
+                  <h4 className="text-lg font-semibold text-white mb-4">{skill.category}</h4>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {skill.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 bg-white/10 rounded-full text-xs text-white/70 hover:bg-white/20 transition-colors"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -234,20 +324,19 @@ export default function AboutSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 1.5 }}
+          transition={{ duration: 0.6, delay: 2.2 }}
           className="text-center"
         >
           <p className="text-xl text-white/70 mb-8">
-            Ready to bring your ideas to life? Let's work together!
+            Ready to bring your ideas to life? Let&apos;s collaborate!
           </p>
-          <motion.a
+          <Link
             href="#contact"
             className="btn-primary inline-flex items-center"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
-            Get In Touch
-          </motion.a>
+            <span>Get In Touch</span>
+            <span className="ml-2">→</span>
+          </Link>
         </motion.div>
       </div>
     </section>
