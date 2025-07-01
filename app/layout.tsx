@@ -18,25 +18,53 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
 	title: {
-		default: 'Euael - Full Stack Developer',
-		template: '%s | Euael'
+		default: 'Euael M. Eshete - Full Stack Developer & AI Engineer',
+		template: '%s | Euael M. Eshete'
 	},
-	description: 'Full Stack Developer specializing in modern web technologies, React, Next.js, and creative digital experiences.',
-	keywords: ['Full Stack Developer', 'React', 'Next.js', 'TypeScript', 'Web Development', 'Frontend', 'Backend'],
-	authors: [{ name: 'Euael' }],
-	creator: 'Euael',
+	description: 'Full Stack Developer specializing in AI-driven solutions, React, Next.js, Python, and modern web technologies. Computer Engineering graduate with 2+ years experience building scalable applications.',
+	keywords: [
+		'Full Stack Developer', 
+		'React Developer', 
+		'Next.js Developer', 
+		'TypeScript Developer', 
+		'Python Developer',
+		'AI Engineer',
+		'Machine Learning',
+		'Web Development', 
+		'Frontend Developer', 
+		'Backend Developer',
+		'Software Engineer',
+		'Euael Eshete',
+		'Portfolio',
+		'Ethiopia Developer'
+	],
+	authors: [{ name: 'Euael M. Eshete', url: 'https://portfoli.euaell.me' }],
+	creator: 'Euael M. Eshete',
+	publisher: 'Euael M. Eshete',
+	applicationName: 'Euael Portfolio',
+	category: 'Technology',
 	openGraph: {
 		type: 'website',
 		locale: 'en_US',
-		url: 'https://euaell.github.io',
-		title: 'Euael - Full Stack Developer',
-		description: 'Full Stack Developer specializing in modern web technologies, React, Next.js, and creative digital experiences.',
+		url: 'https://portfoli.euaell.me',
+		title: 'Euael M. Eshete - Full Stack Developer & AI Engineer',
+		description: 'Full Stack Developer specializing in AI-driven solutions, React, Next.js, Python, and modern web technologies. View my portfolio and get in touch!',
 		siteName: 'Euael Portfolio',
+		images: [
+			{
+				url: '/images/og-image.png',
+				width: 1200,
+				height: 630,
+				alt: 'Euael M. Eshete - Full Stack Developer Portfolio',
+			},
+		],
 	},
 	twitter: {
 		card: 'summary_large_image',
-		title: 'Euael - Full Stack Developer',
-		description: 'Full Stack Developer specializing in modern web technologies, React, Next.js, and creative digital experiences.',
+		title: 'Euael M. Eshete - Full Stack Developer & AI Engineer',
+		description: 'Full Stack Developer specializing in AI-driven solutions, React, Next.js, Python, and modern web technologies.',
+		images: ['/images/og-image.png'],
+		creator: '@euaell', // Add your Twitter handle if you have one
 	},
 	robots: {
 		index: true,
@@ -49,8 +77,11 @@ export const metadata: Metadata = {
 			'max-snippet': -1,
 		},
 	},
-	verification: {
-		google: 'your-google-verification-code',
+	alternates: {
+		canonical: 'https://portfoli.euaell.me',
+	},
+	other: {
+		'google-site-verification': 'your-actual-google-verification-code-here',
 	},
 }
 
@@ -60,11 +91,7 @@ export default function RootLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
-			<head>
-				<link rel="preconnect" href="https://fonts.googleapis.com" />
-				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-			</head>
+		<html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
 			<body className={`${inter.className} antialiased`}>
 				<ThemeProvider>
 					<SmoothScrollProvider>
