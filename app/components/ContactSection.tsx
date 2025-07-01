@@ -2,7 +2,7 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Github, Linkedin, Twitter } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, GithubIcon, Linkedin, Twitter } from 'lucide-react'
 
 const contactInfo = [
 	{
@@ -15,8 +15,8 @@ const contactInfo = [
 	{
 		icon: Phone,
 		label: 'Phone',
-		value: '+251 91 234 5678',
-		href: 'tel:+251912345678',
+		value: '+251 93 893 7079',
+		href: 'tel:+251938937079',
 		color: 'from-green-500 to-emerald-500'
 	},
 	{
@@ -31,20 +31,20 @@ const contactInfo = [
 const socialLinks = [
 	{
 		name: 'GitHub',
-		icon: Github,
+		icon: GithubIcon,
 		href: 'https://github.com/euaell',
 		color: 'hover:text-gray-300'
 	},
 	{
 		name: 'LinkedIn',
 		icon: Linkedin,
-		href: 'https://linkedin.com/in/euael',
+		href: 'https://linkedin.com/in/euael-eshete/',
 		color: 'hover:text-blue-400'
 	},
 	{
-		name: 'Twitter',
+		name: 'X',
 		icon: Twitter,
-		href: 'https://twitter.com/euael',
+		href: 'https://x.com/euaelesh',
 		color: 'hover:text-sky-400'
 	}
 ]
@@ -78,7 +78,7 @@ export default function ContactSection() {
 	const [isSubmitting, setIsSubmitting] = useState(false)
 	const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
-	const validateForm = (): boolean => {
+	function validateForm(): boolean {
 		const newErrors: FormErrors = {}
 
 		if (!formData.name.trim()) {
@@ -105,7 +105,7 @@ export default function ContactSection() {
 		return Object.keys(newErrors).length === 0
 	}
 
-	const handleSubmit = async (e: React.FormEvent) => {
+	async function handleSubmit(e: React.FormEvent) {
 		e.preventDefault()
 		
 		if (!validateForm()) return
@@ -131,7 +131,7 @@ export default function ContactSection() {
 		}
 	}
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+	function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
 		const { name, value } = e.target
 		setFormData(prev => ({ ...prev, [name]: value }))
 		
@@ -142,10 +142,7 @@ export default function ContactSection() {
 	}
 
 	return (
-		<section id="contact" className="section-padding relative overflow-hidden">
-			{/* Background Effects */}
-			<div className="absolute inset-0 bg-gradient-to-b from-transparent via-green-900/5 to-transparent" />
-			
+		<section id="contact" className="relative overflow-hidden pb-20">
 			<div className="container-custom" ref={ref}>
 				{/* Section Header */}
 				<motion.div
@@ -158,7 +155,7 @@ export default function ContactSection() {
 						<span className="gradient-text">Get In Touch</span>
 					</h2>
 					<p className="text-xl text-white/70 max-w-3xl mx-auto">
-						Have a project in mind? Let&apos;s discuss how we can work together to bring your ideas to life.
+						Have a project in mind? Let&apos;s discuss how we can work together.
 					</p>
 				</motion.div>
 
@@ -371,7 +368,7 @@ export default function ContactSection() {
 				</div>
 
 				{/* Additional Contact Methods */}
-				<motion.div
+				{/* <motion.div
 					initial={{ opacity: 0, y: 30 }}
 					animate={isInView ? { opacity: 1, y: 0 } : {}}
 					transition={{ duration: 0.6, delay: 0.8 }}
@@ -381,24 +378,24 @@ export default function ContactSection() {
 						Prefer a different way to connect?
 					</p>
 					<div className="flex flex-col sm:flex-row gap-4 justify-center">
-						<a
+						<Link
 							href="https://linkedin.com/in/euael"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="btn-secondary cursor-pointer"
 						>
 							Connect on LinkedIn
-						</a>
-						<a
+						</Link>
+						<Link
 							href="https://github.com/euaell"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="btn-secondary cursor-pointer"
 						>
 							View My GitHub
-						</a>
+						</Link>
 					</div>
-				</motion.div>
+				</motion.div> */}
 			</div>
 		</section>
 	)

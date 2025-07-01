@@ -1,4 +1,3 @@
-
 export interface Project {
 	title: string;
 	description: string;
@@ -28,15 +27,17 @@ export const projectsData: Project[] = [
 	},
 	{
 		title: 'Mekdim - School Portal',
-		description: '',
+		description: 'A comprehensive school management system built for educational institutions in Ethiopia. Features student enrollment, grade management, attendance tracking, and parent-teacher communication portals.',
 		responsibilities: [
-			'Actively engaged in the requirements, design, coding, and testing phase of the software.',
-			'Managed a team of 26 during the requirement phase of the development, to design a reliable system.',
+			'Led a team of 26 developers during the requirements gathering and system design phase',
+			'Implemented scalable backend architecture using Express.js and MongoDB',
+			'Designed responsive frontend interfaces using React and modern UI principles',
+			'Established reliable testing frameworks and deployment pipelines',
 		],
-		tags: ['ExpressJS', 'React', 'MongoDB'],
+		tags: ['ExpressJS', 'React', 'MongoDB', 'Team Leadership', 'Educational Technology'],
 		repositoryLink: 'https://github.com/NathanZK/Mekdim',
 		image: '/images/placeholder.png',
-		featured: false,
+		featured: true,
 	},
 	{
 		title: 'React Component Library',

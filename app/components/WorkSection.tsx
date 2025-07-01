@@ -29,7 +29,7 @@ export default function WorkSection() {
 	const techFilters = ['All', ...allTechnologies.slice(0, 8)] // Limit to top 8 technologies
 
 	return (
-		<section id="work" className="section-padding relative overflow-hidden">
+		<section id="work" className="relative overflow-hidden">
 			{/* Background Effects */}
 			<div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/5 to-transparent" />
 			
@@ -67,7 +67,7 @@ export default function WorkSection() {
 								initial={{ opacity: 0, y: 30 }}
 								animate={isInView ? { opacity: 1, y: 0 } : {}}
 								transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-								className="card-hover interactive-card group"
+								className="card-hover interactive-card group rounded-lg"
 							>
 								{/* Project Image */}
 								<div className="relative overflow-hidden rounded-lg mb-6 bg-gradient-to-br from-blue-500/20 to-purple-500/20 aspect-video">
@@ -88,7 +88,7 @@ export default function WorkSection() {
 												<ExternalLink size={20} />
 											</a>
 										)}
-										<a
+										<Link
 											href={project.repositoryLink}
 											target="_blank"
 											rel="noopener noreferrer"
@@ -96,12 +96,12 @@ export default function WorkSection() {
 											title="View Source Code"
 										>
 											<Github size={20} />
-										</a>
+										</Link>
 									</div>
 								</div>
 
 								{/* Project Details */}
-								<div className="space-y-4">
+								<div className="space-y-4 p-6">
 									<div className="flex items-center justify-between">
 										<h4 className="text-xl font-semibold text-white">{project.title}</h4>
 										<span className="px-3 py-1 bg-white/10 rounded-full text-sm text-white/70">
@@ -175,6 +175,7 @@ export default function WorkSection() {
 					initial={{ opacity: 0, y: 30 }}
 					animate={isInView ? { opacity: 1, y: 0 } : {}}
 					transition={{ duration: 0.6, delay: 0.8 }}
+					className="mb-20"
 				>
 					<h3 className="text-2xl md:text-3xl font-bold text-white mb-8 text-center">
 						Other Projects
@@ -187,7 +188,7 @@ export default function WorkSection() {
 								initial={{ opacity: 0, y: 30 }}
 								animate={isInView ? { opacity: 1, y: 0 } : {}}
 								transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
-								className="card-hover interactive-card group"
+								className="card-hover interactive-card group rounded-lg"
 							>
 								{/* Project Image */}
 								<div className="relative overflow-hidden rounded-lg mb-4 bg-gradient-to-br from-blue-500/10 to-purple-500/10 aspect-video">
@@ -197,7 +198,7 @@ export default function WorkSection() {
 									
 									{/* Overlay with links */}
 									<div className="absolute inset-0 bg-black/50 flex items-center justify-center space-x-3 opacity-0 group-hover:opacity-100 transition-opacity">
-										<a
+										<Link
 											href={project.repositoryLink}
 											target="_blank"
 											rel="noopener noreferrer"
@@ -205,12 +206,12 @@ export default function WorkSection() {
 											title="View Source Code"
 										>
 											<Github size={16} />
-										</a>
+										</Link>
 									</div>
 								</div>
 
 								{/* Project Details */}
-								<div className="space-y-3">
+								<div className="space-y-3 p-6">
 									<div className="flex items-center justify-between">
 										<h4 className="font-semibold text-white">{project.title}</h4>
 										<span className="px-2 py-1 bg-white/10 rounded text-xs text-white/70">
@@ -244,7 +245,7 @@ export default function WorkSection() {
 				</motion.div>
 
 				{/* Call to Action */}
-				<motion.div
+				{/* <motion.div
 					initial={{ opacity: 0, y: 30 }}
 					animate={isInView ? { opacity: 1, y: 0 } : {}}
 					transition={{ duration: 0.6, delay: 1.2 }}
@@ -269,8 +270,8 @@ export default function WorkSection() {
 							View All Projects
 						</a>
 					</div>
-				</motion.div>
+				</motion.div> */}
 			</div>
 		</section>
 	)
-} 
+}

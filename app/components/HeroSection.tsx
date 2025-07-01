@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 
 const socialLinks = [
 	{ name: 'GitHub', icon: Github, href: 'https://github.com/euaell', color: 'hover:text-gray-300' },
-	{ name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/in/euael', color: 'hover:text-blue-400' },
+	{ name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/in/euael-eshete/', color: 'hover:text-blue-400' },
 	{ name: 'Email', icon: Mail, href: 'mailto:euaelmeko@gmail.com', color: 'hover:text-red-400' },
 ]
 
@@ -28,14 +28,18 @@ export default function HeroSection() {
 	}
 
 	return (
-		<section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+		<section 
+			id="home" 
+			className="relative h-screen pt-24 flex items-center justify-center overflow-hidden"
+			aria-label="Hero section with introduction"
+		>
 			{/* Background Effects */}
-			<div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-pink-900/20" />
-			<div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent" />
-			<div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-purple-600/20 via-transparent to-transparent" />
+			<div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-pink-900/20" aria-hidden="true" />
+			<div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent" aria-hidden="true" />
+			<div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-purple-600/20 via-transparent to-transparent" aria-hidden="true" />
 			
 			{/* Animated Background Elements */}
-			<div className="absolute inset-0 overflow-hidden">
+			<div className="absolute inset-0 overflow-hidden" aria-hidden="true">
 				{[...Array(20)].map((_, i) => (
 					<motion.div
 						key={i}
@@ -53,13 +57,14 @@ export default function HeroSection() {
 							repeat: Infinity,
 							repeatType: 'reverse',
 						}}
+						aria-hidden="true"
 					/>
 				))}
 			</div>
 
 			{/* Main Content */}
 			<div className="container-custom relative z-10">
-				<div className="text-center max-w-4xl mx-auto">
+				<header className="text-center max-w-4xl mx-auto">
 					{/* Greeting */}
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
@@ -79,7 +84,7 @@ export default function HeroSection() {
 						transition={{ duration: 0.8, delay: 0.2 }}
 						className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-shadow-lg"
 					>
-						<span className="gradient-text">Euael</span>
+						<span className="gradient-text">Euael M. Eshete</span>
 					</motion.h1>
 
 					{/* Title with rotating skills */}
@@ -88,6 +93,9 @@ export default function HeroSection() {
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8, delay: 0.4 }}
 						className="text-xl md:text-2xl lg:text-3xl font-light mb-8 text-white/90"
+						role="banner"
+						aria-live="polite"
+						aria-label="Professional title and specialization"
 					>
 						<span>Full Stack Developer specializing in </span>
 						<motion.span
@@ -97,13 +105,14 @@ export default function HeroSection() {
 							exit={{ opacity: 0, y: -20 }}
 							transition={{ duration: 0.5 }}
 							className="gradient-text-primary font-semibold"
+							aria-label={`Current specialty: ${skills[currentSkill]}`}
 						>
 							{skills[currentSkill]}
 						</motion.span>
 					</motion.div>
 
 					{/* Description */}
-					<motion.p
+					{/* <motion.p
 						initial={{ opacity: 0, y: 30 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8, delay: 0.6 }}
@@ -111,37 +120,43 @@ export default function HeroSection() {
 					>
 						I create modern, scalable web applications with beautiful user experiences. 
 						Passionate about clean code, innovative solutions, and continuous learning.
-					</motion.p>
+					</motion.p> */}
 
 					{/* CTA Buttons */}
-					<motion.div
+					<motion.nav
 						initial={{ opacity: 0, y: 30 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8, delay: 0.8 }}
 						className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
+						role="navigation"
+						aria-label="Main call-to-action buttons"
 					>
 						<button
 							onClick={scrollToAbout}
-							className="btn-primary group cursor-pointer"
+							className="btn-primary group flex justify-center items-center flex-row"
+							aria-label="Explore my work and projects"
 						>
-							<span>Explore My Work</span>
-							<ExternalLink size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+							<span className='hidden md:inline'>Explore</span><span className='ml-1'> My Work</span>
+							<ExternalLink size={18} className="ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
 						</button>
 						<Link
 							href="#contact"
-							className="btn-secondary group cursor-pointer"
+							className="btn-secondary group flex justify-center items-center flex-row"
+							aria-label="Get in touch with me"
 						>
 							<span>Get In Touch</span>
-							<Mail size={18} className="ml-2 group-hover:scale-110 transition-transform" />
+							<Mail size={18} className="ml-2 group-hover:scale-110 transition-transform" aria-hidden="true" />
 						</Link>
-					</motion.div>
+					</motion.nav>
 
 					{/* Social Links */}
-					<motion.div
+					<motion.nav
 						initial={{ opacity: 0, y: 30 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8, delay: 1 }}
-						className="flex justify-center space-x-6 mb-16"
+						className="flex justify-center space-x-6 mb-8"
+						role="navigation"
+						aria-label="Social media links"
 					>
 						{socialLinks.map((social, index) => (
 							<a
@@ -149,7 +164,8 @@ export default function HeroSection() {
 								href={social.href}
 								target="_blank"
 								rel="noopener noreferrer"
-								className={`p-3 glass rounded-full text-white/70 transition-all duration-300 hover:scale-110 cursor-pointer ${social.color}`}
+								className={`p-3 glass rounded-full text-white/70 transition-all duration-300 hover:scale-110 ${social.color}`}
+								aria-label={`Visit my ${social.name} profile`}
 							>
 								<motion.div
 									initial={{ opacity: 0, scale: 0 }}
@@ -158,11 +174,11 @@ export default function HeroSection() {
 									whileHover={{ y: -2 }}
 									whileTap={{ scale: 0.95 }}
 								>
-									<social.icon size={20} />
+									<social.icon size={20} aria-hidden="true" />
 								</motion.div>
 							</a>
 						))}
-					</motion.div>
+					</motion.nav>
 
 					{/* Scroll Indicator */}
 					<motion.div
@@ -170,34 +186,37 @@ export default function HeroSection() {
 						animate={{ opacity: 1 }}
 						transition={{ duration: 0.8, delay: 1.4 }}
 						className="flex flex-col items-center"
+						role="button"
+						aria-label="Scroll down to explore more content"
 					>
 						<span className="text-white/50 text-sm mb-2">Scroll to explore</span>
 						<motion.button
 							onClick={scrollToAbout}
 							animate={{ y: [0, 10, 0] }}
 							transition={{ duration: 2, repeat: Infinity }}
-							className="p-2 text-white/50 hover:text-white transition-colors cursor-pointer"
+							className="p-2 text-white/50 hover:text-white transition-colors"
+							aria-label="Scroll down to about section"
 						>
-							<ArrowDown size={24} />
+							<ArrowDown size={24} aria-hidden="true" />
 						</motion.button>
 					</motion.div>
-				</div>
+				</header>
 			</div>
 
 			{/* Floating Elements */}
-			<div className="absolute top-20 left-10 animate-float">
+			<div className="absolute top-20 left-10 animate-float" aria-hidden="true">
 				<div className="w-20 h-20 glass rounded-full flex items-center justify-center">
-					<span className="text-2xl">⚡</span>
+					<span className="text-2xl" role="img" aria-label="lightning bolt">⚡</span>
 				</div>
 			</div>
-			<div className="absolute top-40 right-10 animate-float" style={{ animationDelay: '2s' }}>
+			<div className="absolute top-40 right-10 animate-float" style={{ animationDelay: '2s' }} aria-hidden="true">
 				<div className="w-16 h-16 glass rounded-full flex items-center justify-center">
-					<span className="text-xl">🚀</span>
+					<span className="text-xl" role="img" aria-label="rocket">🚀</span>
 				</div>
 			</div>
-			<div className="absolute bottom-40 left-20 animate-float" style={{ animationDelay: '4s' }}>
+			<div className="absolute bottom-40 left-20 animate-float" style={{ animationDelay: '4s' }} aria-hidden="true">
 				<div className="w-12 h-12 glass rounded-full flex items-center justify-center">
-					<span className="text-lg">💡</span>
+					<span className="text-lg" role="img" aria-label="light bulb">💡</span>
 				</div>
 			</div>
 		</section>
