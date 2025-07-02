@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Home, User, Briefcase, Mail, Sun, Moon } from 'lucide-react'
-import { useTheme } from './ThemeProvider'
+import { Menu, X, Home, User, Briefcase, Mail } from 'lucide-react'
+// import { useTheme } from './ThemeProvider'
 
 const navItems = [
 	{ name: 'Home', href: '#home', icon: Home },
@@ -16,7 +16,7 @@ export default function Navigation() {
 	const [isOpen, setIsOpen] = useState(false)
 	const [activeSection, setActiveSection] = useState('home')
 	const [scrolled, setScrolled] = useState(false)
-	const { theme, setTheme } = useTheme()
+	// const { theme, setTheme } = useTheme()
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -50,9 +50,9 @@ export default function Navigation() {
 		setIsOpen(false)
 	}
 
-	const toggleTheme = () => {
-		setTheme(theme === 'dark' ? 'light' : 'dark')
-	}
+	// const toggleTheme = () => {
+	// 	setTheme(theme === 'dark' ? 'light' : 'dark')
+	// }
 
 	return (
 		<>
@@ -88,12 +88,12 @@ export default function Navigation() {
 					))}
 					
 					{/* Theme Toggle */}
-					<button
+					{/* <button
 						onClick={toggleTheme}
 						className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300"
 					>
 						{theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-					</button>
+					</button> */}
 				</div>
 			</motion.nav>
 
@@ -177,7 +177,7 @@ export default function Navigation() {
 								))}
 								
 								{/* Theme Toggle */}
-								<motion.button
+								{/* <motion.button
 									initial={{ x: 50, opacity: 0 }}
 									animate={{ x: 0, opacity: 1 }}
 									transition={{ delay: navItems.length * 0.1 }}
@@ -188,7 +188,7 @@ export default function Navigation() {
 									<span className="font-medium">
 										{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
 									</span>
-								</motion.button>
+								</motion.button> */}
 							</div>
 						</motion.div>
 					)}

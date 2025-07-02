@@ -17,6 +17,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
+	metadataBase: new URL('https://portfolio.euaell.me'),
 	title: {
 		default: 'Euael M. Eshete - Full Stack Developer & AI Engineer',
 		template: '%s | Euael M. Eshete'
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
 		'Portfolio',
 		'Ethiopia Developer'
 	],
-	authors: [{ name: 'Euael M. Eshete', url: 'https://portfoli.euaell.me' }],
+	authors: [{ name: 'Euael M. Eshete', url: 'https://portfolio.euaell.me' }],
 	creator: 'Euael M. Eshete',
 	publisher: 'Euael M. Eshete',
 	applicationName: 'Euael Portfolio',
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		type: 'website',
 		locale: 'en_US',
-		url: 'https://portfoli.euaell.me',
+		url: 'https://portfolio.euaell.me',
 		title: 'Euael M. Eshete - Full Stack Developer & AI Engineer',
 		description: 'Full Stack Developer specializing in AI-driven solutions, React, Next.js, Python, and modern web technologies. View my portfolio and get in touch!',
 		siteName: 'Euael Portfolio',
@@ -78,7 +79,7 @@ export const metadata: Metadata = {
 		},
 	},
 	alternates: {
-		canonical: 'https://portfoli.euaell.me',
+		canonical: 'https://portfolio.euaell.me',
 	},
 	other: {
 		'google-site-verification': 'your-actual-google-verification-code-here',
