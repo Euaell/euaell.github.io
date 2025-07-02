@@ -18,6 +18,7 @@
 		"deploy": "chmod +x deploy.sh && ./deploy.sh"
 	},
 	"dependencies": {
+		"@next/third-parties": "^15.3.4",
 		"framer-motion": "^11.11.17",
 		"lucide-react": "^0.460.0",
 		"next": "14.2.12",

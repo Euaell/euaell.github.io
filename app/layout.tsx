@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/app/components/ThemeProvider'
 import { SmoothScrollProvider } from '@/app/components/SmoothScrollProvider'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const inter = Inter({ 
 	subsets: ['latin'],
@@ -115,6 +116,7 @@ export default function RootLayout({
 					</SmoothScrollProvider>
 				</ThemeProvider>
 			</body>
+			<GoogleAnalytics gaId="G-QZW3GEJSTM" />
 		</html>
 	)
 }
