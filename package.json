@@ -5,10 +5,17 @@
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
-		"start": "npx serve@latest out",
+		"start": "next start",
 		"lint": "next lint",
 		"analyze": "ANALYZE=true next build",
-		"build:static": "next build && next export"
+		"build:static": "next build && next export",
+		"docker:build": "docker build -t portfolio-app .",
+		"docker:run": "docker run -d --name portfolio-container -p 3000:3000 --restart unless-stopped portfolio-app",
+		"docker:stop": "docker stop portfolio-container",
+		"docker:remove": "docker rm portfolio-container && docker rmi portfolio-app",
+		"docker:logs": "docker logs portfolio-container",
+		"docker:dev": "docker-compose -f docker-compose.yml up --build",
+		"deploy": "chmod +x deploy.sh && ./deploy.sh"
 	},
 	"dependencies": {
 		"framer-motion": "^11.11.17",
@@ -22,6 +29,7 @@
 		"@types/node": "^20.16.10",
 		"@types/react": "^18.3.12",
 		"@types/react-dom": "^18.3.1",
+		"critters": "^0.0.23",
 		"eslint": "^8.57.1",
 		"eslint-config-next": "14.2.12",
 		"postcss": "^8.4.49",

@@ -15,7 +15,7 @@ const nextConfig = {
 	optimizeFonts: true,
 	productionBrowserSourceMaps: false,
 	experimental: {
-		optimizeCss: true,
+		// optimizeCss: true, // Commented out to avoid critters dependency
 		optimizePackageImports: ['lucide-react', 'framer-motion'],
 	},
 };

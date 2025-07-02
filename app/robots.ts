@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/api/',
     },
-    sitemap: 'https://euaell.github.io/sitemap.xml',
+    sitemap: 'https://portfolio.euaell.me/sitemap.xml',
   };
 } 
