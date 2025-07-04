@@ -78,7 +78,7 @@ export default function WorkSection() {
 									{/* Overlay with links */}
 									<div className="absolute inset-0 bg-black/50 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100 transition-opacity">
 										{project.link && (
-											<a
+											<Link
 												href={project.link}
 												target="_blank"
 												rel="noopener noreferrer"
@@ -86,7 +86,7 @@ export default function WorkSection() {
 												title="View Live Site"
 											>
 												<ExternalLink size={20} />
-											</a>
+											</Link>
 										)}
 										<Link
 											href={project.repositoryLink}
@@ -207,6 +207,17 @@ export default function WorkSection() {
 										>
 											<Github size={16} />
 										</Link>
+										{project.link && (
+											<Link
+												href={project.link}
+												target="_blank"
+												rel="noopener noreferrer"
+												className="p-2 glass rounded-full text-white hover:scale-110 transition-transform"
+												title="View Live Site"
+											>
+												<ExternalLink size={16} />
+											</Link>
+										)}
 									</div>
 								</div>
 
