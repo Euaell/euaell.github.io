@@ -111,4 +111,17 @@ export const projectsData: Project[] = [
 		image: '/images/placeholder.png',
 		featured: false,
 	},
+	{
+		title: "Game of Life",
+		description: "A web application that implements Conway's Game of Life.",
+		responsibilities: [
+			"Developed using React and TypeScript.",
+			"Implemented the game logic using React hooks."
+		],
+		tags: ["React", "TypeScript"],
+		repositoryLink: "https://github.com/Euaell/game_of_life",
+		link: "https://gol.euaell.me",
+		image: '/images/placeholder.png',
+		featured: false,
+	}
 ];
