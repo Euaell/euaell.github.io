@@ -11,7 +11,7 @@ const skills = [
 		category: 'Frontend',
 		icon: Globe,
 		technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vue.js'],
-		color: 'from-blue-500 to-cyan-500'
+		color: 'from-sky-600 to-cyan-600'
 	},
 	{
 		category: 'Backend',
