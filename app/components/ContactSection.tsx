@@ -352,10 +352,11 @@ export default function ContactSection() {
 									animate={{ opacity: 1, y: 0 }}
 									className="flex items-center p-4 bg-green-500/20 border border-green-500/30 rounded-lg"
 								>
-									<CheckCircle size={20} className="text-green-400 mr-3" />
-									<span className="text-green-300">
-										Message sent successfully! Thank you for reaching out. I&apos;ll get back to you soon.
-									</span>
+									<CheckCircle size={20} className="text-green-400 mr-3 hidden md:inline-block" />
+									<div className="text-green-300">
+										<p className="font-semibold mb-1">Message sent successfully!</p>
+										<p className="text-sm">Thank you for reaching out. You&apos;ll receive a confirmation email shortly, and I&apos;ll get back to you within 24-48 hours.</p>
+									</div>
 								</motion.div>
 							)}
 
@@ -366,9 +367,10 @@ export default function ContactSection() {
 									className="flex items-center p-4 bg-red-500/20 border border-red-500/30 rounded-lg"
 								>
 									<AlertCircle size={20} className="text-red-400 mr-3" />
-									<span className="text-red-300">
-										Something went wrong. Please try again or contact me directly.
-									</span>
+									<div className="text-red-300">
+										<p className="font-semibold mb-1">Something went wrong!</p>
+										<p className="text-sm">Please try again or contact me directly at <a href="mailto:euaelesh@gmail.com" className="underline hover:text-red-200">euaelesh@gmail.com</a></p>
+									</div>
 								</motion.div>
 							)}
 						</form>
