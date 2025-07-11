@@ -146,7 +146,6 @@ Sent from portfolio contact form at ${new Date().toLocaleString()}
 			html: htmlContent,
 		})
 		
-		console.log('Notification email sent: %s', notificationInfo.messageId)
 
 		// Prepare confirmation email content for sender
 		const confirmationHtmlContent = `
@@ -245,8 +244,6 @@ This is an automated confirmation email.
 			text: confirmationTextContent,
 			html: confirmationHtmlContent,
 		})
-		
-		console.log('Confirmation email sent: %s', confirmationInfo.messageId)
 		
 		return NextResponse.json(
 			{ 

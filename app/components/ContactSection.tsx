@@ -369,7 +369,7 @@ export default function ContactSection() {
 									<AlertCircle size={20} className="text-red-400 mr-3" />
 									<div className="text-red-300">
 										<p className="font-semibold mb-1">Something went wrong!</p>
-										<p className="text-sm">Please try again or contact me directly at <a href="mailto:euaelesh@gmail.com" className="underline hover:text-red-200">euaelesh@gmail.com</a></p>
+										<p className="text-sm">Please try again or contact me directly at <a href="mailto:euaelmeko@gmail.com" className="underline hover:text-red-200">euaelmeko@gmail.com</a></p>
 									</div>
 								</motion.div>
 							)}
