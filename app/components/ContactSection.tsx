@@ -114,17 +114,25 @@ export default function ContactSection() {
 		setSubmitStatus('idle')
 
 		try {
-			// Create mailto link with form data
-			const subject = encodeURIComponent(formData.subject)
-			const body = encodeURIComponent(`Hello Euael,\n\n${formData.message}\n\nBest regards,\n${formData.name}\n${formData.email}`)
-			const mailtoLink = `mailto:euaelmeko@gmail.com?subject=${subject}&body=${body}`
-			
-			// Open email client
-			window.location.href = mailtoLink
-			
-			setSubmitStatus('success')
-			setFormData({ name: '', email: '', subject: '', message: '' })
-		} catch {
+			const response = await fetch('/api/contact', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+			})
+
+			const data = await response.json()
+
+			if (response.ok) {
+				setSubmitStatus('success')
+				setFormData({ name: '', email: '', subject: '', message: '' })
+			} else {
+				console.error('Form submission error:', data.error)
+				setSubmitStatus('error')
+			}
+		} catch (error) {
+			console.error('Network error:', error)
 			setSubmitStatus('error')
 		} finally {
 			setIsSubmitting(false)
@@ -346,7 +354,7 @@ export default function ContactSection() {
 								>
 									<CheckCircle size={20} className="text-green-400 mr-3" />
 									<span className="text-green-300">
-										Your email client should open shortly. Thank you for reaching out!
+										Message sent successfully! Thank you for reaching out. I&apos;ll get back to you soon.
 									</span>
 								</motion.div>
 							)}

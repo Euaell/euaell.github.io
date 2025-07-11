@@ -29,9 +29,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAGES: true
-      NEXT_PUBLIC_EMAILJS_SERVICE_ID: ${{ vars.EMAILJS_SERVICE_ID }}
-      NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: ${{ vars.EMAILJS_TEMPLATE_ID }}
-      NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: ${{ vars.EMAILJS_PUBLIC_KEY }}
+      NODE_MAILER_HOST: ${{ secrets.NODE_MAILER_HOST }}
+      NODE_MAILER_PORT: ${{ secrets.NODE_MAILER_PORT }}
+      NODE_MAILER_USER: ${{ secrets.NODE_MAILER_USER }}
+      NODE_MAILER_PASS: ${{ secrets.NODE_MAILER_PASS }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,8 +40,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Checkout environment variables
-        run: echo "service id $NEXT_PUBLIC_EMAILJS_SERVICE_ID template id $NEXT_PUBLIC_EMAILJS_TEMPLATE_ID public key $NEXT_PUBLIC_EMAILJS_PUBLIC_KEY"
+      - name: Verify environment variables
+        run: echo "Nodemailer configuration loaded"
       - name: Install dependencies
         run: yarn
       - name: Build
