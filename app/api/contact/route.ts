@@ -204,7 +204,7 @@ Sent from portfolio contact form at ${new Date().toLocaleString()}
 							<span style="color: #666;">Full Stack Developer & AI Engineer</span>
 						</p>
 						<p style="color: #999; font-size: 12px; margin: 15px 0 0 0;">
-							This is an automated confirmation email. Please do not reply to this email.
+							This is an automated confirmation email.
 						</p>
 					</div>
 				</div>
