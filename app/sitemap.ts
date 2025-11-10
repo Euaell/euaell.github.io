@@ -2,32 +2,51 @@ import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
 	const baseUrl = 'https://portfolio.euaell.me';
-	
-	// Add all your top-level routes and sections
-	const routes = [
+	const alternateUrl = 'https://euaell.dev.et';
+	const lastModified = new Date();
+
+	// Main routes with both domains
+	const routes: MetadataRoute.Sitemap = [
 		{
 			url: baseUrl,
-			lastModified: new Date(),
-			changeFrequency: 'weekly' as const,
-			priority: 1,
+			lastModified: lastModified,
+			changeFrequency: 'weekly',
+			priority: 1.0,
+			alternates: {
+				languages: {
+					'en': alternateUrl,
+				},
+			},
 		},
 		{
-			url: `${baseUrl}#about`,
-			lastModified: new Date(),
-			changeFrequency: 'monthly' as const,
+			url: `${baseUrl}/#about`,
+			lastModified: lastModified,
+			changeFrequency: 'monthly',
 			priority: 0.8,
 		},
 		{
-			url: `${baseUrl}#work`,
-			lastModified: new Date(),
-			changeFrequency: 'monthly' as const,
+			url: `${baseUrl}/#work`,
+			lastModified: lastModified,
+			changeFrequency: 'weekly',
 			priority: 0.9,
 		},
 		{
-			url: `${baseUrl}#contact`,
-			lastModified: new Date(),
-			changeFrequency: 'monthly' as const,
+			url: `${baseUrl}/#projects`,
+			lastModified: lastModified,
+			changeFrequency: 'weekly',
+			priority: 0.9,
+		},
+		{
+			url: `${baseUrl}/#skills`,
+			lastModified: lastModified,
+			changeFrequency: 'monthly',
 			priority: 0.7,
+		},
+		{
+			url: `${baseUrl}/#contact`,
+			lastModified: lastModified,
+			changeFrequency: 'monthly',
+			priority: 0.8,
 		},
 	];
 
