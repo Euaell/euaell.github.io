@@ -1,19 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    // INFO: It has to be this way because I don't have a backend server, and only a static site is served from github pages
-    output: 'export',
-    images: {
-        unoptimized: true,
-    },
-    compiler: {
-        removeConsole: process.env.NODE_ENV === 'production',
-    },
-    poweredByHeader: false,
-    reactStrictMode: true,
-    swcMinify: true,
-    compress: true,
-    optimizeFonts: true,
-    productionBrowserSourceMaps: false
+	output: 'standalone',
+	trailingSlash: true,
+	images: {
+		unoptimized: true,
+		formats: ['image/webp', 'image/avif'],
+	},
+	compiler: {
+		removeConsole: process.env.NODE_ENV === 'production',
+	},
+	reactStrictMode: true,
+	swcMinify: true,
+	compress: true,
+	optimizeFonts: true,
+	productionBrowserSourceMaps: false,
+	experimental: {
+		// optimizeCss: true, // Commented out to avoid critters dependency
+		optimizePackageImports: ['lucide-react', 'framer-motion'],
+	},
 };
 
 export default nextConfig;
