@@ -1,7 +1,7 @@
 import Navigation from '@/app/components/Navigation'
-import HeroSection from '@/app/components/HeroSection'
+import HeroSectionNew from '@/app/components/HeroSectionNew'
 import AboutSection from '@/app/components/AboutSection'
-import WorkSection from '@/app/components/WorkSection'
+import WorkSectionNew from '@/app/components/WorkSectionNew'
 import ContactSection from '@/app/components/ContactSection'
 
 export default function Home() {
@@ -9,9 +9,9 @@ export default function Home() {
 		<>
 			<Navigation />
 			<main className="relative">
-				<HeroSection />
+				<HeroSectionNew />
 				<AboutSection />
-				<WorkSection />
+				<WorkSectionNew />
 				<ContactSection />
 			</main>
 		</>
