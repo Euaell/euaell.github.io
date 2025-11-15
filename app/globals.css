@@ -28,13 +28,14 @@
 
 @layer base {
 	html {
-		scroll-behavior: smooth;
+		scroll-behavior: auto; /* Disabled for Lenis smooth scroll */
 	}
 
 	body {
 		font-feature-settings: "rlig" 1, "calt" 1;
 		background: #0a0a0a;
 		color: #ffffff;
+		cursor: none; /* Hide default cursor for custom cursor */
 	}
 
 	/* Custom scrollbar */
@@ -65,6 +66,13 @@
 	:focus-visible {
 		outline: none;
 		box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+	}
+
+	/* Mobile: show default cursor */
+	@media (max-width: 768px) {
+		body {
+			cursor: auto;
+		}
 	}
 }
 
@@ -249,9 +257,107 @@
 	}
 }
 
-/* Smooth transitions */
-* {
-	transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes slideUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes scaleIn {
+	from {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: -1000px 0;
+	}
+	100% {
+		background-position: 1000px 0;
+	}
+}
+
+@keyframes glow {
+	0%, 100% {
+		box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(139, 92, 246, 0.2);
+	}
+	50% {
+		box-shadow: 0 0 30px rgba(59, 130, 246, 0.5), 0 0 60px rgba(139, 92, 246, 0.3);
+	}
+}
+
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* Smooth transitions - removed to prevent conflicts with GSAP */
+
+/* Utility classes for advanced effects */
+@layer utilities {
+	.text-glow {
+		text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+	}
+
+	.backdrop-blur-xs {
+		backdrop-filter: blur(2px);
+	}
+
+	.perspective-1000 {
+		perspective: 1000px;
+	}
+
+	.transform-style-3d {
+		transform-style: preserve-3d;
+	}
+
+	.backface-hidden {
+		backface-visibility: hidden;
+	}
+
+	.bento-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 1.5rem;
+		grid-auto-flow: dense;
+	}
+
+	.bento-item-large {
+		grid-column: span 2;
+		grid-row: span 2;
+	}
+
+	.bento-item-wide {
+		grid-column: span 2;
+	}
+
+	.bento-item-tall {
+		grid-row: span 2;
+	}
 }
 
 /* Reduce motion for accessibility */
@@ -264,8 +370,12 @@
 		transition-duration: 0.01ms !important;
 		scroll-behavior: auto !important;
 	}
-	
+
 	.animate-float {
 		animation: none !important;
+	}
+
+	body {
+		cursor: auto !important;
 	}
 }

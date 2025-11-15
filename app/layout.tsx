@@ -2,17 +2,20 @@ import type { Metadata } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/app/components/ThemeProvider'
-import { SmoothScrollProvider } from '@/app/components/SmoothScrollProvider'
+import LenisScrollProvider from '@/app/components/LenisScrollProvider'
+import CustomCursor from '@/app/components/CustomCursor'
+import MorphingBlobs from '@/app/components/MorphingBlobs'
+import ParticleField from '@/app/components/ParticleField'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { AllStructuredData } from '@/app/components/seo/StructuredData'
 
-const inter = Inter({ 
+const inter = Inter({
 	subsets: ['latin'],
 	variable: '--font-inter',
 	display: 'swap',
 })
 
-const jetbrainsMono = JetBrains_Mono({ 
+const jetbrainsMono = JetBrains_Mono({
 	subsets: ['latin'],
 	variable: '--font-jetbrains-mono',
 	display: 'swap',
@@ -136,8 +139,15 @@ export default function RootLayout({
 			</head>
 			<body className={`${inter.className} antialiased`}>
 				<ThemeProvider>
-					<SmoothScrollProvider>
+					<LenisScrollProvider>
 						<div className="relative min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
+							{/* Custom Cursor */}
+							<CustomCursor />
+
+							{/* Animated Background Effects */}
+							<MorphingBlobs />
+							<ParticleField />
+
 							{/* Background Effects */}
 							<div className="fixed inset-0 bg-gradient-to-br from-blue-900/10 via-purple-900/10 to-pink-900/10 pointer-events-none" />
 							<div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-blue-600/10 via-transparent to-transparent pointer-events-none" />
@@ -153,7 +163,7 @@ export default function RootLayout({
 
 							{children}
 						</div>
-					</SmoothScrollProvider>
+					</LenisScrollProvider>
 				</ThemeProvider>
 			</body>
 			<GoogleAnalytics gaId="G-QZW3GEJSTM" />
