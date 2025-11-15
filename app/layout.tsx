@@ -3,9 +3,6 @@ import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/app/components/ThemeProvider'
 import LenisScrollProvider from '@/app/components/LenisScrollProvider'
-import CustomCursor from '@/app/components/CustomCursor'
-import MorphingBlobs from '@/app/components/MorphingBlobs'
-import ParticleField from '@/app/components/ParticleField'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { AllStructuredData } from '@/app/components/seo/StructuredData'
 
@@ -141,12 +138,13 @@ export default function RootLayout({
 				<ThemeProvider>
 					<LenisScrollProvider>
 						<div className="relative min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
-							{/* Custom Cursor */}
-							<CustomCursor />
-
-							{/* Animated Background Effects */}
-							<MorphingBlobs />
-							<ParticleField />
+							{/* Animated Gradient Orbs - Performant CSS Animation */}
+							<div className="fixed inset-0 overflow-hidden pointer-events-none">
+								<div className="absolute top-0 -left-40 w-80 h-80 bg-blue-500/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" />
+								<div className="absolute top-0 -right-40 w-80 h-80 bg-purple-500/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000" />
+								<div className="absolute -bottom-40 left-20 w-80 h-80 bg-pink-500/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000" />
+								<div className="absolute bottom-0 right-20 w-80 h-80 bg-cyan-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-6000" />
+							</div>
 
 							{/* Background Effects */}
 							<div className="fixed inset-0 bg-gradient-to-br from-blue-900/10 via-purple-900/10 to-pink-900/10 pointer-events-none" />
