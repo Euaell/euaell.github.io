@@ -4,7 +4,6 @@ import { useState, useRef } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 import { projectsData } from '../data/projects';
 import Link from 'next/link';
-import TiltCard from './TiltCard';
 import ScrollReveal from './ScrollReveal';
 import TextReveal from './TextReveal';
 import MagneticButton from './MagneticButton';
@@ -67,132 +66,134 @@ export default function WorkSectionNew() {
               <span className="gradient-text-primary">Featured Projects</span>
             </h3>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[300px]">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {featuredProjects.map((project, index) => {
                 const isLarge = index === 0;
                 const isTall = index === 1;
 
                 return (
-                  <ScrollReveal
+                  <motion.div
                     key={project.title}
-                    direction="scale"
-                    delay={0.3 + index * 0.1}
-                    className={`${isLarge ? 'md:col-span-2 md:row-span-2' : ''} ${
+                    initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.3 + index * 0.1,
+                      type: 'spring',
+                      stiffness: 100,
+                    }}
+                    whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                    className={`${isLarge ? 'md:col-span-2' : ''} ${
                       isTall ? 'md:row-span-2' : ''
                     }`}
                   >
-                    <TiltCard
-                      className="h-full"
-                      glowColor={
-                        index % 3 === 0
-                          ? 'rgba(59, 130, 246, 0.5)'
-                          : index % 3 === 1
-                            ? 'rgba(139, 92, 246, 0.5)'
-                            : 'rgba(236, 72, 153, 0.5)'
-                      }
+                    <div
+                      className="glass-card rounded-3xl overflow-hidden h-full group cursor-pointer relative border border-white/10 hover:border-white/20 transition-all"
+                      onMouseEnter={() => setHoveredProject(index)}
+                      onMouseLeave={() => setHoveredProject(null)}
                     >
+                      {/* Background Gradient */}
                       <div
-                        className="glass-card rounded-3xl overflow-hidden h-full group cursor-pointer relative"
-                        onMouseEnter={() => setHoveredProject(index)}
-                        onMouseLeave={() => setHoveredProject(null)}
-                      >
-                        {/* Background Gradient */}
-                        <div
-                          className={`absolute inset-0 bg-gradient-to-br ${
-                            index % 3 === 0
-                              ? 'from-blue-500/20 to-cyan-500/20'
-                              : index % 3 === 1
-                                ? 'from-purple-500/20 to-pink-500/20'
-                                : 'from-pink-500/20 to-orange-500/20'
-                          }`}
-                        />
+                        className={`absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+                          index % 3 === 0
+                            ? 'from-blue-500/10 to-cyan-500/10'
+                            : index % 3 === 1
+                              ? 'from-purple-500/10 to-pink-500/10'
+                              : 'from-pink-500/10 to-orange-500/10'
+                        }`}
+                      />
 
-                        {/* Content */}
-                        <div className="relative p-8 h-full flex flex-col justify-between">
-                          {/* Header */}
-                          <div>
-                            <div className="flex items-start justify-between mb-4">
-                              <div className="flex-1">
-                                <span className="px-3 py-1 bg-white/10 rounded-full text-xs text-white/70 inline-block mb-3">
-                                  Featured
-                                </span>
-                                <h4 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                                  {project.title}
-                                </h4>
-                              </div>
+                      {/* Content */}
+                      <div className="relative p-8 flex flex-col h-full">
+                        {/* Header */}
+                        <div className="mb-auto">
+                          <div className="flex items-start justify-between mb-4">
+                            <div className="flex-1">
+                              <span className="px-3 py-1 bg-white/10 rounded-full text-xs text-white/70 inline-block mb-3">
+                                Featured
+                              </span>
+                              <h4 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                                {project.title}
+                              </h4>
                             </div>
+                          </div>
 
-                            <p className="text-white/70 leading-relaxed mb-6 line-clamp-3">
-                              {project.description}
-                            </p>
+                          <p className="text-white/70 leading-relaxed mb-6">
+                            {project.description}
+                          </p>
 
-                            {/* Key Features - only for large cards */}
-                            {isLarge && project.responsibilities.length > 0 && (
-                              <div className="mb-6">
-                                <h5 className="text-sm font-semibold text-white/90 mb-3">
-                                  Key Features:
-                                </h5>
-                                <ul className="text-sm text-white/60 space-y-2">
-                                  {project.responsibilities.slice(0, 3).map((responsibility, idx) => (
-                                    <li key={idx} className="flex items-start">
-                                      <span className="text-blue-400 mr-2">✓</span>
-                                      {responsibility}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
+                          {/* Key Features - only for large cards */}
+                          {isLarge && project.responsibilities.length > 0 && (
+                            <div className="mb-6">
+                              <h5 className="text-sm font-semibold text-white/90 mb-3">
+                                Key Features:
+                              </h5>
+                              <ul className="text-sm text-white/60 space-y-2">
+                                {project.responsibilities.slice(0, 3).map((responsibility, idx) => (
+                                  <li key={idx} className="flex items-start">
+                                    <span className="text-blue-400 mr-2">✓</span>
+                                    {responsibility}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Footer */}
+                        <div className="mt-6">
+                          <div className="flex flex-wrap gap-2 mb-6">
+                            {project.tags.slice(0, isLarge ? 8 : 5).map((tech) => (
+                              <span
+                                key={tech}
+                                className="px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs text-white/80 border border-white/10"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                            {project.tags.length > (isLarge ? 8 : 5) && (
+                              <span className="px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs text-white/80 border border-white/10">
+                                +{project.tags.length - (isLarge ? 8 : 5)}
+                              </span>
                             )}
                           </div>
 
-                          {/* Footer */}
-                          <div>
-                            <div className="flex flex-wrap gap-2 mb-6">
-                              {project.tags.slice(0, isLarge ? 6 : 4).map((tech) => (
-                                <span
-                                  key={tech}
-                                  className="px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs text-white/80 border border-white/10"
-                                >
-                                  {tech}
-                                </span>
-                              ))}
-                            </div>
-
-                            {/* Links */}
-                            <motion.div
-                              initial={{ opacity: 0, y: 10 }}
-                              animate={{
-                                opacity: hoveredProject === index ? 1 : 0.6,
-                                y: hoveredProject === index ? 0 : 10,
-                              }}
-                              transition={{ duration: 0.3 }}
-                              className="flex gap-3"
+                          {/* Links */}
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{
+                              opacity: hoveredProject === index ? 1 : 0.6,
+                              y: hoveredProject === index ? 0 : 10,
+                            }}
+                            transition={{ duration: 0.3 }}
+                            className="flex gap-3"
+                          >
+                            <Link
+                              href={project.repositoryLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 px-4 py-2 glass rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-all"
                             >
+                              <Github size={16} />
+                              <span className="text-sm">Code</span>
+                            </Link>
+                            {project.link && (
                               <Link
-                                href={project.repositoryLink}
+                                href={project.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 px-4 py-2 glass rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-all"
                               >
-                                <Github size={16} />
-                                <span className="text-sm">Code</span>
+                                <ExternalLink size={16} />
+                                <span className="text-sm">Demo</span>
                               </Link>
-                              {project.link && (
-                                <Link
-                                  href={project.link}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex items-center gap-2 px-4 py-2 glass rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-all"
-                                >
-                                  <ExternalLink size={16} />
-                                  <span className="text-sm">Demo</span>
-                                </Link>
-                              )}
-                            </motion.div>
-                          </div>
+                            )}
+                          </motion.div>
                         </div>
                       </div>
-                    </TiltCard>
-                  </ScrollReveal>
+                    </div>
+                  </motion.div>
                 );
               })}
             </div>
@@ -221,7 +222,7 @@ export default function WorkSectionNew() {
           </div>
         </ScrollReveal>
 
-        {/* Other Projects - Masonry Grid */}
+        {/* Other Projects - Grid */}
         <ScrollReveal direction="up" delay={0.5}>
           <div className="mb-20">
             <h3 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">
@@ -230,74 +231,79 @@ export default function WorkSectionNew() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProjects.map((project, index) => (
-                <ScrollReveal
+                <motion.div
                   key={project.title}
-                  direction="up"
-                  delay={0.6 + index * 0.05}
-                  className="h-full"
+                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.6 + index * 0.05,
+                    type: 'spring',
+                    stiffness: 100,
+                  }}
+                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
                 >
-                  <TiltCard className="h-full" glowColor="rgba(59, 130, 246, 0.3)">
-                    <div className="glass-card rounded-2xl overflow-hidden h-full group cursor-pointer hover:border-white/20 transition-all">
-                      {/* Project Icon/Emoji */}
-                      <div className="relative overflow-hidden bg-gradient-to-br from-blue-500/10 to-purple-500/10 aspect-video flex items-center justify-center">
-                        <div className="text-6xl">📱</div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="glass-card rounded-2xl overflow-hidden h-full group cursor-pointer hover:border-white/20 transition-all border border-white/10">
+                    {/* Project Icon/Emoji */}
+                    <div className="relative overflow-hidden bg-gradient-to-br from-blue-500/10 to-purple-500/10 aspect-video flex items-center justify-center">
+                      <div className="text-6xl">📱</div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+
+                    {/* Project Details */}
+                    <div className="p-6 space-y-4">
+                      <div>
+                        <h4 className="text-xl font-semibold text-white mb-2">
+                          {project.title}
+                        </h4>
+                        <p className="text-white/60 text-sm leading-relaxed line-clamp-2">
+                          {project.description ||
+                            'A comprehensive project showcasing modern development practices.'}
+                        </p>
                       </div>
 
-                      {/* Project Details */}
-                      <div className="p-6 space-y-4">
-                        <div>
-                          <h4 className="text-xl font-semibold text-white mb-2">
-                            {project.title}
-                          </h4>
-                          <p className="text-white/60 text-sm leading-relaxed line-clamp-2">
-                            {project.description ||
-                              'A comprehensive project showcasing modern development practices.'}
-                          </p>
-                        </div>
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.slice(0, 3).map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-2 py-1 bg-white/5 rounded text-xs text-white/50"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                        {project.tags.length > 3 && (
+                          <span className="px-2 py-1 bg-white/5 rounded text-xs text-white/50">
+                            +{project.tags.length - 3}
+                          </span>
+                        )}
+                      </div>
 
-                        <div className="flex flex-wrap gap-2">
-                          {project.tags.slice(0, 3).map((tech) => (
-                            <span
-                              key={tech}
-                              className="px-2 py-1 bg-white/5 rounded text-xs text-white/50"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                          {project.tags.length > 3 && (
-                            <span className="px-2 py-1 bg-white/5 rounded text-xs text-white/50">
-                              +{project.tags.length - 3}
-                            </span>
-                          )}
-                        </div>
-
-                        <div className="flex gap-2 pt-2">
+                      <div className="flex gap-2 pt-2">
+                        <Link
+                          href={project.repositoryLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 flex items-center justify-center gap-2 px-3 py-2 glass rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all text-sm"
+                        >
+                          <Github size={14} />
+                          <span>Code</span>
+                        </Link>
+                        {project.link && (
                           <Link
-                            href={project.repositoryLink}
+                            href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex-1 flex items-center justify-center gap-2 px-3 py-2 glass rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all text-sm"
                           >
-                            <Github size={14} />
-                            <span>Code</span>
+                            <ExternalLink size={14} />
+                            <span>Demo</span>
                           </Link>
-                          {project.link && (
-                            <Link
-                              href={project.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 glass rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all text-sm"
-                            >
-                              <ExternalLink size={14} />
-                              <span>Demo</span>
-                            </Link>
-                          )}
-                        </div>
+                        )}
                       </div>
                     </div>
-                  </TiltCard>
-                </ScrollReveal>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>
