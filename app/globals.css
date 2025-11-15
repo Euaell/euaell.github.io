@@ -61,10 +61,26 @@
 		color: #dbeafe;
 	}
 
-	/* Focus styles */
+	/* Focus styles - Enhanced for better keyboard navigation */
 	:focus-visible {
 		outline: none;
-		box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+		box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.6), 0 0 0 6px rgba(59, 130, 246, 0.2);
+		outline-offset: 2px;
+		transition: box-shadow 0.2s ease;
+	}
+
+	button:focus-visible,
+	a:focus-visible {
+		box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.6), 0 0 0 6px rgba(59, 130, 246, 0.2);
+		outline: 2px solid rgba(59, 130, 246, 0.8);
+		outline-offset: 2px;
+	}
+
+	/* High contrast focus for links */
+	a:focus-visible {
+		text-decoration: underline;
+		text-decoration-thickness: 2px;
+		text-underline-offset: 4px;
 	}
 }
 

@@ -28,7 +28,8 @@ export default function ParallaxElement({
     const yPercent = direction === 'vertical' ? speed * 100 : 0;
     const xPercent = direction === 'horizontal' ? speed * 100 : 0;
 
-    gsap.to(element, {
+    // Store the animation to access its ScrollTrigger
+    const animation = gsap.to(element, {
       yPercent,
       xPercent,
       ease: 'none',
@@ -40,12 +41,12 @@ export default function ParallaxElement({
       },
     });
 
+    // Cleanup: kill only this specific ScrollTrigger to prevent memory leaks
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.trigger === element) {
-          trigger.kill();
-        }
-      });
+      if (animation.scrollTrigger) {
+        animation.scrollTrigger.kill();
+      }
+      animation.kill();
     };
   }, [speed, direction]);
 

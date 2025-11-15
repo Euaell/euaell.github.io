@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo, useCallback } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 import { projectsData } from '../data/projects';
 import Link from 'next/link';
@@ -9,24 +9,32 @@ import TextReveal from './TextReveal';
 import MagneticButton from './MagneticButton';
 import { motion } from 'framer-motion';
 
+// Memoize static computed values outside component
 const featuredProjects = projectsData.filter((project) => project.featured);
 const smallerProjects = projectsData.filter((project) => !project.featured);
-
 const allTechnologies = Array.from(new Set(projectsData.flatMap((project) => project.tags))).sort();
+const techFilters = ['All', ...allTechnologies.slice(0, 8)];
 
 export default function WorkSectionNew() {
   const ref = useRef(null);
   const [selectedTech, setSelectedTech] = useState<string>('All');
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
-  const filteredProjects =
-    selectedTech === 'All'
-      ? smallerProjects
-      : smallerProjects.filter((project) =>
-          project.tags.some((tag) => tag.toLowerCase().includes(selectedTech.toLowerCase()))
-        );
+  // Memoize filtered projects to prevent unnecessary recalculations
+  const filteredProjects = useMemo(
+    () =>
+      selectedTech === 'All'
+        ? smallerProjects
+        : smallerProjects.filter((project) =>
+            project.tags.some((tag) => tag.toLowerCase().includes(selectedTech.toLowerCase()))
+          ),
+    [selectedTech]
+  );
 
-  const techFilters = ['All', ...allTechnologies.slice(0, 8)];
+  // Memoize filter change handler to prevent unnecessary re-renders
+  const handleTechFilterChange = useCallback((tech: string) => {
+    setSelectedTech(tech);
+  }, []);
 
   return (
     <section id="work" className="relative overflow-hidden section-padding">
@@ -207,13 +215,14 @@ export default function WorkSectionNew() {
               {techFilters.map((tech) => (
                 <MagneticButton
                   key={tech}
-                  onClick={() => setSelectedTech(tech)}
+                  onClick={() => handleTechFilterChange(tech)}
                   className={`px-6 py-3 rounded-full transition-all duration-300 font-medium ${
                     selectedTech === tech
                       ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/30'
                       : 'glass border border-white/20 text-white/70 hover:text-white hover:border-white/40'
                   }`}
                   strength={0.15}
+                  ariaLabel={`Filter projects by ${tech === 'All' ? 'all technologies' : tech}`}
                 >
                   {tech}
                 </MagneticButton>

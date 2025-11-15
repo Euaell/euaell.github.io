@@ -43,17 +43,32 @@ export default function TextReveal({
         break;
     }
 
-    // Create HTML with wrapped elements
-    const wrappedHTML = elements
-      .map((element, index) => {
-        const content = element === '' ? '&nbsp;' : element;
-        return `<span class="inline-block overflow-hidden"><span class="inline-block text-reveal-inner">${content}${
-          type === 'words' && index < elements.length - 1 ? '&nbsp;' : ''
-        }</span></span>`;
-      })
-      .join('');
+    // Create DOM elements safely without innerHTML to prevent XSS
+    const fragment = document.createDocumentFragment();
 
-    container.innerHTML = wrappedHTML;
+    elements.forEach((element, index) => {
+      const wrapper = document.createElement('span');
+      wrapper.className = 'inline-block overflow-hidden';
+
+      const inner = document.createElement('span');
+      inner.className = 'inline-block text-reveal-inner';
+
+      // Use textContent instead of innerHTML for safe text insertion
+      const content = element === '' ? '\u00A0' : element;
+      inner.textContent = content;
+
+      // Add space after words (except last word)
+      if (type === 'words' && index < elements.length - 1) {
+        inner.textContent += '\u00A0';
+      }
+
+      wrapper.appendChild(inner);
+      fragment.appendChild(wrapper);
+    });
+
+    // Clear and append safely
+    container.textContent = '';
+    container.appendChild(fragment);
 
     // Animate
     const innerElements = container.querySelectorAll('.text-reveal-inner');

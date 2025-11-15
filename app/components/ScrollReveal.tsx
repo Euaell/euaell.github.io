@@ -38,7 +38,8 @@ export default function ScrollReveal({
 
     const config = directionConfig[direction];
 
-    gsap.fromTo(
+    // Store the animation to access its ScrollTrigger
+    const animation = gsap.fromTo(
       element,
       {
         opacity: 0,
@@ -61,12 +62,12 @@ export default function ScrollReveal({
       }
     );
 
+    // Cleanup: kill only this specific ScrollTrigger to prevent memory leaks
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.trigger === element) {
-          trigger.kill();
-        }
-      });
+      if (animation.scrollTrigger) {
+        animation.scrollTrigger.kill();
+      }
+      animation.kill();
     };
   }, [direction, delay, duration]);
 

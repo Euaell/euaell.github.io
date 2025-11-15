@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, ReactNode } from 'react';
+import { useRef, useState, ReactNode, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface MagneticButtonProps {
@@ -9,6 +9,7 @@ interface MagneticButtonProps {
   onClick?: () => void;
   href?: string;
   strength?: number;
+  ariaLabel?: string;
 }
 
 export default function MagneticButton({
@@ -17,9 +18,12 @@ export default function MagneticButton({
   onClick,
   href,
   strength = 0.3,
+  ariaLabel,
 }: MagneticButtonProps) {
   const buttonRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const rafRef = useRef<number | null>(null);
+  const targetPosition = useRef({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!buttonRef.current) return;
@@ -31,15 +35,45 @@ export default function MagneticButton({
     const deltaX = (e.clientX - centerX) * strength;
     const deltaY = (e.clientY - centerY) * strength;
 
-    setPosition({ x: deltaX, y: deltaY });
+    // Store target position and schedule RAF update
+    targetPosition.current = { x: deltaX, y: deltaY };
+
+    if (!rafRef.current) {
+      rafRef.current = requestAnimationFrame(updatePosition);
+    }
+  };
+
+  const updatePosition = () => {
+    setPosition(targetPosition.current);
+    rafRef.current = null;
   };
 
   const handleMouseLeave = () => {
+    targetPosition.current = { x: 0, y: 0 };
     setPosition({ x: 0, y: 0 });
+
+    // Cancel any pending RAF
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
   };
 
+  // Cleanup RAF on unmount
+  useEffect(() => {
+    return () => {
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, []);
+
   const Component = href ? 'a' : 'button';
-  const props = href ? { href } : { onClick };
+  const linkProps = href
+    ? { href, target: href.startsWith('http') ? '_blank' : undefined, rel: href.startsWith('http') ? 'noopener noreferrer' : undefined }
+    : {};
+  const buttonProps = !href ? { onClick, type: 'button' as const } : {};
+  const accessibilityProps = ariaLabel ? { 'aria-label': ariaLabel } : {};
 
   return (
     <div ref={buttonRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
@@ -48,7 +82,9 @@ export default function MagneticButton({
         transition={{ type: 'spring', stiffness: 200, damping: 15 }}
       >
         <Component
-          {...props}
+          {...linkProps}
+          {...buttonProps}
+          {...accessibilityProps}
           className={`magnetic relative inline-flex items-center justify-center overflow-hidden group ${className}`}
         >
           <span className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

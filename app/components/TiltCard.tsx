@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, ReactNode } from 'react';
+import { useRef, useState, ReactNode, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 interface TiltCardProps {
@@ -18,6 +18,8 @@ export default function TiltCard({
 }: TiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = useState(false);
+  const rafRef = useRef<number | null>(null);
+  const targetPosition = useRef({ x: 0, y: 0 });
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -45,8 +47,18 @@ export default function TiltCard({
     const xPct = mouseXPos / width - 0.5;
     const yPct = mouseYPos / height - 0.5;
 
-    mouseX.set(xPct);
-    mouseY.set(yPct);
+    // Store target position and schedule RAF update
+    targetPosition.current = { x: xPct, y: yPct };
+
+    if (!rafRef.current) {
+      rafRef.current = requestAnimationFrame(updateMousePosition);
+    }
+  };
+
+  const updateMousePosition = () => {
+    mouseX.set(targetPosition.current.x);
+    mouseY.set(targetPosition.current.y);
+    rafRef.current = null;
   };
 
   const handleMouseEnter = () => {
@@ -55,9 +67,25 @@ export default function TiltCard({
 
   const handleMouseLeave = () => {
     setIsHovering(false);
+    targetPosition.current = { x: 0, y: 0 };
     mouseX.set(0);
     mouseY.set(0);
+
+    // Cancel any pending RAF
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
   };
+
+  // Cleanup RAF on unmount
+  useEffect(() => {
+    return () => {
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, []);
 
   return (
     <motion.div

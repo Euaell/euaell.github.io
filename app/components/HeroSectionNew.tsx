@@ -1,26 +1,41 @@
 'use client';
 
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { Github, Linkedin, Mail } from 'lucide-react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import MagneticButton from './MagneticButton';
 import TiltCard from './TiltCard';
 import ParallaxElement from './ParallaxElement';
+import { throttle } from '@/utils/helpers';
+import { ANIMATION_CONFIG, type SocialLink, type Stat } from '@/types';
 
-const socialLinks = [
-  { name: 'GitHub', icon: Github, href: 'https://github.com/euaell', color: 'hover:text-gray-300' },
+const socialLinks: SocialLink[] = [
+  {
+    name: 'GitHub',
+    icon: Github,
+    href: 'https://github.com/euaell',
+    color: 'hover:text-gray-300',
+    ariaLabel: 'Visit my GitHub profile',
+  },
   {
     name: 'LinkedIn',
     icon: Linkedin,
     href: 'https://linkedin.com/in/euael-eshete/',
     color: 'hover:text-blue-400',
+    ariaLabel: 'Connect with me on LinkedIn',
   },
-  { name: 'Email', icon: Mail, href: 'mailto:euaelmeko@gmail.com', color: 'hover:text-red-400' },
+  {
+    name: 'Email',
+    icon: Mail,
+    href: 'mailto:euaelmeko@gmail.com',
+    color: 'hover:text-red-400',
+    ariaLabel: 'Send me an email',
+  },
 ];
 
 const skills = ['React', 'Next.js', 'TypeScript', 'Python', 'FastAPI', 'AI/ML'];
 
-const stats = [
+const stats: Stat[] = [
   { label: 'Projects', value: '50+' },
   { label: 'Experience', value: '4+ Years' },
   { label: 'Technologies', value: '25+' },
@@ -37,32 +52,37 @@ export default function HeroSectionNew() {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+  // Throttled mouse move handler for better performance
+  const handleMouseMove = useCallback(
+    throttle((e: MouseEvent) => {
       setMousePosition({
         x: (e.clientX / window.innerWidth - 0.5) * 20,
         y: (e.clientY / window.innerHeight - 0.5) * 20,
       });
-    };
+    }, 16), // ~60fps
+    []
+  );
 
-    window.addEventListener('mousemove', handleMouseMove);
+  useEffect(() => {
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [handleMouseMove]);
 
-  const scrollToSection = (id: string) => {
+  const scrollToSection = useCallback((id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  };
+  }, []);
 
   return (
     <section
       id="home"
       className="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden"
+      aria-label="Hero section with introduction and navigation"
     >
       {/* Animated Gradient Background */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
         <div
           className="absolute inset-0 opacity-30 transition-all duration-1000"
           style={{
@@ -80,6 +100,7 @@ export default function HeroSectionNew() {
       {/* Grid Pattern */}
       <div
         className="absolute inset-0 opacity-20"
+        aria-hidden="true"
         style={{
           backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
                             linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)`,
@@ -97,9 +118,8 @@ export default function HeroSectionNew() {
               animate={{ scale: 1, rotate: 0 }}
               transition={{
                 type: 'spring',
-                stiffness: 260,
-                damping: 20,
-                delay: 0.1,
+                ...ANIMATION_CONFIG.spring.normal,
+                delay: ANIMATION_CONFIG.delays.short,
               }}
               className="glass px-6 py-3 rounded-full border border-white/20"
             >
@@ -115,10 +135,10 @@ export default function HeroSectionNew() {
               initial={{ opacity: 0, y: 50, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{
-                duration: 0.8,
-                delay: 0.2,
+                duration: ANIMATION_CONFIG.durations.slow,
+                delay: ANIMATION_CONFIG.delays.medium,
                 type: 'spring',
-                stiffness: 100,
+                stiffness: ANIMATION_CONFIG.spring.gentle.stiffness,
               }}
               className="text-6xl md:text-8xl lg:text-9xl font-bold mb-6"
             >
@@ -143,7 +163,7 @@ export default function HeroSectionNew() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
+              transition={{ duration: ANIMATION_CONFIG.durations.slow, delay: 0.7 }}
               className="text-2xl md:text-4xl lg:text-5xl font-light text-white/80 mb-4"
             >
               <span>Full Stack Developer </span>
@@ -162,7 +182,7 @@ export default function HeroSectionNew() {
             <motion.p
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
+              transition={{ duration: ANIMATION_CONFIG.durations.slow, delay: 0.9 }}
               className="text-lg md:text-xl text-white/60 max-w-3xl mx-auto leading-relaxed"
             >
               Crafting exceptional digital experiences with modern technologies and innovative
@@ -174,7 +194,7 @@ export default function HeroSectionNew() {
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
+            transition={{ duration: ANIMATION_CONFIG.durations.slow, delay: 1 }}
             className="grid grid-cols-3 gap-4 md:gap-8 max-w-3xl mx-auto mb-12"
           >
             {stats.map((stat, index) => (
@@ -185,11 +205,13 @@ export default function HeroSectionNew() {
                     animate={{ scale: 1, rotate: 0 }}
                     transition={{
                       type: 'spring',
-                      stiffness: 200,
+                      stiffness: ANIMATION_CONFIG.spring.normal.stiffness,
                       delay: 1.1 + index * 0.1,
                     }}
                     whileHover={{ scale: 1.05, y: -5 }}
                     className="glass-card rounded-2xl p-6 text-center h-full"
+                    role="group"
+                    aria-label={`${stat.value} ${stat.label}`}
                   >
                     <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">
                       {stat.value}
@@ -205,13 +227,16 @@ export default function HeroSectionNew() {
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.4 }}
+            transition={{ duration: ANIMATION_CONFIG.durations.slow, delay: 1.4 }}
             className="flex flex-col sm:flex-row gap-6 justify-center mb-16"
+            role="navigation"
+            aria-label="Main action buttons"
           >
             <MagneticButton
               onClick={() => scrollToSection('work')}
               className="px-8 py-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold text-lg shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-shadow"
               strength={0.25}
+              ariaLabel="View my portfolio projects"
             >
               View My Work
             </MagneticButton>
@@ -219,6 +244,7 @@ export default function HeroSectionNew() {
               onClick={() => scrollToSection('contact')}
               className="px-8 py-4 rounded-full glass border-2 border-white/20 text-white font-semibold text-lg hover:border-white/40 transition-all"
               strength={0.25}
+              ariaLabel="Get in touch with me"
             >
               Let&apos;s Connect
             </MagneticButton>
@@ -228,8 +254,10 @@ export default function HeroSectionNew() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.6 }}
+            transition={{ duration: ANIMATION_CONFIG.durations.slow, delay: 1.6 }}
             className="flex justify-center gap-6"
+            role="navigation"
+            aria-label="Social media links"
           >
             {socialLinks.map((social, index) => (
               <MagneticButton
@@ -237,6 +265,7 @@ export default function HeroSectionNew() {
                 href={social.href}
                 className="p-4 glass rounded-full border border-white/10 text-white/70 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all"
                 strength={0.2}
+                ariaLabel={social.ariaLabel}
               >
                 <motion.div
                   initial={{ scale: 0, rotate: -180 }}
@@ -245,9 +274,10 @@ export default function HeroSectionNew() {
                   whileTap={{ scale: 0.9 }}
                   transition={{
                     type: 'spring',
-                    stiffness: 300,
+                    ...ANIMATION_CONFIG.spring.snappy,
                     delay: 1.7 + index * 0.1,
                   }}
+                  aria-hidden="true"
                 >
                   <social.icon size={24} />
                 </motion.div>
@@ -264,12 +294,18 @@ export default function HeroSectionNew() {
           >
             <motion.button
               onClick={() => scrollToSection('about')}
-              className="flex flex-col items-center gap-2 text-white/40 hover:text-white/80 transition-colors group"
+              className="flex flex-col items-center gap-2 text-white/40 hover:text-white/80 transition-colors group focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-4 rounded-lg"
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              aria-label="Scroll to about section"
             >
-              <span className="text-xs uppercase tracking-wider">Scroll</span>
-              <div className="w-6 h-10 rounded-full border-2 border-current flex items-start justify-center p-2">
+              <span className="text-xs uppercase tracking-wider" aria-hidden="true">
+                Scroll
+              </span>
+              <div
+                className="w-6 h-10 rounded-full border-2 border-current flex items-start justify-center p-2"
+                aria-hidden="true"
+              >
                 <motion.div
                   className="w-1 h-2 bg-current rounded-full"
                   animate={{ y: [0, 12, 0] }}
@@ -288,8 +324,9 @@ export default function HeroSectionNew() {
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             whileHover={{ scale: 1.1, rotate: 360 }}
-            transition={{ type: 'spring', stiffness: 200, delay: 2.2 }}
+            transition={{ type: 'spring', ...ANIMATION_CONFIG.spring.normal, delay: 2.2 }}
             className="w-24 h-24 glass-card rounded-3xl flex items-center justify-center"
+            aria-hidden="true"
           >
             <span className="text-4xl">⚡</span>
           </motion.div>
@@ -302,8 +339,9 @@ export default function HeroSectionNew() {
             initial={{ scale: 0, rotate: 180 }}
             animate={{ scale: 1, rotate: 0 }}
             whileHover={{ scale: 1.1, rotate: -360 }}
-            transition={{ type: 'spring', stiffness: 200, delay: 2.4 }}
+            transition={{ type: 'spring', ...ANIMATION_CONFIG.spring.normal, delay: 2.4 }}
             className="w-20 h-20 glass-card rounded-3xl flex items-center justify-center"
+            aria-hidden="true"
           >
             <span className="text-3xl">🚀</span>
           </motion.div>
@@ -316,8 +354,9 @@ export default function HeroSectionNew() {
             initial={{ scale: 0, rotate: -90 }}
             animate={{ scale: 1, rotate: 0 }}
             whileHover={{ scale: 1.1, rotate: 180 }}
-            transition={{ type: 'spring', stiffness: 200, delay: 2.6 }}
+            transition={{ type: 'spring', ...ANIMATION_CONFIG.spring.normal, delay: 2.6 }}
             className="w-16 h-16 glass-card rounded-3xl flex items-center justify-center"
+            aria-hidden="true"
           >
             <span className="text-2xl">💡</span>
           </motion.div>
