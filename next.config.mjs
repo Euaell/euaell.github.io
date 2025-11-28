@@ -10,9 +10,7 @@ const nextConfig = {
 		removeConsole: process.env.NODE_ENV === 'production',
 	},
 	reactStrictMode: true,
-	swcMinify: true,
 	compress: true,
-	optimizeFonts: true,
 	productionBrowserSourceMaps: false,
 	experimental: {
 		// optimizeCss: true, // Commented out to avoid critters dependency

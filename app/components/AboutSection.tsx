@@ -3,6 +3,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
 import { Code, Database, Globe, Smartphone, Server, Zap, Calendar, MapPin, Building } from 'lucide-react'
+import Image from 'next/image'
 import { experienceData } from '../data/experience'
 import { educationData } from '../data/education'
 
@@ -146,7 +147,7 @@ export default function AboutSection() {
 						</div>
 					</motion.div>
 
-					{/* Profile Image Placeholder */}
+					{/* Profile Image */}
 					<motion.div
 						initial={{ opacity: 0, x: 50 }}
 						animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -157,8 +158,15 @@ export default function AboutSection() {
 							{/* Decorative Elements */}
 							<div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl" />
 							<div className="relative glass-card rounded-2xl p-8 text-center">
-								<div className="w-48 h-48 mx-auto mb-6 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full flex items-center justify-center">
-									<div className="text-6xl">👨‍💻</div>
+								<div className="relative w-48 h-48 mx-auto mb-6 overflow-hidden rounded-full ring-4 ring-blue-500/30">
+									<Image
+										src="/images/profile.jpg"
+										alt="Euael M. Eshete - Full Stack Developer"
+										fill
+										sizes="(max-width: 768px) 192px, 192px"
+										className="object-cover"
+										priority
+									/>
 								</div>
 								<h4 className="text-xl font-semibold text-white mb-2">Euael M. Eshete</h4>
 								<p className="text-white/60">Full Stack Developer</p>
