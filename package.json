@@ -6,37 +6,28 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint",
-		"analyze": "ANALYZE=true next build",
-		"build:static": "next build && next export",
-		"docker:build": "docker build -t portfolio-app .",
-		"docker:run": "docker run -d --name portfolio-container -p 3000:3000 --restart unless-stopped portfolio-app",
-		"docker:stop": "docker stop portfolio-container",
-		"docker:remove": "docker rm portfolio-container && docker rmi portfolio-app",
-		"docker:logs": "docker logs portfolio-container",
-		"docker:dev": "docker-compose -f docker-compose.yml up --build",
-		"deploy": "chmod +x deploy.sh && ./deploy.sh"
+		"lint": "next lint"
 	},
 	"dependencies": {
-		"@next/third-parties": "^15.3.4",
-		"@types/nodemailer": "^6.4.17",
-		"framer-motion": "^11.11.17",
+		"@next/third-parties": "^15.5.9",
+		"@types/nodemailer": "^6.4.21",
+		"framer-motion": "^11.18.2",
 		"lucide-react": "^0.460.0",
-		"next": "^15.1.6",
-		"nodemailer": "^7.0.5",
-		"react": "^19.0.0",
-		"react-dom": "^19.0.0"
+		"next": "^15.5.9",
+		"nodemailer": "^7.0.11",
+		"react": "^19.2.3",
+		"react-dom": "^19.2.3"
 	},
 	"devDependencies": {
-		"@next/bundle-analyzer": "^15.1.6",
-		"@types/node": "^22.10.5",
-		"@types/react": "^19.0.6",
-		"@types/react-dom": "^19.0.2",
+		"@next/bundle-analyzer": "^15.5.9",
+		"@types/node": "^22.19.3",
+		"@types/react": "^19.2.7",
+		"@types/react-dom": "^19.2.3",
 		"critters": "^0.0.24",
-		"eslint": "^9.17.0",
-		"eslint-config-next": "^15.1.6",
-		"postcss": "^8.4.49",
-		"tailwindcss": "^3.4.14",
-		"typescript": "^5.7.2"
+		"eslint": "^9.39.2",
+		"eslint-config-next": "^15.5.9",
+		"postcss": "^8.5.6",
+		"tailwindcss": "^3.4.19",
+		"typescript": "^5.9.3"
 	}
 }
