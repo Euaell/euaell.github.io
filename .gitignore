@@ -45,4 +45,5 @@ project_content.txt
 # ide
 .idea/
 
-*.lock
+*.
+!bun.lock
