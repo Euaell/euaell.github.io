@@ -1,0 +1,123 @@
+---
+import MobileMenu from './MobileMenu';
+
+const navItems = [
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Work', href: '#work' },
+  { name: 'Contact', href: '#contact' },
+];
+---
+
+<!-- Desktop Navigation -->
+<nav
+  id="main-nav"
+  class="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden md:block glass rounded-full px-6 py-3 transition-all duration-300"
+>
+  <ul class="flex items-center gap-8">
+    {navItems.map((item) => (
+      <li>
+        <a
+          href={item.href}
+          class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors relative"
+          data-section={item.href.replace('#', '')}
+        >
+          {item.name}
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 transition-all duration-300 nav-indicator"></span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="md:hidden">
+  <MobileMenu client:load />
+</div>
+
+<script>
+  // Navigation scroll detection and active section tracking
+  let scrolled = false;
+  const nav = document.getElementById('main-nav');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  // Scroll detection - change navbar style at 50px
+  window.addEventListener('scroll', () => {
+    const shouldBeScrolled = window.scrollY > 50;
+
+    if (shouldBeScrolled !== scrolled) {
+      scrolled = shouldBeScrolled;
+      if (nav) {
+        if (scrolled) {
+          nav.classList.remove('glass');
+          nav.classList.add('glass-strong');
+        } else {
+          nav.classList.remove('glass-strong');
+          nav.classList.add('glass');
+        }
+      }
+    }
+
+    // Active section tracking based on scroll position
+    const sections = ['home', 'about', 'work', 'contact'];
+    let current = '';
+
+    sections.forEach(sectionId => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        const rect = section.getBoundingClientRect();
+        // Check if section is in viewport (top of section is within 100px of top)
+        if (rect.top <= 100 && rect.bottom >= 100) {
+          current = sectionId;
+        }
+      }
+    });
+
+    // Update active link
+    if (current) {
+      navLinks.forEach(link => {
+        const linkSection = link.getAttribute('data-section');
+        const indicator = link.querySelector('.nav-indicator');
+
+        if (linkSection === current) {
+          link.classList.add('text-white');
+          link.classList.remove('text-white/80');
+          if (indicator) {
+            (indicator as HTMLElement).style.width = '100%';
+          }
+        } else {
+          link.classList.remove('text-white');
+          link.classList.add('text-white/80');
+          if (indicator) {
+            (indicator as HTMLElement).style.width = '0';
+          }
+        }
+      });
+    }
+  });
+
+  // Smooth scroll to sections
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const href = link.getAttribute('href');
+      if (href) {
+        const targetId = href.replace('#', '');
+        const target = document.getElementById(targetId);
+        if (target) {
+          const offsetTop = target.offsetTop - 80; // Account for fixed nav
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  .nav-link:hover .nav-indicator {
+    width: 100%;
+  }
+</style>

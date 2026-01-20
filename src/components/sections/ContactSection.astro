@@ -1,0 +1,104 @@
+---
+import ContactForm from '@/components/ui/ContactForm';
+
+const contactInfo = [
+  {
+    icon: '📧',
+    label: 'Email',
+    value: 'contact@euaell.me',
+    href: 'mailto:contact@euaell.me',
+  },
+  {
+    icon: '💼',
+    label: 'LinkedIn',
+    value: 'Euael Eshete',
+    href: 'https://www.linkedin.com/in/euael-eshete',
+  },
+  {
+    icon: '🐙',
+    label: 'GitHub',
+    value: '@euaell',
+    href: 'https://github.com/euaell',
+  },
+  {
+    icon: '🐦',
+    label: 'Twitter',
+    value: '@euaell',
+    href: 'https://twitter.com/euaell',
+  },
+];
+---
+
+<section id="contact" class="section-padding bg-neutral-950/50">
+  <div class="container-custom">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">
+        <span class="gradient-text">Get In Touch</span>
+      </h2>
+      <p class="text-xl text-white/70 max-w-2xl mx-auto">
+        Have a project in mind or just want to chat? Feel free to reach out!
+      </p>
+    </div>
+
+    <!-- Contact Content -->
+    <div class="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
+      <!-- Contact Info -->
+      <div class="lg:col-span-2">
+        <div class="glass-card rounded-2xl p-8 sticky top-24">
+          <h3 class="text-2xl font-bold mb-6">Let's Connect</h3>
+          <p class="text-white/70 mb-8">
+            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+          </p>
+
+          <!-- Contact Links -->
+          <div class="space-y-4">
+            {contactInfo.map((info) => (
+              <a
+                href={info.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-4 p-4 glass rounded-xl hover:glass-strong transition-all duration-300 group"
+              >
+                <span class="text-3xl group-hover:scale-110 transition-transform">
+                  {info.icon}
+                </span>
+                <div>
+                  <div class="text-sm text-white/50">{info.label}</div>
+                  <div class="font-medium text-white/90 group-hover:text-primary-400 transition-colors">
+                    {info.value}
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <!-- Availability Status -->
+          <div class="mt-8 p-4 glass rounded-xl">
+            <div class="flex items-center gap-3">
+              <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+              <span class="text-sm text-white/80">
+                Available for freelance work
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="lg:col-span-3">
+        <div class="glass-card rounded-2xl p-8">
+          <h3 class="text-2xl font-bold mb-6">Send Me a Message</h3>
+          <ContactForm client:visible />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Scroll animation for contact info cards */
+  .glass-card {
+    animation: fadeUp 0.8s ease-out backwards;
+  }
+</style>
