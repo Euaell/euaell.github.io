@@ -67,7 +67,7 @@ export default function ProjectFilter({ projects, technologies }: Props) {
                 loading="lazy"
                 className="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/70 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-neutral-950/70 via-transparent to-transparent" />
             </div>
 
             <div className="p-6">

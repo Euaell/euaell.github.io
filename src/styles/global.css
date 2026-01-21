@@ -179,7 +179,6 @@ svg {
 }
 
 .glass-liquid {
-  position: relative;
   overflow: hidden;
   background:
     radial-gradient(ellipse 80% 50% at 20% 0%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),

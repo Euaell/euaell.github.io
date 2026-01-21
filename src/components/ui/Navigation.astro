@@ -13,108 +13,29 @@ const navItems = [
 <!-- Desktop Navigation -->
 <nav
   id="main-nav"
-  class="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden md:flex items-center gap-6 glass-liquid rounded-full px-6 py-2 transition-all duration-300"
+  class="items-center gap-4 glass-liquid rounded-full px-4 py-2 transition-all duration-300 sticky top-4 z-50 hidden md:flex mx-auto max-w-lg lg:px-6 lg:py-3"
 >
-  <ul class="flex items-center gap-8">
+  <ul class="flex items-center gap-6">
     {navItems.map((item) => (
       <li>
         <a
           href={item.href}
-          class="nav-link text-xs uppercase tracking-[0.25em] text-white/70 hover:text-white transition-colors relative"
+          class="nav-link text-xs uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors relative py-1"
           data-section={item.href.replace('#', '')}
         >
           {item.name}
-          <span class="absolute -bottom-2 left-0 h-0.5 w-0 bg-gradient-to-r from-primary-400 to-accent-400 transition-all duration-300 nav-indicator"></span>
+          <span class="absolute -bottom-1 left-0 h-0.5 w-0 bg-linear-to-r from-primary-400 to-accent-400 transition-all duration-300 nav-indicator"></span>
         </a>
       </li>
     ))}
   </ul>
-  <div class="h-6 w-px bg-white/20"></div>
-  <ThemeToggle client:load />
+  <div class="h-5 w-px bg-white/15"></div>
+  <div class="flex-1 flex justify-end">
+    <ThemeToggle client:load />
+  </div>
 </nav>
 
 <!-- Mobile Menu -->
 <div class="md:hidden">
   <MobileMenu client:load />
 </div>
-
-<script>
-  let scrolled = false;
-  const nav = document.getElementById('main-nav');
-  const navLinks = document.querySelectorAll('.nav-link');
-
-  window.addEventListener('scroll', () => {
-    const shouldBeScrolled = window.scrollY > 40;
-
-    if (shouldBeScrolled !== scrolled) {
-      scrolled = shouldBeScrolled;
-      if (nav) {
-        if (scrolled) {
-          nav.classList.remove('glass-liquid');
-          nav.classList.add('glass-liquid-strong');
-        } else {
-          nav.classList.remove('glass-liquid-strong');
-          nav.classList.add('glass-liquid');
-        }
-      }
-    }
-
-    const sections = ['home', 'about', 'work', 'contact'];
-    let current = '';
-
-    sections.forEach(sectionId => {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= 120 && rect.bottom >= 120) {
-          current = sectionId;
-        }
-      }
-    });
-
-    if (current) {
-      navLinks.forEach(link => {
-        const linkSection = link.getAttribute('data-section');
-        const indicator = link.querySelector('.nav-indicator');
-
-        if (linkSection === current) {
-          link.classList.add('text-white');
-          link.classList.remove('text-white/70');
-          if (indicator instanceof HTMLElement) {
-            indicator.style.width = '100%';
-          }
-        } else {
-          link.classList.remove('text-white');
-          link.classList.add('text-white/70');
-          if (indicator instanceof HTMLElement) {
-            indicator.style.width = '0';
-          }
-        }
-      });
-    }
-  });
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const href = link.getAttribute('href');
-      if (href) {
-        const targetId = href.replace('#', '');
-        const target = document.getElementById(targetId);
-        if (target) {
-          const offsetTop = target.offsetTop - 80;
-          window.scrollTo({
-            top: offsetTop,
-            behavior: 'smooth'
-          });
-        }
-      }
-    });
-  });
-</script>
-
-<style>
-  .nav-link:hover .nav-indicator {
-    width: 100%;
-  }
-</style>
