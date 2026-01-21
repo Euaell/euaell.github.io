@@ -28,14 +28,13 @@ export default function ProjectFilter({ projects, technologies }: Props) {
 
   return (
     <div className="project-filter">
-      {/* Filter Buttons */}
       <div className="flex flex-wrap justify-center gap-3 mb-12">
         <button
           onClick={() => setSelected('All')}
-          className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+          className={`px-5 py-2 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 border ${
             selected === 'All'
-              ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white'
-              : 'glass hover:glass-strong text-white/80'
+              ? 'bg-gradient-to-r from-primary-400 to-accent-400 text-neutral-950 border-transparent'
+              : 'border-white/10 text-white/70 hover:text-white hover:border-primary-400/40'
           }`}
         >
           All
@@ -44,10 +43,10 @@ export default function ProjectFilter({ projects, technologies }: Props) {
           <button
             key={tech}
             onClick={() => setSelected(tech)}
-            className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+            className={`px-5 py-2 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 border ${
               selected === tech
-                ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white'
-                : 'glass hover:glass-strong text-white/80'
+                ? 'bg-gradient-to-r from-primary-400 to-accent-400 text-neutral-950 border-transparent'
+                : 'border-white/10 text-white/70 hover:text-white hover:border-primary-400/40'
             }`}
           >
             {tech}
@@ -55,49 +54,43 @@ export default function ProjectFilter({ projects, technologies }: Props) {
         ))}
       </div>
 
-      {/* Projects Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filtered.map((project) => (
-          <div
+          <article
             key={project.title}
-            className="glass-card rounded-xl overflow-hidden card-hover group"
+            className="rounded-3xl border border-white/10 bg-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-primary-500/40"
           >
-            {/* Project Image */}
-            <div className="aspect-video bg-gradient-to-br from-primary-900/50 to-accent-900/50 relative overflow-hidden">
+            <div className="relative aspect-video overflow-hidden">
               <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+                className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-all duration-500"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/70 via-transparent to-transparent" />
             </div>
 
-            {/* Project Content */}
             <div className="p-6">
-              <h3 className="text-xl font-bold mb-2 group-hover:text-primary-400 transition-colors">
-                {project.title}
-              </h3>
-              <p className="text-white/70 text-sm mb-4 line-clamp-2">
+              <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+              <p className="text-white/70 text-sm leading-relaxed mb-4">
                 {project.description}
               </p>
 
-              {/* Tags */}
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.tags.slice(0, 3).map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 rounded-full text-xs glass text-white/80"
+                    className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70"
                   >
                     {tag}
                   </span>
                 ))}
                 {project.tags.length > 3 && (
-                  <span className="px-3 py-1 rounded-full text-xs glass text-white/80">
+                  <span className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">
                     +{project.tags.length - 3}
                   </span>
                 )}
               </div>
 
-              {/* Links */}
               <div className="flex gap-3">
                 {project.link && (
                   <a
@@ -113,22 +106,19 @@ export default function ProjectFilter({ projects, technologies }: Props) {
                   href={project.repositoryLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${
-                    project.link ? 'flex-1' : 'w-full'
-                  } btn-secondary text-center py-2 text-sm`}
+                  className={`${project.link ? 'flex-1' : 'w-full'} btn-secondary text-center py-2 text-sm`}
                 >
                   GitHub
                 </a>
               </div>
             </div>
-          </div>
+          </article>
         ))}
       </div>
 
-      {/* No Results */}
       {filtered.length === 0 && (
         <div className="text-center py-20">
-          <p className="text-xl text-white/50">
+          <p className="text-lg text-white/60">
             No projects found for this technology.
           </p>
         </div>

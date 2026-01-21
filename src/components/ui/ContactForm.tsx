@@ -92,7 +92,7 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Name Field */}
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-white/80 mb-2">
+        <label htmlFor="name" className="block text-xs uppercase tracking-[0.2em] text-white/60 mb-2">
           Name *
         </label>
         <input
@@ -101,8 +101,8 @@ export default function ContactForm() {
           name="name"
           value={formData.name}
           onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-lg glass text-white placeholder-white/40 focus:outline-none focus:ring-2 ${
-            errors.name ? 'ring-2 ring-red-500' : 'focus:ring-primary-500'
+          className={`w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-primary-400/60 focus:border-primary-400/60 ${
+            errors.name ? 'ring-2 ring-red-500 border-red-500/60' : ''
           } transition-all`}
           placeholder="Your name"
         />
@@ -113,7 +113,7 @@ export default function ContactForm() {
 
       {/* Email Field */}
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
+        <label htmlFor="email" className="block text-xs uppercase tracking-[0.2em] text-white/60 mb-2">
           Email *
         </label>
         <input
@@ -122,8 +122,8 @@ export default function ContactForm() {
           name="email"
           value={formData.email}
           onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-lg glass text-white placeholder-white/40 focus:outline-none focus:ring-2 ${
-            errors.email ? 'ring-2 ring-red-500' : 'focus:ring-primary-500'
+          className={`w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-primary-400/60 focus:border-primary-400/60 ${
+            errors.email ? 'ring-2 ring-red-500 border-red-500/60' : ''
           } transition-all`}
           placeholder="your.email@example.com"
         />
@@ -134,7 +134,7 @@ export default function ContactForm() {
 
       {/* Subject Field */}
       <div>
-        <label htmlFor="subject" className="block text-sm font-medium text-white/80 mb-2">
+        <label htmlFor="subject" className="block text-xs uppercase tracking-[0.2em] text-white/60 mb-2">
           Subject *
         </label>
         <input
@@ -143,8 +143,8 @@ export default function ContactForm() {
           name="subject"
           value={formData.subject}
           onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-lg glass text-white placeholder-white/40 focus:outline-none focus:ring-2 ${
-            errors.subject ? 'ring-2 ring-red-500' : 'focus:ring-primary-500'
+          className={`w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-primary-400/60 focus:border-primary-400/60 ${
+            errors.subject ? 'ring-2 ring-red-500 border-red-500/60' : ''
           } transition-all`}
           placeholder="What's this about?"
         />
@@ -155,7 +155,7 @@ export default function ContactForm() {
 
       {/* Message Field */}
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-white/80 mb-2">
+        <label htmlFor="message" className="block text-xs uppercase tracking-[0.2em] text-white/60 mb-2">
           Message *
         </label>
         <textarea
@@ -164,8 +164,8 @@ export default function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           rows={6}
-          className={`w-full px-4 py-3 rounded-lg glass text-white placeholder-white/40 focus:outline-none focus:ring-2 ${
-            errors.message ? 'ring-2 ring-red-500' : 'focus:ring-primary-500'
+          className={`w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-primary-400/60 focus:border-primary-400/60 ${
+            errors.message ? 'ring-2 ring-red-500 border-red-500/60' : ''
           } transition-all resize-none`}
           placeholder="Tell me about your project or question..."
         />
@@ -178,7 +178,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="w-full btn-primary py-4 text-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full btn-primary py-4 text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {status === 'submitting' ? (
           <span className="flex items-center justify-center gap-2">

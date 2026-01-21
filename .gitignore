@@ -15,6 +15,7 @@
 
 # astro
 /dist/
+.astro
 
 # production
 /build

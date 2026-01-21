@@ -7,62 +7,60 @@ const socialLinks = [
 ];
 ---
 
-<section id="home" class="relative min-h-screen flex items-center overflow-hidden">
-  <!-- Background gradient -->
-  <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-pink-900/20"></div>
+<section id="home" class="relative overflow-hidden min-h-[92vh] flex items-center">
+  <!-- Background glow -->
+  <div class="absolute inset-0 bg-gradient-to-br from-primary-950/40 via-transparent to-accent-950/30"></div>
+  <div class="absolute -top-32 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-primary-500/25 blur-3xl"></div>
+  <div class="absolute -bottom-32 right-12 h-80 w-80 rounded-full bg-accent-500/20 blur-3xl"></div>
 
-  <!-- Floating background particles -->
-  <div class="absolute inset-0 opacity-30">
-    <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse-slow"></div>
-    <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
-    <div class="absolute top-1/2 left-1/3 w-64 h-64 bg-pink-500/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 4s;"></div>
-  </div>
-
-  <div class="container-custom relative z-10 py-20 md:py-0">
-    <div class="max-w-4xl mx-auto text-center">
-      <!-- Greeting -->
-      <div class="hero-greeting mb-4 md:mb-6 inline-block">
-        <span class="glass rounded-full px-6 py-2.5 text-sm font-medium inline-flex items-center gap-2">
-          <span class="text-xl md:text-2xl">👋</span>
-          Hello, I'm
-        </span>
+  <div class="container-custom relative z-10 pt-28 pb-24 md:pt-36 md:pb-32">
+    <div class="mx-auto flex max-w-5xl flex-col items-center text-center">
+      <!-- Status pill -->
+      <div class="hero-greeting mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-xs uppercase tracking-[0.2em] text-white/70">
+        <span class="h-2 w-2 rounded-full bg-primary-400 shadow-[0_0_12px_rgba(34,211,238,0.8)]"></span>
+        Open to new projects
       </div>
 
       <!-- Name -->
-      <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 px-4">
+      <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold font-display tracking-tight mb-5 px-4">
         <span class="gradient-text">Euael M. Eshete</span>
       </h1>
 
       <!-- Title with rotating skills -->
-      <div class="hero-subtitle text-lg sm:text-xl md:text-2xl mb-6 md:mb-8 text-white/90 px-4">
-        <span>Full Stack Developer specializing in </span>
-        <span id="rotating-skill" class="gradient-text-primary font-semibold inline-block min-w-[120px]">React</span>
+      <div class="hero-subtitle text-lg sm:text-xl md:text-2xl text-white/85 mb-6 px-4">
+        <span>Full Stack Developer focused on </span>
+        <span id="rotating-skill" class="gradient-text-primary font-semibold inline-block min-w-[140px]">React</span>
       </div>
 
       <!-- Description -->
-      <p class="hero-description text-base md:text-lg text-white/70 max-w-2xl mx-auto mb-8 md:mb-10 px-4">
-        Building innovative web applications and AI solutions with modern technologies.
-        Passionate about creating seamless user experiences and solving complex problems.
+      <p class="hero-description text-base md:text-lg text-white/65 max-w-2xl mx-auto mb-8 px-4">
+        I design, build, and ship polished web experiences with modern stacks, AI tooling, and a strong focus on performance and accessibility.
       </p>
 
       <!-- CTA Buttons -->
-      <div class="hero-cta flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 mb-8 md:mb-10 px-4">
-        <a href="#work" class="btn-primary w-full sm:w-auto">
+      <div class="hero-cta flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 mb-8 px-4">
+        <a href="#work" class="btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-2">
           View My Work
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
         </a>
-        <a href="#contact" class="btn-secondary w-full sm:w-auto">
+        <a href="#contact" class="btn-secondary w-full sm:w-auto inline-flex items-center justify-center gap-2">
           Get In Touch
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10m-13 9h16a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
         </a>
       </div>
 
       <!-- Social Links -->
-      <div class="hero-social flex items-center justify-center gap-4 md:gap-6 px-4">
+      <div class="hero-social flex items-center justify-center gap-3 md:gap-5 px-4">
         {socialLinks.map((social) => (
           <a
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
-            class="glass rounded-full p-3 hover:glass-strong transition-all duration-300 hover:scale-110"
+            class="glass rounded-full p-3 hover:glass-strong transition-all duration-300 hover:-translate-y-1"
             aria-label={social.label}
           >
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -85,18 +83,10 @@ const socialLinks = [
     </div>
   </div>
 
-  <!-- Floating emoji decorations -->
-  <div class="floating-elements absolute inset-0 pointer-events-none hidden md:block">
-    <div class="float-item absolute top-1/4 left-10 text-6xl opacity-20" style="animation-delay: 0s;">⚡</div>
-    <div class="float-item absolute top-1/3 right-20 text-5xl opacity-20" style="animation-delay: 2s;">🚀</div>
-    <div class="float-item absolute bottom-1/4 left-1/4 text-5xl opacity-20" style="animation-delay: 4s;">💡</div>
-    <div class="float-item absolute top-2/3 right-1/4 text-4xl opacity-20" style="animation-delay: 1s;">✨</div>
-  </div>
-
   <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce-slow">
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce-slow">
     <a href="#about" class="flex flex-col items-center gap-2 text-white/60 hover:text-white transition-colors">
-      <span class="text-sm">Scroll Down</span>
+      <span class="text-xs tracking-[0.2em] uppercase">Scroll</span>
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
       </svg>
@@ -138,38 +128,31 @@ const socialLinks = [
 </script>
 
 <style>
-  /* Hero section animations */
   .hero-greeting {
     animation: fadeUp 0.6s ease-out;
   }
 
   .hero-title {
-    animation: fadeUp 0.8s ease-out 0.2s backwards;
+    animation: fadeUp 0.8s ease-out 0.1s backwards;
   }
 
   .hero-subtitle {
-    animation: fadeUp 0.8s ease-out 0.4s backwards;
+    animation: fadeUp 0.8s ease-out 0.2s backwards;
   }
 
   .hero-description {
-    animation: fadeUp 0.8s ease-out 0.6s backwards;
+    animation: fadeUp 0.8s ease-out 0.3s backwards;
   }
 
   .hero-cta {
-    animation: fadeUp 0.8s ease-out 0.8s backwards;
+    animation: fadeUp 0.8s ease-out 0.4s backwards;
   }
 
   .hero-social {
-    animation: fadeUp 0.8s ease-out 1s backwards;
+    animation: fadeUp 0.8s ease-out 0.5s backwards;
   }
 
-  /* Rotating skill transition */
   #rotating-skill {
     transition: opacity 0.25s ease, transform 0.25s ease;
-  }
-
-  /* Floating elements */
-  .float-item {
-    animation: float 6s ease-in-out infinite;
   }
 </style>

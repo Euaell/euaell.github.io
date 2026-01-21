@@ -1,119 +1,105 @@
 ---
 import { projectsData } from '@/data/projects';
 
-// Get only featured projects, limit to 3
 const featured = projectsData.filter((p) => p.featured).slice(0, 3);
 ---
 
-<section id="work" class="py-16 md:py-24 bg-neutral-950/30">
+<section id="work" class="relative py-20 md:py-28">
   <div class="container-custom">
-    <!-- Section Header -->
     <div class="text-center mb-12 md:mb-16">
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-        <span class="gradient-text">Featured Work</span>
+      <p class="text-xs uppercase tracking-[0.4em] text-white/50 mb-3">Selected Work</p>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold font-display mb-4">
+        Projects built with intention.
       </h2>
-      <p class="text-base md:text-lg text-white/70 max-w-2xl mx-auto px-4">
-        Highlighting some of my best projects that showcase my skills in full-stack development and AI integration.
+      <p class="text-base md:text-lg text-white/70 max-w-2xl mx-auto">
+        A curated set of full-stack and AI-powered products focused on performance, clarity, and clean interaction.
       </p>
     </div>
 
-    <!-- Featured Projects -->
-    <div class="mb-10 md:mb-12">
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {featured.map((project, index) => (
-          <div
-            class="featured-project glass-card rounded-2xl overflow-hidden card-hover group"
-            data-index={index}
-          >
-            {/* Project Image */}
-            <div class="aspect-video bg-gradient-to-br from-primary-900/50 to-accent-900/50 relative overflow-hidden">
-              <img
-                src={project.image}
-                alt={project.title}
-                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
-              />
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {featured.map((project, index) => (
+        <article
+          class="featured-project group rounded-3xl border border-white/10 bg-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-primary-500/40"
+          data-index={index}
+        >
+          <div class="relative aspect-video overflow-hidden">
+            <img
+              src={project.image}
+              alt={project.title}
+              class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent"></div>
+          </div>
+
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-3 group-hover:text-primary-300 transition-colors">
+              {project.title}
+            </h3>
+            <p class="text-white/70 text-sm leading-relaxed mb-5">
+              {project.description}
+            </p>
+
+            <div class="flex flex-wrap gap-2 mb-5">
+              {project.tags.slice(0, 4).map((tag) => (
+                <span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">
+                  {tag}
+                </span>
+              ))}
+              {project.tags.length > 4 && (
+                <span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">
+                  +{project.tags.length - 4}
+                </span>
+              )}
             </div>
 
-            {/* Project Content */}
-            <div class="p-6">
-              <h4 class="text-xl font-bold mb-3 group-hover:text-primary-400 transition-colors">
-                {project.title}
-              </h4>
-              <p class="text-white/70 text-sm mb-4 line-clamp-3">
-                {project.description}
-              </p>
-
-              {/* Tags */}
-              <div class="flex flex-wrap gap-2 mb-4">
-                {project.tags.slice(0, 4).map((tag) => (
-                  <span class="px-3 py-1 rounded-full text-xs glass text-white/80">
-                    {tag}
-                  </span>
-                ))}
-                {project.tags.length > 4 && (
-                  <span class="px-3 py-1 rounded-full text-xs glass text-white/80">
-                    +{project.tags.length - 4}
-                  </span>
-                )}
-              </div>
-
-              {/* Links */}
-              <div class="flex gap-3">
-                {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="flex-1 btn-primary text-center py-2 text-sm"
-                  >
-                    Live Demo
-                  </a>
-                )}
+            <div class="flex gap-3">
+              {project.link && (
                 <a
-                  href={project.repositoryLink}
+                  href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class={`${
-                    project.link ? 'flex-1' : 'w-full'
-                  } btn-secondary text-center py-2 text-sm`}
+                  class="flex-1 btn-primary text-center py-2 text-sm"
                 >
-                  GitHub
+                  Live Demo
                 </a>
-              </div>
+              )}
+              <a
+                href={project.repositoryLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class={`${project.link ? 'flex-1' : 'w-full'} btn-secondary text-center py-2 text-sm`}
+              >
+                GitHub
+              </a>
             </div>
           </div>
-        ))}
-      </div>
+        </article>
+      ))}
+    </div>
 
-      <!-- View All Projects CTA -->
-      <div class="mt-12 text-center">
-        <a
-          href="/projects"
-          class="inline-flex items-center gap-2 btn-primary px-8 py-4"
-        >
-          View All Projects
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M14 5l7 7m0 0l-7 7m7-7H3"
-            />
-          </svg>
-        </a>
-      </div>
+    <div class="mt-12 text-center">
+      <a href="/projects" class="inline-flex items-center gap-2 btn-primary px-8 py-4">
+        View All Projects
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M14 5l7 7m0 0l-7 7m7-7H3"
+          />
+        </svg>
+      </a>
     </div>
   </div>
 </section>
 
 <script>
-  // Intersection Observer for featured projects
-  const observer = new IntersectionObserver(
+  const workObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
+          workObserver.unobserve(entry.target);
         }
       });
     },
@@ -121,14 +107,14 @@ const featured = projectsData.filter((p) => p.featured).slice(0, 3);
   );
 
   document.querySelectorAll('.featured-project').forEach((el) => {
-    observer.observe(el);
+    workObserver.observe(el);
   });
 </script>
 
 <style>
   .featured-project {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(24px);
     transition: opacity 0.6s ease, transform 0.6s ease;
   }
 
@@ -137,7 +123,6 @@ const featured = projectsData.filter((p) => p.featured).slice(0, 3);
     transform: translateY(0);
   }
 
-  /* Stagger featured projects */
   .featured-project[data-index="0"].in-view { transition-delay: 0s; }
   .featured-project[data-index="1"].in-view { transition-delay: 0.15s; }
   .featured-project[data-index="2"].in-view { transition-delay: 0.3s; }
