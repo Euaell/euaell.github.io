@@ -34,3 +34,35 @@ const navItems = [
 <div class="md:hidden">
   <MobileMenu client:load />
 </div>
+
+<script is:inline>
+  const sections = ['home', 'about', 'work', 'contact'];
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  function updateActiveLink() {
+    let current = sections.find((section) => {
+      const el = document.getElementById(section);
+      if (!el) return false;
+      const rect = el.getBoundingClientRect();
+      return rect.top <= 120 && rect.bottom >= 120;
+    });
+
+    navLinks.forEach((link) => {
+      const isActive = link.dataset.section === current;
+      link.classList.toggle('active', Boolean(isActive));
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+  window.addEventListener('load', updateActiveLink);
+</script>
+
+<style>
+  .nav-link.active {
+    color: white;
+  }
+
+  .nav-link.active .nav-indicator {
+    width: 100%;
+  }
+</style>
