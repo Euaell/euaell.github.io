@@ -2,7 +2,7 @@
 import { experienceData } from '@/data/experience';
 import { educationData } from '@/data/education';
 import { skillCategories } from '@/data/skills';
-import { profileStats as stats, projectHighlights, mentoringData, profileInfo } from '@/data/profile';
+import { mentoringData, profileInfo } from '@/data/profile';
 ---
 
 <section id="about" class="relative py-16 md:py-20 border-t border-white/5">
@@ -37,49 +37,25 @@ import { profileStats as stats, projectHighlights, mentoringData, profileInfo } 
             </div>
           </div>
 
-          <div class="mt-8 grid grid-cols-2 gap-4">
-            {stats.map((stat) => (
-              <div class="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-center reveal" data-target={stat.value}>
-                <div class="text-3xl font-semibold text-white">
-                  <span class="stat-value">0</span>
-                  {stat.suffix && <span class="text-primary-400">{stat.suffix}</span>}
+          <div class="mt-8">
+            <p class="text-xs uppercase tracking-[0.3em] text-white/50 mb-4">Skills snapshot</p>
+            <div class="grid md:grid-cols-2 gap-6">
+              {skillCategories.map((category) => (
+                <div class="space-y-3">
+                  <div class="flex items-center gap-3">
+                    <span class="h-2 w-2 rounded-full bg-primary-400"></span>
+                    <h4 class="text-sm uppercase tracking-[0.2em] text-white/70">{category.title}</h4>
+                  </div>
+                  <div class="flex flex-wrap gap-2">
+                    {category.skills.map((skill) => (
+                      <span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70 transition hover:border-primary-400/40 hover:text-white">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <p class="text-xs uppercase tracking-[0.2em] text-white/50 mt-2">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div class="glass-card rounded-3xl p-8 md:p-10 reveal">
-          <h3 class="text-2xl font-semibold font-display mb-6">Selected projects</h3>
-          <div class="space-y-4">
-            {projectHighlights.map((project) => (
-              <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
-                <h4 class="text-lg font-semibold">{project.name}</h4>
-                <p class="text-white/70 text-sm mt-2">{project.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div class="glass-card rounded-3xl p-8 md:p-10 reveal">
-          <h3 class="text-2xl font-semibold font-display mb-6">Skills snapshot</h3>
-          <div class="grid md:grid-cols-2 gap-6">
-            {skillCategories.map((category) => (
-              <div class="space-y-3">
-                <div class="flex items-center gap-3">
-                  <span class="h-2 w-2 rounded-full bg-primary-400"></span>
-                  <h4 class="text-sm uppercase tracking-[0.2em] text-white/70">{category.title}</h4>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                  {category.skills.map((skill) => (
-                    <span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70 transition hover:border-primary-400/40 hover:text-white">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -181,30 +157,6 @@ import { profileStats as stats, projectHighlights, mentoringData, profileInfo } 
     revealObserver.observe(el);
   });
 
-  function animateCounter(element) {
-    const target = parseInt(element.dataset?.target || '0');
-    const valueElement = element.querySelector('.stat-value');
-    if (!valueElement) return;
-
-    let current = 0;
-    const increment = target / 60;
-    const duration = 1800;
-    const frameDuration = duration / 60;
-
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        current = target;
-        clearInterval(timer);
-      }
-      valueElement.textContent = Math.floor(current).toString();
-    }, frameDuration);
-  }
-
-  document.querySelectorAll('#about [data-target]').forEach((el) => {
-    revealObserver.observe(el);
-    el.addEventListener('transitionend', () => animateCounter(el), { once: true });
-  });
 </script>
 
 <style>

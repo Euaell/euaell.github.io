@@ -1,14 +1,3 @@
-export interface Stat {
-  label: string;
-  value: number;
-  suffix: string;
-}
-
-export interface ProjectHighlight {
-  name: string;
-  description: string;
-}
-
 export interface MentoringItem {
   date: string;
   title: string;
@@ -16,24 +5,6 @@ export interface MentoringItem {
   location: string;
   description: string[];
 }
-
-export const profileStats: Stat[] = [
-  { label: 'Monthly messages scaled', value: 58, suffix: 'k+' },
-  { label: 'Active users supported', value: 2, suffix: 'k+' },
-  { label: 'Students mentored', value: 150, suffix: '+' },
-  { label: 'Infra cost reduction', value: 94, suffix: '%' },
-];
-
-export const projectHighlights: ProjectHighlight[] = [
-  {
-    name: 'DistroKV (Current)',
-    description: 'Distributed KV store in Go with Raft consensus, LSM-tree persistence, and multi-region Kubernetes testing.',
-  },
-  {
-    name: 'IoT Water Distribution System (Thesis)',
-    description: 'Low-power embedded monitoring with a cloud data pipeline for resource-constrained environments.',
-  },
-];
 
 export const mentoringData: MentoringItem[] = [
   {
@@ -63,6 +34,6 @@ export const profileInfo = {
   description: 'Full-stack software developer specializing in scalable backend platforms, cloud infrastructure, and AI-enabled products.',
   bio: 'Software developer focused on high-concurrency systems, cloud-native delivery, and AI tooling that improves real products.',
   location: 'Addis Ababa, Ethiopia',
-  availability: 'Remote friendly',
+  availability: '4+ years experience',
   image: '/images/profile.jpg',
 };

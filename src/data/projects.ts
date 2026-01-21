@@ -11,6 +11,31 @@ export interface Project {
 
 export const projectsData: Project[] = [
 	{
+		title: 'DistroKV',
+		description: 'Distributed KV store in Go with Raft consensus, LSM-tree persistence, and multi-region Kubernetes testing.',
+		responsibilities: [
+			'Built a Go-based distributed KV store with Raft consensus.',
+			'Implemented LSM-tree persistence for durable storage.',
+			'Validated multi-region behavior with Kubernetes testing.',
+		],
+		tags: ['Go', 'Raft', 'Kubernetes', 'Distributed Systems'],
+		repositoryLink: 'https://github.com/Euaell',
+		image: '/images/placeholder.png',
+		featured: false,
+	},
+	{
+		title: 'IoT Water Distribution System',
+		description: 'Low-power embedded monitoring with a cloud data pipeline for resource-constrained environments.',
+		responsibilities: [
+			'Designed low-power embedded monitoring nodes.',
+			'Built a cloud data pipeline for constrained environments.',
+		],
+		tags: ['IoT', 'Embedded', 'Cloud'],
+		repositoryLink: 'https://github.com/Euaell',
+		image: '/images/placeholder.png',
+		featured: false,
+	},
+	{
 		title: 'MacroChef',
 		description: 'A recipe app that allows users to track their daily calorie intake and plan their meals.',
 		responsibilities: [
