@@ -1,31 +1,25 @@
 ---
 import { projectsData } from '@/data/projects';
-import ProjectFilter from '@/components/ui/ProjectFilter';
 
-const featured = projectsData.filter((p) => p.featured);
-const others = projectsData.filter((p) => !p.featured);
-const allTech = [...new Set(projectsData.flatMap((p) => p.tags))].slice(0, 10);
+// Get only featured projects, limit to 3
+const featured = projectsData.filter((p) => p.featured).slice(0, 3);
 ---
 
-<section id="work" class="section-padding">
+<section id="work" class="py-16 md:py-24 bg-neutral-950/30">
   <div class="container-custom">
     <!-- Section Header -->
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4">
-        <span class="gradient-text">My Work</span>
+    <div class="text-center mb-12 md:mb-16">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+        <span class="gradient-text">Featured Work</span>
       </h2>
-      <p class="text-xl text-white/70 max-w-2xl mx-auto">
-        A collection of projects I've built, ranging from web applications to AI-powered solutions.
+      <p class="text-base md:text-lg text-white/70 max-w-2xl mx-auto px-4">
+        Highlighting some of my best projects that showcase my skills in full-stack development and AI integration.
       </p>
     </div>
 
     <!-- Featured Projects -->
-    <div class="mb-20">
-      <h3 class="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3">
-        <span class="text-3xl">⭐</span>
-        Featured Projects
-      </h3>
-      <div class="grid md:grid-cols-2 gap-8">
+    <div class="mb-10 md:mb-12">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {featured.map((project, index) => (
           <div
             class="featured-project glass-card rounded-2xl overflow-hidden card-hover group"
@@ -41,36 +35,26 @@ const allTech = [...new Set(projectsData.flatMap((p) => p.tags))].slice(0, 10);
             </div>
 
             {/* Project Content */}
-            <div class="p-8">
-              <h4 class="text-2xl font-bold mb-3 group-hover:text-primary-400 transition-colors">
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3 group-hover:text-primary-400 transition-colors">
                 {project.title}
               </h4>
-              <p class="text-white/70 mb-4">
+              <p class="text-white/70 text-sm mb-4 line-clamp-3">
                 {project.description}
               </p>
 
-              {/* Responsibilities */}
-              {project.responsibilities.length > 0 && (
-                <div class="mb-6">
-                  <h5 class="text-sm font-semibold text-white/80 mb-2">Key Highlights:</h5>
-                  <ul class="space-y-2">
-                    {project.responsibilities.slice(0, 3).map((resp) => (
-                      <li class="text-sm text-white/70 flex gap-2">
-                        <span class="text-primary-400 mt-1">•</span>
-                        <span>{resp}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
               {/* Tags */}
-              <div class="flex flex-wrap gap-2 mb-6">
-                {project.tags.map((tag) => (
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.tags.slice(0, 4).map((tag) => (
                   <span class="px-3 py-1 rounded-full text-xs glass text-white/80">
                     {tag}
                   </span>
                 ))}
+                {project.tags.length > 4 && (
+                  <span class="px-3 py-1 rounded-full text-xs glass text-white/80">
+                    +{project.tags.length - 4}
+                  </span>
+                )}
               </div>
 
               {/* Links */}
@@ -80,7 +64,7 @@ const allTech = [...new Set(projectsData.flatMap((p) => p.tags))].slice(0, 10);
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="flex-1 btn-primary text-center"
+                    class="flex-1 btn-primary text-center py-2 text-sm"
                   >
                     Live Demo
                   </a>
@@ -91,31 +75,34 @@ const allTech = [...new Set(projectsData.flatMap((p) => p.tags))].slice(0, 10);
                   rel="noopener noreferrer"
                   class={`${
                     project.link ? 'flex-1' : 'w-full'
-                  } btn-secondary text-center`}
+                  } btn-secondary text-center py-2 text-sm`}
                 >
-                  View on GitHub
+                  GitHub
                 </a>
               </div>
             </div>
           </div>
         ))}
       </div>
-    </div>
 
-    <!-- Other Projects -->
-    {others.length > 0 && (
-      <div>
-        <h3 class="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3">
-          <span class="text-3xl">💼</span>
-          Other Projects
-        </h3>
-        <ProjectFilter
-          client:visible
-          projects={others}
-          technologies={allTech}
-        />
+      <!-- View All Projects CTA -->
+      <div class="mt-12 text-center">
+        <a
+          href="/projects"
+          class="inline-flex items-center gap-2 btn-primary px-8 py-4"
+        >
+          View All Projects
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"
+            />
+          </svg>
+        </a>
       </div>
-    )}
+    </div>
   </div>
 </section>
 

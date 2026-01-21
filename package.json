@@ -1,5 +1,5 @@
 {
-  "name": "euaell-astro-portfolio",
+  "name": "euaell-portfolio",
   "type": "module",
   "version": "1.0.0",
   "scripts": {
@@ -11,15 +11,15 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
-    "@astrojs/node": "^8.3.4",
-    "@astrojs/react": "^3.6.3",
+    "@astrojs/node": "9.5.2",
+    "@astrojs/react": "4.4.2",
     "@astrojs/sitemap": "^3.7.0",
     "@tailwindcss/vite": "^4.1.18",
     "@types/node": "^22.19.7",
     "@types/nodemailer": "^6.4.21",
     "@types/react": "^18.3.27",
     "@types/react-dom": "^18.3.7",
-    "astro": "^4.16.19",
+    "astro": "5.16.11",
     "nodemailer": "^6.10.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

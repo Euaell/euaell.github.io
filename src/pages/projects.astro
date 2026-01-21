@@ -1,0 +1,86 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Navigation from '@/components/ui/Navigation.astro';
+import FloatingResumeButton from '@/components/ui/FloatingResumeButton.astro';
+import { projectsData } from '@/data/projects';
+import ProjectFilter from '@/components/ui/ProjectFilter';
+
+const allProjects = projectsData;
+const allTech = [...new Set(projectsData.flatMap((p) => p.tags))].slice(0, 12);
+---
+
+<Layout
+  title="Projects - Euael M. Eshete"
+  description="Explore my portfolio of web applications, AI solutions, and software projects built with React, Next.js, Python, and more."
+>
+  <Navigation />
+  <FloatingResumeButton />
+
+  <main class="pt-24 md:pt-28">
+    <section class="py-12 md:py-16">
+      <div class="container-custom">
+        <!-- Page Header -->
+        <div class="text-center mb-12 md:mb-16 max-w-3xl mx-auto">
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <span class="gradient-text">All Projects</span>
+          </h1>
+          <p class="text-base md:text-lg text-white/70 px-4">
+            A comprehensive collection of my work, from web applications to AI-powered solutions.
+            Filter by technology to find specific projects.
+          </p>
+        </div>
+
+        <!-- All Projects with Filter -->
+        <ProjectFilter client:visible projects={allProjects} technologies={allTech} />
+
+        <!-- Back to Home -->
+        <div class="mt-12 text-center">
+          <a
+            href="/#work"
+            class="inline-flex items-center gap-2 btn-secondary px-8 py-3"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+            Back to Home
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-6 md:py-8 border-t border-white/10">
+    <div class="container-custom">
+      <div class="flex flex-col md:flex-row items-center justify-center md:justify-between gap-3 md:gap-4 text-sm text-white/60">
+        <p>
+          © {new Date().getFullYear()} Euael M. Eshete. All rights reserved.
+        </p>
+        <div class="flex items-center gap-6">
+          <a href="/#home" class="hover:text-white transition-colors">Home</a>
+          <a
+            href="https://github.com/euaell"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-white transition-colors"
+          >
+            GitHub
+          </a>
+          <a
+            href="https://www.linkedin.com/in/euael-eshete"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-white transition-colors"
+          >
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</Layout>

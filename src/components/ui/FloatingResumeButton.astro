@@ -1,0 +1,48 @@
+---
+// Floating Resume Button Component
+---
+
+<a
+  href="https://euaell.me/cv"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="fixed bottom-6 right-6 z-40 glass-strong rounded-full p-4 hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl group"
+  aria-label="View Resume"
+>
+  <div class="flex items-center gap-2">
+    <!-- Document Icon -->
+    <svg
+      class="w-5 h-5 text-white"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+      />
+    </svg>
+
+    <!-- Text (hidden on mobile, shown on hover/desktop) -->
+    <span class="hidden md:inline-block text-sm font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-w-0 group-hover:max-w-xs overflow-hidden whitespace-nowrap">
+      Resume
+    </span>
+  </div>
+
+  <!-- Pulse animation on the button -->
+  <div class="absolute inset-0 rounded-full bg-primary-500/20 animate-ping"></div>
+</a>
+
+<style>
+  /* Ensure button appears above other content */
+  a {
+    backdrop-filter: blur(12px);
+  }
+
+  /* Smooth transition for text reveal */
+  span {
+    transition: max-width 0.3s ease, opacity 0.3s ease;
+  }
+</style>

@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://portfolio.euaell.me',
-  output: 'hybrid',  // Pre-render pages, SSR for API routes
+  output: 'static',
   adapter: node({ mode: 'standalone' }),
   integrations: [
     react(),

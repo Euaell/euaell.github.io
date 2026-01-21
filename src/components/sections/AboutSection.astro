@@ -9,32 +9,44 @@ const stats = [
   { label: 'Happy Clients', value: 5 },
 ];
 
-const skills = [
-  { name: 'React / Next.js', level: 95 },
-  { name: 'TypeScript', level: 90 },
-  { name: 'Python / FastAPI', level: 90 },
-  { name: 'Node.js / Express', level: 85 },
-  { name: 'PostgreSQL / MongoDB', level: 85 },
-  { name: 'Docker / CI/CD', level: 80 },
-  { name: 'AI/ML Integration', level: 85 },
-  { name: 'Vue.js', level: 75 },
+const skillCategories = [
+  {
+    title: 'Frontend',
+    skills: ['React', 'Next.js', 'TypeScript', 'Vue.js', 'Tailwind CSS', 'JavaScript'],
+  },
+  {
+    title: 'Backend',
+    skills: ['Node.js', 'Express', 'FastAPI', 'Python', 'REST APIs', 'GraphQL'],
+  },
+  {
+    title: 'Database',
+    skills: ['PostgreSQL', 'MongoDB', 'Redis', 'Prisma', 'SQL'],
+  },
+  {
+    title: 'DevOps & Tools',
+    skills: ['Docker', 'Git', 'CI/CD', 'AWS', 'Vercel', 'Linux'],
+  },
+  {
+    title: 'AI & ML',
+    skills: ['OpenAI API', 'LangChain', 'Machine Learning', 'Data Analysis'],
+  },
 ];
 ---
 
-<section id="about" class="section-padding bg-neutral-950/50">
+<section id="about" class="py-16 md:py-24 bg-neutral-950/50">
   <div class="container-custom">
     <!-- Section Header -->
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4">
+    <div class="text-center mb-12 md:mb-16">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
         <span class="gradient-text">About Me</span>
       </h2>
-      <p class="text-xl text-white/70 max-w-2xl mx-auto">
+      <p class="text-base md:text-lg text-white/70 max-w-2xl mx-auto px-4">
         Passionate full-stack developer with expertise in building scalable web applications and AI-powered solutions.
       </p>
     </div>
 
     <!-- Stats Grid -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16">
       {stats.map((stat) => (
         <div
           class="stat-card glass-card rounded-2xl p-6 text-center"
@@ -50,14 +62,14 @@ const skills = [
     </div>
 
     <!-- Experience & Education -->
-    <div class="grid lg:grid-cols-2 gap-12 mb-20">
+    <div class="grid lg:grid-cols-2 gap-8 md:gap-10 mb-12 md:mb-16">
       <!-- Experience Timeline -->
       <div>
-        <h3 class="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3">
-          <span class="text-3xl">💼</span>
+        <h3 class="text-xl md:text-2xl font-bold mb-6 flex items-center gap-2">
+          <span class="text-2xl">💼</span>
           Experience
         </h3>
-        <div class="space-y-6">
+        <div class="space-y-4">
           {experienceData.map((exp, index) => (
             <div
               class="timeline-item glass-card rounded-xl p-6 relative border-l-4 border-primary-500/50"
@@ -82,11 +94,11 @@ const skills = [
 
       <!-- Education Timeline -->
       <div>
-        <h3 class="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3">
-          <span class="text-3xl">🎓</span>
+        <h3 class="text-xl md:text-2xl font-bold mb-6 flex items-center gap-2">
+          <span class="text-2xl">🎓</span>
           Education
         </h3>
-        <div class="space-y-6">
+        <div class="space-y-4">
           {educationData.map((edu, index) => (
             <div
               class="timeline-item glass-card rounded-xl p-6 relative border-l-4 border-accent-500/50"
@@ -112,23 +124,23 @@ const skills = [
 
     <!-- Skills Grid -->
     <div>
-      <h3 class="text-2xl md:text-3xl font-bold mb-8 text-center flex items-center justify-center gap-3">
-        <span class="text-3xl">🛠️</span>
+      <h3 class="text-xl md:text-2xl font-bold mb-8 md:mb-10 text-center flex items-center justify-center gap-2">
+        <span class="text-2xl">🛠️</span>
         Skills & Technologies
       </h3>
-      <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-        {skills.map((skill, index) => (
-          <div class="skill-card glass-card rounded-xl p-6" data-index={index}>
-            <div class="flex justify-between items-center mb-3">
-              <span class="font-medium">{skill.name}</span>
-              <span class="text-sm text-white/50">{skill.level}%</span>
-            </div>
-            <div class="skill-bar h-2 bg-white/10 rounded-full overflow-hidden">
-              <div
-                class="skill-fill h-full bg-gradient-to-r from-primary-500 to-accent-500 rounded-full transition-all duration-1000 ease-out"
-                data-level={skill.level}
-                style="width: 0%;"
-              ></div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+        {skillCategories.map((category, categoryIndex) => (
+          <div class="skill-category" data-index={categoryIndex}>
+            <h4 class="text-lg font-semibold mb-4 text-white/90 flex items-center gap-2">
+              <span class="w-1 h-6 bg-gradient-to-b from-primary-500 to-accent-500 rounded-full"></span>
+              {category.title}
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              {category.skills.map((skill) => (
+                <span class="skill-badge px-4 py-2 rounded-lg text-sm font-medium glass-card hover:glass-strong transition-all duration-300 cursor-default">
+                  {skill}
+                </span>
+              ))}
             </div>
           </div>
         ))}
@@ -150,11 +162,6 @@ const skills = [
             animateCounter(entry.target as HTMLElement);
           }
 
-          // Trigger skill bar animation
-          if (entry.target.classList.contains('skill-card')) {
-            animateSkillBar(entry.target as HTMLElement);
-          }
-
           // Unobserve after animation
           observer.unobserve(entry.target);
         }
@@ -164,7 +171,7 @@ const skills = [
   );
 
   // Observe all animated elements
-  document.querySelectorAll('.stat-card, .timeline-item, .skill-card').forEach((el) => {
+  document.querySelectorAll('.stat-card, .timeline-item, .skill-category').forEach((el) => {
     observer.observe(el);
   });
 
@@ -187,24 +194,12 @@ const skills = [
       valueElement.textContent = Math.floor(current).toString();
     }, frameDuration);
   }
-
-  function animateSkillBar(element: HTMLElement) {
-    const skillFill = element.querySelector('.skill-fill') as HTMLElement;
-    if (!skillFill) return;
-
-    const level = parseInt(skillFill.dataset.level || '0');
-
-    // Delay slightly for stagger effect
-    setTimeout(() => {
-      skillFill.style.width = `${level}%`;
-    }, 100);
-  }
 </script>
 
 <style>
   .stat-card,
   .timeline-item,
-  .skill-card {
+  .skill-category {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.6s ease, transform 0.6s ease;
@@ -212,7 +207,7 @@ const skills = [
 
   .stat-card.in-view,
   .timeline-item.in-view,
-  .skill-card.in-view {
+  .skill-category.in-view {
     opacity: 1;
     transform: translateY(0);
   }
@@ -224,13 +219,20 @@ const skills = [
   .timeline-item[data-index="3"].in-view { transition-delay: 0.3s; }
   .timeline-item[data-index="4"].in-view { transition-delay: 0.4s; }
 
-  /* Stagger skill cards */
-  .skill-card[data-index="0"].in-view { transition-delay: 0s; }
-  .skill-card[data-index="1"].in-view { transition-delay: 0.05s; }
-  .skill-card[data-index="2"].in-view { transition-delay: 0.1s; }
-  .skill-card[data-index="3"].in-view { transition-delay: 0.15s; }
-  .skill-card[data-index="4"].in-view { transition-delay: 0.2s; }
-  .skill-card[data-index="5"].in-view { transition-delay: 0.25s; }
-  .skill-card[data-index="6"].in-view { transition-delay: 0.3s; }
-  .skill-card[data-index="7"].in-view { transition-delay: 0.35s; }
+  /* Stagger skill categories */
+  .skill-category[data-index="0"].in-view { transition-delay: 0s; }
+  .skill-category[data-index="1"].in-view { transition-delay: 0.1s; }
+  .skill-category[data-index="2"].in-view { transition-delay: 0.15s; }
+  .skill-category[data-index="3"].in-view { transition-delay: 0.2s; }
+  .skill-category[data-index="4"].in-view { transition-delay: 0.25s; }
+
+  /* Skill badge hover effect */
+  .skill-badge {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .skill-badge:hover {
+    transform: translateY(-2px);
+    border-color: rgba(59, 130, 246, 0.3);
+  }
 </style>

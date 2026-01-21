@@ -1,0 +1,45 @@
+# Dependencies
+node_modules
+bun.lockb
+
+# Build output
+dist
+.astro
+
+# Development
+.env
+.env.local
+.env.*.local
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Testing
+coverage
+
+# Documentation
+README.md
+MIGRATION-COMPLETE.md
+doc/
+
+# GitHub
+.github

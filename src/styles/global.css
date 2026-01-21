@@ -216,11 +216,6 @@ body {
   @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
 }
 
-/* Section Padding */
-.section-padding {
-  @apply py-20 md:py-32;
-}
-
 /* Card Hover Effect */
 .card-hover {
   transition: all 0.3s ease;
