@@ -9,13 +9,17 @@ interface ContactFormData {
 }
 
 function createTransporter() {
+  const host = process.env.NODE_MAILER_HOST || 'smtp.gmail.com';
+  const port = Number.parseInt(process.env.NODE_MAILER_PORT || '465', 10);
+  const secure = port === 465;
+
   return nodemailer.createTransport({
-    host: import.meta.env.NODE_MAILER_HOST,
-    port: parseInt(import.meta.env.NODE_MAILER_PORT!),
-    secure: true,
+    host,
+    port,
+    secure,
     auth: {
-      user: import.meta.env.NODE_MAILER_USER,
-      pass: import.meta.env.NODE_MAILER_PASS,
+      user: process.env.NODE_MAILER_USER,
+      pass: process.env.NODE_MAILER_PASS,
     },
   });
 }
@@ -77,8 +81,8 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Email template for site owner
     const ownerMailOptions = {
-      from: `"Portfolio Contact Form" <${import.meta.env.NODE_MAILER_USER}>`,
-      to: import.meta.env.NODE_MAILER_USER,
+      from: `"Portfolio Contact Form" <${process.env.NODE_MAILER_USER}>`,
+      to: process.env.NODE_MAILER_USER,
       subject: `New Contact Form Message: ${subject}`,
       html: `
         <!DOCTYPE html>
@@ -180,7 +184,7 @@ Sent at: ${new Date().toLocaleString()}
 
     // Confirmation email for sender
     const senderMailOptions = {
-      from: `"Euael M. Eshete" <${import.meta.env.NODE_MAILER_USER}>`,
+      from: `"Euael M. Eshete" <${process.env.NODE_MAILER_USER}>`,
       to: email,
       subject: 'Thanks for reaching out!',
       html: `
