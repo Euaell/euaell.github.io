@@ -34,7 +34,7 @@ const skillCategories = [
 ---
 
 <section id="about" class="relative py-24 md:py-32 border-t border-white/5">
-  <div class="container-custom">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12 md:mb-16">
       <p class="text-xs uppercase tracking-[0.4em] text-white/50 mb-3">About</p>
       <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold font-display mb-4">
@@ -147,7 +147,7 @@ const skillCategories = [
   </div>
 </section>
 
-<script>
+<script lang="ts">
   const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -164,7 +164,7 @@ const skillCategories = [
     revealObserver.observe(el);
   });
 
-  function animateCounter(element) {
+  function animateCounter(element: HTMLElement) {
     const target = parseInt(element.dataset.target || '0');
     const valueElement = element.querySelector('.stat-value');
     if (!valueElement) return;
@@ -184,7 +184,7 @@ const skillCategories = [
     }, frameDuration);
   }
 
-  document.querySelectorAll('#about [data-target]').forEach((el) => {
+  document.querySelectorAll<HTMLElement>('#about [data-target]').forEach((el) => {
     revealObserver.observe(el);
     el.addEventListener('transitionend', () => animateCounter(el), { once: true });
   });
