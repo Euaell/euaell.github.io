@@ -71,13 +71,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       rel="stylesheet"
     />
 
-    <!-- Theme Persistence Script (prevents FOUC) -->
-    <script is:inline>
-      // Initialize theme from localStorage or default to dark
-      const theme = localStorage.getItem('theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', theme);
-    </script>
-
     <!-- Additional head content slot -->
     <slot name="head" />
   </head>
