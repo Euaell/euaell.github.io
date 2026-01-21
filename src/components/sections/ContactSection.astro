@@ -1,0 +1,141 @@
+---
+import ContactForm from '@/components/ui/ContactForm';
+
+const contactInfo = [
+  {
+    label: 'Email',
+    value: 'contact@euaell.me',
+    href: 'mailto:contact@euaell.me',
+    icon: 'mail',
+  },
+  {
+    label: 'LinkedIn',
+    value: 'Euael Eshete',
+    href: 'https://www.linkedin.com/in/euael-eshete',
+    icon: 'linkedin',
+  },
+  {
+    label: 'GitHub',
+    value: '@euaell',
+    href: 'https://github.com/euaell',
+    icon: 'github',
+  },
+  {
+    label: 'Twitter',
+    value: '@euaell',
+    href: 'https://twitter.com/euaell',
+    icon: 'twitter',
+  },
+];
+---
+
+<section id="contact" class="relative py-14 md:py-18">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12 md:mb-16">
+      <p class="text-xs uppercase tracking-[0.4em] text-white/50 mb-3">Contact</p>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold font-display mb-4">
+        Let us build something excellent.
+      </h2>
+      <p class="text-base md:text-lg text-white/70 max-w-2xl mx-auto">
+        Have a project in mind or want to collaborate? Drop a message and I will respond quickly.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-8 items-start max-w-6xl mx-auto">
+      <div class="lg:col-span-2 space-y-6">
+        <div class="glass-card rounded-3xl p-8 reveal">
+          <h3 class="text-xl font-semibold font-display mb-4">Let us connect</h3>
+          <p class="text-white/70 mb-6">
+            I am open to freelance work, full-time roles, and partnerships that push the craft forward.
+          </p>
+
+          <div class="space-y-4">
+            {contactInfo.map((info) => (
+              <a
+                href={info.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary-500/40"
+              >
+                <span class="flex h-11 w-11 items-center justify-center rounded-full bg-white/5 border border-white/10">
+                  {info.icon === 'mail' && (
+                    <svg class="h-5 w-5 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 6l-10 7L2 6"/>
+                    </svg>
+                  )}
+                  {info.icon === 'linkedin' && (
+                    <svg class="h-5 w-5 text-primary-300" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5zM3 9h4v12H3zM9 9h3.6v1.7h.1c.5-.9 1.7-1.9 3.5-1.9 3.7 0 4.4 2.4 4.4 5.6V21h-4v-5.2c0-1.2 0-2.8-1.7-2.8-1.7 0-2 1.3-2 2.7V21H9z"/>
+                    </svg>
+                  )}
+                  {info.icon === 'github' && (
+                    <svg class="h-5 w-5 text-primary-300" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                  )}
+                  {info.icon === 'twitter' && (
+                    <svg class="h-5 w-5 text-primary-300" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0012 8.1v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                    </svg>
+                  )}
+                </span>
+                <div>
+                  <div class="text-xs uppercase tracking-[0.2em] text-white/50">{info.label}</div>
+                  <div class="font-medium text-white/90 group-hover:text-primary-300 transition-colors">
+                    {info.value}
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div class="glass-card rounded-3xl p-6 reveal">
+          <div class="flex items-center gap-3">
+            <span class="h-3 w-3 rounded-full bg-primary-400 animate-pulse"></span>
+            <span class="text-sm text-white/70">Currently available for new opportunities.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-3">
+        <div class="glass-card rounded-3xl p-8 md:p-10 reveal">
+          <h3 class="text-2xl font-semibold font-display mb-6">Send a message</h3>
+          <ContactForm client:visible />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const contactObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          contactObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  document.querySelectorAll('#contact .reveal').forEach((el) => {
+    contactObserver.observe(el);
+  });
+</script>
+
+<style>
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>

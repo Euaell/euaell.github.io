@@ -1,0 +1,66 @@
+---
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Euael M. Eshete',
+  jobTitle: 'Full Stack Developer & AI Engineer',
+  url: 'https://portfolio.euaell.me',
+  email: 'contact@euaell.me',
+  sameAs: [
+    'https://github.com/euaell',
+    'https://www.linkedin.com/in/euael-eshete',
+    'https://twitter.com/euaell',
+  ],
+  knowsAbout: [
+    'Web Development',
+    'Full Stack Development',
+    'React',
+    'Next.js',
+    'TypeScript',
+    'Python',
+    'FastAPI',
+    'Artificial Intelligence',
+    'Machine Learning',
+    'Software Engineering',
+  ],
+  alumniOf: {
+    '@type': 'EducationalOrganization',
+    name: 'Addis Ababa University',
+  },
+  worksFor: {
+    '@type': 'Organization',
+    name: 'SecureTron Inc.',
+  },
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Euael M. Eshete Portfolio',
+  url: 'https://portfolio.euaell.me',
+  description:
+    'Portfolio of Euael M. Eshete - Full Stack Developer & AI Engineer specializing in React, Next.js, Python, TypeScript, and machine learning.',
+  author: {
+    '@type': 'Person',
+    name: 'Euael M. Eshete',
+  },
+};
+
+const profilePageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  dateCreated: '2023-01-01',
+  dateModified: new Date().toISOString().split('T')[0],
+  mainEntity: {
+    '@type': 'Person',
+    name: 'Euael M. Eshete',
+    jobTitle: 'Full Stack Developer & AI Engineer',
+    description:
+      'Full Stack Developer & AI Engineer specializing in React, Next.js, Python, TypeScript, and machine learning. Building innovative web applications and AI solutions.',
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(profilePageSchema)} />

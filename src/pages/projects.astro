@@ -1,0 +1,46 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import FloatingResumeButton from '@/components/ui/FloatingResumeButton.astro';
+import { projectsData } from '@/data/projects';
+import ProjectFilter from '@/components/ui/ProjectFilter';
+
+const allProjects = projectsData;
+const allTech = [...new Set(projectsData.flatMap((p) => p.tags))].slice(0, 12);
+---
+
+<Layout
+  title="Projects - Euael M. Eshete"
+  description="Explore my portfolio of web applications, AI solutions, and software projects built with React, Next.js, Python, and more."
+>
+  <main>
+    <section class="pt-8 pb-16 md:pt-12 md:pb-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 md:mb-16 max-w-3xl mx-auto">
+          <p class="text-xs uppercase tracking-[0.4em] text-white/50 mb-3">Archive</p>
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-semibold font-display mb-4">
+            All Projects
+          </h1>
+          <p class="text-base md:text-lg text-white/70 px-4">
+            A comprehensive collection of my work, from web applications to AI-powered solutions. Filter by technology to find specific projects.
+          </p>
+        </div>
+
+        <ProjectFilter client:visible projects={allProjects} technologies={allTech} />
+
+        <div class="mt-12 text-center">
+          <a href="/#work" class="inline-flex items-center gap-2 btn-secondary px-8 py-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+            Back to home
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

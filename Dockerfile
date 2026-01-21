@@ -4,8 +4,6 @@ FROM oven/bun:1-alpine AS base
 # Install dependencies only when needed
 FROM base AS deps
 WORKDIR /app
-
-# Install dependencies based on the preferred package manager
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
 
@@ -15,37 +13,25 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Stage 2: Build the application
-ENV NEXT_TELEMETRY_DISABLED=1
+# Build the Astro application
 ENV NODE_ENV=production
-
 RUN bun run build
 
-# Production image, copy all the files and run next
+# Production image, copy all the files and run the server
 FROM base AS runner
 WORKDIR /app
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# Copy the built application
+# Astro SSR with Node adapter runs with node/bun, since we use bun:
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 
-COPY --from=builder /app/public ./public
+EXPOSE 4321
 
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
+ENV PORT=4321
+ENV HOST="0.0.0.0"
+ENV NODE_ENV=production
 
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
-
-EXPOSE 3000
-
-ENV PORT=3000
-# set hostname to localhost
-ENV HOSTNAME="0.0.0.0"
-
-CMD ["bun", "server.js"]
-
+# Start the server
+CMD ["bun", "run", "./dist/server/entry.mjs"]

@@ -1,0 +1,131 @@
+---
+import { projectsData } from '@/data/projects';
+
+const featured = projectsData.filter((p) => p.featured).slice(0, 3);
+---
+
+<section id="work" class="relative py-14 md:py-18">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12 md:mb-16">
+      <p class="text-xs uppercase tracking-[0.4em] text-white/50 mb-3">Selected Work</p>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold font-display mb-4">
+        Projects built with intention.
+      </h2>
+      <p class="text-base md:text-lg text-white/70 max-w-2xl mx-auto">
+        A curated set of full-stack and AI-powered products focused on performance, clarity, and clean interaction.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {featured.map((project, index) => (
+        <article
+          class="featured-project group rounded-3xl border border-white/10 bg-white/5 overflow-hidden transition-all hover:-translate-y-1 hover:border-primary-500/40 duration-300"
+          data-index={index}
+        >
+          <div class="relative aspect-video overflow-hidden">
+            <img
+              src={project.image}
+              alt={project.title}
+              loading="lazy"
+              class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+            />
+            <div class="absolute inset-0 bg-linear-to-t from-neutral-950/80 via-transparent to-transparent"></div>
+          </div>
+
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-3 group-hover:text-primary-300 transition-colors">
+              {project.title}
+            </h3>
+            <p class="text-white/70 text-sm leading-relaxed mb-5">
+              {project.description}
+            </p>
+
+            <div class="flex flex-wrap gap-2 mb-5">
+              {project.tags.slice(0, 4).map((tag) => (
+                <span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">
+                  {tag}
+                </span>
+              ))}
+              {project.tags.length > 4 && (
+                <span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">
+                  +{project.tags.length - 4}
+                </span>
+              )}
+            </div>
+
+            <div class="flex gap-3">
+              {project.link && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 btn-primary text-center py-2 text-sm"
+                >
+                  Live Demo
+                </a>
+              )}
+              <a
+                href={project.repositoryLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class={`${project.link ? 'flex-1' : 'w-full'} btn-secondary text-center py-2 text-sm`}
+              >
+                GitHub
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-12 text-center">
+      <a href="/projects" class="inline-flex items-center gap-2 btn-primary px-8 py-4">
+        View All Projects
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M14 5l7 7m0 0l-7 7m7-7H3"
+          />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const workObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          workObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  document.querySelectorAll('.featured-project').forEach((el) => {
+    workObserver.observe(el);
+  });
+</script>
+
+<style>
+  .featured-project {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .featured-project.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .featured-project[data-index="0"].in-view { transition-delay: 0s; }
+  .featured-project[data-index="1"].in-view { transition-delay: 0.15s; }
+  .featured-project[data-index="2"].in-view { transition-delay: 0.3s; }
+  .featured-project[data-index="3"].in-view { transition-delay: 0.45s; }
+</style>

@@ -1,0 +1,27 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Navigation from '@/components/ui/Navigation.astro';
+import HeroSection from '@/components/sections/HeroSection.astro';
+import AboutSection from '@/components/sections/AboutSection.astro';
+import WorkSection from '@/components/sections/WorkSection.astro';
+import ContactSection from '@/components/sections/ContactSection.astro';
+import StructuredData from '@/components/seo/StructuredData.astro';
+---
+
+<Layout
+  title="Euael M. Eshete - Full Stack Developer & AI Engineer"
+  description="Full Stack Developer & AI Engineer specializing in React, Next.js, Python, TypeScript, and machine learning. Building innovative web applications and AI solutions."
+>
+  <Fragment slot="head">
+    <StructuredData />
+  </Fragment>
+
+  <Navigation />
+
+  <main class="-mt-14">
+    <HeroSection />
+    <AboutSection />
+    <WorkSection />
+    <ContactSection />
+  </main>
+</Layout>

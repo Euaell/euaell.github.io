@@ -1,33 +1,33 @@
 {
-	"name": "euaell.github.io",
-	"version": "0.3.2",
-	"private": true,
-	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
-		"lint": "next lint"
-	},
-	"dependencies": {
-		"@next/third-parties": "^15.5.9",
-		"@types/nodemailer": "^6.4.21",
-		"framer-motion": "^11.18.2",
-		"lucide-react": "^0.460.0",
-		"next": "^15.5.9",
-		"nodemailer": "^7.0.11",
-		"react": "^19.2.3",
-		"react-dom": "^19.2.3"
-	},
-	"devDependencies": {
-		"@next/bundle-analyzer": "^15.5.9",
-		"@types/node": "^22.19.3",
-		"@types/react": "^19.2.7",
-		"@types/react-dom": "^19.2.3",
-		"critters": "^0.0.24",
-		"eslint": "^9.39.2",
-		"eslint-config-next": "^15.5.9",
-		"postcss": "^8.5.6",
-		"tailwindcss": "^3.4.19",
-		"typescript": "^5.9.3"
-	}
+  "name": "euaell-portfolio",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/node": "9.5.2",
+    "@astrojs/react": "4.4.2",
+    "@astrojs/sitemap": "^3.7.0",
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/node": "^22.19.7",
+    "@types/nodemailer": "^6.4.21",
+    "@types/react": "^18.3.27",
+    "@types/react-dom": "^18.3.7",
+    "astro": "5.16.11",
+    "nodemailer": "^6.10.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "prettier": "^3.8.0",
+    "prettier-plugin-astro": "^0.14.1"
+  }
 }
