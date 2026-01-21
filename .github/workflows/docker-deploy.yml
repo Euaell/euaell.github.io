@@ -2,7 +2,7 @@ name: Build and Push Docker Image to DockerHub
 
 on:
   push:
-    branches: ['migrate-to-astro', 'main']
+    branches: ['main']
   workflow_dispatch:
 
 jobs:
