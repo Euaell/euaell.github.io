@@ -12,8 +12,6 @@ const allTech = [...new Set(projectsData.flatMap((p) => p.tags))].slice(0, 12);
   title="Projects - Euael M. Eshete"
   description="Explore my portfolio of web applications, AI solutions, and software projects built with React, Next.js, Python, and more."
 >
-  <FloatingResumeButton />
-
   <main>
     <section class="pt-8 pb-16 md:pt-12 md:pb-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,33 +43,4 @@ const allTech = [...new Set(projectsData.flatMap((p) => p.tags))].slice(0, 12);
       </div>
     </section>
   </main>
-
-  <footer class="py-8 border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row items-center justify-center md:justify-between gap-4 text-xs uppercase tracking-[0.2em] text-white/50">
-        <p>
-          (c) {new Date().getFullYear()} Euael M. Eshete. All rights reserved.
-        </p>
-        <div class="flex items-center gap-6">
-          <a href="/#home" class="hover:text-white transition-colors">Home</a>
-          <a
-            href="https://github.com/euaell"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-white transition-colors"
-          >
-            GitHub
-          </a>
-          <a
-            href="https://www.linkedin.com/in/euael-eshete"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-white transition-colors"
-          >
-            LinkedIn
-          </a>
-        </div>
-      </div>
-    </div>
-  </footer>
 </Layout>
