@@ -1,3 +1,5 @@
+import profileImage from '@/assets/profile.jpg';
+
 export interface MentoringItem {
   date: string;
   title: string;
@@ -35,5 +37,5 @@ export const profileInfo = {
   bio: 'Software developer focused on high-concurrency systems, cloud-native delivery, and AI tooling that improves real products.',
   location: 'Addis Ababa, Ethiopia',
   availability: '4+ years experience',
-  image: '/images/profile.jpg',
+  image: profileImage,
 };
