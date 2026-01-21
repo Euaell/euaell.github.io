@@ -11,7 +11,7 @@ interface ContactFormData {
 function createTransporter() {
   return nodemailer.createTransport({
     host: import.meta.env.NODE_MAILER_HOST,
-    port: parseInt(import.meta.env.NODE_MAILER_PORT || '465'),
+    port: parseInt(import.meta.env.NODE_MAILER_PORT!),
     secure: true,
     auth: {
       user: import.meta.env.NODE_MAILER_USER,
