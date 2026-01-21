@@ -18,8 +18,8 @@ import { mentoringData, profileInfo } from '@/data/profile';
     </div>
 
     <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-12 items-start">
-      <div class="space-y-8">
-        <div class="glass-card rounded-3xl p-8 md:p-10 reveal lg:sticky lg:top-24">
+      <div class="space-y-8 lg:sticky lg:top-24 lg:self-start">
+        <div class="glass-card rounded-3xl p-8 md:p-10 reveal">
           <div class="flex flex-col sm:flex-row gap-6 items-start">
             <div class="h-32 w-32 rounded-2xl overflow-hidden border border-white/10 bg-white/5">
               <img src={profileInfo.image} alt={profileInfo.name} class="h-full w-full object-cover scale-110 object-[40%_0%]" loading="lazy" />
@@ -170,4 +170,5 @@ import { mentoringData, profileInfo } from '@/data/profile';
     opacity: 1;
     transform: translateY(0);
   }
+
 </style>
