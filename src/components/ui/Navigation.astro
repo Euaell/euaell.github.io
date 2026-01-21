@@ -1,5 +1,6 @@
 ---
 import MobileMenu from './MobileMenu';
+import ThemeToggle from './ThemeToggle';
 
 const navItems = [
   { name: 'Home', href: '#home' },
@@ -12,7 +13,7 @@ const navItems = [
 <!-- Desktop Navigation -->
 <nav
   id="main-nav"
-  class="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden md:block glass rounded-full px-8 py-3 transition-all duration-300 border border-white/10"
+  class="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden md:flex items-center gap-6 glass-liquid rounded-full px-6 py-2 transition-all duration-300"
 >
   <ul class="flex items-center gap-8">
     {navItems.map((item) => (
@@ -28,6 +29,8 @@ const navItems = [
       </li>
     ))}
   </ul>
+  <div class="h-6 w-px bg-white/20"></div>
+  <ThemeToggle client:load />
 </nav>
 
 <!-- Mobile Menu -->
@@ -47,11 +50,11 @@ const navItems = [
       scrolled = shouldBeScrolled;
       if (nav) {
         if (scrolled) {
-          nav.classList.remove('glass');
-          nav.classList.add('glass-strong');
+          nav.classList.remove('glass-liquid');
+          nav.classList.add('glass-liquid-strong');
         } else {
-          nav.classList.remove('glass-strong');
-          nav.classList.add('glass');
+          nav.classList.remove('glass-liquid-strong');
+          nav.classList.add('glass-liquid');
         }
       }
     }
@@ -77,13 +80,13 @@ const navItems = [
         if (linkSection === current) {
           link.classList.add('text-white');
           link.classList.remove('text-white/70');
-          if (indicator) {
+          if (indicator instanceof HTMLElement) {
             indicator.style.width = '100%';
           }
         } else {
           link.classList.remove('text-white');
           link.classList.add('text-white/70');
-          if (indicator) {
+          if (indicator instanceof HTMLElement) {
             indicator.style.width = '0';
           }
         }

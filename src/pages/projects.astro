@@ -1,6 +1,5 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Navigation from '@/components/ui/Navigation.astro';
 import FloatingResumeButton from '@/components/ui/FloatingResumeButton.astro';
 import { projectsData } from '@/data/projects';
 import ProjectFilter from '@/components/ui/ProjectFilter';
@@ -13,11 +12,10 @@ const allTech = [...new Set(projectsData.flatMap((p) => p.tags))].slice(0, 12);
   title="Projects - Euael M. Eshete"
   description="Explore my portfolio of web applications, AI solutions, and software projects built with React, Next.js, Python, and more."
 >
-  <Navigation />
   <FloatingResumeButton />
 
-  <main class="pt-24 md:pt-28">
-    <section class="py-16 md:py-20">
+  <main>
+    <section class="pt-8 pb-16 md:pt-12 md:pb-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12 md:mb-16 max-w-3xl mx-auto">
           <p class="text-xs uppercase tracking-[0.4em] text-white/50 mb-3">Archive</p>

@@ -1,36 +1,8 @@
 ---
 import { experienceData } from '@/data/experience';
 import { educationData } from '@/data/education';
-
-const stats = [
-  { label: 'Years Experience', value: 2 },
-  { label: 'Projects Completed', value: 15 },
-  { label: 'Technologies', value: 20 },
-  { label: 'Happy Clients', value: 5 },
-];
-
-const skillCategories = [
-  {
-    title: 'Frontend',
-    skills: ['React', 'Next.js', 'TypeScript', 'Vue.js', 'Tailwind CSS', 'JavaScript'],
-  },
-  {
-    title: 'Backend',
-    skills: ['Node.js', 'Express', 'FastAPI', 'Python', 'REST APIs', 'GraphQL'],
-  },
-  {
-    title: 'Database',
-    skills: ['PostgreSQL', 'MongoDB', 'Redis', 'Prisma', 'SQL'],
-  },
-  {
-    title: 'DevOps & Tools',
-    skills: ['Docker', 'Git', 'CI/CD', 'AWS', 'Vercel', 'Linux'],
-  },
-  {
-    title: 'AI & ML',
-    skills: ['OpenAI API', 'LangChain', 'Machine Learning', 'Data Analysis'],
-  },
-];
+import { skillCategories } from '@/data/skills';
+import { profileStats as stats, projectHighlights, mentoringData, profileInfo } from '@/data/profile';
 ---
 
 <section id="about" class="relative py-24 md:py-32 border-t border-white/5">
@@ -38,33 +10,53 @@ const skillCategories = [
     <div class="text-center mb-12 md:mb-16">
       <p class="text-xs uppercase tracking-[0.4em] text-white/50 mb-3">About</p>
       <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold font-display mb-4">
-        Building products with clarity and care.
+        {profileInfo.tagline}
       </h2>
       <p class="text-base md:text-lg text-white/70 max-w-2xl mx-auto">
-        Full-stack developer focused on thoughtful UX, reliable systems, and practical AI that makes apps smarter.
+        {profileInfo.description}
       </p>
     </div>
 
     <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-12 items-start">
       <div class="space-y-8">
         <div class="glass-card rounded-3xl p-8 md:p-10 reveal">
-          <h3 class="text-2xl font-semibold font-display mb-4">A quick overview</h3>
-          <p class="text-white/70 leading-relaxed mb-5">
-            I craft high-performance web apps from strategy to deployment, pairing clean engineering with modern design.
-          </p>
-          <p class="text-white/60 leading-relaxed">
-            Whether it is a landing page, dashboard, or AI workflow, I aim for elegant details, scalable architecture,
-            and a smooth user journey.
-          </p>
+          <div class="flex flex-col sm:flex-row gap-6 items-start">
+            <div class="h-32 w-32 rounded-2xl overflow-hidden border border-white/10 bg-white/5">
+              <img src={profileInfo.image} alt={profileInfo.name} class="h-full w-full object-cover" loading="lazy" />
+            </div>
+            <div>
+              <p class="text-xs uppercase tracking-[0.3em] text-white/50 mb-2">Profile</p>
+              <h3 class="text-2xl font-semibold font-display">{profileInfo.name}</h3>
+              <p class="text-white/70 leading-relaxed mt-3">
+                {profileInfo.bio}
+              </p>
+              <div class="mt-4 flex flex-wrap gap-2 text-xs uppercase tracking-[0.2em] text-white/60">
+                <span class="rounded-full border border-white/10 bg-white/5 px-3 py-2">{profileInfo.location}</span>
+                <span class="rounded-full border border-white/10 bg-white/5 px-3 py-2">{profileInfo.availability}</span>
+              </div>
+            </div>
+          </div>
 
           <div class="mt-8 grid grid-cols-2 gap-4">
             {stats.map((stat) => (
               <div class="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-center reveal" data-target={stat.value}>
                 <div class="text-3xl font-semibold text-white">
                   <span class="stat-value">0</span>
-                  <span class="text-primary-400">+</span>
+                  {stat.suffix && <span class="text-primary-400">{stat.suffix}</span>}
                 </div>
                 <p class="text-xs uppercase tracking-[0.2em] text-white/50 mt-2">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="glass-card rounded-3xl p-8 md:p-10 reveal">
+          <h3 class="text-2xl font-semibold font-display mb-6">Selected projects</h3>
+          <div class="space-y-4">
+            {projectHighlights.map((project) => (
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+                <h4 class="text-lg font-semibold">{project.name}</h4>
+                <p class="text-white/70 text-sm mt-2">{project.description}</p>
               </div>
             ))}
           </div>
@@ -142,12 +134,37 @@ const skillCategories = [
             ))}
           </div>
         </div>
+
+        <div class="glass-card rounded-3xl p-8 md:p-10 reveal">
+          <h3 class="text-xl font-semibold font-display mb-6">Teaching & mentoring</h3>
+          <div class="space-y-6">
+            {mentoringData.map((mentoring) => (
+              <div class="relative pl-6">
+                <span class="absolute left-0 top-2.5 h-2.5 w-2.5 rounded-full bg-primary-400 shadow-[0_0_12px_rgba(34,211,238,0.7)]"></span>
+                <div class="rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:-translate-y-1 hover:border-primary-500/40">
+                  <div class="text-xs uppercase tracking-[0.2em] text-primary-300">{mentoring.date}</div>
+                  <h4 class="text-lg font-semibold mt-2">{mentoring.title}</h4>
+                  <p class="text-white/70 text-sm">{mentoring.subtitle}</p>
+                  <p class="text-white/50 text-xs mt-1">{mentoring.location}</p>
+                  <ul class="mt-4 space-y-2 text-sm text-white/65">
+                    {mentoring.description.map((desc) => (
+                      <li class="flex gap-3">
+                        <span class="mt-2 h-1 w-1 rounded-full bg-primary-400"></span>
+                        <span>{desc}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<script lang="ts">
+<script is:inline>
   const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -164,8 +181,8 @@ const skillCategories = [
     revealObserver.observe(el);
   });
 
-  function animateCounter(element: HTMLElement) {
-    const target = parseInt(element.dataset.target || '0');
+  function animateCounter(element) {
+    const target = parseInt(element.dataset?.target || '0');
     const valueElement = element.querySelector('.stat-value');
     if (!valueElement) return;
 
@@ -184,7 +201,7 @@ const skillCategories = [
     }, frameDuration);
   }
 
-  document.querySelectorAll<HTMLElement>('#about [data-target]').forEach((el) => {
+  document.querySelectorAll('#about [data-target]').forEach((el) => {
     revealObserver.observe(el);
     el.addEventListener('transitionend', () => animateCounter(el), { once: true });
   });

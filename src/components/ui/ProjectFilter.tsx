@@ -33,7 +33,7 @@ export default function ProjectFilter({ projects, technologies }: Props) {
           onClick={() => setSelected('All')}
           className={`px-5 py-2 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 border ${
             selected === 'All'
-              ? 'bg-gradient-to-r from-primary-400 to-accent-400 text-neutral-950 border-transparent'
+              ? 'bg-linear-to-r from-primary-400 to-accent-400 text-neutral-950 border-transparent'
               : 'border-white/10 text-white/70 hover:text-white hover:border-primary-400/40'
           }`}
         >
@@ -45,7 +45,7 @@ export default function ProjectFilter({ projects, technologies }: Props) {
             onClick={() => setSelected(tech)}
             className={`px-5 py-2 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 border ${
               selected === tech
-                ? 'bg-gradient-to-r from-primary-400 to-accent-400 text-neutral-950 border-transparent'
+                ? 'bg-linear-to-r from-primary-400 to-accent-400 text-neutral-950 border-transparent'
                 : 'border-white/10 text-white/70 hover:text-white hover:border-primary-400/40'
             }`}
           >
@@ -63,8 +63,9 @@ export default function ProjectFilter({ projects, technologies }: Props) {
             <div className="relative aspect-video overflow-hidden">
               <img
                 src={project.image}
-                alt={project.title}
-                className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-all duration-500"
+                alt={project.title || 'Project Image'}
+                loading="lazy"
+                className="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/70 via-transparent to-transparent" />
             </div>
