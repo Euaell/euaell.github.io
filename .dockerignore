@@ -1,6 +1,5 @@
 # Dependencies
 node_modules
-bun.lockb
 
 # Build output
 dist
@@ -37,8 +36,6 @@ lerna-debug.log*
 coverage
 
 # Documentation
-README.md
-MIGRATION-COMPLETE.md
 doc/
 
 # GitHub
