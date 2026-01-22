@@ -197,6 +197,13 @@ svg {
   z-index: 1;
 }
 
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .glass-liquid,
+  .glass-liquid-strong {
+    background: rgba(15, 23, 42, 0.92);
+  }
+}
+
 .glass-card {
   background: rgba(15, 23, 42, 0.45);
   backdrop-filter: blur(16px);
