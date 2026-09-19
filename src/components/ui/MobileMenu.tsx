@@ -1,89 +1,132 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import '@/styles/mobile-menu.css';
 
 const navItems = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
   { name: 'Work', href: '#work' },
+  { name: 'About', href: '#about' },
   { name: 'Contact', href: '#contact' },
 ];
 
+const RESUME_URL = 'https://euaell.me/cv';
+
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
-  const toggleMenu = () => setIsOpen((prev) => !prev);
-
-  const handleNavClick = (href: string) => {
-    const targetId = href.replace('#', '');
-    const target = document.getElementById(targetId);
-    if (target) {
-      const offsetTop = target.offsetTop - 80;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth',
-      });
-    }
+  const close = useCallback(() => {
     setIsOpen(false);
-  };
+    // Return focus to the trigger so keyboard position is not lost.
+    triggerRef.current?.focus();
+  }, []);
+
+  // Escape closes, and Tab is kept inside the panel while it is open.
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        close();
+        return;
+      }
+
+      if (event.key !== 'Tab' || !panelRef.current) return;
+
+      const focusable = panelRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled])'
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [isOpen, close]);
+
+  // Prevent the page behind the drawer from scrolling while it is open.
+  useEffect(() => {
+    if (!isOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [isOpen]);
+
+  // Move focus into the panel when it opens.
+  useEffect(() => {
+    if (!isOpen) return;
+    const firstLink = panelRef.current?.querySelector<HTMLElement>('a[href], button');
+    firstLink?.focus();
+  }, [isOpen]);
 
   return (
     <>
       <button
-        onClick={toggleMenu}
-        className="fixed top-4 right-4 z-50 glass rounded-full p-3 transition-all duration-300 hover:glass-strong border border-white/10"
-        aria-label="Toggle menu"
+        ref={triggerRef}
+        type="button"
+        className="menu-trigger"
+        aria-label={isOpen ? 'Close menu' : 'Open menu'}
         aria-expanded={isOpen}
+        aria-controls="mobile-menu-panel"
+        onClick={() => (isOpen ? close() : setIsOpen(true))}
       >
-        <div className="w-6 h-6 flex flex-col justify-center items-center">
-          <span
-            className={`w-6 h-0.5 bg-white transition-all duration-300 ${
-              isOpen ? 'rotate-45 translate-y-1.5' : ''
-            }`}
-          />
-          <span
-            className={`w-6 h-0.5 bg-white mt-1.5 transition-all duration-300 ${
-              isOpen ? 'opacity-0' : ''
-            }`}
-          />
-          <span
-            className={`w-6 h-0.5 bg-white mt-1.5 transition-all duration-300 ${
-              isOpen ? '-rotate-45 -translate-y-1.5' : ''
-            }`}
-          />
-        </div>
+        <span className={`menu-bars${isOpen ? ' is-open' : ''}`} aria-hidden="true">
+          <span />
+          <span />
+        </span>
       </button>
 
       <div
-        className={`fixed inset-0 z-40 transition-all duration-300 ${
-          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={toggleMenu}
-      >
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-      </div>
+        className={`menu-scrim${isOpen ? ' is-open' : ''}`}
+        onClick={close}
+        aria-hidden="true"
+      />
 
       <div
-        className={`fixed top-0 right-0 h-full w-72 glass-strong z-50 transition-transform duration-300 border-l border-white/10 ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        id="mobile-menu-panel"
+        ref={panelRef}
+        className={`menu-panel${isOpen ? ' is-open' : ''}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+        // Keeps the panel out of the tab order entirely while closed.
+        inert={isOpen ? undefined : true}
       >
-        <nav className="flex flex-col items-start justify-center h-full px-8 py-20 gap-6">
-          {navItems.map((item, index) => (
-            <button
-              key={item.name}
-              onClick={() => handleNavClick(item.href)}
-              className="w-full text-left text-white/80 hover:text-white transition-colors opacity-0 animate-fadeIn"
-              style={{
-                animationDelay: `${index * 0.1}s`,
-                animationFillMode: 'forwards',
-              }}
-            >
-              <div className="flex items-center gap-4">
-                <span className="h-2.5 w-2.5 rounded-full bg-primary-400 shadow-[0_0_10px_rgba(34,211,238,0.6)]" />
-                <span className="text-lg font-medium uppercase tracking-[0.2em]">{item.name}</span>
-              </div>
-            </button>
-          ))}
+        <nav>
+          <ul className="menu-list">
+            {navItems.map((item) => (
+              <li key={item.name}>
+                <a className="menu-link" href={item.href} onClick={close}>
+                  {item.name}
+                </a>
+              </li>
+            ))}
+          </ul>
         </nav>
+
+        <div className="menu-footer">
+          <a
+            className="btn btn-secondary menu-resume"
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={close}
+          >
+            Resume
+          </a>
+        </div>
       </div>
     </>
   );

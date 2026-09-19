@@ -1,131 +1,223 @@
 ---
-import { projectsData } from '@/data/projects';
+import { featuredProjects } from '@/data/projects';
 
-const featured = projectsData.filter((p) => p.featured).slice(0, 3);
+// Featured work renders as full-width rows rather than a card grid: for three
+// substantial projects, a row gives each one a readable screenshot and room to
+// state the actual contribution. Cards would crush that into thumbnails.
 ---
 
-<section id="work" class="relative py-14 md:py-18">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12 md:mb-16">
-      <p class="text-xs uppercase tracking-[0.4em] text-white/50 mb-3">Selected Work</p>
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold font-display mb-4">
-        Projects built with intention.
-      </h2>
-      <p class="text-base md:text-lg text-white/70 max-w-2xl mx-auto">
-        A curated set of full-stack and AI-powered products focused on performance, clarity, and clean interaction.
+<section id="work" class="section">
+  <div class="container">
+    <header class="section-head">
+      <h2 class="heading">Selected work</h2>
+      <p class="lede">
+        Four systems I have designed, built, and shipped. Each one is in production
+        or under active development.
       </p>
-    </div>
+    </header>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {featured.map((project, index) => (
-        <article
-          class="featured-project group rounded-3xl border border-white/10 bg-white/5 overflow-hidden transition-all hover:-translate-y-1 hover:border-primary-500/40 duration-300"
-          data-index={index}
-        >
-          <div class="relative aspect-video overflow-hidden">
-            <img
-              src={project.image}
-              alt={project.title}
-              loading="lazy"
-              class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-            />
-            <div class="absolute inset-0 bg-linear-to-t from-neutral-950/80 via-transparent to-transparent"></div>
-          </div>
+    <div class="work-list">
+      {
+        featuredProjects.map((project, index) => (
+          <article class="work-item" data-index={index}>
+            {project.image ? (
+              <div class="work-media">
+                <img
+                  src={project.image}
+                  alt={project.imageAlt ?? ''}
+                  loading="lazy"
+                  decoding="async"
+                  width="1600"
+                  height="1000"
+                />
+              </div>
+            ) : (
+              <div class="work-media work-media--text" aria-hidden="true">
+                <span class="work-media-mark">{project.title.charAt(0)}</span>
+              </div>
+            )}
 
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-3 group-hover:text-primary-300 transition-colors">
-              {project.title}
-            </h3>
-            <p class="text-white/70 text-sm leading-relaxed mb-5">
-              {project.description}
-            </p>
+            <div class="work-body">
+              <p class="meta work-role">
+                <span>{project.role}</span>
+                <span class="sep" aria-hidden="true">·</span>
+                <span>{project.year}</span>
+              </p>
 
-            <div class="flex flex-wrap gap-2 mb-5">
-              {project.tags.slice(0, 4).map((tag) => (
-                <span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">
-                  {tag}
-                </span>
-              ))}
-              {project.tags.length > 4 && (
-                <span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">
-                  +{project.tags.length - 4}
-                </span>
-              )}
+              <h3 class="work-title">{project.title}</h3>
+
+              <p class="work-summary">{project.summary}</p>
+
+              <ul class="work-highlights">
+                {project.highlights.slice(0, 3).map((point) => (
+                  <li>{point}</li>
+                ))}
+              </ul>
+
+              <ul class="work-tags">
+                {project.tags.slice(0, 5).map((tag) => (
+                  <li class="tag">{tag}</li>
+                ))}
+              </ul>
+
+              <p class="work-links">
+                {project.link && (
+                  <a class="link" href={project.link} target="_blank" rel="noopener noreferrer">
+                    {project.linkLabel ?? 'Visit site'}
+                  </a>
+                )}
+                {project.link && project.repositoryLink && (
+                  <span class="sep" aria-hidden="true">·</span>
+                )}
+                {project.repositoryLink && (
+                  <a class="link" href={project.repositoryLink} target="_blank" rel="noopener noreferrer">
+                    Source
+                  </a>
+                )}
+              </p>
             </div>
-
-            <div class="flex gap-3">
-              {project.link && (
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex-1 btn-primary text-center py-2 text-sm"
-                >
-                  Live Demo
-                </a>
-              )}
-              <a
-                href={project.repositoryLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                class={`${project.link ? 'flex-1' : 'w-full'} btn-secondary text-center py-2 text-sm`}
-              >
-                GitHub
-              </a>
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
-
-    <div class="mt-12 text-center">
-      <a href="/projects" class="inline-flex items-center gap-2 btn-primary px-8 py-4">
-        View All Projects
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M14 5l7 7m0 0l-7 7m7-7H3"
-          />
-        </svg>
-      </a>
+          </article>
+        ))
+      }
     </div>
   </div>
 </section>
 
-<script>
-  const workObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          workObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.2 }
-  );
-
-  document.querySelectorAll('.featured-project').forEach((el) => {
-    workObserver.observe(el);
-  });
-</script>
-
 <style>
-  .featured-project {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+  .section-head {
+    max-width: 44rem;
+    margin-bottom: var(--space-7);
   }
 
-  .featured-project.in-view {
-    opacity: 1;
-    transform: translateY(0);
+  .section-head .heading {
+    margin-bottom: var(--space-3);
   }
 
-  .featured-project[data-index="0"].in-view { transition-delay: 0s; }
-  .featured-project[data-index="1"].in-view { transition-delay: 0.15s; }
-  .featured-project[data-index="2"].in-view { transition-delay: 0.3s; }
-  .featured-project[data-index="3"].in-view { transition-delay: 0.45s; }
+  .work-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .work-item {
+    display: grid;
+    gap: var(--space-5);
+    align-items: start;
+  }
+
+  .work-media img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: var(--radius-lg);
+    border: var(--border-width) solid var(--border);
+    background: var(--surface);
+  }
+
+  /* Fallback for projects with no capture available. Deliberately plain: a
+     large initial on a flat surface reads as intentional, where a stock or
+     generated stand-in would read as filler. */
+  .work-media--text {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-lg);
+    border: var(--border-width) solid var(--border);
+    background: var(--surface);
+  }
+
+  .work-media-mark {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 2rem + 6vw, 5rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--accent-mark);
+    opacity: 0.45;
+  }
+
+  .work-role {
+    margin-bottom: var(--space-2);
+  }
+
+  .work-title {
+    font-size: clamp(1.375rem, 1.1rem + 1vw, 1.75rem);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+
+  .work-summary {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-4);
+    max-width: 60ch;
+  }
+
+  .work-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+    max-width: 60ch;
+  }
+
+  .work-highlights li {
+    position: relative;
+    padding-left: var(--space-4);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  /* A short accent rule per point, not a bullet glyph. */
+  .work-highlights li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 0.5rem;
+    height: 1px;
+    background: var(--accent-mark);
+  }
+
+  .work-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .tag {
+    padding: 0.2rem 0.55rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-sm);
+  }
+
+  .work-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.9375rem;
+  }
+
+  @media (min-width: 900px) {
+    .work-item {
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: var(--space-7);
+      align-items: center;
+    }
+
+    /* Alternate which side the screenshot sits on so consecutive rows do not
+       read as a single repeated block. */
+    .work-item[data-index='1'] .work-media,
+    .work-item[data-index='3'] .work-media {
+      order: 2;
+    }
+  }
 </style>

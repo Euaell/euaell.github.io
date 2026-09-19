@@ -29,12 +29,25 @@ export const mentoringData: MentoringItem[] = [
   },
 ];
 
+/** Single source of truth for outbound identity links. */
+export const siteLinks = {
+  github: 'https://github.com/euaell',
+  linkedin: 'https://www.linkedin.com/in/euael-eshete',
+  email: 'euaelmeko@gmail.com',
+  /** External redirect; the CV itself is served from the euaell.me domain. */
+  resume: 'https://euaell.me/cv',
+  studio: 'https://zaftech.co',
+  convia: 'https://convia.zaftech.co',
+  relay: 'https://github.com/zaftec/relay',
+} as const;
+
 export const profileInfo = {
   name: 'Euael M. Eshete',
-  title: 'Software Developer',
-  tagline: 'Building reliable systems with practical AI.',
-  description: 'Full-stack software developer specializing in scalable backend platforms, cloud infrastructure, and AI-enabled products.',
-  bio: 'Software developer focused on high-concurrency systems, cloud-native delivery, and AI tooling that improves real products.',
+  title: 'Software Engineer',
+  tagline: 'I build backend systems that hold up under load, and AI products people actually use.',
+  description:
+    'Software engineer in Addis Ababa working across high-concurrency backend platforms, cloud infrastructure, and AI-native products.',
+  bio: 'Founder of ZafTech and lead engineer on production systems across PKI, conversational AI, and distributed infrastructure. Four years of shipping software that has to survive real traffic.',
   location: 'Addis Ababa, Ethiopia',
   availability: '4+ years experience',
   image: profileImage,

@@ -1,183 +1,258 @@
 ---
-import { Image } from 'astro:assets';
 import { experienceData } from '@/data/experience';
 import { educationData } from '@/data/education';
 import { skillCategories } from '@/data/skills';
 import { mentoringData, profileInfo } from '@/data/profile';
 ---
 
-<section id="about" class="relative py-16 md:py-20 border-t border-white/5">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12 md:mb-16">
-      <p class="text-xs uppercase tracking-[0.4em] text-white/50 mb-3">About</p>
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold font-display mb-4">
-        {profileInfo.tagline}
-      </h2>
-      <p class="text-base md:text-lg text-white/70 max-w-2xl mx-auto">
-        {profileInfo.description}
-      </p>
-    </div>
+<section id="about" class="section about">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">About</p>
+      <h2 class="heading">How I got here</h2>
+      <p class="lede">{profileInfo.bio}</p>
+    </header>
 
-    <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-12 items-start">
-      <div class="space-y-8 lg:sticky lg:top-24 lg:self-start">
-        <div class="glass-card rounded-3xl p-8 md:p-10 reveal">
-          <div class="flex flex-col sm:flex-row gap-6 items-start">
-            <div class="h-32 w-32 rounded-2xl overflow-hidden border border-white/10 bg-white/5">
-              <Image
-                src={profileInfo.image}
-                alt={profileInfo.name}
-                width={256}
-                height={256}
-                sizes="128px"
-                class="h-full w-full object-cover scale-110 object-[40%_0%]"
-                loading="lazy"
-              />
-            </div>
-            <div>
-              <p class="text-xs uppercase tracking-[0.3em] text-white/50 mb-2">Profile</p>
-              <h3 class="text-2xl font-semibold font-display">{profileInfo.name}</h3>
-              <p class="text-white/70 leading-relaxed mt-3">
-                {profileInfo.bio}
-              </p>
-              <div class="mt-4 flex flex-wrap gap-2 text-xs uppercase tracking-[0.2em] text-white/60">
-                <span class="rounded-full border border-white/10 bg-white/5 px-3 py-2">{profileInfo.location}</span>
-                <span class="rounded-full border border-white/10 bg-white/5 px-3 py-2">{profileInfo.availability}</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-8">
-            <p class="text-xs uppercase tracking-[0.3em] text-white/50 mb-4">Skills snapshot</p>
-            <div class="grid md:grid-cols-2 gap-6">
-              {skillCategories.map((category) => (
-                <div class="space-y-3">
-                  <div class="flex items-center gap-3">
-                    <span class="h-2 w-2 rounded-full bg-primary-400"></span>
-                    <h4 class="text-sm uppercase tracking-[0.2em] text-white/70">{category.title}</h4>
+    <div class="about-grid">
+      <div class="about-main">
+        <section class="block" aria-labelledby="experience-heading">
+          <h3 id="experience-heading" class="block-heading">Experience</h3>
+          <ol class="timeline">
+            {
+              experienceData.map((job) => (
+                <li class="entry">
+                  <div class="entry-head">
+                    <h4 class="entry-title">{job.title}</h4>
+                    <p class="entry-when">{job.date}</p>
                   </div>
-                  <div class="flex flex-wrap gap-2">
-                    {category.skills.map((skill) => (
-                      <span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70 transition hover:border-primary-400/40 hover:text-white">
-                        {skill}
-                      </span>
+                  <p class="entry-org">
+                    {job.subtitle}
+                    <span class="sep" aria-hidden="true">·</span>
+                    {job.location}
+                  </p>
+                  <ul class="entry-points">
+                    {job.description.map((line) => (
+                      <li>{line}</li>
                     ))}
+                  </ul>
+                </li>
+              ))
+            }
+          </ol>
+        </section>
+
+        <section class="block" aria-labelledby="education-heading">
+          <h3 id="education-heading" class="block-heading">Education</h3>
+          <ol class="timeline">
+            {
+              educationData.map((study) => (
+                <li class="entry">
+                  <div class="entry-head">
+                    <h4 class="entry-title">{study.title}</h4>
+                    <p class="entry-when">{study.date}</p>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+                  <p class="entry-org">
+                    {study.subtitle}
+                    <span class="sep" aria-hidden="true">·</span>
+                    {study.location}
+                  </p>
+                  <ul class="entry-points">
+                    {study.description.map((line) => (
+                      <li>{line}</li>
+                    ))}
+                  </ul>
+                </li>
+              ))
+            }
+          </ol>
+        </section>
+
+        <section class="block" aria-labelledby="mentoring-heading">
+          <h3 id="mentoring-heading" class="block-heading">Teaching and mentoring</h3>
+          <ol class="timeline">
+            {
+              mentoringData.map((item) => (
+                <li class="entry">
+                  <div class="entry-head">
+                    <h4 class="entry-title">{item.title}</h4>
+                    <p class="entry-when">{item.date}</p>
+                  </div>
+                  <p class="entry-org">
+                    {item.subtitle}
+                    <span class="sep" aria-hidden="true">·</span>
+                    {item.location}
+                  </p>
+                  <ul class="entry-points">
+                    {item.description.map((line) => (
+                      <li>{line}</li>
+                    ))}
+                  </ul>
+                </li>
+              ))
+            }
+          </ol>
+        </section>
       </div>
 
-      <div class="space-y-8">
-        <div class="glass-card rounded-3xl p-8 md:p-10 reveal">
-          <h3 class="text-xl font-semibold font-display mb-6">Experience</h3>
-          <div class="space-y-6">
-            {experienceData.map((exp) => (
-              <div class="relative pl-6">
-                <span class="absolute left-0 top-2.5 h-2.5 w-2.5 rounded-full bg-primary-400 shadow-[0_0_12px_rgba(34,211,238,0.7)]"></span>
-                <div class="rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:-translate-y-1 hover:border-primary-500/40">
-                  <div class="text-xs uppercase tracking-[0.2em] text-primary-300">{exp.date}</div>
-                  <h4 class="text-lg font-semibold mt-2">{exp.title}</h4>
-                  <p class="text-white/70 text-sm">{exp.subtitle}</p>
-                  <p class="text-white/50 text-xs mt-1">{exp.location}</p>
-                  <ul class="mt-4 space-y-2 text-sm text-white/65">
-                    {exp.description.map((desc) => (
-                      <li class="flex gap-3">
-                        <span class="mt-2 h-1 w-1 rounded-full bg-primary-400"></span>
-                        <span>{desc}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+      <aside class="about-aside" aria-labelledby="toolkit-heading">
+        <h3 id="toolkit-heading" class="block-heading">Toolkit</h3>
+        <dl class="toolkit">
+          {
+            skillCategories.map((category) => (
+              <div class="toolkit-group">
+                <dt class="toolkit-label">{category.title}</dt>
+                <dd class="toolkit-items">{category.skills.join(', ')}</dd>
               </div>
-            ))}
-          </div>
-        </div>
-
-        <div class="glass-card rounded-3xl p-8 md:p-10 reveal">
-          <h3 class="text-xl font-semibold font-display mb-6">Education</h3>
-          <div class="space-y-6">
-            {educationData.map((edu) => (
-              <div class="relative pl-6">
-                <span class="absolute left-0 top-2.5 h-2.5 w-2.5 rounded-full bg-accent-400 shadow-[0_0_12px_rgba(249,115,22,0.7)]"></span>
-                <div class="rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:-translate-y-1 hover:border-accent-500/40">
-                  <div class="text-xs uppercase tracking-[0.2em] text-accent-300">{edu.date}</div>
-                  <h4 class="text-lg font-semibold mt-2">{edu.title}</h4>
-                  <p class="text-white/70 text-sm">{edu.subtitle}</p>
-                  <p class="text-white/50 text-xs mt-1">{edu.location}</p>
-                  <ul class="mt-4 space-y-2 text-sm text-white/65">
-                    {edu.description.map((desc) => (
-                      <li class="flex gap-3">
-                        <span class="mt-2 h-1 w-1 rounded-full bg-accent-400"></span>
-                        <span>{desc}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div class="glass-card rounded-3xl p-8 md:p-10 reveal">
-          <h3 class="text-xl font-semibold font-display mb-6">Teaching & mentoring</h3>
-          <div class="space-y-6">
-            {mentoringData.map((mentoring) => (
-              <div class="relative pl-6">
-                <span class="absolute left-0 top-2.5 h-2.5 w-2.5 rounded-full bg-primary-400 shadow-[0_0_12px_rgba(34,211,238,0.7)]"></span>
-                <div class="rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:-translate-y-1 hover:border-primary-500/40">
-                  <div class="text-xs uppercase tracking-[0.2em] text-primary-300">{mentoring.date}</div>
-                  <h4 class="text-lg font-semibold mt-2">{mentoring.title}</h4>
-                  <p class="text-white/70 text-sm">{mentoring.subtitle}</p>
-                  <p class="text-white/50 text-xs mt-1">{mentoring.location}</p>
-                  <ul class="mt-4 space-y-2 text-sm text-white/65">
-                    {mentoring.description.map((desc) => (
-                      <li class="flex gap-3">
-                        <span class="mt-2 h-1 w-1 rounded-full bg-primary-400"></span>
-                        <span>{desc}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+            ))
+          }
+        </dl>
+      </aside>
     </div>
   </div>
 </section>
 
-<script is:inline>
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.2 }
-  );
-
-  document.querySelectorAll('#about .reveal').forEach((el) => {
-    revealObserver.observe(el);
-  });
-
-</script>
-
 <style>
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+  .section-head {
+    max-width: 44rem;
+    margin-bottom: var(--space-7);
   }
 
-  .reveal.in-view {
-    opacity: 1;
-    transform: translateY(0);
+  .section-head .eyebrow {
+    display: block;
+    margin-bottom: var(--space-2);
   }
 
+  .section-head .heading {
+    margin-bottom: var(--space-3);
+  }
+
+  .about-grid {
+    display: grid;
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .about-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .block-heading {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-bottom: var(--space-3);
+    border-bottom: var(--border-width) solid var(--border);
+    margin-bottom: var(--space-5);
+  }
+
+  /* Entries are separated by rules rather than enclosed in cards, so long
+     timelines stay calm and the eye follows a single column. */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .entry {
+    padding-block: var(--space-5);
+    border-bottom: var(--border-width) solid var(--border);
+  }
+
+  .entry:first-child {
+    padding-top: 0;
+  }
+
+  .entry:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .entry-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-1) var(--space-4);
+  }
+
+  .entry-title {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .entry-when {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .entry-org {
+    margin-top: var(--space-1);
+    font-size: 0.875rem;
+    color: var(--accent-text);
+  }
+
+  .entry-points {
+    margin-top: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: 62ch;
+  }
+
+  .entry-points li {
+    position: relative;
+    padding-left: var(--space-4);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .entry-points li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 0.5rem;
+    height: 1px;
+    background: var(--accent-mark);
+  }
+
+  .toolkit {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin: 0;
+  }
+
+  .toolkit-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: var(--space-1);
+  }
+
+  .toolkit-items {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  @media (min-width: 900px) {
+    .about-grid {
+      grid-template-columns: minmax(0, 1fr) 15rem;
+      gap: var(--space-8);
+    }
+
+    .about-aside {
+      position: sticky;
+      top: calc(68px + var(--space-6));
+    }
+  }
 </style>

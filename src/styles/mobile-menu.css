@@ -1,0 +1,140 @@
+/* Mobile drawer. Plain stylesheet because Astro scoped styles do not reach
+   React islands. All colour comes from semantic tokens. */
+
+.menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: transparent;
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition:
+    border-color var(--dur) var(--ease),
+    background-color var(--dur) var(--ease);
+}
+
+.menu-trigger:hover {
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+
+.menu-bars {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 12px;
+}
+
+.menu-bars span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--text);
+  border-radius: 1px;
+  transition:
+    transform var(--dur) var(--ease),
+    opacity var(--dur) var(--ease),
+    top var(--dur) var(--ease);
+}
+
+.menu-bars span:first-child {
+  top: 2px;
+}
+
+.menu-bars span:last-child {
+  top: 8px;
+}
+
+/* Two bars cross into an X rather than the usual three-bar morph. */
+.menu-bars.is-open span:first-child {
+  top: 5px;
+  transform: rotate(45deg);
+}
+
+.menu-bars.is-open span:last-child {
+  top: 5px;
+  transform: rotate(-45deg);
+}
+
+.menu-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: oklch(17.97% 0.004 308.19 / 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur) var(--ease);
+}
+
+.menu-scrim.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: min(20rem, 85vw);
+  height: 100dvh;
+  padding: var(--space-7) var(--space-5) var(--space-6);
+  background: var(--bg);
+  border-left: var(--border-width) solid var(--border);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition:
+    transform var(--dur) var(--ease),
+    visibility var(--dur) var(--ease);
+}
+
+.menu-panel.is-open {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+
+.menu-link {
+  display: block;
+  padding-block: var(--space-3);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--text);
+  border-bottom: var(--border-width) solid var(--border);
+  transition: color var(--dur) var(--ease);
+}
+
+.menu-link:hover {
+  color: var(--accent-text);
+}
+
+.menu-footer {
+  padding-top: var(--space-5);
+}
+
+.menu-resume {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-panel {
+    transition: none;
+  }
+}
