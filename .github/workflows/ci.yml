@@ -46,7 +46,7 @@ jobs:
           set -euo pipefail
           docker run --detach --name portfolio-ci --publish 127.0.0.1:4321:4321 portfolio:ci
           trap 'docker logs portfolio-ci; docker rm --force portfolio-ci' EXIT
-          curl --fail --silent --show-error --retry 20 --retry-connrefused --retry-delay 1 http://127.0.0.1:4321/ > /dev/null
+          curl --fail --silent --show-error --retry 20 --retry-all-errors --retry-delay 1 --max-time 5 --retry-max-time 45 http://127.0.0.1:4321/ > /dev/null
           for path in projects projects/pki-trust-manager sitemap-index.xml sitemap-0.xml robots.txt; do
             curl --fail --silent --show-error "http://127.0.0.1:4321/$path" > /dev/null
           done
