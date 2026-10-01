@@ -49,5 +49,25 @@ project_content.txt
 # ide
 .idea/
 
+# design staging payloads (see doc/staging/README.md)
+# Everything inside these folders is ignored; the folders persist in a
+# working tree once created. Use `git add -f <path>` to track a specific
+# file deliberately.
+doc/staging/colors/*
+doc/staging/images/*
+doc/staging/resume/*
+doc/staging/references/*
+doc/staging/notes/*
+doc/staging/tools/*
+
 *.
 !bun.lock
+
+# Impeccable design skill: development-only state (surface briefs, mocks, review shots)
+.impeccable/*
+!.impeccable/design.json
+
+# Design-exploration surface for the open design artifacts in doc/staging/prototypes/.
+# Authored here, served from a transient src/pages/prototypes/ route during review,
+# deleted when a direction is promoted. Never part of the site build.
+src/prototypes/

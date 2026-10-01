@@ -1,6 +1,5 @@
 ---
-import FloatingResumeButton from '@/components/ui/FloatingResumeButton.astro';
-import '@/styles/global.css';
+import "@/styles/global.css";
 
 interface Props {
   title?: string;
@@ -10,39 +9,52 @@ interface Props {
 }
 
 const {
-  title = 'Euael M. Eshete - Full Stack Developer & AI Engineer',
-  description = 'Full Stack Developer & AI Engineer specializing in React, Next.js, Python, TypeScript, and machine learning. Building innovative web applications and AI solutions.',
-  ogImage = 'https://portfolio.euaell.me/og-image.png',
+  title = "Euael M. Eshete · Software Engineer",
+  description = "Software engineer building secure multi-tenant systems and AI products. PKI and certificate infrastructure at Securetron; founder of ZafTech.",
+  ogImage = "https://portfolio.euaell.me/og-image.png",
   noIndex = false,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = new URL(
+  Astro.url.pathname.replace(/\/+$/, "") || "/",
+  Astro.site,
+);
+const year = new Date().getFullYear();
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Primary Meta Tags -->
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="author" content="Euael M. Eshete" />
-    <meta name="keywords" content="Full Stack Developer, AI Engineer, React, Next.js, TypeScript, Python, FastAPI, Machine Learning, Web Development, Software Engineer" />
     <link rel="canonical" href={canonicalURL} />
+    <meta
+      name="robots"
+      content={noIndex
+        ? "noindex, follow"
+        : "index, follow, max-image-preview:large"}
+    />
 
-    {noIndex && <meta name="robots" content="noindex, nofollow" />}
-
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:site_name" content="Euael M. Eshete Portfolio" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta
+      property="og:image:alt"
+      content="Euael M. Eshete — software engineer at Securetron and founder of ZafTech"
+    />
+    <meta property="og:site_name" content="Euael M. Eshete" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter -->
@@ -51,73 +63,143 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    <meta name="twitter:creator" content="@euaell" />
-
-    <!-- Favicons -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#0b0f14" />
-
-    <!-- Preconnect to Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
-      rel="stylesheet"
+    <meta
+      name="twitter:image:alt"
+      content="Euael M. Eshete — software engineer at Securetron and founder of ZafTech"
     />
 
-    <!-- Additional head content slot -->
+    <!-- Only these two icon assets exist; the previous markup referenced five
+         files that were never in the repo and 404'd on every load. -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/icons/Logo.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Match the browser chrome to the system theme. -->
+    <meta
+      name="theme-color"
+      content="#f7f8f5"
+      media="(prefers-color-scheme: light)"
+    /><meta
+      name="theme-color"
+      content="#181c19"
+      media="(prefers-color-scheme: dark)"
+    />
+
+    <!-- Self-hosted. The variable upright covers every heading on first paint,
+         so it is worth preloading; the italic is not. -->
+    <link
+      rel="preload"
+      href="/fonts/archivo/archivo-latin-wght.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
     <slot name="head" />
   </head>
 
   <body>
-    <FloatingResumeButton />
-    <!-- Main content slot -->
+    <a href="#main" class="skip-link">Skip to content</a>
+
     <slot />
 
-    <footer class="py-8 border-t border-white/10">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row items-center justify-center md:justify-between gap-4 text-xs uppercase tracking-[0.2em] text-white/50">
-          <p>
-            &copy; {new Date().getFullYear()} Euael M. Eshete. All rights reserved.
-          </p>
-          <div class="flex items-center gap-6">
-            <a href="/#home" class="hover:text-white transition-colors">Home</a>
-            <a
-              href="https://github.com/euaell"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="hover:text-white transition-colors"
-            >
-              GitHub
-            </a>
-            <a
-              href="https://www.linkedin.com/in/euael-eshete"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="hover:text-white transition-colors"
-            >
-              LinkedIn
-            </a>
-          </div>
-        </div>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="meta">&copy; {year} Euael M. Eshete</p>
+        <nav aria-label="Elsewhere">
+          <ul class="footer-links">
+            <li>
+              <a
+                class="footer-link"
+                href="https://github.com/euaell"
+                target="_blank"
+                rel="noopener noreferrer">GitHub</a
+              >
+            </li>
+            <li>
+              <a
+                class="footer-link"
+                href="https://www.linkedin.com/in/euael-eshete"
+                target="_blank"
+                rel="noopener noreferrer">LinkedIn</a
+              >
+            </li>
+            <li>
+              <a class="footer-link" href="mailto:euaelmeko@gmail.com">Email</a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </footer>
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZW3GEJSTM"></script>
+    <script
+      is:inline
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-QZW3GEJSTM"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-QZW3GEJSTM', {
-        page_path: window.location.pathname,
-      });
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-QZW3GEJSTM", { page_path: window.location.pathname });
     </script>
   </body>
 </html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    left: var(--space-4);
+    top: -3rem;
+    z-index: 100;
+    padding: var(--space-2) var(--space-4);
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: top var(--dur) var(--ease);
+  }
+
+  .skip-link:focus-visible {
+    top: var(--space-4);
+  }
+
+  .site-footer {
+    border-top: var(--border-width) solid var(--border);
+    padding-block: 2rem;
+    margin-top: 0;
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: flex-start;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+  }
+
+  .footer-link {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    transition: color var(--dur) var(--ease);
+  }
+
+  .footer-link:hover {
+    color: var(--accent-text);
+  }
+
+  @media (min-width: 640px) {
+    .footer-inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+</style>

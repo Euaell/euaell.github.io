@@ -5,27 +5,42 @@ export interface SkillCategory {
 
 export const skillCategories: SkillCategory[] = [
   {
-    title: 'Programming',
-    skills: ['Python', 'C#/.NET', 'SQL', 'JavaScript/TypeScript', 'Go'],
+    title: "Programming",
+    skills: ["C#/.NET", "Python", "Go", "TypeScript", "SQL"],
   },
   {
-    title: 'Backend',
-    skills: ['FastAPI', 'LiteStar', 'ASP.NET Core', 'gRPC', 'REST APIs', 'Microservices'],
+    title: "Backend",
+    skills: [
+      "ASP.NET Core",
+      "EF Core",
+      "FastAPI",
+      "LiteStar",
+      "REST APIs",
+      "HTMX",
+      "Alpine.js",
+    ],
   },
   {
-    title: 'AI Engineering',
-    skills: ['RAG Architectures', 'Vector Embeddings', 'LLM Tooling', 'Prompt Engineering'],
+    title: "AI Engineering",
+    skills: ["MCP", "Schema-constrained LLM workflows", "RAG", "Vector search"],
   },
   {
-    title: 'Infrastructure',
-    skills: ['Docker', 'GCP Cloud Run', 'GCS', 'CI/CD (GitHub Actions)', 'Linux', 'Kubernetes (Learning)'],
+    title: "Infrastructure",
+    skills: [
+      "Azure Pipelines",
+      "Bicep",
+      "Docker",
+      "GitHub Actions",
+      "GCP Cloud Run",
+      "Linux",
+    ],
   },
   {
-    title: 'Data & Storage',
-    skills: ['PostgreSQL', 'Redis', 'MongoDB', 'Vector Databases'],
+    title: "Data & Storage",
+    skills: ["PostgreSQL", "SQL Server", "Redis", "MongoDB", "pgvector"],
   },
   {
-    title: 'Languages',
-    skills: ['English (Proficient)', 'Amharic (Native)', 'Deutsch (Beginner)'],
+    title: "Languages",
+    skills: ["English (Proficient)", "Amharic (Native)", "Deutsch (Beginner)"],
   },
 ];

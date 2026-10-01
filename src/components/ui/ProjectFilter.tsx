@@ -1,129 +1,173 @@
-import { useState } from 'react';
+import { useMemo, useState } from "react";
+import "@/styles/projects-filter.css";
 
-export interface Project {
+export interface ProjectCard {
+  slug: string;
   title: string;
+  summary: string;
   description: string;
-  image: string;
-  link?: string;
-  repositoryLink: string;
+  role: string;
+  year: string;
+  highlights: string[];
   tags: string[];
-  responsibilities: string[];
+  image: string | null;
+  imageAlt?: string;
+  link?: string;
+  repositoryLink?: string;
   featured: boolean;
 }
-
-interface Props {
-  projects: Project[];
-  technologies: string[];
-}
-
-export default function ProjectFilter({ projects, technologies }: Props) {
-  const [selected, setSelected] = useState('All');
-
+export default function ProjectFilter({
+  projects,
+}: {
+  projects: ProjectCard[];
+}) {
+  const [selected, setSelected] = useState("All");
+  const technologies = useMemo(
+    () => [...new Set(projects.flatMap((project) => project.tags))].sort(),
+    [projects],
+  );
   const filtered =
-    selected === 'All'
+    selected === "All"
       ? projects
-      : projects.filter((p) =>
-          p.tags.some((tag) => tag.toLowerCase().includes(selected.toLowerCase()))
-        );
-
+      : projects.filter((project) => project.tags.includes(selected));
   return (
-    <div className="project-filter">
-      <div className="flex flex-wrap justify-center gap-3 mb-12">
-        <button
-          onClick={() => setSelected('All')}
-          className={`px-5 py-2 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 border ${
-            selected === 'All'
-              ? 'bg-linear-to-r from-primary-400 to-accent-400 text-neutral-950 border-transparent'
-              : 'border-white/10 text-white/70 hover:text-white hover:border-primary-400/40'
-          }`}
-        >
-          All
-        </button>
-        {technologies.map((tech) => (
-          <button
-            key={tech}
-            onClick={() => setSelected(tech)}
-            className={`px-5 py-2 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 border ${
-              selected === tech
-                ? 'bg-linear-to-r from-primary-400 to-accent-400 text-neutral-950 border-transparent'
-                : 'border-white/10 text-white/70 hover:text-white hover:border-primary-400/40'
-            }`}
+    <div>
+      <div className="filter-bar">
+        <p className="filter-status" aria-live="polite">
+          {filtered.length} {filtered.length === 1 ? "project" : "projects"}
+          {selected !== "All" ? " · " + selected : ""}
+        </p>
+        <div className="filter-control">
+          <label htmlFor="technology">Technology</label>
+          <select
+            id="technology"
+            value={selected}
+            onChange={(event) => setSelected(event.target.value)}
           >
-            {tech}
-          </button>
-        ))}
-      </div>
-
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filtered.map((project) => (
-          <article
-            key={project.title}
-            className="rounded-3xl border border-white/10 bg-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-primary-500/40"
-          >
-            <div className="relative aspect-video overflow-hidden">
-              <img
-                src={project.image}
-                alt={project.title || 'Project Image'}
-                loading="lazy"
-                className="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-500"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-neutral-950/70 via-transparent to-transparent" />
-            </div>
-
-            <div className="p-6">
-              <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-              <p className="text-white/70 text-sm leading-relaxed mb-4">
-                {project.description}
-              </p>
-
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tags.slice(0, 3).map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70"
-                  >
-                    {tag}
-                  </span>
-                ))}
-                {project.tags.length > 3 && (
-                  <span className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">
-                    +{project.tags.length - 3}
-                  </span>
-                )}
-              </div>
-
-              <div className="flex gap-3">
-                {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 btn-primary text-center py-2 text-sm"
-                  >
-                    Live Demo
-                  </a>
-                )}
-                <a
-                  href={project.repositoryLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${project.link ? 'flex-1' : 'w-full'} btn-secondary text-center py-2 text-sm`}
-                >
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      {filtered.length === 0 && (
-        <div className="text-center py-20">
-          <p className="text-lg text-white/60">
-            No projects found for this technology.
-          </p>
+            <option value="All">All technologies</option>
+            {technologies.map((tech) => (
+              <option key={tech} value={tech}>
+                {tech}
+              </option>
+            ))}
+          </select>
         </div>
-      )}
+      </div>
+      <ul className="project-grid">
+        {filtered.map((project) => (
+          <li key={project.slug} id={project.slug}>
+            <article className="project-card">
+              <header className="project-heading">
+                <h2>
+                  <a href={"/projects/" + project.slug}>{project.title}</a>
+                </h2>
+                <p className="project-meta">
+                  {project.role} · {project.year}
+                </p>
+                {project.image && (
+                  <figure>
+                    <img
+                      className="project-thumb"
+                      src={project.image}
+                      alt={project.imageAlt ?? ""}
+                      loading="lazy"
+                      decoding="async"
+                      width="1500"
+                      height="1000"
+                    />
+                    {project.slug === "mizan" && (
+                      <figcaption className="project-image-caption">
+                        Shown with demo data.
+                      </figcaption>
+                    )}
+                  </figure>
+                )}
+              </header>
+              <div className="project-body">
+                <p className="project-summary">{project.summary}</p>
+                <ul className="project-tags">
+                  {project.tags.map((tag) => (
+                    <li key={tag}>{tag}</li>
+                  ))}
+                </ul>
+                <details className="project-details">
+                  <summary>
+                    Engineering details{" "}
+                    <span aria-hidden="true">
+                      <svg
+                        className="ui-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        aria-hidden="true"
+                      >
+                        <path d="M12 5v14M5 12h14" />
+                      </svg>
+                    </span>
+                  </summary>
+                  <div>
+                    <p>{project.description}</p>
+                    <ul>
+                      {project.highlights.map((highlight) => (
+                        <li key={highlight}>{highlight}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </details>
+                {(project.link || project.repositoryLink) && (
+                  <p className="project-links">
+                    {project.link && (
+                      <a
+                        className="text-link"
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Visit project{" "}
+                        <span aria-hidden="true">
+                          <svg
+                            className="ui-icon"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            aria-hidden="true"
+                          >
+                            <path d="M5 19 19 5M5 5h14v14" />
+                          </svg>
+                        </span>
+                      </a>
+                    )}
+                    {project.repositoryLink && (
+                      <a
+                        className="text-link"
+                        href={project.repositoryLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Source code{" "}
+                        <span aria-hidden="true">
+                          <svg
+                            className="ui-icon"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            aria-hidden="true"
+                          >
+                            <path d="M5 19 19 5M5 5h14v14" />
+                          </svg>
+                        </span>
+                      </a>
+                    )}
+                  </p>
+                )}
+              </div>
+            </article>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
 Sitemap: https://portfolio.euaell.me/sitemap-index.xml

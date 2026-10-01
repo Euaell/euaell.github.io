@@ -1,50 +1,82 @@
 ---
-// Floating Resume Button Component
+import { siteLinks } from '@/data/profile';
+
+// Persistent resume affordance. The CV is served from the euaell.me domain, so
+// this is an external redirect rather than a file in this repo.
 ---
 
 <a
-  href="https://euaell.me/cv"
+  id="resume-button"
+  class="resume-button fade-in fade-in-delay-3"
+  href={siteLinks.resume}
   target="_blank"
   rel="noopener noreferrer"
-  id="floating-resume-btn"
-  class="fixed bottom-6 right-6 z-50 rounded-full p-3 w-fit transition-all duration-300 shadow-lg hover:shadow-primary-500/25 group"
-  aria-label="View Resume"
+  aria-label="Open resume (opens euaell.me in a new tab)"
 >
-  <div class="flex items-center">
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-      />
-    </svg>
-    <span class="resume-text hidden md:block text-xs uppercase tracking-[0.15em] font-medium">
-      Resume
-    </span>
-  </div>
+  <svg
+    class="resume-icon"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.75"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+    <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z" />
+    <path d="M9 13h6M9 17h4" />
+  </svg>
+  <span class="resume-label">Resume</span>
 </a>
 
 <style>
-  #floating-resume-btn {
-    background: linear-gradient(135deg, var(--color-primary-500), var(--color-accent-500));
-    color: #0b0f14;
+  /* Hidden on small screens: at 390px the button overlaps the hero's own
+     calls to action, and the drawer already exposes a Resume link, so the
+     affordance is not lost. */
+  .resume-button {
+    display: none;
   }
 
-  #floating-resume-btn:hover {
-    background: linear-gradient(135deg, var(--color-primary-400), var(--color-accent-400));
-    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
+  @media (min-width: 700px) {
+    .resume-button {
+      position: fixed;
+      right: var(--space-5);
+      bottom: var(--space-5);
+      z-index: 40;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 0.6rem 0.9rem;
+      background: oklch(14.5% 0.006 285 / 0.85);
+      backdrop-filter: blur(12px);
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-pill);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      line-height: 1;
+      box-shadow: var(--shadow-raised);
+      transition:
+        box-shadow var(--dur) var(--ease),
+        border-color var(--dur) var(--ease),
+        transform var(--dur) var(--ease);
+    }
+
+    .resume-button:hover {
+      box-shadow: 0 0 20px var(--accent-glow);
+      border-color: var(--accent-mark);
+    }
+
+    .resume-button:active {
+      transform: translateY(1px);
+    }
   }
 
-  .resume-text {
-    max-width: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-width 0.3s ease, opacity 0.3s ease;
-  }
-
-  #floating-resume-btn:hover .resume-text {
-    max-width: 100px;
-    opacity: 1;
+  .resume-icon {
+    width: 1rem;
+    height: 1rem;
+    flex: none;
   }
 </style>

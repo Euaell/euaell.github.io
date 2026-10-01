@@ -1,0 +1,107 @@
+---
+import { projectsData } from "@/data/projects";
+const slugs = ["rms", "project-life-manager", "afrochat"];
+const work = slugs.map(
+  (slug) => projectsData.find((project) => project.slug === slug)!,
+);
+const summaries: Record<string, string> = {
+  rms: "Tenant-scoped restaurant operations, table sessions, and payment lifecycles.",
+  "project-life-manager":
+    "PostgreSQL row-level security, idempotent commands, and quarantined file processing.",
+  afrochat:
+    "Async messaging, retrieval-augmented generation, and a migration to Cloud Run.",
+};
+---
+
+<div class="further-work">
+  <h3>More engineering work</h3>
+  <div class="further-list">
+    {
+      work.map((project) => (
+        <a href={"/projects/" + project.slug} class="further-item">
+          <div>
+            <>
+              <h4>{project.title}</h4>
+              <p class="further-meta">
+                {project.role} · {project.year}
+              </p>
+            </>
+          </div>
+          <p class="further-summary">{summaries[project.slug]}</p>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
+            <path d="M5 19 19 5M5 5h14v14" />
+          </svg>
+        </a>
+      ))
+    }
+  </div>
+</div>
+<style>
+  .further-work {
+    margin-top: 5rem;
+  }
+  .further-work > h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+  .further-list {
+    border-top: 1px solid var(--border);
+  }
+  .further-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) 24px;
+    gap: 2rem;
+    align-items: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .further-item h4 {
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+  }
+  .further-meta {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+  }
+  .further-summary {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    max-width: 52ch;
+  }
+  .further-item svg {
+    width: 23px;
+    transition: transform var(--dur) var(--ease);
+  }
+  .further-item:hover svg {
+    transform: translate(2px, -2px);
+  }
+  .further-item:hover h4 {
+    color: var(--accent-text);
+  }
+  @media (max-width: 650px) {
+    .further-work {
+      margin-top: 3.5rem;
+    }
+    .further-item {
+      grid-template-columns: 1fr 24px;
+      gap: 1rem;
+      padding: 1.5rem 0;
+    }
+    .further-summary {
+      grid-column: 1;
+    }
+    .further-item svg {
+      grid-column: 2;
+      grid-row: 1;
+    }
+  }
+</style>

@@ -1,68 +1,195 @@
 ---
-import MobileMenu from './MobileMenu';
-
+import MobileMenu from "./MobileMenu";
+import { siteLinks } from "@/data/profile";
 const navItems = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Work', href: '#work' },
-  { name: 'Contact', href: '#contact' },
+  { name: "Work", id: "work" },
+  { name: "About", id: "about" },
+  { name: "Contact", id: "contact" },
 ];
+const isHome = Astro.url.pathname === "/";
 ---
 
-<!-- Desktop Navigation -->
-<nav
-  id="main-nav"
-  class="glass-liquid-strong rounded-full px-6 py-3 transition-all duration-300 sticky top-4 left-1/2 -translate-x-1/2 z-50 hidden md:flex w-fit"
->
-  <ul class="flex items-center gap-8">
-    {navItems.map((item) => (
-      <li>
-        <a
-          href={item.href}
-          class="nav-link text-xs uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors relative py-1"
-          data-section={item.href.replace('#', '')}
-        >
-          {item.name}
-          <span class="absolute -bottom-1 left-0 h-0.5 w-0 bg-linear-to-r from-primary-400 to-accent-400 transition-all duration-300 nav-indicator"></span>
-        </a>
-      </li>
-    ))}
-  </ul>
-</nav>
-
-<!-- Mobile Menu -->
-<div class="md:hidden">
-  <MobileMenu client:load />
-</div>
-
-<script is:inline>
-  const sections = ['home', 'about', 'work', 'contact'];
-  const navLinks = document.querySelectorAll('.nav-link');
-
-  function updateActiveLink() {
-    let current = sections.find((section) => {
-      const el = document.getElementById(section);
-      if (!el) return false;
-      const rect = el.getBoundingClientRect();
-      return rect.top <= 120 && rect.bottom >= 120;
-    });
-
-    navLinks.forEach((link) => {
-      const isActive = link.dataset.section === current;
-      link.classList.toggle('active', Boolean(isActive));
-    });
+<header id="site-header" class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="euaell. — Home"
+      >euaell<span aria-hidden="true">.</span></a
+    >
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <ul class="nav-list">
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                class="nav-link"
+                href={(isHome ? "#" : "/#") + item.id}
+                data-section={item.id}
+              >
+                {item.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a
+        class="nav-resume"
+        href={siteLinks.resume}
+        target="_blank"
+        rel="noopener noreferrer"
+        >Resume <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg
+        ></a
+      >
+    </nav>
+    <div class="mobile-only"><MobileMenu client:load /></div>
+  </div>
+</header>
+<script>
+  const header = document.getElementById("site-header");
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>(".nav-link"),
+  );
+  let pending = false;
+  function update() {
+    pending = false;
+    header?.classList.toggle("is-scrolled", window.scrollY > 10);
+    let active = "";
+    for (const link of links) {
+      const section = document.getElementById(link.dataset.section ?? "");
+      if (section && section.getBoundingClientRect().top <= 150)
+        active = section.id;
+    }
+    for (const link of links) {
+      const current = link.dataset.section === active;
+      link.classList.toggle("is-active", current);
+      if (current) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    }
   }
-
-  window.addEventListener('scroll', updateActiveLink, { passive: true });
-  window.addEventListener('load', updateActiveLink);
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!pending) {
+        pending = true;
+        requestAnimationFrame(update);
+      }
+    },
+    { passive: true },
+  );
+  update();
 </script>
-
 <style>
-  .nav-link.active {
-    color: white;
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur) var(--ease);
   }
-
-  .nav-link.active .nav-indicator {
-    width: 100%;
+  .site-header.is-scrolled {
+    border-bottom-color: var(--border);
+  }
+  .site-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--bg);
+  }
+  @supports (backdrop-filter: blur(16px)) {
+    .site-header.is-scrolled::before {
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
+      backdrop-filter: blur(16px) saturate(125%);
+      -webkit-backdrop-filter: blur(16px) saturate(125%);
+    }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .site-header.is-scrolled::before {
+      background: var(--bg);
+      backdrop-filter: none;
+    }
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 84px;
+    gap: 2rem;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: baseline;
+    padding-block: 0.4rem;
+    font-size: 1.6rem;
+    font-weight: 650;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .brand span {
+    color: var(--accent-mark);
+  }
+  .desktop-nav,
+  .nav-list {
+    display: flex;
+    align-items: center;
+  }
+  .desktop-nav {
+    gap: 2.6rem;
+  }
+  .nav-list {
+    gap: 2rem;
+  }
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 6px;
+  }
+  .nav-link:hover,
+  .nav-link.is-active {
+    color: var(--text);
+    text-decoration-line: underline;
+    text-decoration-color: var(--accent-mark);
+  }
+  .nav-resume {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    font-size: 0.8125rem;
+    padding: 0.3rem 0 0.3rem 2rem;
+    border-left: 1px solid var(--border);
+  }
+  .nav-resume svg {
+    width: 15px;
+    height: 15px;
+  }
+  .nav-resume:hover {
+    color: var(--accent-text);
+  }
+  .mobile-only {
+    display: none;
+  }
+  @media (max-width: 700px) {
+    .header-inner {
+      min-height: 72px;
+    }
+    .desktop-nav {
+      display: none;
+    }
+    .mobile-only {
+      display: block;
+    }
+    .brand {
+      font-size: 1.4rem;
+    }
   }
 </style>

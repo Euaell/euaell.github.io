@@ -1,0 +1,250 @@
+---
+import { projectsData } from "@/data/projects";
+const project = projectsData.find(
+  (project) => project.slug === "pki-trust-manager",
+)!;
+---
+
+<article class="engineering-feature" aria-labelledby="pki-heading">
+  <div class="engineering-stage">
+    <div class="engineering-copy">
+      <h3 id="pki-heading">Trust, built into<br />the system.</h3>
+      <p class="engineering-client">PKI Trust Manager · Securetron</p>
+      <p>
+        Licensing that works offline. Boundaries between tenants. Certificate
+        providers that share one set of flows.
+      </p>
+      <a href="/projects/pki-trust-manager" class="engineering-link"
+        >Inside PKI Trust Manager <span aria-hidden="true"
+          ><svg
+            class="ui-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg
+          ></span
+        ></a
+      >
+    </div>
+    <figure class="engineering-figure">
+      <svg
+        viewBox="0 0 520 300"
+        role="img"
+        aria-label="Conceptual overview of organisation-scoped licensing and certificate operations, with DigiCert and EJBCA provider integrations"
+      >
+        <rect
+          x="28"
+          y="20"
+          width="464"
+          height="192"
+          rx="8"
+          fill="none"
+          stroke="currentColor"
+          stroke-opacity=".35"
+          stroke-dasharray="4 5"></rect>
+        <text x="50" y="51" class="diagram-label">Organisation scope</text>
+        <path
+          d="M252 123h29m-8-5 8 5-8 5M371 170v66H149v-24m222 24v14"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"></path>
+        <rect x="50" y="82" width="202" height="88" rx="6" fill="#f0f3f7"
+        ></rect>
+        <rect x="282" y="82" width="188" height="88" rx="6" fill="#f0f3f7"
+        ></rect>
+        <g
+          fill="#26364c"
+          font-family="Archivo, sans-serif"
+          font-size="17"
+          font-weight="500"
+          ><text x="71" y="116">License policy</text><text x="303" y="116"
+            >Certificate lifecycle</text
+          ></g
+        >
+        <g fill="#586578" font-family="Archivo, sans-serif" font-size="12"
+          ><text x="71" y="145">Activation · Limits · Grace</text><text
+            x="303"
+            y="145">Orders · Providers · Audit</text
+          ></g
+        >
+        <path
+          d="M149 236v14"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"></path>
+        <rect
+          x="72"
+          y="250"
+          width="154"
+          height="38"
+          rx="19"
+          fill="none"
+          stroke="currentColor"
+          stroke-opacity=".4"></rect><rect
+          x="294"
+          y="250"
+          width="154"
+          height="38"
+          rx="19"
+          fill="none"
+          stroke="currentColor"
+          stroke-opacity=".4"></rect>
+        <g
+          fill="currentColor"
+          font-family="Archivo, sans-serif"
+          font-size="14"
+          text-anchor="middle"
+          ><text x="149" y="274">DigiCert</text><text x="371" y="274"
+            >EJBCA</text
+          ></g
+        >
+      </svg>
+      <figcaption>
+        System overview · Software Developer, 2025–present
+      </figcaption>
+    </figure>
+  </div>
+  <details class="engineering-details">
+    <summary
+      >Engineering contributions <span aria-hidden="true"
+        ><svg
+          class="ui-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg
+        ></span
+      ></summary
+    >
+    <div class="engineering-details-body">
+      <p>{project.description}</p><ul>
+        {project.highlights.map((highlight) => <li>{highlight}</li>)}
+      </ul>
+    </div>
+  </details>
+</article>
+<style>
+  .engineering-feature {
+    margin-bottom: 3.75rem;
+  }
+  .engineering-stage {
+    display: grid;
+    grid-template-columns: 1fr 1.04fr;
+    align-items: center;
+    gap: 2rem;
+    background: #e3e9f1;
+    color: #26364c;
+    padding: clamp(1.5rem, 3vw, 3rem);
+    border-radius: var(--radius-lg);
+  }
+  .engineering-client {
+    font-size: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .engineering-copy h3 {
+    font-size: clamp(2rem, 3.2vw, 2.7rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+  }
+  .engineering-copy > p:not(.engineering-client) {
+    max-width: 35ch;
+    font-size: 0.9375rem;
+    margin: 1.5rem 0;
+    line-height: 1.65;
+    color: #4b5c73;
+  }
+  .engineering-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
+    min-height: 44px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  .engineering-link span {
+    transition: transform var(--dur) var(--ease);
+  }
+  .engineering-link:hover span {
+    transform: translate(2px, -2px);
+  }
+  .engineering-figure {
+    margin: 0;
+  }
+  .engineering-figure svg {
+    width: 100%;
+    height: auto;
+  }
+  .diagram-label {
+    fill: currentColor;
+    font-family: Archivo, sans-serif;
+    font-size: 14px;
+  }
+  .engineering-figure figcaption {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.6875rem;
+    color: #586578;
+  }
+  .engineering-details {
+    border-bottom: 1px solid var(--border);
+  }
+  .engineering-details summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 60px;
+    list-style: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 0.8125rem;
+  }
+  .engineering-details summary::-webkit-details-marker {
+    display: none;
+  }
+  .engineering-details summary span {
+    font-size: 1.25rem;
+    transition: transform var(--dur) var(--ease);
+  }
+  .engineering-details[open] summary span {
+    transform: rotate(45deg);
+  }
+  .engineering-details-body {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 3rem;
+    padding: 1rem 0 2rem;
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+  }
+  .engineering-details-body ul {
+    padding-left: 1.2rem;
+    list-style: disc;
+  }
+  .engineering-details-body li + li {
+    margin-top: 0.8rem;
+  }
+  @media (max-width: 700px) {
+    .engineering-stage {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .engineering-client {
+      margin-bottom: 1.5rem;
+    }
+    .engineering-copy h3 {
+      font-size: 2.25rem;
+    }
+    .engineering-figure {
+      max-width: 460px;
+    }
+    .engineering-figure figcaption {
+      font-size: 0.6875rem;
+    }
+    .engineering-details-body {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+</style>

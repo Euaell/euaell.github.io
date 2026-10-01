@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Typecheck and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+      - name: Install locked dependencies
+        run: bun install --frozen-lockfile
+      - name: Typecheck
+        run: bun run astro check
+      - name: Build production site
+        run: bun run build
+
+  container:
+    name: Docker build and smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build production image
+        run: docker build --tag portfolio:ci .
+      - name: Check production routes
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run --detach --name portfolio-ci --publish 127.0.0.1:4321:4321 portfolio:ci
+          trap 'docker logs portfolio-ci; docker rm --force portfolio-ci' EXIT
+          curl --fail --silent --show-error --retry 20 --retry-all-errors --retry-delay 1 --max-time 5 --retry-max-time 45 http://127.0.0.1:4321/ > /dev/null
+          for path in projects projects/pki-trust-manager sitemap-index.xml sitemap-0.xml robots.txt; do
+            curl --fail --silent --show-error "http://127.0.0.1:4321/$path" > /dev/null
+          done
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:4321/ci-missing-page)" = 404

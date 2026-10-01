@@ -1,46 +1,62 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import FloatingResumeButton from '@/components/ui/FloatingResumeButton.astro';
-import { projectsData } from '@/data/projects';
-import ProjectFilter from '@/components/ui/ProjectFilter';
+import Layout from "@/layouts/Layout.astro";
+import Navigation from "@/components/ui/Navigation.astro";
 
-const allProjects = projectsData;
-const allTech = [...new Set(projectsData.flatMap((p) => p.tags))].slice(0, 12);
+import ProjectFilter, { type ProjectCard } from "@/components/ui/ProjectFilter";
+import { projectsData } from "@/data/projects";
+import StructuredData from "@/components/seo/StructuredData.astro";
+
+const rank: Record<string, number> = {
+  "pki-trust-manager": 0,
+  convia: 1,
+  relay: 2,
+  rms: 3,
+  "project-life-manager": 4,
+  afrochat: 5,
+  mizan: 6,
+  distrokv: 7,
+};
+const projects: ProjectCard[] = [...projectsData].sort(
+  (a, b) => (rank[a.slug] ?? 99) - (rank[b.slug] ?? 99),
+);
 ---
 
 <Layout
-  title="Projects - Euael M. Eshete"
-  description="Explore my portfolio of web applications, AI solutions, and software projects built with React, Next.js, Python, and more."
+  title="Projects · Euael M. Eshete"
+  description="Selected engineering work by Euael M. Eshete: certificate infrastructure, multi-tenant SaaS, durable AI tool execution, and product development."
 >
-  <main>
-    <section class="pt-8 pb-16 md:pt-12 md:pb-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12 md:mb-16 max-w-3xl mx-auto">
-          <p class="text-xs uppercase tracking-[0.4em] text-white/50 mb-3">Archive</p>
-          <h1 class="text-3xl md:text-4xl lg:text-5xl font-semibold font-display mb-4">
-            All Projects
-          </h1>
-          <p class="text-base md:text-lg text-white/70 px-4">
-            A comprehensive collection of my work, from web applications to AI-powered solutions. Filter by technology to find specific projects.
+  <Navigation />
+  <Fragment slot="head"><StructuredData page="projects" /></Fragment>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <header class="page-head">
+          <h1 class="display page-title">Work, in more detail.</h1>
+          <p class="lede">
+            Products, platforms, and systems work. Filter by technology if you
+            are looking for something specific.
           </p>
-        </div>
+        </header>
 
-        <ProjectFilter client:visible projects={allProjects} technologies={allTech} />
-
-        <div class="mt-12 text-center">
-          <a href="/#work" class="inline-flex items-center gap-2 btn-secondary px-8 py-3">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
-            Back to home
-          </a>
-        </div>
+        <ProjectFilter client:visible projects={projects} />
       </div>
     </section>
   </main>
 </Layout>
+
+<style>
+  .page-head {
+    max-width: 44rem;
+    margin-bottom: var(--space-7);
+  }
+
+  .page-head .eyebrow {
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+
+  .page-title {
+    margin-bottom: var(--space-3);
+  }
+</style>

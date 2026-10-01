@@ -1,0 +1,743 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-01T09:00:05.605Z",
+  "title": "Design System: Euael M. Eshete",
+  "extensions": {
+    "colorMeta": {
+      "accent-text": {
+        "role": "primary",
+        "displayName": "Burnt orange (light)",
+        "tonalRamp": [
+          "oklch(15% 0.1348 41.65)",
+          "oklch(26.4% 0.1348 41.65)",
+          "oklch(37.9% 0.1348 41.65)",
+          "oklch(49.3% 0.1348 41.65)",
+          "oklch(60.7% 0.1348 41.65)",
+          "oklch(72.1% 0.1348 41.65)",
+          "oklch(83.6% 0.1348 41.65)",
+          "oklch(95% 0.1348 41.65)"
+        ]
+      },
+      "accent-text-dark": {
+        "role": "primary",
+        "displayName": "Warm apricot (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.0922 51.29)",
+          "oklch(26.4% 0.0922 51.29)",
+          "oklch(37.9% 0.0922 51.29)",
+          "oklch(49.3% 0.0922 51.29)",
+          "oklch(60.7% 0.0922 51.29)",
+          "oklch(72.1% 0.0922 51.29)",
+          "oklch(83.6% 0.0922 51.29)",
+          "oklch(95% 0.0922 51.29)"
+        ]
+      },
+      "accent-mark": {
+        "role": "primary",
+        "displayName": "Terracotta punctuation (light)",
+        "tonalRamp": [
+          "oklch(15% 0.1419 41.67)",
+          "oklch(26.4% 0.1419 41.67)",
+          "oklch(37.9% 0.1419 41.67)",
+          "oklch(49.3% 0.1419 41.67)",
+          "oklch(60.7% 0.1419 41.67)",
+          "oklch(72.1% 0.1419 41.67)",
+          "oklch(83.6% 0.1419 41.67)",
+          "oklch(95% 0.1419 41.67)"
+        ]
+      },
+      "accent-mark-dark": {
+        "role": "primary",
+        "displayName": "Soft copper punctuation (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.1090 51.28)",
+          "oklch(26.4% 0.1090 51.28)",
+          "oklch(37.9% 0.1090 51.28)",
+          "oklch(49.3% 0.1090 51.28)",
+          "oklch(60.7% 0.1090 51.28)",
+          "oklch(72.1% 0.1090 51.28)",
+          "oklch(83.6% 0.1090 51.28)",
+          "oklch(95% 0.1090 51.28)"
+        ]
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "Pale green paper (light)",
+        "tonalRamp": [
+          "oklch(15% 0.0041 121.56)",
+          "oklch(26.4% 0.0041 121.56)",
+          "oklch(37.9% 0.0041 121.56)",
+          "oklch(49.3% 0.0041 121.56)",
+          "oklch(60.7% 0.0041 121.56)",
+          "oklch(72.1% 0.0041 121.56)",
+          "oklch(83.6% 0.0041 121.56)",
+          "oklch(95% 0.0041 121.56)"
+        ]
+      },
+      "bg-dark": {
+        "role": "neutral",
+        "displayName": "Green charcoal (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.0083 153.22)",
+          "oklch(26.4% 0.0083 153.22)",
+          "oklch(37.9% 0.0083 153.22)",
+          "oklch(49.3% 0.0083 153.22)",
+          "oklch(60.7% 0.0083 153.22)",
+          "oklch(72.1% 0.0083 153.22)",
+          "oklch(83.6% 0.0083 153.22)",
+          "oklch(95% 0.0083 153.22)"
+        ]
+      },
+      "bg-subtle": {
+        "role": "neutral",
+        "displayName": "Soft green paper (light)",
+        "tonalRamp": [
+          "oklch(15% 0.0070 124.45)",
+          "oklch(26.4% 0.0070 124.45)",
+          "oklch(37.9% 0.0070 124.45)",
+          "oklch(49.3% 0.0070 124.45)",
+          "oklch(60.7% 0.0070 124.45)",
+          "oklch(72.1% 0.0070 124.45)",
+          "oklch(83.6% 0.0070 124.45)",
+          "oklch(95% 0.0070 124.45)"
+        ]
+      },
+      "bg-subtle-dark": {
+        "role": "neutral",
+        "displayName": "Deep green shade (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.0126 150.14)",
+          "oklch(26.4% 0.0126 150.14)",
+          "oklch(37.9% 0.0126 150.14)",
+          "oklch(49.3% 0.0126 150.14)",
+          "oklch(60.7% 0.0126 150.14)",
+          "oklch(72.1% 0.0126 150.14)",
+          "oklch(83.6% 0.0126 150.14)",
+          "oklch(95% 0.0126 150.14)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Inset green (light)",
+        "tonalRamp": [
+          "oklch(15% 0.0070 124.45)",
+          "oklch(26.4% 0.0070 124.45)",
+          "oklch(37.9% 0.0070 124.45)",
+          "oklch(49.3% 0.0070 124.45)",
+          "oklch(60.7% 0.0070 124.45)",
+          "oklch(72.1% 0.0070 124.45)",
+          "oklch(83.6% 0.0070 124.45)",
+          "oklch(95% 0.0070 124.45)"
+        ]
+      },
+      "surface-dark": {
+        "role": "neutral",
+        "displayName": "Lifted charcoal (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.0135 154.34)",
+          "oklch(26.4% 0.0135 154.34)",
+          "oklch(37.9% 0.0135 154.34)",
+          "oklch(49.3% 0.0135 154.34)",
+          "oklch(60.7% 0.0135 154.34)",
+          "oklch(72.1% 0.0135 154.34)",
+          "oklch(83.6% 0.0135 154.34)",
+          "oklch(95% 0.0135 154.34)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Charcoal ink (light)",
+        "tonalRamp": [
+          "oklch(15% 0.0123 135.05)",
+          "oklch(26.4% 0.0123 135.05)",
+          "oklch(37.9% 0.0123 135.05)",
+          "oklch(49.3% 0.0123 135.05)",
+          "oklch(60.7% 0.0123 135.05)",
+          "oklch(72.1% 0.0123 135.05)",
+          "oklch(83.6% 0.0123 135.05)",
+          "oklch(95% 0.0123 135.05)"
+        ]
+      },
+      "text-dark": {
+        "role": "neutral",
+        "displayName": "Pale sage ink (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.0123 121.70)",
+          "oklch(26.4% 0.0123 121.70)",
+          "oklch(37.9% 0.0123 121.70)",
+          "oklch(49.3% 0.0123 121.70)",
+          "oklch(60.7% 0.0123 121.70)",
+          "oklch(72.1% 0.0123 121.70)",
+          "oklch(83.6% 0.0123 121.70)",
+          "oklch(95% 0.0123 121.70)"
+        ]
+      },
+      "text-secondary": {
+        "role": "neutral",
+        "displayName": "Secondary green ink (light)",
+        "tonalRamp": [
+          "oklch(15% 0.0163 135.01)",
+          "oklch(26.4% 0.0163 135.01)",
+          "oklch(37.9% 0.0163 135.01)",
+          "oklch(49.3% 0.0163 135.01)",
+          "oklch(60.7% 0.0163 135.01)",
+          "oklch(72.1% 0.0163 135.01)",
+          "oklch(83.6% 0.0163 135.01)",
+          "oklch(95% 0.0163 135.01)"
+        ]
+      },
+      "text-secondary-dark": {
+        "role": "neutral",
+        "displayName": "Secondary pale ink (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.0211 131.49)",
+          "oklch(26.4% 0.0211 131.49)",
+          "oklch(37.9% 0.0211 131.49)",
+          "oklch(49.3% 0.0211 131.49)",
+          "oklch(60.7% 0.0211 131.49)",
+          "oklch(72.1% 0.0211 131.49)",
+          "oklch(83.6% 0.0211 131.49)",
+          "oklch(95% 0.0211 131.49)"
+        ]
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "Muted green ink (light)",
+        "tonalRamp": [
+          "oklch(15% 0.0189 133.94)",
+          "oklch(26.4% 0.0189 133.94)",
+          "oklch(37.9% 0.0189 133.94)",
+          "oklch(49.3% 0.0189 133.94)",
+          "oklch(60.7% 0.0189 133.94)",
+          "oklch(72.1% 0.0189 133.94)",
+          "oklch(83.6% 0.0189 133.94)",
+          "oklch(95% 0.0189 133.94)"
+        ]
+      },
+      "text-muted-dark": {
+        "role": "neutral",
+        "displayName": "Muted pale ink (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.0293 136.92)",
+          "oklch(26.4% 0.0293 136.92)",
+          "oklch(37.9% 0.0293 136.92)",
+          "oklch(49.3% 0.0293 136.92)",
+          "oklch(60.7% 0.0293 136.92)",
+          "oklch(72.1% 0.0293 136.92)",
+          "oklch(83.6% 0.0293 136.92)",
+          "oklch(95% 0.0293 136.92)"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Fine green rule (light)",
+        "tonalRamp": [
+          "oklch(15% 0.0129 126.39)",
+          "oklch(26.4% 0.0129 126.39)",
+          "oklch(37.9% 0.0129 126.39)",
+          "oklch(49.3% 0.0129 126.39)",
+          "oklch(60.7% 0.0129 126.39)",
+          "oklch(72.1% 0.0129 126.39)",
+          "oklch(83.6% 0.0129 126.39)",
+          "oklch(95% 0.0129 126.39)"
+        ]
+      },
+      "border-dark": {
+        "role": "neutral",
+        "displayName": "Fine charcoal rule (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.0227 142.63)",
+          "oklch(26.4% 0.0227 142.63)",
+          "oklch(37.9% 0.0227 142.63)",
+          "oklch(49.3% 0.0227 142.63)",
+          "oklch(60.7% 0.0227 142.63)",
+          "oklch(72.1% 0.0227 142.63)",
+          "oklch(83.6% 0.0227 142.63)",
+          "oklch(95% 0.0227 142.63)"
+        ]
+      },
+      "border-strong": {
+        "role": "neutral",
+        "displayName": "Control edge (light)",
+        "tonalRamp": [
+          "oklch(15% 0.0229 130.09)",
+          "oklch(26.4% 0.0229 130.09)",
+          "oklch(37.9% 0.0229 130.09)",
+          "oklch(49.3% 0.0229 130.09)",
+          "oklch(60.7% 0.0229 130.09)",
+          "oklch(72.1% 0.0229 130.09)",
+          "oklch(83.6% 0.0229 130.09)",
+          "oklch(95% 0.0229 130.09)"
+        ]
+      },
+      "border-strong-dark": {
+        "role": "neutral",
+        "displayName": "Light control edge (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.0325 133.94)",
+          "oklch(26.4% 0.0325 133.94)",
+          "oklch(37.9% 0.0325 133.94)",
+          "oklch(49.3% 0.0325 133.94)",
+          "oklch(60.7% 0.0325 133.94)",
+          "oklch(72.1% 0.0325 133.94)",
+          "oklch(83.6% 0.0325 133.94)",
+          "oklch(95% 0.0325 133.94)"
+        ]
+      },
+      "btn-bg": {
+        "role": "neutral",
+        "displayName": "Solid charcoal action (light)",
+        "tonalRamp": [
+          "oklch(15% 0.0123 135.05)",
+          "oklch(26.4% 0.0123 135.05)",
+          "oklch(37.9% 0.0123 135.05)",
+          "oklch(49.3% 0.0123 135.05)",
+          "oklch(60.7% 0.0123 135.05)",
+          "oklch(72.1% 0.0123 135.05)",
+          "oklch(83.6% 0.0123 135.05)",
+          "oklch(95% 0.0123 135.05)"
+        ]
+      },
+      "btn-bg-dark": {
+        "role": "neutral",
+        "displayName": "Solid sage action (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.0250 124.27)",
+          "oklch(26.4% 0.0250 124.27)",
+          "oklch(37.9% 0.0250 124.27)",
+          "oklch(49.3% 0.0250 124.27)",
+          "oklch(60.7% 0.0250 124.27)",
+          "oklch(72.1% 0.0250 124.27)",
+          "oklch(83.6% 0.0250 124.27)",
+          "oklch(95% 0.0250 124.27)"
+        ]
+      },
+      "btn-fg": {
+        "role": "neutral",
+        "displayName": "Pale action text (light)",
+        "tonalRamp": [
+          "oklch(15% 0.0041 121.56)",
+          "oklch(26.4% 0.0041 121.56)",
+          "oklch(37.9% 0.0041 121.56)",
+          "oklch(49.3% 0.0041 121.56)",
+          "oklch(60.7% 0.0041 121.56)",
+          "oklch(72.1% 0.0041 121.56)",
+          "oklch(83.6% 0.0041 121.56)",
+          "oklch(95% 0.0041 121.56)"
+        ]
+      },
+      "btn-fg-dark": {
+        "role": "neutral",
+        "displayName": "Dark action text (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.0202 132.97)",
+          "oklch(26.4% 0.0202 132.97)",
+          "oklch(37.9% 0.0202 132.97)",
+          "oklch(49.3% 0.0202 132.97)",
+          "oklch(60.7% 0.0202 132.97)",
+          "oklch(72.1% 0.0202 132.97)",
+          "oklch(83.6% 0.0202 132.97)",
+          "oklch(95% 0.0202 132.97)"
+        ]
+      },
+      "btn-bg-hover": {
+        "role": "neutral",
+        "displayName": "Deep olive action hover (light)",
+        "tonalRamp": [
+          "oklch(15% 0.0320 131.42)",
+          "oklch(26.4% 0.0320 131.42)",
+          "oklch(37.9% 0.0320 131.42)",
+          "oklch(49.3% 0.0320 131.42)",
+          "oklch(60.7% 0.0320 131.42)",
+          "oklch(72.1% 0.0320 131.42)",
+          "oklch(83.6% 0.0320 131.42)",
+          "oklch(95% 0.0320 131.42)"
+        ]
+      },
+      "btn-bg-hover-dark": {
+        "role": "neutral",
+        "displayName": "Soft sage action hover (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.0469 126.12)",
+          "oklch(26.4% 0.0469 126.12)",
+          "oklch(37.9% 0.0469 126.12)",
+          "oklch(49.3% 0.0469 126.12)",
+          "oklch(60.7% 0.0469 126.12)",
+          "oklch(72.1% 0.0469 126.12)",
+          "oklch(83.6% 0.0469 126.12)",
+          "oklch(95% 0.0469 126.12)"
+        ]
+      },
+      "focus-ring": {
+        "role": "primary",
+        "displayName": "Burnt orange focus (light)",
+        "tonalRamp": [
+          "oklch(15% 0.1348 41.65)",
+          "oklch(26.4% 0.1348 41.65)",
+          "oklch(37.9% 0.1348 41.65)",
+          "oklch(49.3% 0.1348 41.65)",
+          "oklch(60.7% 0.1348 41.65)",
+          "oklch(72.1% 0.1348 41.65)",
+          "oklch(83.6% 0.1348 41.65)",
+          "oklch(95% 0.1348 41.65)"
+        ]
+      },
+      "focus-ring-dark": {
+        "role": "primary",
+        "displayName": "Warm apricot focus (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.0922 51.29)",
+          "oklch(26.4% 0.0922 51.29)",
+          "oklch(37.9% 0.0922 51.29)",
+          "oklch(49.3% 0.0922 51.29)",
+          "oklch(60.7% 0.0922 51.29)",
+          "oklch(72.1% 0.0922 51.29)",
+          "oklch(83.6% 0.0922 51.29)",
+          "oklch(95% 0.0922 51.29)"
+        ]
+      },
+      "selection-bg": {
+        "role": "neutral",
+        "displayName": "Clay selection (light)",
+        "tonalRamp": [
+          "oklch(15% 0.0580 54.77)",
+          "oklch(26.4% 0.0580 54.77)",
+          "oklch(37.9% 0.0580 54.77)",
+          "oklch(49.3% 0.0580 54.77)",
+          "oklch(60.7% 0.0580 54.77)",
+          "oklch(72.1% 0.0580 54.77)",
+          "oklch(83.6% 0.0580 54.77)",
+          "oklch(95% 0.0580 54.77)"
+        ]
+      },
+      "selection-bg-dark": {
+        "role": "neutral",
+        "displayName": "Deep clay selection (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.0782 52.86)",
+          "oklch(26.4% 0.0782 52.86)",
+          "oklch(37.9% 0.0782 52.86)",
+          "oklch(49.3% 0.0782 52.86)",
+          "oklch(60.7% 0.0782 52.86)",
+          "oklch(72.1% 0.0782 52.86)",
+          "oklch(83.6% 0.0782 52.86)",
+          "oklch(95% 0.0782 52.86)"
+        ]
+      },
+      "selection-fg": {
+        "role": "neutral",
+        "displayName": "Charcoal selection text (light)",
+        "tonalRamp": [
+          "oklch(15% 0.0123 135.05)",
+          "oklch(26.4% 0.0123 135.05)",
+          "oklch(37.9% 0.0123 135.05)",
+          "oklch(49.3% 0.0123 135.05)",
+          "oklch(60.7% 0.0123 135.05)",
+          "oklch(72.1% 0.0123 135.05)",
+          "oklch(83.6% 0.0123 135.05)",
+          "oklch(95% 0.0123 135.05)"
+        ]
+      },
+      "selection-fg-dark": {
+        "role": "neutral",
+        "displayName": "White selection text (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(26.4% 0.0000 89.88)",
+          "oklch(37.9% 0.0000 89.88)",
+          "oklch(49.3% 0.0000 89.88)",
+          "oklch(60.7% 0.0000 89.88)",
+          "oklch(72.1% 0.0000 89.88)",
+          "oklch(83.6% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "negative": {
+        "role": "feedback",
+        "displayName": "Error red (light)",
+        "tonalRamp": [
+          "oklch(15% 0.1564 24.70)",
+          "oklch(26.4% 0.1564 24.70)",
+          "oklch(37.9% 0.1564 24.70)",
+          "oklch(49.3% 0.1564 24.70)",
+          "oklch(60.7% 0.1564 24.70)",
+          "oklch(72.1% 0.1564 24.70)",
+          "oklch(83.6% 0.1564 24.70)",
+          "oklch(95% 0.1564 24.70)"
+        ]
+      },
+      "negative-dark": {
+        "role": "feedback",
+        "displayName": "Soft error red (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.1080 24.73)",
+          "oklch(26.4% 0.1080 24.73)",
+          "oklch(37.9% 0.1080 24.73)",
+          "oklch(49.3% 0.1080 24.73)",
+          "oklch(60.7% 0.1080 24.73)",
+          "oklch(72.1% 0.1080 24.73)",
+          "oklch(83.6% 0.1080 24.73)",
+          "oklch(95% 0.1080 24.73)"
+        ]
+      },
+      "positive": {
+        "role": "feedback",
+        "displayName": "Success green (light)",
+        "tonalRamp": [
+          "oklch(15% 0.0953 150.94)",
+          "oklch(26.4% 0.0953 150.94)",
+          "oklch(37.9% 0.0953 150.94)",
+          "oklch(49.3% 0.0953 150.94)",
+          "oklch(60.7% 0.0953 150.94)",
+          "oklch(72.1% 0.0953 150.94)",
+          "oklch(83.6% 0.0953 150.94)",
+          "oklch(95% 0.0953 150.94)"
+        ]
+      },
+      "positive-dark": {
+        "role": "feedback",
+        "displayName": "Soft success green (dark)",
+        "tonalRamp": [
+          "oklch(15% 0.0796 147.51)",
+          "oklch(26.4% 0.0796 147.51)",
+          "oklch(37.9% 0.0796 147.51)",
+          "oklch(49.3% 0.0796 147.51)",
+          "oklch(60.7% 0.0796 147.51)",
+          "oklch(72.1% 0.0796 147.51)",
+          "oklch(83.6% 0.0796 147.51)",
+          "oklch(95% 0.0796 147.51)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Global display baseline. Hero and case-study sizing adapt locally; source: src/styles/global.css."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section introductions using the shared heading role; source: src/styles/global.css."
+      },
+      "title": {
+        "displayName": "Project title",
+        "purpose": "Homepage project captions. Project-index title sizing is a separate responsive treatment; source: WorkSection.astro."
+      },
+      "body-large": {
+        "displayName": "Introductory body",
+        "purpose": "Shared lede text with the normal reading measure; source: src/styles/global.css."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Base Archivo reading style. Supporting paragraphs frequently use 0.9375rem with the same family and open leading."
+      },
+      "label": {
+        "displayName": "Action label",
+        "purpose": "Button typography; ordinary text links use the inherited body leading."
+      },
+      "meta": {
+        "displayName": "Supporting metadata",
+        "purpose": "Technology lists and shared metadata. Natural case, lower contrast than body; never a decorative pre-heading."
+      }
+    },
+    "shadows": [
+      {
+        "name": "product-capture",
+        "value": "0 20px 40px #23433226",
+        "purpose": "Soft lift beneath the Convia and Mizan screenshot wraps, unchanged between system themes. Source: WorkSection.astro."
+      },
+      {
+        "name": "project-control-glass",
+        "value": "inset 0 1px 0 #ffffff, inset 0 -1px 0 #ffffff80, 0 3px 12px #182c2520",
+        "purpose": "Inset highlights and small diffuse lift for the project arrow when backdrop filtering is supported. Fixed product-control material in both themes; solid background fallback when transparency is reduced."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Shared deceleration curve from --ease; used by controls, disclosures, menu, showcase images, and the name entrance."
+      },
+      {
+        "name": "dur-fast",
+        "value": "130ms",
+        "purpose": "Contact-field border transitions from --dur-fast."
+      },
+      {
+        "name": "dur",
+        "value": "240ms",
+        "purpose": "Shared color, border, arrow, disclosure, and drawer transitions from --dur."
+      },
+      {
+        "name": "showcase-transform",
+        "value": "700ms",
+        "purpose": "Local screenshot movement on showcase hover. Convia changes from -5deg to -3deg, and Mizan from -7deg to -4deg, each lifting 5px."
+      },
+      {
+        "name": "hero-settle",
+        "value": "850ms",
+        "purpose": "Homepage-only entrance under prefers-reduced-motion: no-preference; translateY 16px to 0 and tracking -0.025em to -0.04em."
+      },
+      {
+        "name": "reduced-motion-duration",
+        "value": "0.01ms",
+        "purpose": "Under prefers-reduced-motion: reduce, global animation and transition durations nearly disappear, animations run once, and scroll behavior is auto. Drawer, scrim, and menu-bar transitions are explicitly none."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "home-single-column-max",
+        "value": "600px"
+      },
+      {
+        "name": "footer-horizontal-min",
+        "value": "640px"
+      },
+      {
+        "name": "project-and-case-stack-max",
+        "value": "650px"
+      },
+      {
+        "name": "mobile-navigation-and-content-max",
+        "value": "700px"
+      },
+      {
+        "name": "showcase-and-about-compact-max",
+        "value": "800px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid action used for contact submission and project visits; theme colors reverse together.",
+      "html": "<button type=\"button\" class=\"ds-button-primary\">Visit project <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"></path></svg></button>",
+      "css": ".ds-button-primary{--ds-btn-bg:var(--btn-bg,#252923);--ds-btn-fg:var(--btn-fg,#f7f8f5);--ds-btn-bg-hover:var(--btn-bg-hover,#424c3a);--ds-focus-ring:var(--focus-ring,#a74921);}@media(prefers-color-scheme:dark){.ds-button-primary{--ds-btn-bg:var(--btn-bg,#e6eddb);--ds-btn-fg:var(--btn-fg,#20261c);--ds-btn-bg-hover:var(--btn-bg-hover,#cbd9b8);--ds-focus-ring:var(--focus-ring,#edac86);}}.ds-button-primary{display:inline-flex;align-items:center;justify-content:center;gap:0.7rem;min-height:44px;padding:0.8rem 1.25rem;border:1px solid transparent;border-radius:var(--radius,6px);font:500 0.875rem/1.2 var(--font-body,\"Archivo\",\"Segoe UI\",sans-serif);text-decoration:none;cursor:pointer;transition:background-color var(--dur,240ms) var(--ease,cubic-bezier(0.16,1,0.3,1)),color var(--dur,240ms) var(--ease,cubic-bezier(0.16,1,0.3,1)),border-color var(--dur,240ms) var(--ease,cubic-bezier(0.16,1,0.3,1));background:var(--ds-btn-bg);color:var(--ds-btn-fg);}.ds-button-primary svg{width:17px;height:17px;}.ds-button-primary:hover:not(:disabled),.ds-button-primary:active:not(:disabled){background:var(--ds-btn-bg-hover);}.ds-button-primary:disabled{opacity:0.55;cursor:not-allowed;}.ds-button-primary:focus-visible{outline:2px solid var(--ds-focus-ring);outline-offset:5px;}@media(prefers-reduced-motion:reduce){.ds-button-primary{transition:none;animation:none;}}"
+    },
+    {
+      "name": "Secondary button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Outlined action used for the mobile resume path, with a tonal hover fill.",
+      "html": "<button type=\"button\" class=\"ds-button-secondary\">Resume</button>",
+      "css": ".ds-button-secondary{--ds-text:var(--text,#252923);--ds-surface:var(--surface,#eef0eb);--ds-border-strong:var(--border-strong,#a9b1a2);--ds-text-muted:var(--text-muted,#666d62);--ds-focus-ring:var(--focus-ring,#a74921);}@media(prefers-color-scheme:dark){.ds-button-secondary{--ds-text:var(--text,#edf0e7);--ds-surface:var(--surface,#222924);--ds-border-strong:var(--border-strong,#64705d);--ds-text-muted:var(--text-muted,#a1ae9c);--ds-focus-ring:var(--focus-ring,#edac86);}}.ds-button-secondary{display:inline-flex;align-items:center;justify-content:center;gap:0.7rem;min-height:44px;padding:0.8rem 1.25rem;border:1px solid transparent;border-radius:var(--radius,6px);font:500 0.875rem/1.2 var(--font-body,\"Archivo\",\"Segoe UI\",sans-serif);text-decoration:none;cursor:pointer;transition:background-color var(--dur,240ms) var(--ease,cubic-bezier(0.16,1,0.3,1)),color var(--dur,240ms) var(--ease,cubic-bezier(0.16,1,0.3,1)),border-color var(--dur,240ms) var(--ease,cubic-bezier(0.16,1,0.3,1));background:transparent;color:var(--ds-text);border-color:var(--ds-border-strong);}.ds-button-secondary:hover:not(:disabled),.ds-button-secondary:active:not(:disabled){background:var(--ds-surface);border-color:var(--ds-text-muted);}.ds-button-secondary:disabled{opacity:0.55;cursor:not-allowed;}.ds-button-secondary:focus-visible{outline:2px solid var(--ds-focus-ring);outline-offset:5px;}@media(prefers-reduced-motion:reduce){.ds-button-secondary{transition:none;animation:none;}}"
+    },
+    {
+      "name": "Text action",
+      "kind": "button",
+      "refersTo": "text-link",
+      "description": "A direct text link with a small directional response; useful beside supporting content.",
+      "html": "<a class=\"ds-text-action\" href=\"/projects\">All projects <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"></path></svg></a>",
+      "css": ".ds-text-action{--ds-text:var(--text,#252923);--ds-focus-ring:var(--focus-ring,#a74921);}@media(prefers-color-scheme:dark){.ds-text-action{--ds-text:var(--text,#edf0e7);--ds-focus-ring:var(--focus-ring,#edac86);}}.ds-text-action{display:inline-flex;align-items:center;gap:0.75rem;min-height:44px;font:500 0.875rem/1.65 var(--font-body,\"Archivo\",\"Segoe UI\",sans-serif);color:var(--ds-text);text-decoration:none;}.ds-text-action svg{width:18px;height:18px;transition:transform var(--dur,240ms) var(--ease,cubic-bezier(0.16,1,0.3,1));}.ds-text-action:hover svg{transform:translate(2px,-2px);}.ds-text-action:focus-visible{outline:2px solid var(--ds-focus-ring);outline-offset:5px;}@media(prefers-reduced-motion:reduce){.ds-text-action svg{transition:none;animation:none;}}"
+    },
+    {
+      "name": "Contact field",
+      "kind": "input",
+      "refersTo": "contact-field",
+      "description": "Persistent labels, filled fields, visible focus, and an associated error message; hover retains the ordinary border.",
+      "html": "<div class=\"ds-contact-fields\"><div class=\"ds-contact-field\"><label for=\"ds-contact-email\">Email</label><input id=\"ds-contact-email\" type=\"email\" autocomplete=\"email\" placeholder=\"you@example.com\" required></div><div class=\"ds-contact-field\"><label for=\"ds-contact-name\">Name</label><input id=\"ds-contact-name\" type=\"text\" autocomplete=\"name\" placeholder=\"Your name\" required aria-invalid=\"true\" aria-describedby=\"ds-contact-name-error\"><p class=\"ds-field-error\" id=\"ds-contact-name-error\">Name is required.</p></div></div>",
+      "css": ".ds-contact-fields{--ds-surface:var(--surface,#eef0eb);--ds-text:var(--text,#252923);--ds-text-muted:var(--text-muted,#666d62);--ds-border-strong:var(--border-strong,#a9b1a2);--ds-negative:var(--negative,#ac3434);--ds-focus-ring:var(--focus-ring,#a74921);--ds-accent-text:var(--accent-text,#a74921);}@media(prefers-color-scheme:dark){.ds-contact-fields{--ds-surface:var(--surface,#222924);--ds-text:var(--text,#edf0e7);--ds-text-muted:var(--text-muted,#a1ae9c);--ds-border-strong:var(--border-strong,#64705d);--ds-negative:var(--negative,#f39a93);--ds-focus-ring:var(--focus-ring,#edac86);--ds-accent-text:var(--accent-text,#edac86);}}.ds-contact-fields{display:flex;flex-direction:column;gap:1.5rem;max-width:440px;font:400 1rem/1.65 var(--font-body,\"Archivo\",\"Segoe UI\",sans-serif);color:var(--ds-text);}.ds-contact-field{display:flex;flex-direction:column;gap:0.5rem;}.ds-contact-field label{font-size:0.9375rem;font-weight:500;}.ds-contact-field input{box-sizing:border-box;width:100%;min-height:48px;padding:0.85rem 1rem;background:var(--ds-surface);border:1px solid var(--ds-border-strong);border-radius:var(--radius,6px);color:var(--ds-text);font:400 1rem/1.65 var(--font-body,\"Archivo\",\"Segoe UI\",sans-serif);caret-color:var(--ds-accent-text);transition:border-color var(--dur-fast,130ms) var(--ease,cubic-bezier(0.16,1,0.3,1));}.ds-contact-field input:hover{cursor:text;}.ds-contact-field input::placeholder{color:var(--ds-text-muted);}.ds-contact-field input[aria-invalid=\"true\"]{border-color:var(--ds-negative);}.ds-field-error{margin:0;color:var(--ds-negative);font-size:0.9375rem;}.ds-contact-field input:focus-visible{outline:2px solid var(--ds-focus-ring);outline-offset:5px;}@media(prefers-reduced-motion:reduce){.ds-contact-field input{transition:none;animation:none;}}"
+    },
+    {
+      "name": "Main navigation",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Scrolled-header style specimen with active links, a separated resume action, and a mobile menu trigger. Drawer behavior stays in the application.",
+      "html": "<nav class=\"ds-navigation\" aria-label=\"Main navigation\"><a class=\"ds-brand\" href=\"/\" aria-label=\"euaell — Home\">euaell<span aria-hidden=\"true\">.</span></a><div class=\"ds-nav-actions\"><a class=\"ds-nav-link\" href=\"/#work\" aria-current=\"location\">Work</a><a class=\"ds-nav-link\" href=\"/#about\">About</a><a class=\"ds-nav-link\" href=\"/#contact\">Contact</a><a class=\"ds-nav-resume\" href=\"https://euaell.me/cv\">Resume <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"></path></svg></a></div><button class=\"ds-nav-menu\" type=\"button\" aria-label=\"Open menu\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M3 8h18M3 15h18\"></path></svg></button></nav>",
+      "css": ".ds-navigation{--ds-bg:var(--bg,#f7f8f5);--ds-text:var(--text,#252923);--ds-text-secondary:var(--text-secondary,#50564d);--ds-surface:var(--surface,#eef0eb);--ds-border:var(--border,#d9ddd4);--ds-border-strong:var(--border-strong,#a9b1a2);--ds-accent-mark:var(--accent-mark,#bb562c);--ds-accent-text:var(--accent-text,#a74921);--ds-focus-ring:var(--focus-ring,#a74921);}@media(prefers-color-scheme:dark){.ds-navigation{--ds-bg:var(--bg,#181c19);--ds-text:var(--text,#edf0e7);--ds-text-secondary:var(--text-secondary,#c3cbbd);--ds-surface:var(--surface,#222924);--ds-border:var(--border,#394338);--ds-border-strong:var(--border-strong,#64705d);--ds-accent-mark:var(--accent-mark,#de9366);--ds-accent-text:var(--accent-text,#edac86);--ds-focus-ring:var(--focus-ring,#edac86);}}.ds-navigation{display:flex;align-items:center;justify-content:space-between;gap:2rem;min-height:84px;padding-inline:1.25rem;background:var(--ds-bg);color:var(--ds-text);border-bottom:1px solid var(--ds-border);font-family:var(--font-body,\"Archivo\",\"Segoe UI\",sans-serif);}.ds-brand{display:inline-flex;align-items:baseline;padding-block:0.4rem;color:var(--ds-text);font-size:1.6rem;font-weight:650;letter-spacing:-0.04em;line-height:1;text-decoration:none;}.ds-brand span{color:var(--ds-accent-mark);}.ds-nav-actions{display:flex;align-items:center;gap:2rem;}.ds-nav-link{display:inline-flex;align-items:center;min-height:44px;color:var(--ds-text-secondary);font-size:0.8125rem;text-decoration:none;text-underline-offset:6px;text-decoration-thickness:1px;}.ds-nav-link:hover,.ds-nav-link[aria-current]{color:var(--ds-text);text-decoration:underline;text-decoration-color:var(--ds-accent-mark);}.ds-nav-resume{display:inline-flex;align-items:center;gap:0.6rem;min-height:44px;padding:0.3rem 0 0.3rem 2rem;border-left:1px solid var(--ds-border);color:var(--ds-text);font-size:0.8125rem;text-decoration:none;}.ds-nav-resume svg{width:15px;height:15px;}.ds-nav-resume:hover{color:var(--ds-accent-text);}.ds-nav-menu{display:none;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:1px solid var(--ds-border-strong);border-radius:var(--radius,6px);background:transparent;color:var(--ds-text);cursor:pointer;}.ds-nav-menu svg{width:18px;height:18px;}.ds-nav-menu:hover{background:var(--ds-surface);}@supports(backdrop-filter:blur(16px)){.ds-navigation{background:color-mix(in srgb,var(--ds-bg) 82%,transparent);backdrop-filter:blur(16px) saturate(125%);-webkit-backdrop-filter:blur(16px) saturate(125%);}}@media(prefers-reduced-transparency:reduce){.ds-navigation{background:var(--ds-bg);backdrop-filter:none;-webkit-backdrop-filter:none;}}@media(max-width:700px){.ds-navigation{min-height:72px;}.ds-brand{font-size:1.4rem;}.ds-nav-actions{display:none;}.ds-nav-menu{display:inline-flex;}}.ds-navigation a:focus-visible{outline:2px solid var(--ds-focus-ring);outline-offset:5px;}.ds-nav-menu:focus-visible{outline:2px solid var(--ds-focus-ring);outline-offset:5px;}"
+    },
+    {
+      "name": "Technology select",
+      "kind": "input",
+      "refersTo": "technology-select",
+      "description": "Labeled native filtering control; changing these specimen options demonstrates native selection without invoking application filtering.",
+      "html": "<div class=\"ds-filter\"><label for=\"ds-technology\">Technology</label><select id=\"ds-technology\"><option>All technologies</option><option>Go</option><option>PostgreSQL</option><option>React</option></select></div>",
+      "css": ".ds-filter{--ds-bg:var(--bg,#f7f8f5);--ds-text:var(--text,#252923);--ds-text-secondary:var(--text-secondary,#50564d);--ds-border-strong:var(--border-strong,#a9b1a2);--ds-focus-ring:var(--focus-ring,#a74921);}@media(prefers-color-scheme:dark){.ds-filter{--ds-bg:var(--bg,#181c19);--ds-text:var(--text,#edf0e7);--ds-text-secondary:var(--text-secondary,#c3cbbd);--ds-border-strong:var(--border-strong,#64705d);--ds-focus-ring:var(--focus-ring,#edac86);}}.ds-filter{display:flex;align-items:center;gap:1rem;font:400 0.875rem/1.65 var(--font-body,\"Archivo\",\"Segoe UI\",sans-serif);}.ds-filter label{color:var(--ds-text-secondary);}.ds-filter select{min-height:44px;max-width:100%;padding:0.6rem 2.25rem 0.6rem 0.9rem;background:var(--ds-bg);color:var(--ds-text);border:1px solid var(--ds-border-strong);border-radius:var(--radius,6px);font:inherit;cursor:pointer;}.ds-filter select:hover{cursor:pointer;}@media(max-width:650px){.ds-filter{width:100%;justify-content:space-between;}.ds-filter select{max-width:70%;}}.ds-filter select:focus-visible{outline:2px solid var(--ds-focus-ring);outline-offset:5px;}"
+    },
+    {
+      "name": "Project row",
+      "kind": "card",
+      "refersTo": "project-row",
+      "description": "Open two-column project row with title-first metadata and a readable engineering summary; collapses to one column.",
+      "html": "<article class=\"ds-project-row\"><header class=\"ds-project-heading\"><h2><a href=\"/projects/relay\">Relay</a></h2><p class=\"ds-project-meta\">Creator &amp; lead engineer · 2026</p></header><div class=\"ds-project-body\"><p class=\"ds-project-summary\">Reliable tool execution and artifact delivery for AI agents.</p><p class=\"ds-project-status\">Open source · In development</p><a class=\"ds-project-link\" href=\"/projects/relay\">Project overview <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"></path></svg></a></div></article>",
+      "css": ".ds-project-row{--ds-text:var(--text,#252923);--ds-text-muted:var(--text-muted,#666d62);--ds-border:var(--border,#d9ddd4);--ds-focus-ring:var(--focus-ring,#a74921);}@media(prefers-color-scheme:dark){.ds-project-row{--ds-text:var(--text,#edf0e7);--ds-text-muted:var(--text-muted,#a1ae9c);--ds-border:var(--border,#394338);--ds-focus-ring:var(--focus-ring,#edac86);}}.ds-project-row{display:grid;grid-template-columns:minmax(0,0.8fr) minmax(0,1.2fr);gap:clamp(2rem,6vw,6rem);padding:3.5rem 0;border-bottom:1px solid var(--ds-border);color:var(--ds-text);font-family:var(--font-body,\"Archivo\",\"Segoe UI\",sans-serif);}.ds-project-heading h2{margin:0;font-size:clamp(1.75rem,3vw,2.5rem);font-weight:550;line-height:1.1;letter-spacing:-0.025em;}.ds-project-heading a{color:inherit;text-decoration:none;}.ds-project-meta{margin:0.7rem 0 0;font-size:0.75rem;line-height:1.65;color:var(--ds-text-muted);}.ds-project-summary{margin:0 0 1.5rem;font-size:1.125rem;line-height:1.65;}.ds-project-status{margin:0;font-size:0.8125rem;line-height:1.65;color:var(--ds-text-muted);}.ds-project-link{display:inline-flex;align-items:center;gap:0.75rem;min-height:44px;margin-top:1.5rem;font-size:0.875rem;font-weight:500;color:var(--ds-text);text-decoration:none;}.ds-project-link svg{width:18px;height:18px;transition:transform var(--dur,240ms) var(--ease,cubic-bezier(0.16,1,0.3,1));}.ds-project-link:hover svg{transform:translate(2px,-2px);}@media(max-width:650px){.ds-project-row{grid-template-columns:1fr;gap:1.5rem;padding:2.5rem 0;}}.ds-project-row a:focus-visible{outline:2px solid var(--ds-focus-ring);outline-offset:5px;}@media(prefers-reduced-motion:reduce){.ds-project-link svg{transition:none;animation:none;}}"
+    },
+    {
+      "name": "Technology metadata",
+      "kind": "chip",
+      "refersTo": "technology-tags",
+      "description": "Informational wrapping technology list as shipped on project rows; these labels are not interactive chips and introduce no tab stops.",
+      "html": "<ul class=\"ds-technology-tags\" aria-label=\"Technologies\"><li>Go</li><li>Raft</li><li>Distributed Systems</li></ul>",
+      "css": ".ds-technology-tags{--ds-text-muted:var(--text-muted,#666d62);}@media(prefers-color-scheme:dark){.ds-technology-tags{--ds-text-muted:var(--text-muted,#a1ae9c);}}.ds-technology-tags{display:flex;flex-wrap:wrap;gap:0.4rem 1rem;margin:0;padding:0;list-style:none;color:var(--ds-text-muted);font:400 0.8125rem/1.65 var(--font-body,\"Archivo\",\"Segoe UI\",sans-serif);}"
+    },
+    {
+      "name": "Engineering disclosure",
+      "kind": "custom",
+      "refersTo": "engineering-disclosure",
+      "description": "Native, keyboard-operable details element with a rotating plus; open it to inspect the expanded reading style.",
+      "html": "<details class=\"ds-disclosure\"><summary>Engineering details <span class=\"ds-disclosure-mark\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"></path></svg></span></summary><div class=\"ds-disclosure-body\"><p>Licensing that works offline. Boundaries between tenants. Certificate providers that share one set of flows.</p><a class=\"ds-disclosure-link\" href=\"/projects/pki-trust-manager\">Project overview</a></div></details>",
+      "css": ".ds-disclosure{--ds-text:var(--text,#252923);--ds-text-secondary:var(--text-secondary,#50564d);--ds-border:var(--border,#d9ddd4);--ds-accent-text:var(--accent-text,#a74921);--ds-focus-ring:var(--focus-ring,#a74921);}@media(prefers-color-scheme:dark){.ds-disclosure{--ds-text:var(--text,#edf0e7);--ds-text-secondary:var(--text-secondary,#c3cbbd);--ds-border:var(--border,#394338);--ds-accent-text:var(--accent-text,#edac86);--ds-focus-ring:var(--focus-ring,#edac86);}}.ds-disclosure{margin-top:1.5rem;border-top:1px solid var(--ds-border);border-bottom:1px solid var(--ds-border);color:var(--ds-text);font:400 1rem/1.65 var(--font-body,\"Archivo\",\"Segoe UI\",sans-serif);}.ds-disclosure summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:52px;font-size:0.875rem;cursor:pointer;list-style:none;}.ds-disclosure summary:hover{cursor:pointer;}.ds-disclosure summary::-webkit-details-marker{display:none;}.ds-disclosure-mark{transition:transform var(--dur,240ms) var(--ease,cubic-bezier(0.16,1,0.3,1));}.ds-disclosure-mark svg{display:block;width:18px;height:18px;}.ds-disclosure[open] .ds-disclosure-mark{transform:rotate(45deg);}.ds-disclosure-body{padding:0.5rem 0 1.5rem;color:var(--ds-text-secondary);font-size:0.9375rem;}.ds-disclosure-body p{margin:0;}.ds-disclosure-link{display:inline-block;margin-top:1rem;color:inherit;text-decoration:underline;text-decoration-color:var(--ds-border);text-underline-offset:0.2em;}.ds-disclosure-link:hover{color:var(--ds-accent-text);text-decoration-color:currentColor;}.ds-disclosure summary:focus-visible{outline:2px solid var(--ds-focus-ring);outline-offset:5px;}.ds-disclosure-link:focus-visible{outline:2px solid var(--ds-focus-ring);outline-offset:5px;}@media(prefers-reduced-motion:reduce){.ds-disclosure-mark{transition:none;animation:none;}}"
+    },
+    {
+      "name": "Glass project arrow",
+      "kind": "custom",
+      "refersTo": "project-control",
+      "description": "The small translucent arrow within a linked project stage. Its fixed product-control colors are intentional in both system themes; the standalone specimen stays at the 44px desktop size.",
+      "html": "<a class=\"ds-project-control\" href=\"/projects/relay\" aria-label=\"View Relay\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"></path></svg></a>",
+      "css": ".ds-project-control{--ds-focus-ring:var(--focus-ring,#a74921);}@media(prefers-color-scheme:dark){.ds-project-control{--ds-focus-ring:var(--focus-ring,#edac86);}}.ds-project-control{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#fff;color:#294038;text-decoration:none;transition:transform var(--dur,240ms) var(--ease,cubic-bezier(0.16,1,0.3,1));}.ds-project-control svg{width:19px;height:19px;}.ds-project-control:hover{transform:rotate(45deg);}@supports(backdrop-filter:blur(12px)){.ds-project-control{background:#ffffffb8;backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);box-shadow:inset 0 1px 0 #ffffff,inset 0 -1px 0 #ffffff80,0 3px 12px #182c2520;}}@media(prefers-reduced-transparency:reduce){.ds-project-control{background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none;}}.ds-project-control:focus-visible{outline:2px solid var(--ds-focus-ring);outline-offset:5px;}@media(prefers-reduced-motion:reduce){.ds-project-control{transition:none;animation:none;}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Product Monograph",
+    "overview": "The Product Monograph gives real work room to speak. Pale green paper, charcoal type, clear hierarchy, and generous space create a professional setting for product imagery, an authentic portrait, and engineering explanations. The interface is calm; the artifacts provide character.\n\nLight and dark follow the visitor’s operating system. Surfaces remain flat, with small translucent details on the scrolled navigation and project arrow controls. Motion responds to attention and action: short control transitions, a restrained name entrance, and gentle movement of product captures.\n\nThis record describes the finished implementation. Its shared language is reusable; the centered homepage name, PKI-first sequence, individual showcase colors, screenshot angles, and project order are compositions specific to their surfaces. Their direction remains in `.impeccable/surfaces/src-pages-index-astro.md`.",
+    "keyCharacteristics": [
+      "Real photography, verified product captures, and clearly conceptual system diagrams.",
+      "Archivo throughout, with expressive headings and compact supporting metadata.",
+      "Pale green and green charcoal system themes with restrained orange punctuation.",
+      "Flat surfaces, fine rules, native disclosures, and limited liquid glass.",
+      "Readable responsive layouts with visible keyboard focus and reduced-motion support."
+    ],
+    "rules": [
+      {
+        "name": "The Semantic Theme Rule",
+        "body": "Use the active semantic CSS variables for the interface. Keep product-image colors within their own showcase; they do not become a second site-wide accent palette.",
+        "section": "colors"
+      },
+      {
+        "name": "The Explicit Weight Rule",
+        "body": "Set Archivo’s weight explicitly. Its variable-font default is 600; unqualified font use can silently make supporting text too heavy.",
+        "section": "typography"
+      },
+      {
+        "name": "The Reading Measure Rule",
+        "body": "Let imagery occupy broad fields while explanatory copy stays within a readable measure. Reflow columns when the content requires it; do not scale a desktop layout down as a single unit.",
+        "section": "layout"
+      },
+      {
+        "name": "The Limited Glass Rule",
+        "body": "Use translucent blur for the scrolled header and project arrow controls. Both retain solid backgrounds when backdrop filtering is unavailable or reduced transparency is requested.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Evidence Before Decoration Rule",
+        "body": "Use real assets or labeled conceptual diagrams to explain the work. Keep controls quiet enough that the project remains the subject.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do use semantic colors so text, fields, borders, and controls adapt together to the operating-system theme.",
+      "Do keep project titles before their smaller role and year metadata.",
+      "Do preserve visible focus, native disclosure semantics, and the label–control–error relationship.",
+      "Do label demo-data imagery and conceptual diagrams accurately.",
+      "Do use the supplied portrait and verified product imagery, with provenance retained."
+    ],
+    "donts": [
+      "Don't introduce gradients; the confirmed world uses flat color.",
+      "Don't replace the real portrait with a generated avatar.",
+      "Don't spread the localized glass treatment across reading surfaces.",
+      "Don't turn a homepage arrangement, showcase hue, or screenshot angle into a rule for every page.",
+      "Don't replace authored SVG interface icons with text glyphs or icon-font characters."
+    ]
+  }
+}
