@@ -1,13 +1,13 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import '@/styles/mobile-menu.css';
+import { useCallback, useEffect, useRef, useState } from "react";
+import "@/styles/mobile-menu.css";
 
 const navItems = [
-  { name: 'Work', href: '#work' },
-  { name: 'About', href: '#about' },
-  { name: 'Contact', href: '#contact' },
+  { name: "Work", href: "/#work" },
+  { name: "About", href: "/#about" },
+  { name: "Contact", href: "/#contact" },
 ];
 
-const RESUME_URL = 'https://euaell.me/cv';
+const RESUME_URL = "https://euaell.me/cv";
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,16 +25,16 @@ export default function MobileMenu() {
     if (!isOpen) return;
 
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         event.preventDefault();
         close();
         return;
       }
 
-      if (event.key !== 'Tab' || !panelRef.current) return;
+      if (event.key !== "Tab" || !panelRef.current) return;
 
       const focusable = panelRef.current.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled])'
+        "a[href], button:not([disabled])",
       );
       if (focusable.length === 0) return;
 
@@ -50,24 +50,28 @@ export default function MobileMenu() {
       }
     }
 
-    document.addEventListener('keydown', onKeyDown);
-    return () => document.removeEventListener('keydown', onKeyDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
   }, [isOpen, close]);
 
   // Prevent the page behind the drawer from scrolling while it is open.
   useEffect(() => {
     if (!isOpen) return;
     const previous = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = previous;
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (panelRef.current) panelRef.current.inert = !isOpen;
+  }, [isOpen]);
   // Move focus into the panel when it opens.
   useEffect(() => {
     if (!isOpen) return;
-    const firstLink = panelRef.current?.querySelector<HTMLElement>('a[href], button');
+    const firstLink =
+      panelRef.current?.querySelector<HTMLElement>("a[href], button");
     firstLink?.focus();
   }, [isOpen]);
 
@@ -77,19 +81,22 @@ export default function MobileMenu() {
         ref={triggerRef}
         type="button"
         className="menu-trigger"
-        aria-label={isOpen ? 'Close menu' : 'Open menu'}
+        aria-label={isOpen ? "Close menu" : "Open menu"}
         aria-expanded={isOpen}
         aria-controls="mobile-menu-panel"
         onClick={() => (isOpen ? close() : setIsOpen(true))}
       >
-        <span className={`menu-bars${isOpen ? ' is-open' : ''}`} aria-hidden="true">
+        <span
+          className={`menu-bars${isOpen ? " is-open" : ""}`}
+          aria-hidden="true"
+        >
           <span />
           <span />
         </span>
       </button>
 
       <div
-        className={`menu-scrim${isOpen ? ' is-open' : ''}`}
+        className={`menu-scrim${isOpen ? " is-open" : ""}`}
         onClick={close}
         aria-hidden="true"
       />
@@ -97,14 +104,32 @@ export default function MobileMenu() {
       <div
         id="mobile-menu-panel"
         ref={panelRef}
-        className={`menu-panel${isOpen ? ' is-open' : ''}`}
+        className={`menu-panel${isOpen ? " is-open" : ""}`}
         role="dialog"
         aria-modal="true"
         aria-label="Menu"
         // Keeps the panel out of the tab order entirely while closed.
-        inert={isOpen ? undefined : true}
       >
-        <nav>
+        <button
+          type="button"
+          className="menu-close"
+          aria-label="Close menu"
+          onClick={close}
+        >
+          <span aria-hidden="true">
+            <svg
+              className="ui-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              aria-hidden="true"
+            >
+              <path d="m6 6 12 12M6 18 18 6" />
+            </svg>
+          </span>
+        </button>
+        <nav aria-label="Main navigation">
           <ul className="menu-list">
             {navItems.map((item) => (
               <li key={item.name}>

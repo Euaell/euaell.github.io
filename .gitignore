@@ -62,3 +62,12 @@ doc/staging/tools/*
 
 *.
 !bun.lock
+
+# Impeccable design skill: development-only state (surface briefs, mocks, review shots)
+.impeccable/*
+!.impeccable/design.json
+
+# Design-exploration surface for the open design artifacts in doc/staging/prototypes/.
+# Authored here, served from a transient src/pages/prototypes/ route during review,
+# deleted when a direction is promoted. Never part of the site build.
+src/prototypes/

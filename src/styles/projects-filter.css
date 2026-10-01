@@ -1,154 +1,151 @@
-/* Styles for the React project filter. Astro's scoped <style> does not reach
-   React islands, so this is a plain stylesheet resolved through Vite. All
-   colour comes from the semantic tokens, so it follows the system theme. */
-
 .filter-bar {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-bottom: var(--space-4);
-}
-
-.filter-chip {
-  display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: 0.35rem 0.7rem;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  line-height: 1.4;
-  color: var(--text-secondary);
-  background: transparent;
-  border: var(--border-width) solid var(--border);
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  transition:
-    background-color var(--dur) var(--ease),
-    border-color var(--dur) var(--ease),
-    color var(--dur) var(--ease);
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
-
-.filter-chip:hover {
-  border-color: var(--border-strong);
-  color: var(--text);
-}
-
-/* Selected state uses the primary fill, matching .btn-primary so a chip and a
-   button never disagree about what "selected" looks like. */
-.filter-chip.is-selected {
-  background: var(--btn-bg);
-  border-color: var(--btn-bg);
-  color: var(--btn-fg);
-}
-
-.filter-count {
-  font-variant-numeric: tabular-nums;
-  font-size: 0.75rem;
-  opacity: 0.6;
-}
-
 .filter-status {
-  margin-bottom: var(--space-5);
   font-size: 0.875rem;
   color: var(--text-muted);
 }
-
+.filter-control {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+}
+.filter-control label {
+  color: var(--text-secondary);
+}
+.filter-control select {
+  min-height: 44px;
+  max-width: 100%;
+  padding: 0.6rem 2.25rem 0.6rem 0.9rem;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  font: inherit;
+  cursor: pointer;
+}
 .project-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-5);
 }
-
+.project-grid > li {
+  scroll-margin-top: 110px;
+}
 .project-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  transition: border-color var(--dur) var(--ease);
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  padding: 3.5rem 0;
+  border-bottom: 1px solid var(--border);
 }
-
-.project-card:hover {
-  border-color: var(--border-strong);
+.project-heading h2 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
 }
-
-.project-media {
-  overflow: hidden;
-  border-bottom: var(--border-width) solid var(--border);
+.project-meta {
+  margin-top: 0.7rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
 }
-
-.project-media img {
+.project-image-caption {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+.project-thumb {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  max-width: 340px;
+  aspect-ratio: 16/10;
   object-fit: cover;
-  object-position: top center;
-  background: var(--surface-raised);
+  object-position: top;
+  margin-top: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
-
-.project-body {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: var(--space-5);
-}
-
-.project-title {
-  font-size: 1.25rem;
-  letter-spacing: -0.015em;
-  margin-bottom: var(--space-2);
-}
-
 .project-summary {
-  flex: 1;
-  font-size: 0.9375rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  margin-bottom: var(--space-4);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--text);
+  margin-bottom: 1.5rem;
 }
-
 .project-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-bottom: var(--space-4);
+  gap: 0.4rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
 }
-
 .project-links {
   display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.project-details {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.project-details summary {
+  display: flex;
   align-items: center;
-  gap: var(--space-2);
-  font-size: 0.9375rem;
-  margin-top: auto;
-}
-
-.empty-state {
-  padding: var(--space-7) var(--space-5);
-  text-align: center;
-  border: var(--border-width) dashed var(--border-strong);
-  border-radius: var(--radius-lg);
-}
-
-.empty-title {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.0625rem;
-  margin-bottom: var(--space-2);
-}
-
-.empty-reset {
-  background: none;
-  border: 0;
-  padding: 0;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 52px;
+  font-size: 0.875rem;
   cursor: pointer;
-  font: inherit;
+  list-style: none;
 }
-
-@media (min-width: 700px) {
-  .project-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+.project-details summary::-webkit-details-marker {
+  display: none;
+}
+.project-details summary span {
+  font-size: 1.25rem;
+  transition: transform var(--dur) var(--ease);
+}
+.project-details[open] summary span {
+  transform: rotate(45deg);
+}
+.project-details > div {
+  padding: 0.5rem 0 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+}
+.project-details ul {
+  list-style: disc;
+  padding-left: 1.1rem;
+  margin-top: 1.25rem;
+}
+.project-details li + li {
+  margin-top: 0.75rem;
+}
+@media (max-width: 650px) {
+  .project-card {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 2.5rem 0;
   }
-}
-
-@media (min-width: 1000px) {
-  .project-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .project-thumb {
+    max-width: none;
+  }
+  .filter-bar {
+    align-items: flex-start;
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+  .filter-control {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .filter-control select {
+    max-width: 70%;
   }
 }

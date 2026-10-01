@@ -1,13 +1,20 @@
-import { defineConfig } from 'astro/config';
-import node from '@astrojs/node';
-import react from '@astrojs/react';
-import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from "astro/config";
+import node from "@astrojs/node";
+import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://portfolio.euaell.me',
-  adapter: node({ mode: 'standalone' }),
-  integrations: [react()],
+  site: "https://portfolio.euaell.me",
+  trailingSlash: "never",
+  adapter: node({ mode: "standalone" }),
+  integrations: [
+    react(),
+    sitemap({
+      filter: (page) => !page.endsWith("/404/") && !page.endsWith("/404"),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

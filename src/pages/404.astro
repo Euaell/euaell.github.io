@@ -1,0 +1,25 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Navigation from "@/components/ui/Navigation.astro";
+---
+
+<Layout title="Page not found — Euael M. Eshete" noIndex>
+  <Navigation /><main id="main" class="section">
+    <div class="container error-page">
+      <h1 class="display">This page<br />isn’t here.</h1><p>
+        The link may have changed. You can find my work in the project index.
+      </p><a class="btn btn-primary" href="/projects">Explore the projects</a>
+    </div>
+  </main>
+</Layout>
+<style>
+  .error-page {
+    padding-block: 3rem;
+    min-height: 60vh;
+  }
+  .error-page p {
+    color: var(--text-secondary);
+    max-width: 45ch;
+    margin: 2rem 0;
+  }
+</style>

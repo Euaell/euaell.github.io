@@ -1,66 +1,122 @@
 ---
-const personSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Euael M. Eshete',
-  jobTitle: 'Full Stack Developer & AI Engineer',
-  url: 'https://portfolio.euaell.me',
-  email: 'contact@euaell.me',
-  sameAs: [
-    'https://github.com/euaell',
-    'https://www.linkedin.com/in/euael-eshete',
-    'https://twitter.com/euaell',
-  ],
+import { getImage } from "astro:assets";
+import portrait from "@/assets/portrait-casual.jpg";
+import { profileInfo, siteLinks } from "@/data/profile";
+import { projectsData, type Project } from "@/data/projects";
+interface Props {
+  page?: "home" | "projects" | "project";
+  project?: Project;
+}
+const { page = "home", project } = Astro.props;
+const site = Astro.site!;
+const absolute = (path: string) => new URL(path, site).href;
+const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const url = absolute(pathname);
+const personId = absolute("/#person");
+const websiteId = absolute("/#website");
+const headshot = await getImage({ src: portrait, width: 640, format: "webp" });
+const person = {
+  "@type": "Person",
+  "@id": personId,
+  name: profileInfo.name,
+  jobTitle: "Software Engineer",
+  url: absolute("/"),
+  email: siteLinks.email,
+  description: profileInfo.bio,
+  image: absolute(headshot.src),
+  sameAs: [siteLinks.github, siteLinks.linkedin],
+  homeLocation: { "@type": "Place", name: profileInfo.location },
+  worksFor: { "@type": "Organization", name: "Securetron" },
+  affiliation: {
+    "@type": "Organization",
+    name: "ZafTech",
+    url: siteLinks.studio,
+  },
+  alumniOf: { "@type": "CollegeOrUniversity", name: "Addis Ababa University" },
   knowsAbout: [
-    'Web Development',
-    'Full Stack Development',
-    'React',
-    'Next.js',
-    'TypeScript',
-    'Python',
-    'FastAPI',
-    'Artificial Intelligence',
-    'Machine Learning',
-    'Software Engineering',
+    "PKI",
+    "Certificate lifecycle management",
+    "Multi-tenant SaaS",
+    "ASP.NET Core",
+    "PostgreSQL",
+    "Cloud infrastructure",
+    "Model Context Protocol",
   ],
-  alumniOf: {
-    '@type': 'EducationalOrganization',
-    name: 'Addis Ababa University',
-  },
-  worksFor: {
-    '@type': 'Organization',
-    name: 'SecureTron Inc.',
-  },
 };
-
-const websiteSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'Euael M. Eshete Portfolio',
-  url: 'https://portfolio.euaell.me',
-  description:
-    'Portfolio of Euael M. Eshete - Full Stack Developer & AI Engineer specializing in React, Next.js, Python, TypeScript, and machine learning.',
-  author: {
-    '@type': 'Person',
-    name: 'Euael M. Eshete',
-  },
+const website = {
+  "@type": "WebSite",
+  "@id": websiteId,
+  name: "Euael M. Eshete",
+  url: absolute("/"),
+  inLanguage: "en",
+  publisher: { "@id": personId },
 };
-
-const profilePageSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfilePage',
-  dateCreated: '2023-01-01',
-  dateModified: new Date().toISOString().split('T')[0],
+const webPage = {
+  "@type":
+    page === "home"
+      ? "ProfilePage"
+      : page === "projects"
+        ? "CollectionPage"
+        : "WebPage",
+  "@id": url + "#webpage",
+  url,
+  name: project
+    ? project.title + " — Euael M. Eshete"
+    : page === "projects"
+      ? "Engineering projects — Euael M. Eshete"
+      : "Euael M. Eshete — Software Engineer",
+  isPartOf: { "@id": websiteId },
+  inLanguage: "en",
   mainEntity: {
-    '@type': 'Person',
-    name: 'Euael M. Eshete',
-    jobTitle: 'Full Stack Developer & AI Engineer',
-    description:
-      'Full Stack Developer & AI Engineer specializing in React, Next.js, Python, TypeScript, and machine learning. Building innovative web applications and AI solutions.',
+    "@id":
+      page === "home" ? personId : url + (project ? "#project" : "#projects"),
   },
 };
+const graph: Record<string, unknown>[] = [person, website, webPage];
+if (page === "projects")
+  graph.push({
+    "@type": "ItemList",
+    "@id": url + "#projects",
+    name: "Selected engineering projects",
+    numberOfItems: projectsData.length,
+    itemListElement: projectsData.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.title,
+      url: absolute("/projects/" + item.slug),
+    })),
+  });
+if (project)
+  graph.push({
+    "@type": "CreativeWork",
+    "@id": url + "#project",
+    name: project.title,
+    description: project.summary,
+    url,
+    contributor: { "@id": personId },
+    keywords: project.tags.join(", "),
+    ...(project.image ? { image: absolute(project.image) } : {}),
+  });
+if (page !== "home")
+  graph.push({
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: absolute("/") },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Projects",
+        item: absolute("/projects"),
+      },
+      ...(project
+        ? [{ "@type": "ListItem", position: 3, name: project.title, item: url }]
+        : []),
+    ],
+  });
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": graph,
+}).replace(/</g, "\\u003c");
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
-<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
-<script type="application/ld+json" set:html={JSON.stringify(profilePageSchema)} />
+<script is:inline type="application/ld+json" set:html={structuredData} />

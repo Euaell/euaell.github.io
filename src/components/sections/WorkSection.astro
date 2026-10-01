@@ -1,223 +1,585 @@
 ---
-import { featuredProjects } from '@/data/projects';
-
-// Featured work renders as full-width rows rather than a card grid: for three
-// substantial projects, a row gives each one a readable screenshot and room to
-// state the actual contribution. Cards would crush that into thumbnails.
+import { featuredProjects } from "@/data/projects";
+import EngineeringFeature from "./EngineeringFeature.astro";
+import FurtherWork from "./FurtherWork.astro";
+const order = ["convia", "mizan", "relay"];
+const projects = [...featuredProjects].sort(
+  (a, b) => order.indexOf(a.slug) - order.indexOf(b.slug),
+);
+const captions: Record<string, string> = {
+  convia:
+    "A document becomes a conversation. The answers become structured data.",
+  mizan:
+    "Meals, training, and progress — connected to the AI tools you already use.",
+  relay: "Reliable tool execution and artifact delivery for AI agents.",
+};
 ---
 
-<section id="work" class="section">
+<section id="work" class="work-section">
   <div class="container">
-    <header class="section-head">
-      <h2 class="heading">Selected work</h2>
-      <p class="lede">
-        Four systems I have designed, built, and shipped. Each one is in production
-        or under active development.
-      </p>
+    <header class="work-heading">
+      <h2 class="heading">Selected work</h2><a
+        class="text-link"
+        href="/projects"
+        >All projects <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg
+        ></a
+      >
     </header>
-
-    <div class="work-list">
+    <EngineeringFeature />
+    <div class="work-grid">
       {
-        featuredProjects.map((project, index) => (
-          <article class="work-item" data-index={index}>
-            {project.image ? (
-              <div class="work-media">
-                <img
-                  src={project.image}
-                  alt={project.imageAlt ?? ''}
-                  loading="lazy"
-                  decoding="async"
-                  width="1600"
-                  height="1000"
-                />
-              </div>
-            ) : (
-              <div class="work-media work-media--text" aria-hidden="true">
-                <span class="work-media-mark">{project.title.charAt(0)}</span>
-              </div>
-            )}
-
-            <div class="work-body">
-              <p class="meta work-role">
-                <span>{project.role}</span>
-                <span class="sep" aria-hidden="true">·</span>
-                <span>{project.year}</span>
-              </p>
-
-              <h3 class="work-title">{project.title}</h3>
-
-              <p class="work-summary">{project.summary}</p>
-
-              <ul class="work-highlights">
-                {project.highlights.slice(0, 3).map((point) => (
-                  <li>{point}</li>
-                ))}
-              </ul>
-
-              <ul class="work-tags">
-                {project.tags.slice(0, 5).map((tag) => (
-                  <li class="tag">{tag}</li>
-                ))}
-              </ul>
-
-              <p class="work-links">
-                {project.link && (
-                  <a class="link" href={project.link} target="_blank" rel="noopener noreferrer">
-                    {project.linkLabel ?? 'Visit site'}
-                  </a>
-                )}
-                {project.link && project.repositoryLink && (
-                  <span class="sep" aria-hidden="true">·</span>
-                )}
-                {project.repositoryLink && (
-                  <a class="link" href={project.repositoryLink} target="_blank" rel="noopener noreferrer">
-                    Source
-                  </a>
-                )}
-              </p>
+        projects.map((project) => (
+          <article class:list={["work-item", "work-" + project.slug]}>
+            <a
+              class:list={["project-stage", "stage-" + project.slug]}
+              href={
+                project.link ??
+                project.repositoryLink ??
+                "/projects/" + project.slug
+              }
+              target={
+                project.link || project.repositoryLink ? "_blank" : undefined
+              }
+              rel={
+                project.link || project.repositoryLink
+                  ? "noopener noreferrer"
+                  : undefined
+              }
+            >
+              {project.slug === "convia" ? (
+                <>
+                  <div class="stage-wordmark">
+                    convia<span aria-hidden="true">.</span>
+                  </div>
+                  <p class="stage-caption">
+                    Better questions.
+                    <br />
+                    Structured answers.
+                  </p>
+                  <div class="screen-wrap">
+                    <img
+                      src="/images/projects/convia-editor.webp"
+                      alt="Convia form editor with typed question fields and publishing controls"
+                      width="1500"
+                      height="906"
+                      loading="eager"
+                      decoding="async"
+                    />
+                  </div>
+                  <span class="stage-kind">Conversational AI platform</span>
+                </>
+              ) : project.slug === "mizan" ? (
+                <>
+                  <div class="stage-wordmark">
+                    mizan<span aria-hidden="true">.</span>
+                  </div>
+                  <p class="stage-caption">
+                    A little more
+                    <br />
+                    in balance.
+                  </p>
+                  <div class="screen-wrap">
+                    <img
+                      src="/images/projects/mizan-showcase.webp"
+                      alt="Mizan daily log with nutrition, meals, and workout tracking, shown with demo data"
+                      width="1440"
+                      height="960"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <span class="stage-kind">Daily log · Demo data</span>
+                </>
+              ) : (
+                <>
+                  <div class="stage-wordmark">
+                    relay<span aria-hidden="true">.</span>
+                  </div>
+                  <p class="stage-caption">
+                    From a request
+                    <br />
+                    to a result.
+                  </p>
+                  <svg
+                    class="relay-flow"
+                    viewBox="0 0 500 180"
+                    role="img"
+                    aria-label="Relay accepts a request, records a durable run, and delivers an artifact"
+                  >
+                    <path
+                      d="M106 90h77m132 0h78"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      fill="none"
+                      opacity=".55"
+                    />
+                    <path
+                      d="m176 85 7 5-7 5m210-10 7 5-7 5"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      fill="none"
+                    />
+                    <rect
+                      x="20"
+                      y="52"
+                      width="88"
+                      height="76"
+                      rx="12"
+                      fill="#d1dcc5"
+                    />
+                    <rect
+                      x="185"
+                      y="35"
+                      width="128"
+                      height="110"
+                      rx="14"
+                      fill="#edf2e6"
+                    />
+                    <rect
+                      x="395"
+                      y="52"
+                      width="88"
+                      height="76"
+                      rx="12"
+                      fill="#d1dcc5"
+                    />
+                    <path
+                      d="m58 77-12 13 12 13m14-26 12 13-12 13"
+                      stroke="#294038"
+                      stroke-width="2"
+                      fill="none"
+                    />
+                    <path
+                      d="M234 71h30v36h-30zm7 11h16m-16 8h16m-16 8h10"
+                      stroke="#294038"
+                      stroke-width="2"
+                      fill="none"
+                    />
+                    <path
+                      d="M425 76h19l9 9v21h-28zm19 0v10h9"
+                      stroke="#294038"
+                      stroke-width="2"
+                      fill="none"
+                    />
+                    <g
+                      fill="currentColor"
+                      text-anchor="middle"
+                      font-family="Archivo,sans-serif"
+                      font-size="14"
+                    >
+                      <text x="64" y="161">
+                        Request
+                      </text>
+                      <text x="249" y="169">
+                        Durable run
+                      </text>
+                      <text x="439" y="161">
+                        Artifact
+                      </text>
+                    </g>
+                  </svg>
+                  <span class="stage-kind">Open source · In development</span>
+                </>
+              )}
+              <span class="stage-link" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path d="M5 19 19 5M5 5h14v14" />
+                </svg>
+              </span>
+            </a>
+            <div class="project-caption">
+              <>
+                <div>
+                  <>
+                    <h3>{project.title}</h3>
+                    <p class="project-meta">
+                      {project.role} <span aria-hidden="true">·</span>{" "}
+                      {project.year}
+                    </p>
+                  </>
+                </div>
+                <p class="project-summary">
+                  {captions[project.slug] ?? project.summary}
+                </p>
+              </>
             </div>
+            <details class="project-detail">
+              <>
+                <summary>
+                  Behind the build{" "}
+                  <span aria-hidden="true">
+                    <svg
+                      class="ui-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 5v14M5 12h14" />
+                    </svg>
+                  </span>
+                </summary>
+                <div class="project-detail-content">
+                  <p>{project.description}</p>
+                  <a class="text-link" href={"/projects/" + project.slug}>
+                    Project overview
+                  </a>
+                  <ul>
+                    {project.highlights.map((highlight) => (
+                      <li>{highlight}</li>
+                    ))}
+                  </ul>
+                  <p class="project-stack">{project.tags.join(" / ")}</p>
+                  {project.repositoryLink && (
+                    <a
+                      class="link"
+                      href={project.repositoryLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View source
+                    </a>
+                  )}
+                </div>
+              </>
+            </details>
           </article>
         ))
       }
     </div>
+    <FurtherWork />
   </div>
 </section>
-
 <style>
-  .section-head {
-    max-width: 44rem;
-    margin-bottom: var(--space-7);
+  .work-section {
+    padding-block: 2rem 5rem;
   }
-
-  .section-head .heading {
-    margin-bottom: var(--space-3);
-  }
-
-  .work-list {
+  .work-heading {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-8);
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
   }
-
-  .work-item {
+  .work-heading .heading {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+  }
+  .work-grid {
     display: grid;
-    gap: var(--space-5);
-    align-items: start;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3.8rem 2rem;
   }
-
-  .work-media img {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-    object-position: top center;
-    border-radius: var(--radius-lg);
-    border: var(--border-width) solid var(--border);
-    background: var(--surface);
+  .work-convia {
+    grid-column: 1/-1;
   }
-
-  /* Fallback for projects with no capture available. Deliberately plain: a
-     large initial on a flat surface reads as intentional, where a stock or
-     generated stand-in would read as filler. */
-  .work-media--text {
-    display: grid;
-    place-items: center;
-    aspect-ratio: 16 / 10;
-    border-radius: var(--radius-lg);
-    border: var(--border-width) solid var(--border);
-    background: var(--surface);
-  }
-
-  .work-media-mark {
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 2rem + 6vw, 5rem);
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: -0.04em;
-    color: var(--accent-mark);
-    opacity: 0.45;
-  }
-
-  .work-role {
-    margin-bottom: var(--space-2);
-  }
-
-  .work-title {
-    font-size: clamp(1.375rem, 1.1rem + 1vw, 1.75rem);
-    letter-spacing: -0.02em;
-    margin-bottom: var(--space-3);
-  }
-
-  .work-summary {
-    color: var(--text-secondary);
-    margin-bottom: var(--space-4);
-    max-width: 60ch;
-  }
-
-  .work-highlights {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    margin-bottom: var(--space-4);
-    max-width: 60ch;
-  }
-
-  .work-highlights li {
+  .project-stage {
     position: relative;
-    padding-left: var(--space-4);
-    font-size: 0.9375rem;
-    line-height: 1.6;
-    color: var(--text-secondary);
+    display: block;
+    height: 410px;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    isolation: isolate;
   }
-
-  /* A short accent rule per point, not a bullet glyph. */
-  .work-highlights li::before {
-    content: '';
+  .stage-convia {
+    background: #dce9e1;
+    color: #244c3d;
+    height: 480px;
+  }
+  .stage-mizan {
+    background: #ece8dd;
+    color: #4c4b38;
+  }
+  .stage-relay {
+    background: #304a3e;
+    color: #eef2e6;
+  }
+  .stage-wordmark {
     position: absolute;
-    left: 0;
-    top: 0.7em;
-    width: 0.5rem;
-    height: 1px;
-    background: var(--accent-mark);
+    top: 32px;
+    left: 34px;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1;
   }
-
-  .work-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-    margin-bottom: var(--space-4);
+  .stage-wordmark span {
+    color: #8d492b;
   }
-
-  .tag {
-    padding: 0.2rem 0.55rem;
+  .stage-relay .stage-wordmark span {
+    color: #deab79;
+  }
+  .stage-caption {
+    position: absolute;
+    left: 34px;
+    top: 101px;
+    font-size: 1.65rem;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    font-weight: 450;
+  }
+  .stage-kind {
+    position: absolute;
+    bottom: 26px;
+    left: 34px;
     font-size: 0.75rem;
     font-weight: 500;
-    letter-spacing: 0.01em;
-    color: var(--text-muted);
-    background: var(--surface);
-    border: var(--border-width) solid var(--border);
-    border-radius: var(--radius-sm);
   }
-
-  .work-links {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-2);
-    font-size: 0.9375rem;
+  .screen-wrap {
+    position: absolute;
+    border-radius: 7px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px #23433226;
+    transition: transform 700ms var(--ease);
   }
-
-  @media (min-width: 900px) {
-    .work-item {
-      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-      gap: var(--space-7);
-      align-items: center;
+  .screen-wrap img {
+    width: 100%;
+    display: block;
+  }
+  .stage-convia .screen-wrap {
+    width: 73%;
+    left: 34%;
+    top: 70px;
+    transform: rotate(-5deg);
+    transform-origin: left center;
+  }
+  .stage-convia .stage-caption {
+    top: 140px;
+    font-size: clamp(1.6rem, 2.6vw, 2rem);
+  }
+  .stage-mizan .screen-wrap {
+    width: 105%;
+    left: 18%;
+    top: 177px;
+    transform: rotate(-7deg);
+  }
+  .stage-link {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    right: 22px;
+    top: 22px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fff;
+    color: #294038;
+    z-index: 2;
+    transition: transform var(--dur) var(--ease);
+  }
+  @supports (backdrop-filter: blur(12px)) {
+    .stage-link {
+      background: #ffffffb8;
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      box-shadow:
+        inset 0 1px 0 #ffffff,
+        inset 0 -1px 0 #ffffff80,
+        0 3px 12px #182c2520;
     }
-
-    /* Alternate which side the screenshot sits on so consecutive rows do not
-       read as a single repeated block. */
-    .work-item[data-index='1'] .work-media,
-    .work-item[data-index='3'] .work-media {
-      order: 2;
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .stage-link {
+      background: #fff;
+      backdrop-filter: none;
+    }
+  }
+  .stage-link svg {
+    width: 19px;
+    height: 19px;
+  }
+  .project-stage:hover .stage-link {
+    transform: rotate(45deg);
+  }
+  .stage-convia:hover .screen-wrap {
+    transform: rotate(-3deg) translateY(-5px);
+  }
+  .stage-mizan:hover .screen-wrap {
+    transform: rotate(-4deg) translateY(-5px);
+  }
+  .relay-flow {
+    position: absolute;
+    width: 90%;
+    left: 5%;
+    bottom: 65px;
+  }
+  .project-caption {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    padding-top: 1.4rem;
+  }
+  .project-meta {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    margin-top: 0.55rem;
+  }
+  .project-meta span {
+    margin-inline: 0.3rem;
+  }
+  .project-caption h3 {
+    font-size: 1.65rem;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+  .project-summary {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    max-width: 40ch;
+    align-self: center;
+  }
+  .work-item:not(.work-convia) .project-caption {
+    display: block;
+  }
+  .work-item:not(.work-convia) .project-summary {
+    margin-top: 0.8rem;
+  }
+  .project-detail {
+    margin-top: 1.35rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .project-detail summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    list-style: none;
+    padding: 0.75rem 0;
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+  }
+  .project-detail summary::-webkit-details-marker {
+    display: none;
+  }
+  .project-detail summary span {
+    font-size: 1.25rem;
+    transition: transform var(--dur) var(--ease);
+  }
+  .project-detail[open] summary span {
+    transform: rotate(45deg);
+  }
+  .project-detail-content {
+    padding: 0.5rem 0 1.5rem;
+    max-width: 75ch;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+  .project-detail-content ul {
+    list-style: disc;
+    padding-left: 1.2rem;
+    margin-block: 1rem;
+  }
+  .project-detail-content li + li {
+    margin-top: 0.6rem;
+  }
+  .project-stack {
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 800px) {
+    .work-grid {
+      gap: 3rem 1.25rem;
+    }
+    .project-stage {
+      height: 365px;
+    }
+    .stage-convia {
+      height: 390px;
+    }
+    .stage-wordmark,
+    .stage-caption,
+    .stage-kind {
+      left: 24px;
+    }
+    .stage-caption {
+      font-size: 1.5rem;
+    }
+    .stage-convia .screen-wrap {
+      width: 82%;
+      left: 33%;
+      top: 125px;
+    }
+    .stage-convia .stage-caption {
+      top: 95px;
+    }
+    .stage-mizan .screen-wrap {
+      top: 175px;
+    }
+    .project-caption {
+      gap: 1rem;
+    }
+    .project-summary {
+      max-width: 31ch;
+    }
+  }
+  @media (max-width: 600px) {
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+    .work-convia {
+      grid-column: auto;
+    }
+    .work-heading {
+      align-items: baseline;
+      margin-bottom: 1.3rem;
+    }
+    .work-heading .text-link {
+      font-size: 0.8rem;
+      gap: 0.4rem;
+    }
+    .project-stage,
+    .stage-convia {
+      height: 360px;
+    }
+    .stage-convia .screen-wrap {
+      width: 100%;
+      left: 22%;
+      top: 162px;
+    }
+    .stage-convia .stage-caption {
+      top: 91px;
+      font-size: 1.55rem;
+    }
+    .stage-wordmark {
+      top: 27px;
+      font-size: 1.9rem;
+    }
+    .stage-link {
+      width: 36px;
+      height: 36px;
+    }
+    .project-caption {
+      display: block;
+    }
+    .project-summary {
+      margin-top: 0.8rem;
+      max-width: none;
+    }
+    .stage-kind {
+      bottom: 20px;
+      font-size: 0.6875rem;
+    }
+    .stage-convia .stage-kind {
+      background: #dce9e1;
+      padding: 0.3rem 0.5rem;
+      left: 18px;
+      border-radius: 3px;
+    }
+    .stage-mizan .stage-kind {
+      background: #ece8dd;
+      padding: 0.3rem 0.5rem;
+      left: 18px;
+      border-radius: 3px;
     }
   }
 </style>

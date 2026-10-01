@@ -1,41 +1,41 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import Navigation from '@/components/ui/Navigation.astro';
-import FloatingResumeButton from '@/components/ui/FloatingResumeButton.astro';
-import ProjectFilter, { type ProjectCard } from '@/components/ui/ProjectFilter';
-import { projectsData } from '@/data/projects';
+import Layout from "@/layouts/Layout.astro";
+import Navigation from "@/components/ui/Navigation.astro";
 
-// Narrow the full records down to what the filter island renders.
-const projects: ProjectCard[] = projectsData.map(
-  ({ slug, title, summary, tags, image, imageAlt, link, repositoryLink, featured }) => ({
-    slug,
-    title,
-    summary,
-    tags,
-    image,
-    imageAlt,
-    link,
-    repositoryLink,
-    featured,
-  })
+import ProjectFilter, { type ProjectCard } from "@/components/ui/ProjectFilter";
+import { projectsData } from "@/data/projects";
+import StructuredData from "@/components/seo/StructuredData.astro";
+
+const rank: Record<string, number> = {
+  "pki-trust-manager": 0,
+  convia: 1,
+  relay: 2,
+  rms: 3,
+  "project-life-manager": 4,
+  afrochat: 5,
+  mizan: 6,
+  distrokv: 7,
+};
+const projects: ProjectCard[] = [...projectsData].sort(
+  (a, b) => (rank[a.slug] ?? 99) - (rank[b.slug] ?? 99),
 );
 ---
 
 <Layout
   title="Projects · Euael M. Eshete"
-  description="Systems built by Euael M. Eshete: Convia, Relay, a multi-tenant PKI platform, Mizan, DistroKV, and AfroChat."
+  description="Selected engineering work by Euael M. Eshete: certificate infrastructure, multi-tenant SaaS, durable AI tool execution, and product development."
 >
   <Navigation />
+  <Fragment slot="head"><StructuredData page="projects" /></Fragment>
 
   <main id="main">
     <section class="section">
       <div class="container">
         <header class="page-head">
-          <p class="eyebrow">Projects</p>
-          <h1 class="display page-title">Everything I have built</h1>
+          <h1 class="display page-title">Work, in more detail.</h1>
           <p class="lede">
-            Products, platforms, and systems work. Filter by technology if you are
-            looking for something specific.
+            Products, platforms, and systems work. Filter by technology if you
+            are looking for something specific.
           </p>
         </header>
 
@@ -43,8 +43,6 @@ const projects: ProjectCard[] = projectsData.map(
       </div>
     </section>
   </main>
-
-  <FloatingResumeButton />
 </Layout>
 
 <style>

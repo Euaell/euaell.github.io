@@ -1,77 +1,37 @@
-/* Design tokens.
-   Two layers: primitives are the raw ramps (never referenced by components),
-   semantic tokens name the job. Only semantic tokens are used in markup.
-   Theme follows the operating system. There is no toggle and no stored
-   preference, so the light values in :root are simply replaced inside the
-   prefers-color-scheme block. */
-
+/* Flat surfaces; photography and product imagery supply the color. */
 :root {
-  /* ---------------------------------------------------------------- ramps */
-  /* pumpkin spice: the accent */
-  --pumpkin-50: oklch(96.35% 0.02 58.07);
-  --pumpkin-100: oklch(92.83% 0.042 56.75);
-  --pumpkin-200: oklch(86.17% 0.085 57.05);
-  --pumpkin-300: oklch(79.79% 0.128 55.11);
-  --pumpkin-400: oklch(74.26% 0.166 52.21);
-  --pumpkin-500: oklch(69.49% 0.195 45.6);
-  --pumpkin-600: oklch(59.02% 0.164 46.35);
-  --pumpkin-700: oklch(47.91% 0.131 47.01);
-  --pumpkin-800: oklch(36.29% 0.095 49.2);
-  --pumpkin-900: oklch(23.48% 0.057 53.76);
-  --pumpkin-950: oklch(19.47% 0.044 58.27);
-
-  /* "white": a cool cyan-tinted neutral, not actually white */
-  --white-50: oklch(96.64% 0.005 197.07);
-  --white-100: oklch(93.18% 0.012 196.95);
-  --white-200: oklch(86.11% 0.022 196.76);
-  --white-300: oklch(79.12% 0.033 196.5);
-  --white-400: oklch(71.86% 0.043 196.23);
-  --white-500: oklch(64.71% 0.054 195.89);
-  --white-600: oklch(55% 0.045 195.93);
-  --white-700: oklch(45.07% 0.036 195.94);
-  --white-800: oklch(34.31% 0.025 196.03);
-  --white-900: oklch(22.89% 0.016 196.11);
-  --white-950: oklch(18.86% 0.011 196.29);
-
-  /* taupe grey: faintly magenta neutral */
-  --taupe-50: oklch(96.02% 0.003 325.6);
-  --taupe-100: oklch(92.18% 0.004 337.36);
-  --taupe-200: oklch(84.1% 0.012 334.12);
-  --taupe-300: oklch(75.92% 0.017 335.15);
-  --taupe-400: oklch(67.53% 0.022 335.87);
-  --taupe-500: oklch(58.91% 0.028 334.07);
-  --taupe-600: oklch(50.23% 0.024 336.12);
-  --taupe-700: oklch(41.19% 0.02 335.59);
-  --taupe-800: oklch(31.61% 0.015 334.68);
-  --taupe-900: oklch(21.33% 0.006 337.83);
-  --taupe-950: oklch(18.05% 0.004 345.69);
-
-  /* shadow grey: the near-true neutral */
-  --shadow-50: oklch(96.14% 0.001 286.37);
-  --shadow-100: oklch(92.13% 0.005 314.8);
-  --shadow-200: oklch(84.09% 0.009 314.77);
-  --shadow-300: oklch(76.02% 0.011 316.48);
-  --shadow-400: oklch(67.57% 0.017 315.93);
-  --shadow-500: oklch(58.85% 0.022 315.6);
-  --shadow-600: oklch(50.25% 0.018 315.9);
-  --shadow-700: oklch(41.28% 0.013 316.43);
-  --shadow-800: oklch(31.57% 0.012 314.64);
-  --shadow-900: oklch(21.26% 0.007 314.68);
-  --shadow-950: oklch(17.97% 0.004 308.19);
-
-  /* deep crimson: reserved, only for genuine negative signal */
-  --crimson-300: oklch(70.73% 0.18 16.79);
-  --crimson-400: oklch(64.75% 0.229 21.65);
-  --crimson-500: oklch(62.06% 0.252 26.99);
-  --crimson-600: oklch(52.5% 0.212 26.66);
-  --crimson-700: oklch(42.49% 0.171 26.07);
-
-  /* ------------------------------------------------------------ typography */
-  --font-display: 'Archivo', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  --font-body: 'Archivo', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
-
-  /* Space and rhythm. One scale, used everywhere. */
+  color-scheme: light;
+  --font-display: "Archivo", "Segoe UI", sans-serif;
+  --font-body: "Archivo", "Segoe UI", sans-serif;
+  --font-mono: "Cascadia Code", ui-monospace, monospace;
+  --bg: #f7f8f5;
+  --bg-subtle: #eef0eb;
+  --surface: #eef0eb;
+  --surface-raised: #fff;
+  --surface-overlay: #e6e9e2;
+  --text: #252923;
+  --text-secondary: #50564d;
+  --text-muted: #666d62;
+  --border: #d9ddd4;
+  --border-strong: #a9b1a2;
+  --border-hover: #6b7563;
+  --accent-text: #a74921;
+  --accent-mark: #bb562c;
+  --accent-faint: #f1daca;
+  --accent-wash: #f5e8de;
+  --negative: #ac3434;
+  --positive: #327044;
+  --btn-bg: #252923;
+  --btn-fg: #f7f8f5;
+  --btn-bg-hover: #424c3a;
+  --btn-accent-bg: var(--btn-bg);
+  --btn-accent-fg: var(--btn-fg);
+  --btn-accent-hover: var(--btn-bg-hover);
+  --focus-ring: #a74921;
+  --selection-bg: #e6bea4;
+  --selection-fg: #252923;
+  --glass: var(--surface);
+  --glass-strong: var(--surface-overlay);
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -82,101 +42,48 @@
   --space-8: 4rem;
   --space-9: 6rem;
   --space-10: 8rem;
-
+  --page-max: 1240px;
+  --page-pad: clamp(1.25rem, 4vw, 3.5rem);
   --measure: 68ch;
-  --measure-tight: 54ch;
-  --page-max: 1200px;
-  --page-pad: var(--space-5);
-
-  /* One corner scale. Cards and inputs share it; only pills deviate. */
-  --radius-sm: 4px;
-  --radius: 8px;
-  --radius-lg: 14px;
+  --measure-tight: 52ch;
+  --radius-sm: 3px;
+  --radius: 6px;
+  --radius-lg: 12px;
   --radius-pill: 999px;
-
   --border-width: 1px;
-
-  /* Motion: short, purposeful, no bounce. */
-  --ease: cubic-bezier(0.2, 0, 0, 1);
-  --dur-fast: 120ms;
-  --dur: 200ms;
-
-  /* -------------------------------------------------- semantic (light mode) */
-  /* Ground is white-50 exactly as specified in the palette. */
-  --bg: var(--white-50);
-  --surface: var(--white-100);
-  --surface-raised: var(--taupe-50);
-  --border: var(--shadow-200);
-  --border-strong: var(--shadow-300);
-
-  /* 17.1:1 */
-  --text: var(--shadow-950);
-  /* 6.6:1 */
-  --text-secondary: var(--shadow-700);
-  /* 5.4:1. Do not use below this for meaningful text. */
-  --text-muted: var(--shadow-600);
-
-  /* Orange is the hardest hue to make accessible. pumpkin-600 is only 4.0:1
-     on this ground, so it fails AA for body text. Accent *text* therefore
-     uses pumpkin-700 (6.3:1); pumpkin-600 is borders and marks only. */
-  --accent-text: var(--pumpkin-700);
-  --accent-mark: var(--pumpkin-600);
-  --accent-faint: var(--pumpkin-100);
-  --accent-wash: var(--pumpkin-50);
-
-  --negative: var(--crimson-700);
-
-  /* Primary action is a near-black fill with white text: 17.1:1 in light. */
-  --btn-bg: var(--shadow-950);
-  --btn-fg: var(--white-50);
-  --btn-bg-hover: var(--shadow-800);
-
-  --focus-ring: var(--pumpkin-600);
-  --selection-bg: var(--pumpkin-200);
-  --selection-fg: var(--shadow-950);
-
-  --shadow-card: 0 1px 2px oklch(17.97% 0.004 308.19 / 0.06);
-  --shadow-raised: 0 8px 24px oklch(17.97% 0.004 308.19 / 0.1);
-
-  color-scheme: light;
+  --shadow-card: 0 5px 12px #17201b0a;
+  --shadow-raised: 0 22px 50px #17201b26;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 130ms;
+  --dur: 240ms;
+  --dur-slow: 600ms;
 }
-
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: var(--shadow-950);
-    --surface: var(--shadow-900);
-    --surface-raised: var(--shadow-800);
-    --border: var(--shadow-800);
-    --border-strong: var(--shadow-700);
-
-    /* 17.1:1 */
-    --text: var(--white-50);
-    /* 9.9:1 */
-    --text-secondary: var(--white-300);
-    /* 7.7:1 */
-    --text-muted: var(--white-400);
-
-    /* On a dark ground the light pumpkin steps carry contrast, so the accent
-       lifts two steps: pumpkin-400 is 7.8:1 here. */
-    --accent-text: var(--pumpkin-400);
-    --accent-mark: var(--pumpkin-500);
-    --accent-faint: var(--pumpkin-900);
-    --accent-wash: var(--pumpkin-950);
-
-    --negative: var(--crimson-300);
-
-    /* Inverted primary: near-white fill, near-black text. */
-    --btn-bg: var(--white-50);
-    --btn-fg: var(--shadow-950);
-    --btn-bg-hover: var(--white-100);
-
-    --focus-ring: var(--pumpkin-400);
-    --selection-bg: var(--pumpkin-800);
-    --selection-fg: var(--white-50);
-
-    --shadow-card: 0 1px 2px oklch(0% 0 0 / 0.4);
-    --shadow-raised: 0 8px 24px oklch(0% 0 0 / 0.5);
-
     color-scheme: dark;
+    --bg: #181c19;
+    --bg-subtle: #202621;
+    --surface: #222924;
+    --surface-raised: #29322b;
+    --surface-overlay: #303b32;
+    --text: #edf0e7;
+    --text-secondary: #c3cbbd;
+    --text-muted: #a1ae9c;
+    --border: #394338;
+    --border-strong: #64705d;
+    --border-hover: #9ba890;
+    --accent-text: #edac86;
+    --accent-mark: #de9366;
+    --accent-faint: #563b2e;
+    --accent-wash: #322a23;
+    --negative: #f39a93;
+    --positive: #a4d5a9;
+    --btn-bg: #e6eddb;
+    --btn-fg: #20261c;
+    --btn-bg-hover: #cbd9b8;
+    --focus-ring: #edac86;
+    --selection-bg: #855536;
+    --selection-fg: #fff;
+    --shadow-raised: 0 22px 50px #00000038;
   }
 }

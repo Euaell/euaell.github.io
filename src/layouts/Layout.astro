@@ -1,5 +1,5 @@
 ---
-import '@/styles/global.css';
+import "@/styles/global.css";
 
 interface Props {
   title?: string;
@@ -9,13 +9,16 @@ interface Props {
 }
 
 const {
-  title = 'Euael M. Eshete · Software Engineer',
-  description = 'Software engineer in Addis Ababa building high-concurrency backend systems, cloud infrastructure, and AI-native products. Founder of ZafTech, creator of Convia and Relay.',
-  ogImage = 'https://portfolio.euaell.me/og-image.png',
+  title = "Euael M. Eshete · Software Engineer",
+  description = "Software engineer building secure multi-tenant systems and AI products. PKI and certificate infrastructure at Securetron; founder of ZafTech.",
+  ogImage = "https://portfolio.euaell.me/og-image.png",
   noIndex = false,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = new URL(
+  Astro.url.pathname.replace(/\/+$/, "") || "/",
+  Astro.site,
+);
 const year = new Date().getFullYear();
 ---
 
@@ -31,7 +34,12 @@ const year = new Date().getFullYear();
     <meta name="description" content={description} />
     <meta name="author" content="Euael M. Eshete" />
     <link rel="canonical" href={canonicalURL} />
-    {noIndex && <meta name="robots" content="noindex, nofollow" />}
+    <meta
+      name="robots"
+      content={noIndex
+        ? "noindex, follow"
+        : "index, follow, max-image-preview:large"}
+    />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -39,6 +47,13 @@ const year = new Date().getFullYear();
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta
+      property="og:image:alt"
+      content="Euael M. Eshete — software engineer at Securetron and founder of ZafTech"
+    />
     <meta property="og:site_name" content="Euael M. Eshete" />
     <meta property="og:locale" content="en_US" />
 
@@ -48,7 +63,10 @@ const year = new Date().getFullYear();
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    <meta name="twitter:creator" content="@euaell" />
+    <meta
+      name="twitter:image:alt"
+      content="Euael M. Eshete — software engineer at Securetron and founder of ZafTech"
+    />
 
     <!-- Only these two icon assets exist; the previous markup referenced five
          files that were never in the repo and 404'd on every load. -->
@@ -56,9 +74,16 @@ const year = new Date().getFullYear();
     <link rel="apple-touch-icon" href="/icons/Logo.png" />
     <link rel="manifest" href="/manifest.json" />
 
-    <!-- Theme follows the OS. These two values must track the token layer. -->
-    <meta name="theme-color" content="#f0f5f5" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#121113" media="(prefers-color-scheme: dark)" />
+    <!-- Match the browser chrome to the system theme. -->
+    <meta
+      name="theme-color"
+      content="#f7f8f5"
+      media="(prefers-color-scheme: light)"
+    /><meta
+      name="theme-color"
+      content="#181c19"
+      media="(prefers-color-scheme: dark)"
+    />
 
     <!-- Self-hosted. The variable upright covers every heading on first paint,
          so it is worth preloading; the italic is not. -->
@@ -83,22 +108,41 @@ const year = new Date().getFullYear();
         <p class="meta">&copy; {year} Euael M. Eshete</p>
         <nav aria-label="Elsewhere">
           <ul class="footer-links">
-            <li><a class="footer-link" href="https://github.com/euaell" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            <li><a class="footer-link" href="https://www.linkedin.com/in/euael-eshete" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-            <li><a class="footer-link" href="mailto:euaelmeko@gmail.com">Email</a></li>
+            <li>
+              <a
+                class="footer-link"
+                href="https://github.com/euaell"
+                target="_blank"
+                rel="noopener noreferrer">GitHub</a
+              >
+            </li>
+            <li>
+              <a
+                class="footer-link"
+                href="https://www.linkedin.com/in/euael-eshete"
+                target="_blank"
+                rel="noopener noreferrer">LinkedIn</a
+              >
+            </li>
+            <li>
+              <a class="footer-link" href="mailto:euaelmeko@gmail.com">Email</a>
+            </li>
           </ul>
         </nav>
       </div>
     </footer>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZW3GEJSTM"></script>
+    <script
+      is:inline
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-QZW3GEJSTM"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag('js', new Date());
-      gtag('config', 'G-QZW3GEJSTM', { page_path: window.location.pathname });
+      gtag("js", new Date());
+      gtag("config", "G-QZW3GEJSTM", { page_path: window.location.pathname });
     </script>
   </body>
 </html>
@@ -124,8 +168,8 @@ const year = new Date().getFullYear();
 
   .site-footer {
     border-top: var(--border-width) solid var(--border);
-    padding-block: var(--space-6);
-    margin-top: var(--space-9);
+    padding-block: 2rem;
+    margin-top: 0;
   }
 
   .footer-inner {

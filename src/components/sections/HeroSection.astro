@@ -1,192 +1,175 @@
 ---
-import { Image } from 'astro:assets';
-import { profileInfo, siteLinks } from '@/data/profile';
-import profileImage from '@/assets/profile.jpg';
-
-// Proof points are drawn from the CV and contribution extracts. Each is a
-// verifiable outcome, not a self-description.
-const proof = [
-  { value: '574', label: 'commits on a production PKI platform' },
-  { value: '77', label: 'merged pull requests shipped' },
-  { value: '58k', label: 'monthly messages, up from 1,250' },
-  { value: '94%', label: 'infrastructure overhead removed' },
-];
+import { profileInfo, siteLinks } from "@/data/profile";
 ---
 
 <section id="home" class="hero">
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <h1 class="display hero-name">{profileInfo.name}</h1>
-
-      <p class="hero-role">{profileInfo.title}</p>
-
-      <p class="lede hero-lede">{profileInfo.tagline}</p>
-
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#work">View work</a>
-        <a class="btn btn-secondary" href="#contact">Get in touch</a>
-      </div>
-
-      <p class="meta hero-meta">
-        <span>{profileInfo.location}</span>
-        <span class="sep" aria-hidden="true">·</span>
-        <a class="link" href={siteLinks.github} target="_blank" rel="noopener noreferrer">GitHub</a>
-        <span class="sep" aria-hidden="true">·</span>
-        <a class="link" href={siteLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      </p>
-    </div>
-
-    <div class="hero-portrait">
-      <Image
-        src={profileImage}
-        alt={`Portrait of ${profileInfo.name}`}
-        width={640}
-        height={800}
-        widths={[320, 480, 640]}
-        sizes="(min-width: 900px) 22rem, min(20rem, 100vw)"
-        loading="eager"
-        decoding="async"
-      />
-    </div>
-  </div>
-
   <div class="container">
-    <dl class="proof">
-      {
-        proof.map((item) => (
-          <div class="proof-item">
-            <dt class="proof-value">{item.value}</dt>
-            <dd class="proof-label">{item.label}</dd>
-          </div>
-        ))
-      }
-    </dl>
+    <h1 class="display hero-name">
+      {profileInfo.name}<span aria-hidden="true">.</span>
+    </h1>
+    <p class="hero-role">
+      Software Engineer <span aria-hidden="true">/</span>
+      <a href={siteLinks.studio} target="_blank" rel="noopener noreferrer"
+        >Founder at ZafTech</a
+      >
+    </p>
+    <div class="hero-bottom">
+      <p class="hero-description">
+        Secure multi-tenant systems and AI products.<br class="desktop-break" /> Built
+        from the backend to the infrastructure.
+      </p>
+      <a class="hero-work" href="#work"
+        ><span>Explore selected work</span><span
+          class="arrow-disc"
+          aria-hidden="true"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"><path d="M12 4v16m-6-6 6 6 6-6"></path></svg
+          ></span
+        ></a
+      >
+    </div>
+    <div class="hero-foot">
+      <p>{profileInfo.location}</p><p>Software Developer at Securetron</p>
+    </div>
   </div>
 </section>
-
 <style>
-  /* Top padding is capped and paired with the portrait, so the hero fills the
-     first viewport at desktop without floating content halfway down. */
   .hero {
-    padding-top: var(--space-7);
-    padding-bottom: var(--space-8);
+    padding-top: clamp(4.5rem, 9vw, 8rem);
+    padding-bottom: 2rem;
   }
-
-  .hero-grid {
-    display: grid;
-    gap: var(--space-7);
-    align-items: center;
-  }
-
-  .hero-copy {
-    max-width: 34rem;
-  }
-
   .hero-name {
-    /* Clamp keeps the name to two lines at 360px and one generous line up. */
-    font-size: clamp(2.25rem, 1.4rem + 3.4vw, 3.75rem);
-    letter-spacing: -0.035em;
-    margin-bottom: var(--space-3);
+    text-align: center;
+    font-size: clamp(3rem, 7.6vw, 6rem);
+    white-space: nowrap;
   }
-
+  .hero-name span {
+    color: var(--accent-mark);
+  }
   .hero-role {
-    font-family: var(--font-display);
-    font-size: clamp(1rem, 0.95rem + 0.4vw, 1.25rem);
-    font-weight: 500;
-    line-height: 1.3;
-    color: var(--accent-text);
-    margin-bottom: var(--space-4);
-  }
-
-  .hero-lede {
-    margin-bottom: var(--space-6);
-  }
-
-  .hero-actions {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: var(--space-3);
-    margin-bottom: var(--space-5);
+    gap: 0.6rem 1rem;
+    margin-top: 1.4rem;
+    font-size: clamp(1.05rem, 2vw, 1.5rem);
+    letter-spacing: -0.015em;
+    color: var(--text-secondary);
   }
-
-  .hero-meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-1) 0;
+  .hero-role > span {
+    color: var(--border-strong);
   }
-
-  .hero-portrait {
-    position: relative;
-    max-width: 20rem;
-    width: 100%;
-    justify-self: start;
-  }
-
-  .hero-portrait img {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    border-radius: var(--radius-lg);
-    border: var(--border-width) solid var(--border);
-    /* A single tinted shadow, no glow. */
-    box-shadow: var(--shadow-raised);
-  }
-
-  /* Proof strip: real outcomes, separated by rules rather than boxed cards. */
-  .proof {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-5) var(--space-6);
-    margin: var(--space-8) 0 0;
-    padding-top: var(--space-6);
-    border-top: var(--border-width) solid var(--border);
-  }
-
-  .proof-item {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-  }
-
-  .proof-value {
-    font-family: var(--font-display);
-    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1;
+  .hero-role a {
     color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
   }
-
-  .proof-label {
-    margin: 0;
+  .hero-role a:hover {
+    text-decoration-color: var(--accent-mark);
+  }
+  .hero-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    max-width: 870px;
+    margin: 3.5rem auto 4.5rem;
+  }
+  .hero-description {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .hero-work {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
     font-size: 0.875rem;
-    line-height: 1.45;
+    font-weight: 500;
+  }
+  .arrow-disc {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--border-strong);
+    border-radius: 50%;
+    transition:
+      background-color var(--dur) var(--ease),
+      color var(--dur) var(--ease);
+  }
+  .arrow-disc svg {
+    width: 21px;
+    height: 21px;
+    transition: transform var(--dur) var(--ease);
+  }
+  .hero-work:hover .arrow-disc {
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    border-color: var(--btn-bg);
+  }
+  .hero-work:hover svg {
+    transform: translateY(3px);
+  }
+  .hero-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.1rem;
     color: var(--text-muted);
-    max-width: 22ch;
+    font-size: 0.75rem;
   }
-
-  @media (min-width: 768px) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-name {
+      animation: settle 850ms var(--ease) both;
+    }
+    @keyframes settle {
+      from {
+        transform: translateY(16px);
+        letter-spacing: -0.025em;
+      }
+      to {
+        transform: translateY(0);
+        letter-spacing: -0.04em;
+      }
+    }
+  }
+  @media (max-width: 700px) {
     .hero {
-      padding-top: var(--space-8);
-      padding-bottom: var(--space-9);
+      padding-top: 3.8rem;
     }
-
-    .proof {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+    .hero-name {
+      white-space: normal;
+      max-width: 10ch;
+      margin: auto;
+      font-size: clamp(3.1rem, 11.6vw, 4.5rem);
     }
-  }
-
-  @media (min-width: 900px) {
-    .hero-grid {
-      /* Asymmetric: copy leads, portrait is a smaller anchor. */
-      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
-      gap: var(--space-8);
+    .hero-role {
+      font-size: 1rem;
+      gap: 0.25rem 0.6rem;
+      margin-top: 1.2rem;
     }
-
-    .hero-portrait {
-      justify-self: end;
-      max-width: 22rem;
+    .hero-bottom {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.65rem;
+      margin: 2rem auto 3rem;
+      text-align: center;
+    }
+    .hero-description {
+      font-size: 0.9375rem;
+      max-width: 34ch;
+    }
+    .desktop-break {
+      display: none;
+    }
+    .hero-foot p:last-child {
+      display: none;
     }
   }
 </style>

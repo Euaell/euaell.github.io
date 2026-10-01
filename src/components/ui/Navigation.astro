@@ -1,209 +1,195 @@
 ---
-import MobileMenu from './MobileMenu';
-import { siteLinks } from '@/data/profile';
-
+import MobileMenu from "./MobileMenu";
+import { siteLinks } from "@/data/profile";
 const navItems = [
-  { name: 'Work', href: '#work' },
-  { name: 'About', href: '#about' },
-  { name: 'Contact', href: '#contact' },
+  { name: "Work", id: "work" },
+  { name: "About", id: "about" },
+  { name: "Contact", id: "contact" },
 ];
+const isHome = Astro.url.pathname === "/";
 ---
 
 <header id="site-header" class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="#main">
-      <span class="brand-mark" aria-hidden="true"></span>
-      <span class="brand-name">Euael M. Eshete</span>
-    </a>
-
-    <nav class="desktop-nav" aria-label="Sections">
+    <a class="brand" href="/" aria-label="euaell. — Home"
+      >euaell<span aria-hidden="true">.</span></a
+    >
+    <nav class="desktop-nav" aria-label="Main navigation">
       <ul class="nav-list">
         {
           navItems.map((item) => (
             <li>
-              <a class="nav-link" href={item.href} data-section={item.href.replace('#', '')}>
+              <a
+                class="nav-link"
+                href={(isHome ? "#" : "/#") + item.id}
+                data-section={item.id}
+              >
                 {item.name}
               </a>
             </li>
           ))
         }
       </ul>
-      <a class="btn btn-secondary nav-resume" href={siteLinks.resume} target="_blank" rel="noopener noreferrer">
-        Resume
-      </a>
+      <a
+        class="nav-resume"
+        href={siteLinks.resume}
+        target="_blank"
+        rel="noopener noreferrer"
+        >Resume <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg
+        ></a
+      >
     </nav>
-
-    <div class="mobile-only">
-      <MobileMenu client:load />
-    </div>
+    <div class="mobile-only"><MobileMenu client:load /></div>
   </div>
 </header>
-
 <script>
-  const header = document.getElementById('site-header');
-  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav-link'));
-  const sectionIds = links.map((l) => l.dataset.section ?? '').filter(Boolean);
-
-  // One passive scroll handler drives both the elevated-header state and the
-  // active-section indicator. Reading layout is batched into the callback.
-  let ticking = false;
-
+  const header = document.getElementById("site-header");
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>(".nav-link"),
+  );
+  let pending = false;
   function update() {
-    ticking = false;
-
-    if (header) {
-      header.classList.toggle('is-scrolled', window.scrollY > 8);
-    }
-
-    // The section whose top is closest to (but not past) the header line wins.
-    const line = 96;
-    let active = '';
-    for (const id of sectionIds) {
-      const el = document.getElementById(id);
-      if (!el) continue;
-      if (el.getBoundingClientRect().top <= line) active = id;
-    }
-
+    pending = false;
+    header?.classList.toggle("is-scrolled", window.scrollY > 10);
+    let active = "";
     for (const link of links) {
-      link.classList.toggle('is-active', link.dataset.section === active);
+      const section = document.getElementById(link.dataset.section ?? "");
+      if (section && section.getBoundingClientRect().top <= 150)
+        active = section.id;
+    }
+    for (const link of links) {
+      const current = link.dataset.section === active;
+      link.classList.toggle("is-active", current);
+      if (current) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
     }
   }
-
-  function onScroll() {
-    if (!ticking) {
-      ticking = true;
-      window.requestAnimationFrame(update);
-    }
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!pending) {
+        pending = true;
+        requestAnimationFrame(update);
+      }
+    },
+    { passive: true },
+  );
   update();
 </script>
-
 <style>
   .site-header {
     position: sticky;
     top: 0;
     z-index: 30;
-    background: color-mix(in oklch, var(--bg) 82%, transparent);
-    border-bottom: var(--border-width) solid transparent;
-    transition:
-      border-color var(--dur) var(--ease),
-      background-color var(--dur) var(--ease);
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur) var(--ease);
   }
-
-  /* The border only appears once the page has moved, so the header sits
-     flush and borderless at the top of the document. */
   .site-header.is-scrolled {
     border-bottom-color: var(--border);
-    backdrop-filter: blur(10px);
   }
-
-  @supports not (backdrop-filter: blur(1px)) {
-    .site-header {
-      background: var(--bg);
+  .site-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--bg);
+  }
+  @supports (backdrop-filter: blur(16px)) {
+    .site-header.is-scrolled::before {
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
+      backdrop-filter: blur(16px) saturate(125%);
+      -webkit-backdrop-filter: blur(16px) saturate(125%);
     }
   }
-
+  @media (prefers-reduced-transparency: reduce) {
+    .site-header.is-scrolled::before {
+      background: var(--bg);
+      backdrop-filter: none;
+    }
+  }
   .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-4);
-    min-height: 60px;
+    min-height: 84px;
+    gap: 2rem;
   }
-
   .brand {
     display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 0.9375rem;
-    letter-spacing: -0.01em;
-    color: var(--text);
+    align-items: baseline;
+    padding-block: 0.4rem;
+    font-size: 1.6rem;
+    font-weight: 650;
+    letter-spacing: -0.04em;
+    line-height: 1;
   }
-
-  .brand-mark {
-    width: 8px;
-    height: 8px;
-    border-radius: 2px;
-    background: var(--accent-mark);
-    flex: none;
+  .brand span {
+    color: var(--accent-mark);
   }
-
-  .brand-name {
-    white-space: nowrap;
-  }
-
-  .desktop-nav {
-    display: none;
-    align-items: center;
-    gap: var(--space-6);
-  }
-
+  .desktop-nav,
   .nav-list {
     display: flex;
     align-items: center;
-    gap: var(--space-5);
   }
-
+  .desktop-nav {
+    gap: 2.6rem;
+  }
+  .nav-list {
+    gap: 2rem;
+  }
   .nav-link {
-    position: relative;
-    display: inline-block;
-    padding-block: var(--space-1);
-    font-size: 0.9375rem;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.8125rem;
     color: var(--text-secondary);
-    transition: color var(--dur) var(--ease);
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 6px;
   }
-
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 1px;
-    width: 100%;
-    background: var(--accent-mark);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--dur) var(--ease);
-  }
-
-  .nav-link:hover {
-    color: var(--text);
-  }
-
-  .nav-link:hover::after,
-  .nav-link.is-active::after {
-    transform: scaleX(1);
-  }
-
+  .nav-link:hover,
   .nav-link.is-active {
     color: var(--text);
+    text-decoration-line: underline;
+    text-decoration-color: var(--accent-mark);
   }
-
   .nav-resume {
-    padding: 0.45rem 0.85rem;
-    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    font-size: 0.8125rem;
+    padding: 0.3rem 0 0.3rem 2rem;
+    border-left: 1px solid var(--border);
   }
-
+  .nav-resume svg {
+    width: 15px;
+    height: 15px;
+  }
+  .nav-resume:hover {
+    color: var(--accent-text);
+  }
   .mobile-only {
-    display: block;
+    display: none;
   }
-
-  @media (min-width: 768px) {
+  @media (max-width: 700px) {
     .header-inner {
-      min-height: 68px;
+      min-height: 72px;
     }
-
     .desktop-nav {
-      display: flex;
-    }
-
-    .mobile-only {
       display: none;
+    }
+    .mobile-only {
+      display: block;
+    }
+    .brand {
+      font-size: 1.4rem;
     }
   }
 </style>

@@ -37,6 +37,7 @@ coverage
 
 # Documentation
 doc/
+.impeccable/
 
 # GitHub
 .github
