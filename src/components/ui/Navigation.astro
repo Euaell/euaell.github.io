@@ -58,12 +58,9 @@ const navItems = [
 </script>
 
 <style>
+  /* .glass-liquid-strong sets position: relative outside any layer, which beats the `fixed` utility */
   #main-nav {
-    position: fixed !important;
-    top: 1.5rem !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    z-index: 100 !important;
+    position: fixed;
   }
 
   .nav-link.active {
