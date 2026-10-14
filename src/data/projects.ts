@@ -3,7 +3,7 @@ export interface Project {
 	description: string;
 	image: string;
 	link?: string;
-	repositoryLink: string;
+	repositoryLink?: string;
 	tags: string[];
 	responsibilities: string[];
 	featured: boolean;
@@ -11,142 +11,100 @@ export interface Project {
 
 export const projectsData: Project[] = [
 	{
-		title: 'DistroKV',
-		description: 'Distributed KV store in Go with Raft consensus, LSM-tree persistence, and multi-region Kubernetes testing.',
+		title: 'Convia',
+		description:
+			'Conversational AI form builder that turns PDFs or briefs into structured multi-turn interviews, extracting typed answers against strict schemas.',
 		responsibilities: [
-			'Built a Go-based distributed KV store with Raft consensus.',
-			'Implemented LSM-tree persistence for durable storage.',
-			'Validated multi-region behavior with Kubernetes testing.',
+			'Designed schema compiler mapping declarative form fields onto constrained multi-turn LLM interview workflows.',
+			'Built hybrid intake that parses uploaded documents and conversational answers into validated JSON in real time.',
+			'Shipped an MCP tool server and public REST API for external agents and workflow integrations.',
+			'Implemented multi-tenant workspace isolation with scoped roles and magic-link responder mode.',
 		],
-		tags: ['Go', 'Raft', 'Kubernetes', 'Distributed Systems'],
-		repositoryLink: 'https://github.com/Euaell',
-		image: '/images/placeholder.png',
-		featured: false,
-	},
-	{
-		title: 'IoT Water Distribution System',
-		description: 'Low-power embedded monitoring with a cloud data pipeline for resource-constrained environments.',
-		responsibilities: [
-			'Designed low-power embedded monitoring nodes.',
-			'Built a cloud data pipeline for constrained environments.',
-		],
-		tags: ['IoT', 'Embedded', 'Cloud'],
-		repositoryLink: 'https://github.com/Euaell',
-		image: '/images/placeholder.png',
-		featured: false,
-	},
-	{
-		title: 'MacroChef',
-		description: 'A recipe app that allows users to track their daily calorie intake and plan their meals.',
-		responsibilities: [
-			'Developed using Next.js, TypeScript, and Tailwind CSS.',
-			'Implemented user authentication and authorization using NextAuth.js.',
-			'Integrated the Spoonacular API to fetch recipes and nutritional information.',
-			'Implemented a custom meal planner and calorie tracker.',
-		],
-		tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'NextAuth.js', 'Spoonacular API'],
-		repositoryLink: 'https://github.com/Euaell/macro_chef',
-		link: 'https://macro.euaell.me/',
-		image: '/images/placeholder.png',
+		tags: ['FastAPI', 'Next.js', 'PostgreSQL', 'pgvector', 'Docker', 'MCP'],
+		link: 'https://convia.zaftech.co',
+		image: '/images/projects/convia-editor.webp',
 		featured: true,
 	},
 	{
-		title: 'Mekdim - School Portal',
-		description: 'A comprehensive school management system built for educational institutions in Ethiopia. Features student enrollment, grade management, attendance tracking, and parent-teacher communication portals.',
+		title: 'Mizan',
+		description:
+			'Personal health platform for nutrition, workouts, and macro tracking, exposed to AI assistants over the Model Context Protocol.',
 		responsibilities: [
-			'Led a team of 26 developers during the requirements gathering and system design phase',
-			'Implemented scalable backend architecture using Express.js and MongoDB',
-			'Designed responsive frontend interfaces using React and modern UI principles',
-			'Established reliable testing frameworks and deployment pipelines',
+			'Built an MCP server exposing typed tools for logging meals, food diaries, and workout templates.',
+			'Added token management and per-tool usage analytics tracking call volume, success rate, and latency.',
+			'Designed daily-log interface with interactive macro progress, workout templates, and progress history.',
 		],
-		tags: ['ExpressJS', 'React', 'MongoDB', 'Team Leadership', 'Educational Technology'],
-		repositoryLink: 'https://github.com/NathanZK/Mekdim',
-		image: '/images/placeholder.png',
+		tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'MCP', 'Docker'],
+		repositoryLink: 'https://github.com/ZafTec/mizan',
+		link: 'https://mizan.zaftech.co',
+		image: '/images/projects/mizan-showcase.webp',
 		featured: true,
 	},
 	{
-		title: 'React Component Library',
-		description: 'A collection of reusable React components for building web applications.',
+		title: 'PKI Trust Manager',
+		description:
+			'Multi-tenant certificate lifecycle management (CLM) SaaS with online and offline activation, tenant isolation, and automated provider integrations.',
 		responsibilities: [
-			'Implemented the components using TypeScript and Storybook for documentation.',
-			'Used visx for charting and tailwind for styling the components.',
+			'Built the licensing engine handling online/offline activation, grace periods, certificate limits, and signature checks.',
+			'Led the multi-tenant refactor scoping queries and licenses per organisation with middleware isolation.',
+			'Shipped DigiCert CertCentral and EJBCA integrations with encrypted secrets at rest and shared CA provider abstractions.',
+			'Built an in-product AI assistant with conversation persistence, role-aware access, and audit logging.',
 		],
-		repositoryLink: 'https://github.com/Euaell/geek-component-library',
-		link: 'https://www.npmjs.com/package/@euael/eu-react',
-		tags: ['React', 'TypeScript', 'Storybook', 'visx', 'Tailwind CSS'],
-		image: '/images/placeholder.png',
-		featured: false,
-	},
-	{
-		title: "Cryptograph Visualizer",
-		description: "A web application that visualizes the cryptographic algorithms.",
-		responsibilities: [
-			"Developed using Next.js 15 with TypeScript and Tailwind CSS.",
-			"Implemented the cryptographic algorithms using the Web Crypto API.",
-		],	
-		tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-		repositoryLink: "https://github.com/Euaell/Crypto_Grapher",
-		link: "https://crypto-grapher.euaell.me",
-		image: '/images/placeholder.png',
+		tags: ['ASP.NET Core', 'EF Core', 'SQL Server', 'HTMX', 'Alpine.js', 'Tailwind CSS', 'Azure', 'Docker'],
+		image: '/images/projects/pki-trust-manager.png',
 		featured: true,
 	},
 	{
-		title: "Wordle Clone",
-		description: "A Wordle clone built with React.",
+		title: 'Relay',
+		description:
+			'Curated tool and artifact registry for AI agents, with durable artifact delivery, MCP server, and transactional dispatch.',
 		responsibilities: [
-			"Developed the game logic using React hooks.",
-			"Implemented the game state management using zustand.",
+			'Built transactional outbox ensuring durable tool execution and 202 acceptance guarantees.',
+			'Designed retry-safe execution with provider idempotency keys.',
+			'Shipped an MCP server and React administration dashboard with PostgreSQL usage ledger.',
 		],
-		tags: ["React", "CSS"],
-		repositoryLink: "https://github.com/Euaell/myWordle",
-		link: "https://wordle.euaell.me",
-		image: '/images/placeholder.png',
+		tags: ['Deno', 'TypeScript', 'Hono', 'React', 'PostgreSQL', 'Redis', 'MCP', 'Docker'],
+		repositoryLink: 'https://github.com/ZafTec/relay',
+		image: '/images/projects/relay.png',
 		featured: false,
 	},
 	{
-		title: "Tic Tac Toe Game",
-		description: "A simple Tic Tac Toe game built with React and NestJS.",
+		title: 'Cryptograph Visualizer',
+		description:
+			'Interactive cryptographic algorithm visualizer and learning playground built with Next.js and the Web Crypto API.',
 		responsibilities: [
-			"Developed the front-end using React and the back-end using NestJS.",
-			"Implemented the game logic using Socket.io for real-time communication.",
-			"Use Redis for caching and storing game state.",
+			'Developed using Next.js 15 with TypeScript and Tailwind CSS.',
+			'Implemented cryptographic algorithm visualizers using Web Crypto API and custom state engines.',
 		],
-		// link: "https://euaell.github.io/tick_tack_toe",
-		repositoryLink: 'https://github.com/Euaell/tick_tack_toe',
-		tags: ["React", "NestJS", "Socket.io", "Redis", "Docker"],
-		image: '/images/placeholder.png',
-		featured: true,
-	},
-	{
-		title: 'Car Dealership Website',
-		description: 'The program optimizes inventory management and transaction tracking for auto dealers, monitoring goods and financial exchanges, and enables customer searches for preferred car models.',
-		responsibilities: [],
-		tags: ['React', 'Node.js', 'MySQL'],
-		repositoryLink: 'https://github.com/Euaell/Car-Dealership',
-		image: '/images/placeholder.png',
+		tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Web Crypto API'],
+		repositoryLink: 'https://github.com/Euaell/Crypto_Grapher',
+		link: 'https://crypto-grapher.euaell.me',
+		image: '/images/projects/crypto-grapher.png',
 		featured: false,
 	},
 	{
-		title: 'Wordcloud Generator',
-		description: 'The program generates word clouds from a text file, with the size of each word indicating its frequency in the text.',
-		responsibilities: [],
-		// link: 'https://euaell.github.io/word_counter',
-		repositoryLink: 'https://github.com/Euaell/word_counter',
-		tags: ['React', 'react-d3-cloud', 'Next.js'],
-		image: '/images/placeholder.png',
-		featured: false,
-	},
-	{
-		title: "Game of Life",
-		description: "A web application that implements Conway's Game of Life.",
+		title: 'RMS - Restaurant Operations',
+		description:
+			'Restaurant operations platform spanning tables, orders, staff, inventory, and billing with tenant-scoped lifecycles.',
 		responsibilities: [
-			"Developed using React and TypeScript.",
-			"Implemented the game logic using React hooks."
+			'Implemented table-session and payment lifecycle handling with tenant-scoped operations.',
+			'Used CQRS and MediatR to separate application commands from queries.',
+			'Added integration tests against PostgreSQL for tenant data boundaries.',
 		],
-		tags: ["React", "TypeScript"],
-		repositoryLink: "https://github.com/Euaell/game_of_life",
-		link: "https://gol.euaell.me",
-		image: '/images/placeholder.png',
+		tags: ['ASP.NET Core', 'Next.js', 'PostgreSQL', 'Redis', 'CQRS', 'Docker'],
+		image: '/images/projects/rms.png',
 		featured: false,
-	}
+	},
+	{
+		title: 'Mintline',
+		description:
+			'Financial tracking and grading management platform designed for responsive calculation workflows.',
+		responsibilities: [
+			'Built dynamic calculation engines and responsive user interfaces.',
+			'Designed clean, responsive UI components with TypeScript and Tailwind CSS.',
+		],
+		tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+		image: '/images/projects/mintline.png',
+		featured: false,
+	},
 ];

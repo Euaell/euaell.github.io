@@ -8,16 +8,6 @@ import { mentoringData, profileInfo } from '@/data/profile';
 
 <section id="about" class="relative py-16 md:py-20 border-t border-white/5">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12 md:mb-16">
-      <p class="text-xs uppercase tracking-[0.4em] text-white/50 mb-3">About</p>
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold font-display mb-4">
-        {profileInfo.tagline}
-      </h2>
-      <p class="text-base md:text-lg text-white/70 max-w-2xl mx-auto">
-        {profileInfo.description}
-      </p>
-    </div>
-
     <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-12 items-start">
       <div class="space-y-8 lg:sticky lg:top-24 lg:self-start">
         <div class="glass-card rounded-3xl p-8 md:p-10 reveal">
@@ -41,7 +31,6 @@ import { mentoringData, profileInfo } from '@/data/profile';
               </p>
               <div class="mt-4 flex flex-wrap gap-2 text-xs uppercase tracking-[0.2em] text-white/60">
                 <span class="rounded-full border border-white/10 bg-white/5 px-3 py-2">{profileInfo.location}</span>
-                <span class="rounded-full border border-white/10 bg-white/5 px-3 py-2">{profileInfo.availability}</span>
               </div>
             </div>
           </div>
@@ -52,7 +41,7 @@ import { mentoringData, profileInfo } from '@/data/profile';
               {skillCategories.map((category) => (
                 <div class="space-y-3">
                   <div class="flex items-center gap-3">
-                    <span class="h-2 w-2 rounded-full bg-primary-400"></span>
+                    <span class="h-1.5 w-1.5 rounded-full bg-primary-400"></span>
                     <h4 class="text-sm uppercase tracking-[0.2em] text-white/70">{category.title}</h4>
                   </div>
                   <div class="flex flex-wrap gap-2">
@@ -72,24 +61,26 @@ import { mentoringData, profileInfo } from '@/data/profile';
       <div class="space-y-8">
         <div class="glass-card rounded-3xl p-8 md:p-10 reveal">
           <h3 class="text-xl font-semibold font-display mb-6">Experience</h3>
-          <div class="space-y-6">
-            {experienceData.map((exp) => (
-              <div class="relative pl-6">
-                <span class="absolute left-0 top-2.5 h-2.5 w-2.5 rounded-full bg-primary-400 shadow-[0_0_12px_rgba(34,211,238,0.7)]"></span>
-                <div class="rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:-translate-y-1 hover:border-primary-500/40">
-                  <div class="text-xs uppercase tracking-[0.2em] text-primary-300">{exp.date}</div>
-                  <h4 class="text-lg font-semibold mt-2">{exp.title}</h4>
-                  <p class="text-white/70 text-sm">{exp.subtitle}</p>
-                  <p class="text-white/50 text-xs mt-1">{exp.location}</p>
-                  <ul class="mt-4 space-y-2 text-sm text-white/65">
-                    {exp.description.map((desc) => (
-                      <li class="flex gap-3">
-                        <span class="mt-2 h-1 w-1 rounded-full bg-primary-400"></span>
-                        <span>{desc}</span>
-                      </li>
-                    ))}
-                  </ul>
+          <div class="divide-y divide-white/10">
+            {experienceData.map((exp, idx) => (
+              <div class={`${idx === 0 ? 'pb-6' : idx === experienceData.length - 1 ? 'pt-6' : 'py-6'}`}>
+                <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1.5">
+                  <h4 class="text-lg font-semibold">{exp.title}</h4>
+                  <span class="text-xs uppercase tracking-[0.2em] text-primary-300 font-medium">{exp.date}</span>
                 </div>
+                <div class="flex flex-wrap items-center gap-x-2 text-sm mb-3">
+                  <span class="text-white/80 font-medium">{exp.subtitle}</span>
+                  <span class="text-white/30">·</span>
+                  <span class="text-white/50 text-xs">{exp.location}</span>
+                </div>
+                <ul class="space-y-2 text-sm text-white/70">
+                  {exp.description.map((desc) => (
+                    <li class="flex gap-2.5 items-start">
+                      <span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-white/40"></span>
+                      <span>{desc}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
@@ -97,24 +88,26 @@ import { mentoringData, profileInfo } from '@/data/profile';
 
         <div class="glass-card rounded-3xl p-8 md:p-10 reveal">
           <h3 class="text-xl font-semibold font-display mb-6">Education</h3>
-          <div class="space-y-6">
-            {educationData.map((edu) => (
-              <div class="relative pl-6">
-                <span class="absolute left-0 top-2.5 h-2.5 w-2.5 rounded-full bg-accent-400 shadow-[0_0_12px_rgba(249,115,22,0.7)]"></span>
-                <div class="rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:-translate-y-1 hover:border-accent-500/40">
-                  <div class="text-xs uppercase tracking-[0.2em] text-accent-300">{edu.date}</div>
-                  <h4 class="text-lg font-semibold mt-2">{edu.title}</h4>
-                  <p class="text-white/70 text-sm">{edu.subtitle}</p>
-                  <p class="text-white/50 text-xs mt-1">{edu.location}</p>
-                  <ul class="mt-4 space-y-2 text-sm text-white/65">
-                    {edu.description.map((desc) => (
-                      <li class="flex gap-3">
-                        <span class="mt-2 h-1 w-1 rounded-full bg-accent-400"></span>
-                        <span>{desc}</span>
-                      </li>
-                    ))}
-                  </ul>
+          <div class="divide-y divide-white/10">
+            {educationData.map((edu, idx) => (
+              <div class={`${idx === 0 ? 'pb-6' : idx === educationData.length - 1 ? 'pt-6' : 'py-6'}`}>
+                <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1.5">
+                  <h4 class="text-lg font-semibold">{edu.title}</h4>
+                  <span class="text-xs uppercase tracking-[0.2em] text-accent-300 font-medium">{edu.date}</span>
                 </div>
+                <div class="flex flex-wrap items-center gap-x-2 text-sm mb-3">
+                  <span class="text-white/80 font-medium">{edu.subtitle}</span>
+                  <span class="text-white/30">·</span>
+                  <span class="text-white/50 text-xs">{edu.location}</span>
+                </div>
+                <ul class="space-y-2 text-sm text-white/70">
+                  {edu.description.map((desc) => (
+                    <li class="flex gap-2.5 items-start">
+                      <span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-white/40"></span>
+                      <span>{desc}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
@@ -122,24 +115,26 @@ import { mentoringData, profileInfo } from '@/data/profile';
 
         <div class="glass-card rounded-3xl p-8 md:p-10 reveal">
           <h3 class="text-xl font-semibold font-display mb-6">Teaching & mentoring</h3>
-          <div class="space-y-6">
-            {mentoringData.map((mentoring) => (
-              <div class="relative pl-6">
-                <span class="absolute left-0 top-2.5 h-2.5 w-2.5 rounded-full bg-primary-400 shadow-[0_0_12px_rgba(34,211,238,0.7)]"></span>
-                <div class="rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:-translate-y-1 hover:border-primary-500/40">
-                  <div class="text-xs uppercase tracking-[0.2em] text-primary-300">{mentoring.date}</div>
-                  <h4 class="text-lg font-semibold mt-2">{mentoring.title}</h4>
-                  <p class="text-white/70 text-sm">{mentoring.subtitle}</p>
-                  <p class="text-white/50 text-xs mt-1">{mentoring.location}</p>
-                  <ul class="mt-4 space-y-2 text-sm text-white/65">
-                    {mentoring.description.map((desc) => (
-                      <li class="flex gap-3">
-                        <span class="mt-2 h-1 w-1 rounded-full bg-primary-400"></span>
-                        <span>{desc}</span>
-                      </li>
-                    ))}
-                  </ul>
+          <div class="divide-y divide-white/10">
+            {mentoringData.map((mentoring, idx) => (
+              <div class={`${idx === 0 ? 'pb-6' : idx === mentoringData.length - 1 ? 'pt-6' : 'py-6'}`}>
+                <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1.5">
+                  <h4 class="text-lg font-semibold">{mentoring.title}</h4>
+                  <span class="text-xs uppercase tracking-[0.2em] text-primary-300 font-medium">{mentoring.date}</span>
                 </div>
+                <div class="flex flex-wrap items-center gap-x-2 text-sm mb-3">
+                  <span class="text-white/80 font-medium">{mentoring.subtitle}</span>
+                  <span class="text-white/30">·</span>
+                  <span class="text-white/50 text-xs">{mentoring.location}</span>
+                </div>
+                <ul class="space-y-2 text-sm text-white/70">
+                  {mentoring.description.map((desc) => (
+                    <li class="flex gap-2.5 items-start">
+                      <span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-white/40"></span>
+                      <span>{desc}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
@@ -165,7 +160,6 @@ import { mentoringData, profileInfo } from '@/data/profile';
   document.querySelectorAll('#about .reveal').forEach((el) => {
     revealObserver.observe(el);
   });
-
 </script>
 
 <style>
@@ -179,5 +173,4 @@ import { mentoringData, profileInfo } from '@/data/profile';
     opacity: 1;
     transform: translateY(0);
   }
-
 </style>

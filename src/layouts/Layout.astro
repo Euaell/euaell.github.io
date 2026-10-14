@@ -10,8 +10,8 @@ interface Props {
 }
 
 const {
-  title = 'Euael M. Eshete - Full Stack Developer & AI Engineer',
-  description = 'Full Stack Developer & AI Engineer specializing in React, Next.js, Python, TypeScript, and machine learning. Building innovative web applications and AI solutions.',
+  title = 'Euael M. Eshete - Software Engineer',
+  description = 'Software engineer working on PKI, multi-tenant SaaS, licensing, and cloud infrastructure with .NET, Python, Go, and TypeScript.',
   ogImage = 'https://portfolio.euaell.me/og-image.png',
   noIndex = false,
 } = Astro.props;
@@ -65,7 +65,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Google Fonts -->
+    <!-- Nyata Font Preload -->
+    <link
+      rel="preload"
+      href="/fonts/NyataFTR-Regular.otf"
+      as="font"
+      type="font/otf"
+      crossorigin
+    />
+
+    <!-- Google Fonts Fallbacks -->
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"

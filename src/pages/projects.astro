@@ -10,7 +10,7 @@ const allTech = [...new Set(projectsData.flatMap((p) => p.tags))].slice(0, 12);
 
 <Layout
   title="Projects - Euael M. Eshete"
-  description="Explore my portfolio of web applications, AI solutions, and software projects built with React, Next.js, Python, and more."
+  description="Explore my portfolio of systems, PKI and multi-tenant SaaS, distributed architectures, and AI tooling."
 >
   <main>
     <section class="pt-8 pb-16 md:pt-12 md:pb-20">
@@ -20,9 +20,6 @@ const allTech = [...new Set(projectsData.flatMap((p) => p.tags))].slice(0, 12);
           <h1 class="text-3xl md:text-4xl lg:text-5xl font-semibold font-display mb-4">
             All Projects
           </h1>
-          <p class="text-base md:text-lg text-white/70 px-4">
-            A comprehensive collection of my work, from web applications to AI-powered solutions. Filter by technology to find specific projects.
-          </p>
         </div>
 
         <ProjectFilter client:visible projects={allProjects} technologies={allTech} />

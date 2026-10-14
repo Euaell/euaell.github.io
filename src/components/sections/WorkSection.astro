@@ -53,26 +53,30 @@ const featured = projectsData.filter((p) => p.featured).slice(0, 3);
               )}
             </div>
 
-            <div class="flex gap-3">
-              {project.link && (
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex-1 btn-primary text-center py-2 text-sm"
-                >
-                  Live Demo
-                </a>
-              )}
-              <a
-                href={project.repositoryLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                class={`${project.link ? 'flex-1' : 'w-full'} btn-secondary text-center py-2 text-sm`}
-              >
-                GitHub
-              </a>
-            </div>
+            {(project.link || project.repositoryLink) && (
+              <div class="flex gap-3">
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class={`${project.repositoryLink ? 'flex-1' : 'w-full'} btn-primary text-center py-2 text-sm`}
+                  >
+                    Live Demo
+                  </a>
+                )}
+                {project.repositoryLink && (
+                  <a
+                    href={project.repositoryLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class={`${project.link ? 'flex-1' : 'w-full'} btn-secondary text-center py-2 text-sm`}
+                  >
+                    GitHub
+                  </a>
+                )}
+              </div>
+            )}
           </div>
         </article>
       ))}

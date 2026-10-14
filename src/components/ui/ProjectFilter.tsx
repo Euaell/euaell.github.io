@@ -5,7 +5,7 @@ export interface Project {
   description: string;
   image: string;
   link?: string;
-  repositoryLink: string;
+  repositoryLink?: string;
   tags: string[];
   responsibilities: string[];
   featured: boolean;
@@ -92,26 +92,30 @@ export default function ProjectFilter({ projects, technologies }: Props) {
                 )}
               </div>
 
-              <div className="flex gap-3">
-                {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 btn-primary text-center py-2 text-sm"
-                  >
-                    Live Demo
-                  </a>
-                )}
-                <a
-                  href={project.repositoryLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${project.link ? 'flex-1' : 'w-full'} btn-secondary text-center py-2 text-sm`}
-                >
-                  GitHub
-                </a>
-              </div>
+              {(project.link || project.repositoryLink) && (
+                <div className="flex gap-3">
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${project.repositoryLink ? 'flex-1' : 'w-full'} btn-primary text-center py-2 text-sm`}
+                    >
+                      Live Demo
+                    </a>
+                  )}
+                  {project.repositoryLink && (
+                    <a
+                      href={project.repositoryLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${project.link ? 'flex-1' : 'w-full'} btn-secondary text-center py-2 text-sm`}
+                    >
+                      GitHub
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
           </article>
         ))}

@@ -8,14 +8,14 @@ export interface EducationItem {
 
 export const educationData: EducationItem[] = [
   {
-    date: '2018 - 2023',
+    date: 'Sept 2018 - Jun 2023',
     title: 'BSc in Computer Engineering',
     subtitle: 'Addis Ababa University',
     location: 'Addis Ababa, Ethiopia',
     description: [
-      'Major GPA: 3.81/4.00, graduated with high distinction.',
-      'Thesis: IoT-based Water Distribution Monitoring System.',
-      'Relevant coursework: Database Systems, DSP, Software Engineering, Computer Architecture.',
+      'Major GPA: 3.81/4.00 · Graduated with High Distinction.',
+      'Thesis: IoT-based Water Distribution Monitoring System – Developed an IoT solution to monitor and optimise water distribution in resource-constrained environments.',
+      'Relevant Coursework: Database Systems, Digital Logic Design, Digital Signal Processing, Software Engineering, Computer Architecture and Organisation, Object-Oriented Programming.',
     ],
   },
 ];
