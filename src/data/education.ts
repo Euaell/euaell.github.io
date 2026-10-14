@@ -1,10 +1,6 @@
-export interface EducationItem {
-  date: string;
-  title: string;
-  subtitle: string;
-  location: string;
-  description: string[];
-}
+import type { EducationItem } from './types';
+
+export { type EducationItem };
 
 export const educationData: EducationItem[] = [
   {

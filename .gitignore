@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+/Euael_Eshete_*.pdf
 
 # debug
 npm-debug.log*

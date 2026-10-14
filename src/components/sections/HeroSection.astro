@@ -1,23 +1,13 @@
 ---
-const socialLinks = [
-  { name: 'GitHub', icon: 'github', href: 'https://github.com/euaell', label: 'GitHub Profile' },
-  { name: 'LinkedIn', icon: 'linkedin', href: 'https://www.linkedin.com/in/euael-eshete', label: 'LinkedIn Profile' },
-  { name: 'Twitter', icon: 'twitter', href: 'https://twitter.com/euaell', label: 'Twitter Profile' },
-  { name: 'Email', icon: 'mail', href: 'mailto:euaelmeko@gmail.com', label: 'Send Email' },
-];
+import { profileInfo, socialLinks } from '@/data';
 ---
 
 <section id="home" class="relative overflow-hidden min-h-screen flex items-center">
-  <!-- Background fills entire section -->
-  <div class="absolute inset-0 bg-linear-to-br from-primary-950/40 via-transparent to-accent-950/30"></div>
-  <div class="absolute -top-32 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-primary-500/25 blur-3xl"></div>
-  <div class="absolute -bottom-32 right-12 h-80 w-80 rounded-full bg-accent-500/20 blur-3xl"></div>
-
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-16 pb-24 md:pt-20 md:pb-32">
     <div class="mx-auto flex max-w-5xl flex-col items-center text-center">
       <!-- Name -->
       <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold font-display tracking-tight mb-5 px-4">
-        <span class="gradient-text">Euael M. Eshete</span>
+        <span class="gradient-text">{profileInfo.name}</span>
       </h1>
 
       <!-- Title with rotating skills -->
@@ -27,7 +17,7 @@ const socialLinks = [
       </div>
 
       <!-- Description -->
-      <p class="hero-description text-base md:text-lg text-white/65 max-w-2xl mx-auto mb-8 px-4">
+      <p class="hero-description text-base md:text-lg text-white/65 max-w-2xl mx-auto mb-8 px-4 leading-relaxed">
         Building PKI, multi-tenant SaaS, licensing engines, and auth systems with C#/.NET, Python, Go, and TypeScript.
       </p>
 
@@ -48,13 +38,13 @@ const socialLinks = [
       </div>
 
       <!-- Social Links -->
-      <div class="hero-social flex items-center justify-center gap-3 md:gap-5 px-4">
+      <div class="hero-social flex items-center justify-center gap-3 md:gap-4 px-4">
         {socialLinks.map((social) => (
           <a
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
-            class="glass rounded-full p-3 hover:glass-strong transition-all duration-300 hover:-translate-y-1"
+            class="rounded-full p-3 border border-white/10 bg-white/[0.03] text-white/70 hover:text-white hover:border-white/30 hover:bg-white/[0.07] transition-all duration-200 hover:-translate-y-0.5"
             aria-label={social.label}
           >
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -79,9 +69,9 @@ const socialLinks = [
 
   <!-- Scroll indicator -->
   <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce-slow">
-    <a href="#about" class="flex flex-col items-center gap-2 text-white/60 hover:text-white transition-colors">
+    <a href="#about" class="flex flex-col items-center gap-2 text-white/50 hover:text-white transition-colors">
       <span class="text-xs tracking-[0.2em] uppercase">Scroll</span>
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
       </svg>
     </a>
@@ -90,32 +80,26 @@ const socialLinks = [
 
 <script>
   // Rotating skills animation
-  const skills = ['PKI & CLM', 'ASP.NET Core', 'Multi-Tenant SaaS', 'Python & FastAPI', 'Go & Raft', 'Cloud & Docker'];
+  const skills = ['PKI & CLM', 'ASP.NET Core', 'Multi-Tenant SaaS', 'Python & FastAPI', 'Go & Microservices', 'Cloud Infrastructure'];
   let currentIndex = 0;
   const skillElement = document.getElementById('rotating-skill');
 
   function rotateSkill() {
     if (skillElement) {
-      // Fade out
       skillElement.style.opacity = '0';
-      skillElement.style.transform = 'translateY(10px)';
+      skillElement.style.transform = 'translateY(8px)';
 
       setTimeout(() => {
-        // Change text
         currentIndex = (currentIndex + 1) % skills.length;
         skillElement.textContent = skills[currentIndex];
-
-        // Fade in
         skillElement.style.opacity = '1';
         skillElement.style.transform = 'translateY(0)';
       }, 250);
     }
   }
 
-  // Initialize and start rotation
-  setInterval(rotateSkill, 2000);
+  setInterval(rotateSkill, 2400);
 
-  // Set initial skill
   if (skillElement) {
     skillElement.textContent = skills[0];
   }

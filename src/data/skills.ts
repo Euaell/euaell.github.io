@@ -1,7 +1,6 @@
-export interface SkillCategory {
-  title: string;
-  skills: string[];
-}
+import type { SkillCategory } from './types';
+
+export { type SkillCategory };
 
 export const skillCategories: SkillCategory[] = [
   {

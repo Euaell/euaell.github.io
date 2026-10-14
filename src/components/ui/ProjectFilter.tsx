@@ -1,15 +1,5 @@
 import { useState } from 'react';
-
-export interface Project {
-  title: string;
-  description: string;
-  image: string;
-  link?: string;
-  repositoryLink?: string;
-  tags: string[];
-  responsibilities: string[];
-  featured: boolean;
-}
+import type { Project } from '@/data/types';
 
 interface Props {
   projects: Project[];
@@ -28,13 +18,13 @@ export default function ProjectFilter({ projects, technologies }: Props) {
 
   return (
     <div className="project-filter">
-      <div className="flex flex-wrap justify-center gap-3 mb-12">
+      <div className="flex flex-wrap justify-center gap-2.5 mb-12">
         <button
           onClick={() => setSelected('All')}
-          className={`px-5 py-2 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 border ${
+          className={`px-4 py-2 rounded-full text-xs uppercase tracking-[0.18em] transition-all duration-200 border ${
             selected === 'All'
-              ? 'bg-linear-to-r from-primary-400 to-accent-400 text-neutral-950 border-transparent'
-              : 'border-white/10 text-white/70 hover:text-white hover:border-primary-400/40'
+              ? 'bg-white text-neutral-950 border-white font-medium'
+              : 'border-white/10 text-white/70 hover:text-white hover:border-white/30 bg-white/[0.02]'
           }`}
         >
           All
@@ -43,10 +33,10 @@ export default function ProjectFilter({ projects, technologies }: Props) {
           <button
             key={tech}
             onClick={() => setSelected(tech)}
-            className={`px-5 py-2 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 border ${
+            className={`px-4 py-2 rounded-full text-xs uppercase tracking-[0.18em] transition-all duration-200 border ${
               selected === tech
-                ? 'bg-linear-to-r from-primary-400 to-accent-400 text-neutral-950 border-transparent'
-                : 'border-white/10 text-white/70 hover:text-white hover:border-primary-400/40'
+                ? 'bg-white text-neutral-950 border-white font-medium'
+                : 'border-white/10 text-white/70 hover:text-white hover:border-white/30 bg-white/[0.02]'
             }`}
           >
             {tech}
@@ -58,14 +48,14 @@ export default function ProjectFilter({ projects, technologies }: Props) {
         {filtered.map((project) => (
           <article
             key={project.title}
-            className="rounded-3xl border border-white/10 bg-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-primary-500/40"
+            className="rounded-3xl border border-white/10 bg-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-white/25"
           >
             <div className="relative aspect-video overflow-hidden">
               <img
                 src={project.image}
                 alt={project.title || 'Project Image'}
                 loading="lazy"
-                className="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-500"
+                className="w-full h-full object-cover opacity-85 hover:opacity-100 hover:scale-105 transition-all duration-500"
               />
               <div className="absolute inset-0 bg-linear-to-t from-neutral-950/70 via-transparent to-transparent" />
             </div>
@@ -80,13 +70,13 @@ export default function ProjectFilter({ projects, technologies }: Props) {
                 {project.tags.slice(0, 3).map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70"
+                    className="rounded-md border border-white/10 bg-white/[0.03] px-2.5 py-1 text-xs text-white/70"
                   >
                     {tag}
                   </span>
                 ))}
                 {project.tags.length > 3 && (
-                  <span className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">
+                  <span className="rounded-md border border-white/10 bg-white/[0.03] px-2.5 py-1 text-xs text-white/70">
                     +{project.tags.length - 3}
                   </span>
                 )}
@@ -120,14 +110,6 @@ export default function ProjectFilter({ projects, technologies }: Props) {
           </article>
         ))}
       </div>
-
-      {filtered.length === 0 && (
-        <div className="text-center py-20">
-          <p className="text-lg text-white/60">
-            No projects found for this technology.
-          </p>
-        </div>
-      )}
     </div>
   );
 }

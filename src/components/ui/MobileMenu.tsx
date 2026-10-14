@@ -78,7 +78,6 @@ export default function MobileMenu() {
               }}
             >
               <div className="flex items-center gap-4">
-                <span className="h-2.5 w-2.5 rounded-full bg-primary-400 shadow-[0_0_10px_rgba(34,211,238,0.6)]" />
                 <span className="text-lg font-medium uppercase tracking-[0.2em]">{item.name}</span>
               </div>
             </button>

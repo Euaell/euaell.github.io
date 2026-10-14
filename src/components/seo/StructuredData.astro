@@ -1,16 +1,14 @@
 ---
+import { profileInfo } from '@/data';
+
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Euael M. Eshete',
-  jobTitle: 'Software Engineer',
+  name: profileInfo.name,
+  jobTitle: profileInfo.title,
   url: 'https://portfolio.euaell.me',
-  email: 'euaelmeko@gmail.com',
-  sameAs: [
-    'https://github.com/euaell',
-    'https://www.linkedin.com/in/euael-eshete',
-    'https://twitter.com/euaell',
-  ],
+  email: profileInfo.email,
+  sameAs: profileInfo.socialLinks.map((s) => s.href),
   knowsAbout: [
     'PKI & X.509',
     'Multi-Tenant SaaS',
@@ -36,13 +34,12 @@ const personSchema = {
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Euael M. Eshete Portfolio',
+  name: `${profileInfo.name} Portfolio`,
   url: 'https://portfolio.euaell.me',
-  description:
-    'Portfolio of Euael M. Eshete - Software Engineer working on PKI, multi-tenant SaaS, licensing, and cloud infrastructure.',
+  description: profileInfo.description,
   author: {
     '@type': 'Person',
-    name: 'Euael M. Eshete',
+    name: profileInfo.name,
   },
 };
 
@@ -53,10 +50,9 @@ const profilePageSchema = {
   dateModified: new Date().toISOString().split('T')[0],
   mainEntity: {
     '@type': 'Person',
-    name: 'Euael M. Eshete',
-    jobTitle: 'Software Engineer',
-    description:
-      'Software engineer working on PKI, multi-tenant SaaS, licensing, and cloud infrastructure with .NET, Python, Go, and TypeScript.',
+    name: profileInfo.name,
+    jobTitle: profileInfo.title,
+    description: profileInfo.description,
   },
 };
 ---

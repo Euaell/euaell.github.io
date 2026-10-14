@@ -1,13 +1,6 @@
-export interface Project {
-	title: string;
-	description: string;
-	image: string;
-	link?: string;
-	repositoryLink?: string;
-	tags: string[];
-	responsibilities: string[];
-	featured: boolean;
-}
+import type { Project } from './types';
+
+export { type Project };
 
 export const projectsData: Project[] = [
 	{
@@ -92,6 +85,7 @@ export const projectsData: Project[] = [
 			'Added integration tests against PostgreSQL for tenant data boundaries.',
 		],
 		tags: ['ASP.NET Core', 'Next.js', 'PostgreSQL', 'Redis', 'CQRS', 'Docker'],
+		link: 'https://rms.zaftech.co/landing/',
 		image: '/images/projects/rms.png',
 		featured: false,
 	},
