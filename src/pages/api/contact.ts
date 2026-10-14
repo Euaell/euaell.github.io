@@ -1,12 +1,6 @@
 import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
-
-interface ContactFormData {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
+import { CONTACT_FIELDS, EMAIL_PATTERN, MAX_LENGTH, MIN_MESSAGE_LENGTH, type ContactFormData } from '@/lib/contact';
 
 function createTransporter() {
   const host = process.env.NODE_MAILER_HOST || 'smtp.gmail.com';
@@ -24,15 +18,17 @@ function createTransporter() {
   });
 }
 
-const FIELDS = ['name', 'email', 'subject', 'message'] as const;
-
 function validateFormData(data: unknown): data is ContactFormData {
   if (typeof data !== 'object' || data === null) return false;
   const record = data as Record<string, unknown>;
 
   return (
-    FIELDS.every((field) => typeof record[field] === 'string' && record[field].trim().length > 0) &&
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(record.email as string)
+    CONTACT_FIELDS.every((field) => {
+      const value = record[field];
+      return typeof value === 'string' && value.trim().length > 0 && value.length <= MAX_LENGTH[field];
+    }) &&
+    EMAIL_PATTERN.test(record.email as string) &&
+    (record.message as string).trim().length >= MIN_MESSAGE_LENGTH
   );
 }
 

@@ -1,20 +1,19 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react';
+import {
+  EMAIL_PATTERN,
+  MAX_LENGTH,
+  MIN_MESSAGE_LENGTH,
+  type ContactField as FieldName,
+  type ContactFormData as FormData,
+} from '@/lib/contact';
 
-interface FormData {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
-
-type FieldName = keyof FormData;
 type FormErrors = Partial<Record<FieldName, string>>;
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 const EMPTY_FORM: FormData = { name: '', email: '', subject: '', message: '' };
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const MIN_MESSAGE_LENGTH = 10;
 const SUCCESS_RESET_MS = 5000;
+const DEFAULT_ERROR = 'Failed to send message. Please try again or email me directly.';
+const RATE_LIMITED_ERROR = 'Too many messages in a short time. Please wait a few minutes and try again.';
 
 const FIELDS: {
   name: FieldName;
@@ -54,6 +53,7 @@ export default function ContactForm() {
   const [formData, setFormData] = useState<FormData>(EMPTY_FORM);
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<FormStatus>('idle');
+  const [errorMessage, setErrorMessage] = useState(DEFAULT_ERROR);
 
   useEffect(() => {
     if (status !== 'success') return;
@@ -82,11 +82,16 @@ export default function ContactForm() {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) throw new Error(`Request failed with ${response.status}`);
+      if (!response.ok) {
+        setErrorMessage(response.status === 429 ? RATE_LIMITED_ERROR : DEFAULT_ERROR);
+        setStatus('error');
+        return;
+      }
 
       setFormData(EMPTY_FORM);
       setStatus('success');
     } catch {
+      setErrorMessage(DEFAULT_ERROR);
       setStatus('error');
     }
   }
@@ -109,6 +114,7 @@ export default function ContactForm() {
           onChange: handleChange,
           placeholder,
           autoComplete,
+          maxLength: MAX_LENGTH[name],
           required: true,
           'aria-invalid': error ? true : undefined,
           'aria-describedby': error ? errorId : undefined,
@@ -176,7 +182,7 @@ export default function ContactForm() {
                 clipRule="evenodd"
               />
             </svg>
-            Failed to send message. Please try again or email me directly.
+            {errorMessage}
           </p>
         )}
       </div>
