@@ -8,7 +8,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://portfolio.euaell.me',
   adapter: node({ mode: 'standalone' }),
-  integrations: [react(), sitemap({ filter: (page) => !page.includes('/404') })],
+  integrations: [react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
   },

@@ -1,37 +1,32 @@
-# Base image
 FROM oven/bun:1-alpine AS base
-
-# Install dependencies only when needed
-FROM base AS deps
 WORKDIR /app
+
+# Everything needed to build (including devDependencies)
+FROM base AS deps
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
 
-# Rebuild the source code only when needed
+# Runtime dependencies only
+FROM base AS prod-deps
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile --production
+
 FROM base AS builder
-WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
-# Build the Astro application
 ENV NODE_ENV=production
 RUN bun run build
 
-# Production image, copy all the files and run the server
+# Astro Node adapter (standalone) served by Bun
 FROM base AS runner
-WORKDIR /app
-
-# Copy the built application
-# Astro SSR with Node adapter runs with node/bun, since we use bun:
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
-
-EXPOSE 4321
-
-ENV PORT=4321
-ENV HOST="0.0.0.0"
 ENV NODE_ENV=production
+ENV HOST=0.0.0.0
+ENV PORT=4321
 
-# Start the server
-CMD ["bun", "run", "./dist/server/entry.mjs"]
+COPY --from=prod-deps /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+COPY package.json ./
+
+USER bun
+EXPOSE 4321
+CMD ["bun", "./dist/server/entry.mjs"]

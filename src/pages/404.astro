@@ -1,5 +1,9 @@
 ---
 import Layout from '@/layouts/Layout.astro';
+
+// Rendered per request: for a prerendered error page the Node adapter fetches /404.html over
+// HTTP from the public host, which loops back through Cloudflare (and hangs when unreachable)
+export const prerender = false;
 ---
 
 <Layout title="Page not found - Euael M. Eshete" description="The page you are looking for does not exist." noIndex>
