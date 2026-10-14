@@ -12,7 +12,6 @@ import type {
   SkillCategory,
   MentoringItem,
   ProfileInfo,
-  SocialLink,
 } from './types';
 
 export * from './types';

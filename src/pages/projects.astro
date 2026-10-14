@@ -5,7 +5,7 @@ import { projectsData } from '@/data';
 import ProjectFilter from '@/components/ui/ProjectFilter';
 
 const allProjects = projectsData;
-const allTech = [...new Set(projectsData.flatMap((p) => p.tags))].slice(0, 12);
+const allTech = [...new Set(projectsData.flatMap((p) => p.tags))].sort((a, b) => a.localeCompare(b));
 ---
 
 <Layout
