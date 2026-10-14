@@ -2,32 +2,34 @@
   "name": "euaell-portfolio",
   "type": "module",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "check": "astro check",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.6",
     "@astrojs/node": "9.5.2",
     "@astrojs/react": "4.4.2",
-    "@astrojs/sitemap": "^3.7.0",
-    "@tailwindcss/vite": "^4.1.18",
-    "@types/node": "^22.19.7",
-    "@types/nodemailer": "^6.4.21",
-    "@types/react": "^18.3.27",
-    "@types/react-dom": "^18.3.7",
+    "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/vite": "^4.3.3",
     "astro": "5.16.11",
     "nodemailer": "^6.10.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3"
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "prettier": "^3.8.0",
-    "prettier-plugin-astro": "^0.14.1"
+    "@astrojs/check": "^0.9.10",
+    "@types/node": "^22.20.5",
+    "@types/nodemailer": "^6.4.24",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript": "^5.9.3"
   }
 }

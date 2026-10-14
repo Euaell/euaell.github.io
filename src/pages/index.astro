@@ -8,17 +8,14 @@ import ContactSection from '@/components/sections/ContactSection.astro';
 import StructuredData from '@/components/seo/StructuredData.astro';
 ---
 
-<Layout
-  title="Euael M. Eshete - Full Stack Developer & AI Engineer"
-  description="Full Stack Developer & AI Engineer specializing in React, Next.js, Python, TypeScript, and machine learning. Building innovative web applications and AI solutions."
->
+<Layout>
   <Fragment slot="head">
     <StructuredData />
   </Fragment>
 
   <Navigation />
 
-  <main class="md:-mt-13">
+  <main id="main">
     <HeroSection />
     <AboutSection />
     <WorkSection />

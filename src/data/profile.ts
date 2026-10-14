@@ -1,41 +1,38 @@
 import profileImage from '@/assets/profile.jpg';
+import type { ProfileInfo, SocialLink } from './types';
 
-export interface MentoringItem {
-  date: string;
-  title: string;
-  subtitle: string;
-  location: string;
-  description: string[];
-}
+const email = 'euaelmeko@gmail.com';
 
-export const mentoringData: MentoringItem[] = [
+export const socialLinks: SocialLink[] = [
+  { name: 'GitHub', icon: 'github', href: 'https://github.com/euaell', label: 'GitHub Profile', handle: '@euaell' },
   {
-    date: 'Sep 2023 - Mar 2025',
-    title: 'Mentor',
-    subtitle: 'Africa to Silicon Valley (A2SV)',
-    location: 'Addis Ababa, Ethiopia',
-    description: [
-      'Mentored 150+ students in full-stack development, AI/LLM integration, and cloud technologies.',
-    ],
+    name: 'LinkedIn',
+    icon: 'linkedin',
+    href: 'https://www.linkedin.com/in/euael-eshete',
+    label: 'LinkedIn Profile',
+    handle: 'Euael Eshete',
   },
-  {
-    date: 'Mar 2022 - Jun 2022',
-    title: 'Mentor',
-    subtitle: 'Solvers, Addis Ababa University',
-    location: 'Addis Ababa, Ethiopia',
-    description: [
-      'Guided first-year students through university life and STEM foundations.',
-    ],
-  },
+  { name: 'Twitter', icon: 'twitter', href: 'https://twitter.com/euaell', label: 'Twitter Profile', handle: '@euaell' },
+  { name: 'Email', icon: 'mail', href: `mailto:${email}`, label: 'Send Email', handle: email },
 ];
 
-export const profileInfo = {
+export const profileInfo: ProfileInfo = {
   name: 'Euael M. Eshete',
-  title: 'Software Developer',
-  tagline: 'Building reliable systems with practical AI.',
-  description: 'Full-stack software developer specializing in scalable backend platforms, cloud infrastructure, and AI-enabled products.',
-  bio: 'Software developer focused on high-concurrency systems, cloud-native delivery, and AI tooling that improves real products.',
-  location: 'Addis Ababa, Ethiopia',
-  availability: '4+ years experience',
+  email,
+  title: 'Software Engineer',
+  description: 'Software engineer at Securetron building certificate lifecycle management, licensing, and tenant isolation. Founder at ZafTech.',
+  bio: 'Most of my work is in C# and .NET, with Python, Go, and TypeScript where they fit. I build multi-tenant SaaS, licensing engines, cryptographic workflows, and run my own cloud infrastructure.',
+  location: 'Addis Ababa / Remote',
   image: profileImage,
+  resumeUrl: 'https://euaell.me/cv',
+  /** Rotated through in the hero headline */
+  focusAreas: [
+    'PKI & CLM Systems',
+    'Multi-Tenant SaaS',
+    'Licensing Engines',
+    'Distributed Backends',
+    'AI Agent Tools (MCP)',
+    'Cloud Infrastructure',
+  ],
+  socialLinks,
 };

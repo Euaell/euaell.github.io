@@ -1,5 +1,6 @@
 ---
 import FloatingResumeButton from '@/components/ui/FloatingResumeButton.astro';
+import { profileInfo, socialLinks } from '@/data';
 import '@/styles/global.css';
 
 interface Props {
@@ -10,47 +11,49 @@ interface Props {
 }
 
 const {
-  title = 'Euael M. Eshete - Full Stack Developer & AI Engineer',
-  description = 'Full Stack Developer & AI Engineer specializing in React, Next.js, Python, TypeScript, and machine learning. Building innovative web applications and AI solutions.',
-  ogImage = 'https://portfolio.euaell.me/og-image.png',
+  title = `${profileInfo.name} - ${profileInfo.title}`,
+  description = 'Software engineer working on PKI, multi-tenant SaaS, licensing, and cloud infrastructure with .NET, Python, Go, and TypeScript.',
+  ogImage = '/og-image.png',
   noIndex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
+const footerLinks = socialLinks.filter((link) => link.icon === 'github' || link.icon === 'linkedin');
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Primary Meta Tags -->
     <title>{title}</title>
-    <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta name="author" content="Euael M. Eshete" />
-    <meta name="keywords" content="Full Stack Developer, AI Engineer, React, Next.js, TypeScript, Python, FastAPI, Machine Learning, Web Development, Software Engineer" />
+    <meta name="author" content={profileInfo.name} />
     <link rel="canonical" href={canonicalURL} />
-
+    <link rel="sitemap" href="/sitemap-index.xml" />
     {noIndex && <meta name="robots" content="noindex, nofollow" />}
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:site_name" content="Euael M. Eshete Portfolio" />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${profileInfo.name}, ${profileInfo.title}`} />
+    <meta property="og:site_name" content={`${profileInfo.name} Portfolio`} />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:image:alt" content={`${profileInfo.name}, ${profileInfo.title}`} />
     <meta name="twitter:creator" content="@euaell" />
 
     <!-- Favicons -->
@@ -60,64 +63,81 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#0b0f14" />
+    <meta name="color-scheme" content="dark" />
 
-    <!-- Preconnect to Google Fonts -->
+    <!-- Fonts -->
+    <link rel="preload" href="/fonts/NyataFTR-Regular.otf" as="font" type="font/otf" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Google Fonts -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Additional head content slot -->
+    <noscript><style>.reveal { opacity: 1 !important; }</style></noscript>
+
     <slot name="head" />
   </head>
 
   <body>
-    <FloatingResumeButton />
-    <!-- Main content slot -->
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-neutral-950"
+    >
+      Skip to content
+    </a>
+
     <slot />
 
-    <footer class="py-8 border-t border-white/10">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row items-center justify-center md:justify-between gap-4 text-xs uppercase tracking-[0.2em] text-white/50">
-          <p>
-            &copy; {new Date().getFullYear()} Euael M. Eshete. All rights reserved.
-          </p>
-          <div class="flex items-center gap-6">
-            <a href="/#home" class="hover:text-white transition-colors">Home</a>
-            <a
-              href="https://github.com/euaell"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="hover:text-white transition-colors"
-            >
-              GitHub
-            </a>
-            <a
-              href="https://www.linkedin.com/in/euael-eshete"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="hover:text-white transition-colors"
-            >
-              LinkedIn
-            </a>
-          </div>
+    <FloatingResumeButton />
+
+    <footer class="border-t border-white/10 py-8">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col items-center justify-center gap-4 text-xs tracking-caps text-white/50 uppercase md:flex-row md:justify-between">
+          <p>&copy; {new Date().getFullYear()} {profileInfo.name}. All rights reserved.</p>
+          <nav aria-label="Footer">
+            <ul class="flex items-center gap-6">
+              <li><a href="/#home" class="transition-colors hover:text-white">Home</a></li>
+              {
+                footerLinks.map((link) => (
+                  <li>
+                    <a href={link.href} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-white">
+                      {link.name}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
         </div>
       </div>
     </footer>
+
+    <script>
+      // Fade `.reveal` elements in once, the first time they scroll into view
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        },
+        { threshold: 0.15 }
+      );
+
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZW3GEJSTM"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag('js', new Date());
-      gtag('config', 'G-QZW3GEJSTM', {
-        page_path: window.location.pathname,
-      });
+      gtag('config', 'G-QZW3GEJSTM');
     </script>
   </body>
 </html>

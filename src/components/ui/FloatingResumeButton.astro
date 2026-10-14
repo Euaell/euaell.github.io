@@ -1,17 +1,26 @@
 ---
-// Floating Resume Button Component
+import { profileInfo } from '@/data';
 ---
 
-<a
-  href="https://euaell.me/cv"
-  target="_blank"
-  rel="noopener noreferrer"
-  id="floating-resume-btn"
-  class="fixed bottom-6 right-6 z-50 rounded-full p-3 w-fit transition-all duration-300 shadow-lg hover:shadow-primary-500/25 group"
-  aria-label="View Resume"
->
-  <div class="flex items-center">
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<div class="group fixed right-6 bottom-6 z-50 flex items-center justify-center">
+  <!-- Glassy wave: two soft rings ripple out every 2s while the button is idle -->
+  <span
+    class="beacon-wave pointer-events-none absolute size-12 rounded-full border border-white/20 bg-white/5 inset-shadow-sm inset-shadow-white/10 backdrop-blur-xs group-focus-within:invisible group-hover:invisible"
+    aria-hidden="true"
+  ></span>
+  <span
+    class="beacon-wave beacon-wave-trail pointer-events-none absolute size-12 rounded-full border border-white/10 group-focus-within:invisible group-hover:invisible"
+    aria-hidden="true"
+  ></span>
+
+  <a
+    href={profileInfo.resumeUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="relative flex h-12 w-12 items-center justify-center gap-0 overflow-hidden rounded-full border border-white/20 bg-neutral-900/95 text-white shadow-lg shadow-black/60 backdrop-blur-md transition-all duration-300 hover:border-white/40 hover:bg-neutral-800 md:hover:w-32 md:hover:gap-2.5 md:focus-visible:w-32 md:focus-visible:gap-2.5"
+    aria-label="View resume (opens in a new tab)"
+  >
+    <svg class="size-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -19,32 +28,31 @@
         d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
       />
     </svg>
-    <span class="resume-text hidden md:block text-xs uppercase tracking-[0.15em] font-medium">
+    <span
+      class="hidden max-w-0 overflow-hidden text-xs font-medium tracking-label whitespace-nowrap uppercase opacity-0 transition-all duration-300 group-focus-within:max-w-20 group-focus-within:opacity-100 group-hover:max-w-20 group-hover:opacity-100 md:inline-block"
+    >
       Resume
     </span>
-  </div>
-</a>
+  </a>
+</div>
 
 <style>
-  #floating-resume-btn {
-    background: linear-gradient(135deg, var(--color-primary-500), var(--color-accent-500));
-    color: #0b0f14;
+  .beacon-wave {
+    animation: beacon-wave 2s cubic-bezier(0.25, 0.8, 0.4, 1) infinite;
   }
 
-  #floating-resume-btn:hover {
-    background: linear-gradient(135deg, var(--color-primary-400), var(--color-accent-400));
-    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
+  .beacon-wave-trail {
+    animation-delay: 0.35s;
   }
 
-  .resume-text {
-    max-width: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-width 0.3s ease, opacity 0.3s ease;
-  }
-
-  #floating-resume-btn:hover .resume-text {
-    max-width: 100px;
-    opacity: 1;
+  @keyframes beacon-wave {
+    0% {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(1.7);
+      opacity: 0;
+    }
   }
 </style>

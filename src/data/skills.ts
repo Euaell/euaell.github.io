@@ -1,31 +1,32 @@
-export interface SkillCategory {
-  title: string;
-  skills: string[];
-}
+import type { SkillCategory } from './types';
 
 export const skillCategories: SkillCategory[] = [
   {
-    title: 'Programming',
-    skills: ['Python', 'C#/.NET', 'SQL', 'JavaScript/TypeScript', 'Go'],
+    title: 'Languages',
+    skills: ['C#', 'Python', 'Go', 'TypeScript', 'SQL'],
   },
   {
     title: 'Backend',
-    skills: ['FastAPI', 'LiteStar', 'ASP.NET Core', 'gRPC', 'REST APIs', 'Microservices'],
+    skills: ['ASP.NET Core', 'EF Core', 'FastAPI', 'Litestar', 'Node.js', 'gRPC', 'REST APIs'],
   },
   {
-    title: 'AI Engineering',
-    skills: ['RAG Architectures', 'Vector Embeddings', 'LLM Tooling', 'Prompt Engineering'],
+    title: 'Frontend',
+    skills: ['HTMX', 'Alpine.js', 'React', 'Next.js', 'Tailwind CSS'],
   },
   {
-    title: 'Infrastructure',
-    skills: ['Docker', 'GCP Cloud Run', 'GCS', 'CI/CD (GitHub Actions)', 'Linux', 'Kubernetes (Learning)'],
+    title: 'Security & PKI',
+    skills: ['PKI & X.509', 'DigiCert & EJBCA', 'mTLS', 'OAuth 2.0 & OIDC', 'Secrets Management'],
   },
   {
-    title: 'Data & Storage',
-    skills: ['PostgreSQL', 'Redis', 'MongoDB', 'Vector Databases'],
+    title: 'Infrastructure & Cloud',
+    skills: ['Docker', 'Azure Pipelines', 'Azure Bicep', 'GCP (Cloud Run, GCS)', 'GitHub Actions', 'Linux', 'Nginx', 'Kubernetes (learning)'],
   },
   {
-    title: 'Languages',
-    skills: ['English (Proficient)', 'Amharic (Native)', 'Deutsch (Beginner)'],
+    title: 'Data & AI',
+    skills: ['PostgreSQL', 'SQL Server', 'Redis', 'Vector Databases', 'RAG', 'Embeddings', 'LLM Tool Use (MCP)'],
+  },
+  {
+    title: 'Spoken Languages',
+    skills: ['English (Fluent)', 'Amharic (Native)', 'German (Beginner)'],
   },
 ];

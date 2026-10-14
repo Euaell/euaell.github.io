@@ -1,20 +1,13 @@
 {
-	"name": "Euael M. Eshete - Full Stack Developer & AI Engineer",
+	"name": "Euael M. Eshete - Software Engineer",
 	"short_name": "Euael Portfolio",
-	"author": "Euael M. Eshete",
-	"description": "Full Stack Developer & AI Engineer from Ethiopia specializing in React, Next.js, Python, TypeScript, and machine learning. Computer Engineering graduate from AASTU with 2+ years of experience building scalable web applications.",
+	"description": "Software engineer working on PKI, multi-tenant SaaS, licensing, and cloud infrastructure with .NET, Python, Go, and TypeScript.",
 	"icons": [
 		{
 			"src": "/icons/Logo.png",
 			"sizes": "369x369",
 			"type": "image/png",
 			"purpose": "any"
-		},
-		{
-			"src": "/icons/Logo.png",
-			"sizes": "369x369",
-			"type": "image/png",
-			"purpose": "maskable"
 		},
 		{
 			"src": "/icons/link.svg",
@@ -27,36 +20,18 @@
 		{
 			"name": "View Projects",
 			"short_name": "Projects",
-			"description": "View my portfolio projects",
-			"url": "/#work",
-			"icons": [
-				{
-					"src": "/icons/Logo.png",
-					"sizes": "369x369"
-				}
-			]
+			"url": "/projects"
 		},
 		{
 			"name": "Contact Me",
 			"short_name": "Contact",
-			"description": "Get in touch with me",
-			"url": "/#contact",
-			"icons": [
-				{
-					"src": "/icons/Logo.png",
-					"sizes": "369x369"
-				}
-			]
+			"url": "/#contact"
 		}
 	],
-	"categories": ["portfolio", "development", "technology", "business"],
 	"start_url": "/",
 	"scope": "/",
-	"background_color": "#0f172a",
-	"theme_color": "#3b82f6",
+	"background_color": "#0b0f14",
+	"theme_color": "#0b0f14",
 	"display": "standalone",
-	"orientation": "any",
-	"lang": "en-US",
-	"dir": "ltr",
-	"prefer_related_applications": false
+	"lang": "en-US"
 }
