@@ -4,7 +4,7 @@
 @font-face {
   font-family: 'Nyata';
   src: url('/fonts/NyataFTR-Regular.otf') format('opentype');
-  font-weight: 100 900;
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -184,7 +184,8 @@ svg {
   border: 1px solid rgba(148, 163, 184, 0.15);
 }
 
-.glass-strong {
+.glass-strong,
+.glass-liquid-strong {
   background: rgba(22, 27, 34, 0.75);
   backdrop-filter: blur(22px);
   border: 1px solid rgba(148, 163, 184, 0.22);
