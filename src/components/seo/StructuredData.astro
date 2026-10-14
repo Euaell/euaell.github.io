@@ -8,7 +8,7 @@ const personSchema = {
   jobTitle: profileInfo.title,
   url: 'https://portfolio.euaell.me',
   email: profileInfo.email,
-  sameAs: profileInfo.socialLinks.map((s) => s.href),
+  sameAs: profileInfo.socialLinks.filter((s) => !s.href.startsWith('mailto:')).map((s) => s.href),
   knowsAbout: [
     'PKI & X.509',
     'Multi-Tenant SaaS',
