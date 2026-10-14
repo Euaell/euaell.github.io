@@ -8,17 +8,14 @@ import ContactSection from '@/components/sections/ContactSection.astro';
 import StructuredData from '@/components/seo/StructuredData.astro';
 ---
 
-<Layout
-  title="Euael M. Eshete - Software Engineer"
-  description="Software engineer working on PKI, multi-tenant SaaS, licensing, and cloud infrastructure with .NET, Python, Go, and TypeScript."
->
+<Layout>
   <Fragment slot="head">
     <StructuredData />
   </Fragment>
 
   <Navigation />
 
-  <main>
+  <main id="main">
     <HeroSection />
     <AboutSection />
     <WorkSection />

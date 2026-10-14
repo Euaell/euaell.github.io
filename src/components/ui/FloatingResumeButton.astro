@@ -1,11 +1,11 @@
 ---
-// Floating Resume Button Component
+import { profileInfo } from '@/data';
 ---
 
 <div class="group fixed right-6 bottom-6 z-50 flex items-center justify-center">
   <!-- Glassy wave: two soft rings ripple out every 2s while the button is idle -->
   <span
-    class="beacon-wave pointer-events-none absolute size-12 rounded-full border border-white/20 bg-white/5 shadow-[inset_0_0_10px_rgb(255_255_255/0.12)] backdrop-blur-[1px] group-focus-within:invisible group-hover:invisible"
+    class="beacon-wave pointer-events-none absolute size-12 rounded-full border border-white/20 bg-white/5 inset-shadow-sm inset-shadow-white/10 backdrop-blur-xs group-focus-within:invisible group-hover:invisible"
     aria-hidden="true"
   ></span>
   <span
@@ -14,11 +14,11 @@
   ></span>
 
   <a
-    href="https://euaell.me/cv"
+    href={profileInfo.resumeUrl}
     target="_blank"
     rel="noopener noreferrer"
     class="relative flex h-12 w-12 items-center justify-center gap-0 overflow-hidden rounded-full border border-white/20 bg-neutral-900/95 text-white shadow-lg shadow-black/60 backdrop-blur-md transition-all duration-300 hover:border-white/40 hover:bg-neutral-800 md:hover:w-32 md:hover:gap-2.5 md:focus-visible:w-32 md:focus-visible:gap-2.5"
-    aria-label="View Resume"
+    aria-label="View resume (opens in a new tab)"
   >
     <svg class="size-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path
@@ -29,7 +29,7 @@
       />
     </svg>
     <span
-      class="hidden max-w-0 overflow-hidden text-xs font-medium tracking-[0.16em] whitespace-nowrap uppercase opacity-0 transition-all duration-300 group-focus-within:max-w-20 group-focus-within:opacity-100 group-hover:max-w-20 group-hover:opacity-100 md:inline-block"
+      class="hidden max-w-0 overflow-hidden text-xs font-medium tracking-label whitespace-nowrap uppercase opacity-0 transition-all duration-300 group-focus-within:max-w-20 group-focus-within:opacity-100 group-hover:max-w-20 group-hover:opacity-100 md:inline-block"
     >
       Resume
     </span>

@@ -1,7 +1,5 @@
 import type { SkillCategory } from './types';
 
-export { type SkillCategory };
-
 export const skillCategories: SkillCategory[] = [
   {
     title: 'Languages',

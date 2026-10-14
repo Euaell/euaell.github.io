@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react';
 
 interface FormData {
   name: string;
@@ -7,50 +7,71 @@ interface FormData {
   message: string;
 }
 
+type FieldName = keyof FormData;
+type FormErrors = Partial<Record<FieldName, string>>;
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
+const EMPTY_FORM: FormData = { name: '', email: '', subject: '', message: '' };
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MIN_MESSAGE_LENGTH = 10;
+const SUCCESS_RESET_MS = 5000;
+
+const FIELDS: {
+  name: FieldName;
+  label: string;
+  type?: 'text' | 'email';
+  autoComplete?: string;
+  placeholder: string;
+  multiline?: boolean;
+}[] = [
+  { name: 'name', label: 'Name', autoComplete: 'name', placeholder: 'Your name' },
+  { name: 'email', label: 'Email', type: 'email', autoComplete: 'email', placeholder: 'your.email@example.com' },
+  { name: 'subject', label: 'Subject', placeholder: "What's this about?" },
+  { name: 'message', label: 'Message', placeholder: 'Tell me about your project or question...', multiline: true },
+];
+
+function validate(data: FormData): FormErrors {
+  const errors: FormErrors = {};
+
+  if (!data.name.trim()) errors.name = 'Name is required';
+
+  if (!data.email.trim()) errors.email = 'Email is required';
+  else if (!EMAIL_PATTERN.test(data.email)) errors.email = 'Invalid email format';
+
+  if (!data.subject.trim()) errors.subject = 'Subject is required';
+
+  if (!data.message.trim()) errors.message = 'Message is required';
+  else if (data.message.trim().length < MIN_MESSAGE_LENGTH)
+    errors.message = `Message must be at least ${MIN_MESSAGE_LENGTH} characters`;
+
+  return errors;
+}
+
+const inputClass =
+  'w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white transition placeholder:text-white/40 focus:border-primary-400/60 focus:ring-2 focus:ring-primary-400/60 focus:outline-hidden aria-invalid:border-red-500/60 aria-invalid:ring-2 aria-invalid:ring-red-500';
+
 export default function ContactForm() {
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
-
+  const [formData, setFormData] = useState<FormData>(EMPTY_FORM);
+  const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<FormStatus>('idle');
-  const [errors, setErrors] = useState<Partial<FormData>>({});
 
-  function validate(): boolean {
-    const newErrors: Partial<FormData> = {};
+  useEffect(() => {
+    if (status !== 'success') return;
+    const timer = setTimeout(() => setStatus('idle'), SUCCESS_RESET_MS);
+    return () => clearTimeout(timer);
+  }, [status]);
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Invalid email format';
-    }
-
-    if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    } else if (formData.message.length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  }
-
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (!validate()) return;
+    const nextErrors = validate(formData);
+    setErrors(nextErrors);
+
+    const firstInvalid = FIELDS.find((field) => nextErrors[field.name]);
+    if (firstInvalid) {
+      e.currentTarget.querySelector<HTMLElement>(`#${firstInvalid.name}`)?.focus();
+      return;
+    }
 
     setStatus('submitting');
 
@@ -61,137 +82,62 @@ export default function ContactForm() {
         body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        setStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
-        setErrors({});
+      if (!response.ok) throw new Error(`Request failed with ${response.status}`);
 
-        // Reset success message after 5 seconds
-        setTimeout(() => setStatus('idle'), 5000);
-      } else {
-        setStatus('error');
-      }
-    } catch (err) {
+      setFormData(EMPTY_FORM);
+      setStatus('success');
+    } catch {
       setStatus('error');
     }
   }
 
-  function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-
-    // Clear error when user starts typing
-    if (errors[name as keyof FormData]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
-    }
+  function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const name = e.target.name as FieldName;
+    setFormData((prev) => ({ ...prev, [name]: e.target.value }));
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Name Field */}
-      <div>
-        <label htmlFor="name" className="block text-xs uppercase tracking-[0.2em] text-white/60 mb-2">
-          Name *
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-primary-400/60 focus:border-primary-400/60 ${
-            errors.name ? 'ring-2 ring-red-500 border-red-500/60' : ''
-          } transition-all`}
-          placeholder="Your name"
-        />
-        {errors.name && (
-          <p className="mt-1 text-sm text-red-400">{errors.name}</p>
-        )}
-      </div>
+    <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+      {FIELDS.map(({ name, label, type = 'text', autoComplete, placeholder, multiline }) => {
+        const error = errors[name];
+        const errorId = `${name}-error`;
+        const shared = {
+          id: name,
+          name,
+          value: formData[name],
+          onChange: handleChange,
+          placeholder,
+          autoComplete,
+          required: true,
+          'aria-invalid': error ? true : undefined,
+          'aria-describedby': error ? errorId : undefined,
+        };
 
-      {/* Email Field */}
-      <div>
-        <label htmlFor="email" className="block text-xs uppercase tracking-[0.2em] text-white/60 mb-2">
-          Email *
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-primary-400/60 focus:border-primary-400/60 ${
-            errors.email ? 'ring-2 ring-red-500 border-red-500/60' : ''
-          } transition-all`}
-          placeholder="your.email@example.com"
-        />
-        {errors.email && (
-          <p className="mt-1 text-sm text-red-400">{errors.email}</p>
-        )}
-      </div>
+        return (
+          <div key={name}>
+            <label htmlFor={name} className="mb-2 block text-xs tracking-caps text-white/60 uppercase">
+              {label} <span aria-hidden="true">*</span>
+            </label>
+            {multiline ? (
+              <textarea {...shared} rows={6} className={`${inputClass} resize-none`} />
+            ) : (
+              <input {...shared} type={type} className={inputClass} />
+            )}
+            {error && (
+              <p id={errorId} className="mt-1 text-sm text-red-400">
+                {error}
+              </p>
+            )}
+          </div>
+        );
+      })}
 
-      {/* Subject Field */}
-      <div>
-        <label htmlFor="subject" className="block text-xs uppercase tracking-[0.2em] text-white/60 mb-2">
-          Subject *
-        </label>
-        <input
-          type="text"
-          id="subject"
-          name="subject"
-          value={formData.subject}
-          onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-primary-400/60 focus:border-primary-400/60 ${
-            errors.subject ? 'ring-2 ring-red-500 border-red-500/60' : ''
-          } transition-all`}
-          placeholder="What's this about?"
-        />
-        {errors.subject && (
-          <p className="mt-1 text-sm text-red-400">{errors.subject}</p>
-        )}
-      </div>
-
-      {/* Message Field */}
-      <div>
-        <label htmlFor="message" className="block text-xs uppercase tracking-[0.2em] text-white/60 mb-2">
-          Message *
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          rows={6}
-          className={`w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-primary-400/60 focus:border-primary-400/60 ${
-            errors.message ? 'ring-2 ring-red-500 border-red-500/60' : ''
-          } transition-all resize-none`}
-          placeholder="Tell me about your project or question..."
-        />
-        {errors.message && (
-          <p className="mt-1 text-sm text-red-400">{errors.message}</p>
-        )}
-      </div>
-
-      {/* Submit Button */}
-      <button
-        type="submit"
-        disabled={status === 'submitting'}
-        className="w-full btn-primary py-4 text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-      >
+      <button type="submit" disabled={status === 'submitting'} className="btn-primary w-full py-4 text-base font-semibold">
         {status === 'submitting' ? (
           <span className="flex items-center justify-center gap-2">
-            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-                fill="none"
-              />
+            <svg className="size-5 animate-spin" viewBox="0 0 24 24" aria-hidden="true">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
               <path
                 className="opacity-75"
                 fill="currentColor"
@@ -205,37 +151,35 @@ export default function ContactForm() {
         )}
       </button>
 
-      {/* Success Message */}
-      {status === 'success' && (
-        <div className="p-4 rounded-lg glass-strong border border-green-500/50 text-green-400">
-          <div className="flex items-center gap-2">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+      <div role="status" aria-live="polite">
+        {status === 'success' && (
+          <p className="glass-strong flex items-center gap-2 rounded-lg border-green-500/50 p-4 text-green-400">
+            <svg className="size-5 shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
               <path
                 fillRule="evenodd"
                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                 clipRule="evenodd"
               />
             </svg>
-            <span>Message sent successfully! I'll get back to you soon.</span>
-          </div>
-        </div>
-      )}
+            Message sent successfully! I'll get back to you soon.
+          </p>
+        )}
+      </div>
 
-      {/* Error Message */}
-      {status === 'error' && (
-        <div className="p-4 rounded-lg glass-strong border border-red-500/50 text-red-400">
-          <div className="flex items-center gap-2">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+      <div role="alert">
+        {status === 'error' && (
+          <p className="glass-strong flex items-center gap-2 rounded-lg border-red-500/50 p-4 text-red-400">
+            <svg className="size-5 shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
               <path
                 fillRule="evenodd"
                 d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
                 clipRule="evenodd"
               />
             </svg>
-            <span>Failed to send message. Please try again or email me directly.</span>
-          </div>
-        </div>
-      )}
+            Failed to send message. Please try again or email me directly.
+          </p>
+        )}
+      </div>
     </form>
   );
 }

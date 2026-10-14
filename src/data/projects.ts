@@ -1,7 +1,5 @@
 import type { Project } from './types';
 
-export { type Project };
-
 export const projectsData: Project[] = [
 	{
 		title: 'Convia',

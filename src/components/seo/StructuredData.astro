@@ -1,62 +1,54 @@
 ---
-import { profileInfo } from '@/data';
+import { getImage } from 'astro:assets';
+import { profileInfo, socialLinks } from '@/data';
 
-const personSchema = {
+const siteUrl = new URL('/', Astro.site).href;
+const personId = `${siteUrl}#person`;
+const portrait = await getImage({ src: profileInfo.image, width: 512, height: 512, format: 'jpg' });
+
+const graph = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: profileInfo.name,
-  jobTitle: profileInfo.title,
-  url: 'https://portfolio.euaell.me',
-  email: profileInfo.email,
-  sameAs: profileInfo.socialLinks.filter((s) => !s.href.startsWith('mailto:')).map((s) => s.href),
-  knowsAbout: [
-    'PKI & X.509',
-    'Multi-Tenant SaaS',
-    'C# & .NET',
-    'ASP.NET Core',
-    'Python',
-    'FastAPI',
-    'Go',
-    'TypeScript',
-    'Distributed Systems',
-    'Cloud Infrastructure & Docker',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': personId,
+      name: profileInfo.name,
+      jobTitle: profileInfo.title,
+      description: profileInfo.description,
+      url: siteUrl,
+      image: new URL(portrait.src, Astro.site).href,
+      email: `mailto:${profileInfo.email}`,
+      sameAs: socialLinks.filter((s) => s.href.startsWith('http')).map((s) => s.href),
+      knowsAbout: [
+        'PKI & X.509',
+        'Multi-Tenant SaaS',
+        'C# & .NET',
+        'ASP.NET Core',
+        'Python',
+        'FastAPI',
+        'Go',
+        'TypeScript',
+        'Distributed Systems',
+        'Cloud Infrastructure & Docker',
+      ],
+      alumniOf: { '@type': 'CollegeOrUniversity', name: 'Addis Ababa University' },
+      worksFor: { '@type': 'Organization', name: 'Securetron' },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}#website`,
+      name: `${profileInfo.name} Portfolio`,
+      url: siteUrl,
+      description: profileInfo.description,
+      author: { '@id': personId },
+    },
+    {
+      '@type': 'ProfilePage',
+      url: siteUrl,
+      mainEntity: { '@id': personId },
+    },
   ],
-  alumniOf: {
-    '@type': 'EducationalOrganization',
-    name: 'Addis Ababa University',
-  },
-  worksFor: {
-    '@type': 'Organization',
-    name: 'SecureTron Inc.',
-  },
-};
-
-const websiteSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: `${profileInfo.name} Portfolio`,
-  url: 'https://portfolio.euaell.me',
-  description: profileInfo.description,
-  author: {
-    '@type': 'Person',
-    name: profileInfo.name,
-  },
-};
-
-const profilePageSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfilePage',
-  dateCreated: '2023-01-01',
-  dateModified: new Date().toISOString().split('T')[0],
-  mainEntity: {
-    '@type': 'Person',
-    name: profileInfo.name,
-    jobTitle: profileInfo.title,
-    description: profileInfo.description,
-  },
 };
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
-<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
-<script type="application/ld+json" set:html={JSON.stringify(profilePageSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(graph)} />

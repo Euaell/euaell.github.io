@@ -11,15 +11,8 @@ export interface Project {
   featured: boolean;
 }
 
-export interface ExperienceItem {
-  date: string;
-  title: string;
-  subtitle: string;
-  location: string;
-  description: string[];
-}
-
-export interface EducationItem {
+/** An entry in the experience, education or mentoring timelines */
+export interface TimelineItem {
   date: string;
   title: string;
   subtitle: string;
@@ -32,49 +25,31 @@ export interface SkillCategory {
   skills: string[];
 }
 
-export interface MentoringItem {
-  date: string;
-  title: string;
-  subtitle: string;
-  location: string;
-  description: string[];
-}
+export type SocialIconName = 'github' | 'linkedin' | 'twitter' | 'mail';
 
 export interface SocialLink {
   name: string;
-  icon: string;
+  icon: SocialIconName;
   href: string;
   label: string;
+  /** Short display value, e.g. a username */
+  handle: string;
+}
+
+export interface NavItem {
+  name: string;
+  href: `#${string}`;
 }
 
 export interface ProfileInfo {
   name: string;
   email: string;
   title: string;
-  tagline: string;
   description: string;
   bio: string;
   location: string;
   image: ImageMetadata;
   resumeUrl: string;
+  focusAreas: string[];
   socialLinks: SocialLink[];
-}
-
-export interface PortfolioData {
-  profile: ProfileInfo;
-  projects: Project[];
-  experience: ExperienceItem[];
-  education: EducationItem[];
-  skills: SkillCategory[];
-  mentoring: MentoringItem[];
-}
-
-export interface PortfolioDataProvider {
-  getProfile(): Promise<ProfileInfo> | ProfileInfo;
-  getProjects(): Promise<Project[]> | Project[];
-  getExperience(): Promise<ExperienceItem[]> | ExperienceItem[];
-  getEducation(): Promise<EducationItem[]> | EducationItem[];
-  getSkills(): Promise<SkillCategory[]> | SkillCategory[];
-  getMentoring(): Promise<MentoringItem[]> | MentoringItem[];
-  getAll(): Promise<PortfolioData> | PortfolioData;
 }

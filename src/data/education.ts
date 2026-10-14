@@ -1,8 +1,6 @@
-import type { EducationItem } from './types';
+import type { TimelineItem } from './types';
 
-export { type EducationItem };
-
-export const educationData: EducationItem[] = [
+export const educationData: TimelineItem[] = [
   {
     date: 'Sept 2018 - Jun 2023',
     title: 'BSc in Computer Engineering',

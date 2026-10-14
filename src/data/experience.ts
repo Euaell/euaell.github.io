@@ -1,8 +1,6 @@
-import type { ExperienceItem } from './types';
+import type { TimelineItem } from './types';
 
-export { type ExperienceItem };
-
-export const experienceData: ExperienceItem[] = [
+export const experienceData: TimelineItem[] = [
   {
     date: 'Mar 2025 - Present',
     title: 'Software Developer',

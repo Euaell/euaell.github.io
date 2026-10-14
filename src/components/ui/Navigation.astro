@@ -1,73 +1,54 @@
 ---
+import { navItems } from '@/data';
 import MobileMenu from './MobileMenu';
-
-const navItems = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Work', href: '#work' },
-  { name: 'Contact', href: '#contact' },
-];
 ---
 
-<!-- Desktop Navigation -->
 <nav
   id="main-nav"
-  class="glass-liquid-strong rounded-full px-6 py-3 transition-all duration-300 fixed top-6 left-1/2 -translate-x-1/2 z-50 hidden md:flex w-fit shadow-lg shadow-black/30"
+  aria-label="Primary"
+  class="glass-liquid-strong fixed top-6 left-1/2 z-50 hidden w-fit -translate-x-1/2 rounded-full px-6 py-3 shadow-lg shadow-black/30 md:flex"
 >
   <ul class="flex items-center gap-8">
-    {navItems.map((item) => (
-      <li>
-        <a
-          href={item.href}
-          class="nav-link text-xs uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors relative py-1"
-          data-section={item.href.replace('#', '')}
-        >
-          {item.name}
-          <span class="absolute -bottom-1 left-0 h-0.5 w-0 bg-white transition-all duration-300 nav-indicator"></span>
-        </a>
-      </li>
-    ))}
+    {
+      navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="nav-link group relative py-1 text-xs tracking-caps text-white/70 uppercase transition-colors hover:text-white data-active:text-white"
+          >
+            {item.name}
+            <span
+              class="absolute -bottom-1 left-0 h-0.5 w-0 bg-white transition-[width] duration-300 group-data-active:w-full"
+              aria-hidden="true"
+            />
+          </a>
+        </li>
+      ))
+    }
   </ul>
 </nav>
 
-<!-- Mobile Menu -->
-<div class="md:hidden">
-  <MobileMenu client:load />
-</div>
+<MobileMenu client:media="(max-width: 47.99rem)" items={navItems} />
 
-<script is:inline>
-  const sections = ['home', 'about', 'work', 'contact'];
-  const navLinks = document.querySelectorAll('.nav-link');
+<script>
+  // Highlight the link for whichever section crosses the line just below the nav
+  const ACTIVE_LINE = 120;
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('#main-nav .nav-link')];
+  const sections = links.map((link) => document.querySelector<HTMLElement>(link.hash));
+
+  let frame = 0;
 
   function updateActiveLink() {
-    let current = sections.find((section) => {
-      const el = document.getElementById(section);
-      if (!el) return false;
-      const rect = el.getBoundingClientRect();
-      return rect.top <= 120 && rect.bottom >= 120;
-    });
-
-    navLinks.forEach((link) => {
-      const isActive = link.dataset.section === current;
-      link.classList.toggle('active', Boolean(isActive));
+    frame = 0;
+    sections.forEach((section, i) => {
+      const rect = section?.getBoundingClientRect();
+      const isActive = !!rect && rect.top <= ACTIVE_LINE && rect.bottom >= ACTIVE_LINE;
+      links[i].toggleAttribute('data-active', isActive);
+      if (isActive) links[i].setAttribute('aria-current', 'location');
+      else links[i].removeAttribute('aria-current');
     });
   }
 
-  window.addEventListener('scroll', updateActiveLink, { passive: true });
-  window.addEventListener('load', updateActiveLink);
+  window.addEventListener('scroll', () => (frame ||= requestAnimationFrame(updateActiveLink)), { passive: true });
+  updateActiveLink();
 </script>
-
-<style>
-  /* .glass-liquid-strong sets position: relative outside any layer, which beats the `fixed` utility */
-  #main-nav {
-    position: fixed;
-  }
-
-  .nav-link.active {
-    color: white;
-  }
-
-  .nav-link.active .nav-indicator {
-    width: 100%;
-  }
-</style>

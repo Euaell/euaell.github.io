@@ -24,59 +24,56 @@ function createTransporter() {
   });
 }
 
-function validateFormData(data: any): data is ContactFormData {
+const FIELDS = ['name', 'email', 'subject', 'message'] as const;
+
+function validateFormData(data: unknown): data is ContactFormData {
+  if (typeof data !== 'object' || data === null) return false;
+  const record = data as Record<string, unknown>;
+
   return (
-    typeof data === 'object' &&
-    data !== null &&
-    typeof data.name === 'string' &&
-    typeof data.email === 'string' &&
-    typeof data.subject === 'string' &&
-    typeof data.message === 'string' &&
-    data.name.trim().length > 0 &&
-    data.email.trim().length > 0 &&
-    data.subject.trim().length > 0 &&
-    data.message.trim().length > 0 &&
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)
+    FIELDS.every((field) => typeof record[field] === 'string' && record[field].trim().length > 0) &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(record.email as string)
   );
+}
+
+function escapeHtml(value: string): string {
+  return value.replace(/[&<>"']/g, (char) => `&#${char.charCodeAt(0)};`);
+}
+
+function json(body: Record<string, unknown>, status: number): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { 'Content-Type': 'application/json' },
+  });
 }
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const body = await request.json();
+    const body: unknown = await request.json().catch(() => null);
 
-    // Validate form data
     if (!validateFormData(body)) {
-      return new Response(
-        JSON.stringify({
-          error: 'Invalid form data',
-          message: 'Please provide all required fields with valid data',
-        }),
-        {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
-        }
+      return json(
+        { error: 'Invalid form data', message: 'Please provide all required fields with valid data' },
+        400
       );
     }
 
     const { name, email, subject, message } = body;
+    // Visitor input is interpolated into the HTML emails below, so it must be escaped there
+    const html = {
+      name: escapeHtml(name),
+      email: escapeHtml(email),
+      subject: escapeHtml(subject),
+      message: escapeHtml(message),
+    };
 
-    // Create transporter and verify connection
     const transporter = createTransporter();
 
     try {
       await transporter.verify();
     } catch (error) {
       console.error('SMTP connection error:', error);
-      return new Response(
-        JSON.stringify({
-          error: 'Email service unavailable',
-          message: 'Unable to connect to email service',
-        }),
-        {
-          status: 503,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      return json({ error: 'Email service unavailable', message: 'Unable to connect to email service' }, 503);
     }
 
     // Email template for site owner
@@ -145,19 +142,19 @@ export const POST: APIRoute = async ({ request }) => {
             <div class="content">
               <div class="field">
                 <div class="label">From:</div>
-                <div class="value">${name}</div>
+                <div class="value">${html.name}</div>
               </div>
               <div class="field">
                 <div class="label">Email:</div>
-                <div class="value"><a href="mailto:${email}">${email}</a></div>
+                <div class="value"><a href="mailto:${html.email}">${html.email}</a></div>
               </div>
               <div class="field">
                 <div class="label">Subject:</div>
-                <div class="value">${subject}</div>
+                <div class="value">${html.subject}</div>
               </div>
               <div class="field">
                 <div class="label">Message:</div>
-                <div class="message-box">${message}</div>
+                <div class="message-box">${html.message}</div>
               </div>
             </div>
             <div class="footer">
@@ -239,14 +236,14 @@ Sent at: ${new Date().toLocaleString()}
             </div>
             <div class="content">
               <div class="greeting">
-                Hi ${name},
+                Hi ${html.name},
               </div>
               <p>
                 Thank you for reaching out! I've received your message and I'll get back to you as soon as possible.
               </p>
               <div class="message-preview">
                 <strong>Your message:</strong><br/>
-                "${message}"
+                "${html.message}"
               </div>
               <p>
                 I typically respond within 24-48 hours. If your inquiry is urgent, feel free to connect with me on LinkedIn or Twitter.
@@ -254,7 +251,7 @@ Sent at: ${new Date().toLocaleString()}
               <p>
                 Best regards,<br/>
                 <strong>Euael M. Eshete</strong><br/>
-                Full Stack Developer & AI Engineer
+                Software Engineer
               </p>
             </div>
             <div class="footer">
@@ -279,7 +276,7 @@ I typically respond within 24-48 hours. If your inquiry is urgent, feel free to 
 
 Best regards,
 Euael M. Eshete
-Full Stack Developer & AI Engineer
+Software Engineer
 
 ---
 portfolio.euaell.me
@@ -294,28 +291,10 @@ LinkedIn: linkedin.com/in/euael-eshete
       transporter.sendMail(senderMailOptions),
     ]);
 
-    return new Response(
-      JSON.stringify({
-        success: true,
-        message: 'Message sent successfully!',
-      }),
-      {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
-  } catch (error: any) {
+    return json({ success: true, message: 'Message sent successfully!' }, 200);
+  } catch (error) {
     console.error('Error sending email:', error);
-    return new Response(
-      JSON.stringify({
-        error: 'Failed to send email',
-        message: 'An unexpected error occurred. Please try again later.',
-      }),
-      {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    return json({ error: 'Failed to send email', message: 'An unexpected error occurred. Please try again later.' }, 500);
   }
 };
 
