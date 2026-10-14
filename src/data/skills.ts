@@ -29,6 +29,6 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     title: 'Spoken Languages',
-    skills: ['English (Fluent / IELTS 7.5)', 'Amharic (Native)', 'German (Beginner)'],
+    skills: ['English (Fluent)', 'Amharic (Native)', 'German (Beginner)'],
   },
 ];

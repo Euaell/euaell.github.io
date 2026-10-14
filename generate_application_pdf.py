@@ -220,7 +220,7 @@ def build_cv(output_path):
     story.append(Paragraph('• <b>Security:</b> PKI and X.509, CA integration (DigiCert, EJBCA), mTLS, OAuth 2.0 &amp; OIDC, secrets handling', bullet))
     story.append(Paragraph('• <b>Infrastructure:</b> Docker, Azure Pipelines, Azure Bicep, GCP (Cloud Run, Cloud Storage), GitHub Actions, Linux, Nginx, Kubernetes (learning)', bullet))
     story.append(Paragraph('• <b>Data &amp; AI:</b> PostgreSQL, SQL Server, Redis, vector databases, RAG, embeddings, LLM tool use, prompt versioning', bullet))
-    story.append(Paragraph('• <b>Spoken Languages:</b> Amharic (Native), English (Fluent / IELTS 7.5), German (Beginner)', bullet))
+    story.append(Paragraph('• <b>Spoken Languages:</b> Amharic (Native), English (Fluent), German (Beginner)', bullet))
 
     # MENTORING
     story.extend(section_header('Mentoring &amp; Leadership'))
